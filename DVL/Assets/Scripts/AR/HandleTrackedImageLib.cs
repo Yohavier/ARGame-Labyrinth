@@ -16,7 +16,7 @@ public class HandleTrackedImageLib : MonoBehaviour
         manager = GetComponent<ARTrackedImageManager>();
         manager.trackedImagesChanged += OnTrackedImagesChanged;
         trackableDictionary.Add("Board", board);
-        trackableDictionary.Add("T1", t1);
+        trackableDictionary.Add("T1", t1); 
     }
 
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
@@ -35,7 +35,11 @@ public class HandleTrackedImageLib : MonoBehaviour
             }
         }
     }
-    
+    public void ChangeTrackedPrefab(Color droppedOutColor)
+    {
+        t1.GetComponent<Tile>().prefabColor = droppedOutColor;
+        t1.GetComponent<MeshRenderer>().material.color = droppedOutColor;
+    }
     public void RemoveFromDictionary(string tileName)
     {
         trackableDictionary.Remove(tileName);

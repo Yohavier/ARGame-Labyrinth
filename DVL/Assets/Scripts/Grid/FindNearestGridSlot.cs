@@ -59,7 +59,7 @@ public class FindNearestGridSlot : MonoBehaviour
                 board.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
                 Debug.Log(targetTile.row.ToString() + targetTile.column.ToString());
                 targetTile = null;
-                GetComponent<FindNearestGridSlot>().enabled = false;
+                //GetComponent<FindNearestGridSlot>().enabled = false;
             }
         }
         else if (hitCounter == 0)

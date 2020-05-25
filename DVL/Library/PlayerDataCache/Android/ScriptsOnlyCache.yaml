@@ -59,6 +59,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11938}
     - Class: 114
+      Script: {instanceID: 12272}
+    - Class: 114
       Script: {instanceID: 12286}
     - Class: 114
       Script: {instanceID: 12630}
@@ -76,8 +78,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13414}
     - Class: 114
       Script: {instanceID: 13490}
-    - Class: 114
-      Script: {instanceID: 19864}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -165,7 +165,7 @@ ScriptsOnlyBuild:
     className: XRGeneralSettings
   - hash:
       serializedVersion: 2
-      Hash: d4ec8b91c2a963f766e87726fc647424
+      Hash: 5bca04d4fb4ec556d56aa1209a652fef
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -303,7 +303,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 38abf030478f8a3e282c24c2fd423014
+      Hash: df020a4e8db864da4df0a05e81f49fd2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BoardGrid
@@ -393,10 +393,10 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 6286e92cae9dac36f77afe66399d73d8
+      Hash: 83901eb38d7813b3cdf40d145a0e63ce
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: DynamicLibrary
+    className: HandleTrackedImageLib
   - hash:
       serializedVersion: 2
       Hash: cbdaf6289eb255feedd0bee0a753faee
@@ -733,18 +733,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: e7f18b699c9689579bb4d706ef0788e6
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: switchlib
-  - hash:
-      serializedVersion: 2
-      Hash: 83901eb38d7813b3cdf40d145a0e63ce
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HandleTrackedImageLib
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gridsystem.unity

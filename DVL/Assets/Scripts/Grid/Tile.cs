@@ -9,10 +9,12 @@ public class Tile: MonoBehaviour
     public bool edgePiece;
     public bool canMoveHorizontal;
     public bool canMoveVertical;
+    public Color prefabColor;
 
-    //Set Tile Data
+    //Set Tile Data on init
     public void SetTileData(int rowNum, int colNum)
     {
+        GetComponent<MeshRenderer>().material.color = prefabColor;
         row = rowNum;
         column = colNum;
         UpdateTileState();
@@ -21,7 +23,7 @@ public class Tile: MonoBehaviour
     //Move the Tile
     public void Move(GridMovement move)
     {
-        transform.position += move.moveDir;
+        transform.localPosition += move.moveDir;
         row += move.rowChangeDir;
         column += move.colChangeDir;
         UpdateTileState();
