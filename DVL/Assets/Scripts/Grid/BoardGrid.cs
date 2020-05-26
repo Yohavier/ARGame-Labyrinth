@@ -31,7 +31,7 @@ public class BoardGrid : MonoBehaviour
     {
         if (row % 2 == 0 && column % 2 == 0)
         {
-            int randomNumber = Random.Range(0, allPossibleStaticTiles.Count);
+            int randomNumber = Random.Range(0, allPossibleStaticTiles.Count);           
             return allPossibleStaticTiles[randomNumber];
         }
         else
@@ -64,6 +64,10 @@ public class BoardGrid : MonoBehaviour
                 var tilescript = tile.GetComponent<Tile>();             
                 tilescript.SetTileData(row, column);
                 grid.Add(tilescript);
+                if (row == 0 && column == 0 || row == 0 && column == 6 || row == 6 && column == 0 || row == 6 && column == 6)   
+                {
+                    GetComponent<SpawnPlayer>().SpawnPlayersInCorner(tilescript);
+                }
             }
         }
         trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(allPossibleMovingTiles[0].GetComponent<Tile>().prefabColor);
