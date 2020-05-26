@@ -23,7 +23,7 @@ public class Player: MonoBehaviour
                 player = playingPlayer.Enemy;
                 break;
         }
-        if(player != GameManager.GameManagerInstance.viewOfPlayer)
+        if(player != GameManager.instance.viewOfPlayer)
         {
             GetComponent<MeshRenderer>().enabled = false;
             Eventbroker.eventbroker.SignUpForFogOfWar(this.gameObject);

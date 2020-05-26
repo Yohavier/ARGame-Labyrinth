@@ -1,10 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BoardGrid : MonoBehaviour
 {
+    public static BoardGrid instance = new BoardGrid();
+
     public GameObject trackingManager;
+    public HandleTrackedImageLib trackingInstance;
+    public Tile trackedTile;
 
     //prefablist of tiles that can move
     public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
@@ -12,6 +19,8 @@ public class BoardGrid : MonoBehaviour
     public List<GameObject> allPossibleStaticTiles = new List<GameObject>();
 
     //variables for instantiation
+    public static int maxTileCount = 50;
+    public static int tileCount = 0;
     public static int size;
     private int set_size = 7;
     private float gridSpacing = 0.1f;
@@ -23,9 +32,26 @@ public class BoardGrid : MonoBehaviour
     #region Handle Init
     private void Awake()
     {
+        trackingInstance = trackingManager.GetComponent<HandleTrackedImageLib>();
+        trackedTile = trackingInstance.t1.GetComponent<Tile>();
+        instance = this;
         size = set_size;
         SetUpGrid();
     }
+
+    private void OnGUI()
+    {
+        foreach (Tile tile in grid)
+        {
+            Vector2 pos = Camera.main.WorldToScreenPoint(tile.transform.position);
+            pos.y = Screen.height - pos.y;
+            string label = tile.index.ToString() + Environment.NewLine + tile.row.ToString() + Environment.NewLine + tile.column.ToString();
+            Vector2 size = GUI.skin.label.CalcSize(new GUIContent(label));
+            pos -= size / 2;
+            GUI.Label(new Rect(pos, new Vector2(200, 200)), tile.index.ToString());
+        }
+    }
+
     //Get a random tile from the right list
     private GameObject GetRandomTile(int row, int column)
     {
@@ -51,6 +77,7 @@ public class BoardGrid : MonoBehaviour
             allPossibleStaticTiles.Remove(tile);
         }
     }
+
     //Creates the Basic Grid depending on the size
     private void SetUpGrid()
     {
@@ -58,11 +85,13 @@ public class BoardGrid : MonoBehaviour
         {
             for (int column = 0; column < size; column++)
             {
+                tileCount++;
                 var randomTile = GetRandomTile(row, column);
                 RemoveTileFromList(randomTile);
                 var tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0, column * gridSpacing), Quaternion.identity, this.transform);
                 var tilescript = tile.GetComponent<Tile>();             
                 tilescript.SetTileData(row, column);
+                tilescript.index = tileCount;
                 grid.Add(tilescript);
                 if (row == 0 && column == 0 || row == 0 && column == 6 || row == 6 && column == 0 || row == 6 && column == 6)   
                 {
@@ -91,7 +120,9 @@ public class BoardGrid : MonoBehaviour
         
         grid.Add(instNewTile);
         AdjustColAndRow(instNewTile);
-        MoveAllTile(entryTile, instNewTile);
+        instNewTile.index = MoveAllTile(entryTile, instNewTile);
+        //int movedTileIndex = MoveAllTile(entryTile, newRoom);
+
     }
     private void AdjustColAndRow(Tile newTile)
     {
@@ -106,12 +137,13 @@ public class BoardGrid : MonoBehaviour
     }
 
     //Moves all matching Tiles depending on the GridMovement
-    private void MoveAllTile(Tile entrytile, Tile newtile)
+    private int MoveAllTile(Tile entrytile, Tile newtile)
     {
         bool vertical = entrytile.canMoveVertical;
         bool horizontal = entrytile.canMoveHorizontal;
         int col = entrytile.column;
         int row = entrytile.row;
+        Vector3 entryPos = entrytile.transform.position;
 
         List<Tile> movedTileList = new List<Tile>();
         GridMovement dir = GetMoveDir(entrytile);
@@ -139,12 +171,16 @@ public class BoardGrid : MonoBehaviour
         {
             if (tile.row < 0 || tile.row > size - 1 || tile.column < 0 || tile.column > size - 1)
             {
+                //tile.transform.position = entryPos;
+                //AdjustColAndRow(tile);
                 grid.Remove(tile);
                 trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(tile.prefabColor);
                 Destroy(tile.gameObject);
-                return;
+                return tile.index;
             }
         }
+
+        return -1;
     }
 
     //Creates a Movement class depending on the input Tile

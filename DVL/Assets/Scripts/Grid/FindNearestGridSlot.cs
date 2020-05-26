@@ -16,7 +16,8 @@ public class FindNearestGridSlot : MonoBehaviour
     }
     private void Update()
     {
-        FindTileWithRays();
+        if (GameManager.instance.GetTurn())
+            FindTileWithRays();
     }
 
     //shots ray in 4 directions and tries to find the right Tile
@@ -56,6 +57,7 @@ public class FindNearestGridSlot : MonoBehaviour
         {
             if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
             {
+                NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
                 board.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
                 Debug.Log(targetTile.row.ToString() + targetTile.column.ToString());
                 targetTile = null;

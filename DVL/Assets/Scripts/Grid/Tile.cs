@@ -10,6 +10,17 @@ public class Tile: MonoBehaviour
     public bool canMoveHorizontal;
     public bool canMoveVertical;
     public Color prefabColor;
+    public int index = -1; //Identifier of tile, -1 invalid index
+
+    /*private void Start() //Set identifier based on existing tiles
+    {
+        if (BoardGrid.tileCount < BoardGrid.maxTileCount)
+        {
+            index = BoardGrid.tileCount;
+            BoardGrid.tileCount++;
+        }
+    }*/
+
 
     //Set Tile Data on init
     public void SetTileData(int rowNum, int colNum)

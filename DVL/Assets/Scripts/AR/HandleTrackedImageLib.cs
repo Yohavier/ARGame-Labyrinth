@@ -16,7 +16,8 @@ public class HandleTrackedImageLib : MonoBehaviour
         manager = GetComponent<ARTrackedImageManager>();
         manager.trackedImagesChanged += OnTrackedImagesChanged;
         trackableDictionary.Add("Board", board);
-        trackableDictionary.Add("T1", t1); 
+        trackableDictionary.Add("T1", t1);
+        t1.GetComponent<Tile>().index = 0;
     }
 
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
