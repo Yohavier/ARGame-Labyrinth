@@ -7,13 +7,15 @@ using UnityEngine.XR.ARSubsystems;
 public class HandleTrackedImageLib : MonoBehaviour
 {
 	private ARTrackedImageManager manager;
-
 	public GameObject board;
-
 	public GameObject tilePrefabParent;
-
+	public static HandleTrackedImageLib CustomTrackingManagerInstance;
 	private Dictionary<string, GameObject> trackableDictionary = new Dictionary<string, GameObject>();
 
+	private void Awake()
+	{
+		CustomTrackingManagerInstance = this;
+	}
 	private void Start()
 	{
 		manager = this.GetComponent<ARTrackedImageManager>();
@@ -41,15 +43,20 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
-		if (tilePrefabParent.transform.childCount > 0)
-		{
-			Destroy(tilePrefabParent.transform.GetChild(0).gameObject);
-		}
-		GameObject obj = Instantiate(droppedOutPrefab);
-		obj.transform.SetParent(tilePrefabParent.transform);
-		obj.transform.localPosition = Vector3.zero;
-		obj.transform.localRotation = Quaternion.identity;
-		obj.GetComponent<FindNearestGridSlot>().enabled = true;
+		tilePrefabParent.SetActive(false);
+
+		droppedOutPrefab.transform.SetParent(tilePrefabParent.transform);
+		droppedOutPrefab.transform.localPosition = Vector3.zero;
+		droppedOutPrefab.transform.localRotation = Quaternion.identity;
+
+		droppedOutPrefab.GetComponent<FindNearestGridSlot>().enabled = true;
+		droppedOutPrefab.GetComponent<MeshRenderer>().material.color = droppedOutPrefab.GetComponent<Tile>().prefabColor;
+
+		Invoke("ToggleBackOn", 2);
+	}
+	private void ToggleBackOn()
+	{
+		tilePrefabParent.SetActive(true);
 	}
 
 	public void RemoveFromDictionary(string tileName)

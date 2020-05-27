@@ -16,11 +16,15 @@ public class Pathfinding : MonoBehaviour
 
 	public Button startMoveButton;
 
-	private void Start()
+	private void OnEnable()
 	{
 		startMoveButton = FindObjectOfType<Button>();
 		startMoveButton.onClick.AddListener(SendMovePathToPlayer);
 		grid = FindObjectOfType<BoardGrid>().grid;
+	}
+	private void OnDisable()
+	{
+		startMoveButton.onClick.RemoveListener(SendMovePathToPlayer);
 	}
 
 	private void Update()
@@ -81,7 +85,6 @@ public class Pathfinding : MonoBehaviour
 
 	private void ClearPathMarks(List<Tile> path)
 	{
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
 		if (path.Count != 0)
 		{
 			foreach (Tile item in path)
@@ -122,8 +125,6 @@ public class Pathfinding : MonoBehaviour
 
 	private void GetFinalPath(Tile start, Tile target)
 	{
-		//IL_002c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0056: Unknown result type (might be due to invalid IL or missing references)
 		if (CurrentSavedFinalPath != null)
 		{
 			ClearPathMarks(CurrentSavedFinalPath);

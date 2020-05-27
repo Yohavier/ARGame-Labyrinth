@@ -1,42 +1,30 @@
 using System;
 using UnityEngine;
-
+using System.Collections;
 public class Tile : MonoBehaviour
 {
 	public int row;
-
 	public int column;
 
 	public bool edgePiece;
-
 	public bool canMoveHorizontal;
-
 	public bool canMoveVertical;
 
 	public Color prefabColor;
-
 	public Tile Parent;
 
 	[Header("Init Variables")]
 	public bool initForward;
-
 	public bool initRight;
-
 	public bool initBackward;
-
 	public bool initLeft;
 
 	[Header("Dynamik Variables")]
 	public bool forward;
-
 	public bool right;
-
 	public bool backward;
-
 	public bool left;
-
 	public int gCost;
-
 	public int hCost;
 
 	public int FCost => gCost + hCost;
@@ -84,11 +72,30 @@ public class Tile : MonoBehaviour
 
 	public void Move(GridMovement move)
 	{
-		transform.localPosition += move.moveDir;
+		var targetPos = transform.localPosition + move.moveDir;
+		StartCoroutine(MoveInterpolate(transform.localPosition, targetPos, 1));
 		row += move.rowChangeDir;
 		column += move.colChangeDir;
 		UpdateTileState();
 		UpdatePathfindingOptions();
+	}
+
+	private IEnumerator MoveInterpolate(Vector3 startPos, Vector3 targetPos, float time)
+	{
+		float i = 0.0f;
+		float rate = 1.0f / time;
+		while (i < 1.0f)
+		{
+			i += Time.deltaTime * rate;
+			transform.position = Vector3.Lerp(startPos, targetPos, i);
+			yield return null;
+		}
+
+		if (row < 0 || row > BoardGrid.GridInstance.size - 1 || column < 0 || column > BoardGrid.GridInstance.size - 1)
+		{
+			BoardGrid.GridInstance.RemoveTileFromGrid(this);
+			HandleTrackedImageLib.CustomTrackingManagerInstance.ChangeTrackedPrefab(this.gameObject);
+		}
 	}
 
 	private void UpdateTileState()
@@ -113,7 +120,7 @@ public class Tile : MonoBehaviour
 			canMoveVertical = true;
 			canMoveHorizontal = true;
 		}
-		if (row == 0 || column == 0 || column == BoardGrid.size - 1 || row == BoardGrid.size - 1)
+		if (row == 0 || column == 0 || column == BoardGrid.GridInstance.size - 1 || row == BoardGrid.GridInstance.size - 1)
 		{
 			edgePiece = true;
 		}

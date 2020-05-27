@@ -1,21 +1,28 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BoardGrid : MonoBehaviour
 {
-	public GameObject trackingManager;
+	public static BoardGrid GridInstance;
 
+	public GameObject trackingManager;
+	
 	public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
 	public List<GameObject> allPossibleStaticTiles = new List<GameObject>();
 
-	public static int size;
+	public int size;
 	private int set_size = 7;
 	private float gridSpacing = 0.1f;
 	public int[] randomRoations;
 
 	public List<Tile> grid = new List<Tile>();
 
+	private void Awake()
+	{
+		GridInstance = this;
+	}
 	private void Start()
 	{
 		size = set_size;
@@ -64,7 +71,8 @@ public class BoardGrid : MonoBehaviour
 				}
 			}
 		}
-		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(allPossibleMovingTiles[0]);
+		GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
+		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 	}
 
@@ -76,9 +84,10 @@ public class BoardGrid : MonoBehaviour
 	public void InsertNewRoomPushing(Tile entryTile, Tile newRoom)
 	{
 		GridMovement moveDir = GetMoveDir(entryTile);
-		GameObject val = Object.Instantiate<GameObject>(newRoom.gameObject);
-		val.transform.SetParent(this.transform);
+		//GameObject val = Instantiate(newRoom.gameObject);
+		GameObject val = newRoom.gameObject;
 		int num = SetNewRoomRotation(newRoom);
+		val.transform.SetParent(this.transform);		
 		val.transform.localEulerAngles = new Vector3(0f, num, 0f);
 		val.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		val.transform.localPosition = entryTile.transform.localPosition - moveDir.moveDir;
@@ -88,8 +97,7 @@ public class BoardGrid : MonoBehaviour
 		component.GetComponent<FindNearestGridSlot>().enabled = false;
 		grid.Add(component);
 		AdjustColAndRow(component);
-		MoveAllTile(entryTile, component);
-		Vector3 localEulerAngles = val.transform.localEulerAngles;
+		MoveAllTile(entryTile, component);		
 	}
 
 	private void AdjustColAndRow(Tile newTile)
@@ -136,16 +144,11 @@ public class BoardGrid : MonoBehaviour
 				list.Add(item);
 			}
 		}
-		foreach (Tile item2 in list)
-		{
-			if (item2.row < 0 || item2.row > size - 1 || item2.column < 0 || item2.column > size - 1)
-			{
-				grid.Remove(item2);
-				trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(item2.gameObject);
-				Object.Destroy(item2.gameObject);
-				break;
-			}
-		}
+	}
+
+	public void RemoveTileFromGrid(Tile removedTile)
+	{
+		grid.Remove(removedTile);
 	}
 
 	private GridMovement GetMoveDir(Tile moveTile)

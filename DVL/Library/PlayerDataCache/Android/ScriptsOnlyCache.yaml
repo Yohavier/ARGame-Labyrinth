@@ -67,61 +67,61 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11220}
+      Script: {instanceID: 11172}
     - Class: 114
-      Script: {instanceID: 11234}
+      Script: {instanceID: 11186}
+    - Class: 114
+      Script: {instanceID: 11366}
+    - Class: 114
+      Script: {instanceID: 11406}
     - Class: 114
       Script: {instanceID: 11414}
     - Class: 114
       Script: {instanceID: 11454}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11804}
     - Class: 114
-      Script: {instanceID: 11502}
+      Script: {instanceID: 11910}
     - Class: 114
-      Script: {instanceID: 11852}
+      Script: {instanceID: 11940}
     - Class: 114
-      Script: {instanceID: 11958}
+      Script: {instanceID: 12056}
     - Class: 114
-      Script: {instanceID: 11988}
+      Script: {instanceID: 12172}
     - Class: 114
-      Script: {instanceID: 12322}
+      Script: {instanceID: 12278}
     - Class: 114
-      Script: {instanceID: 12336}
+      Script: {instanceID: 12292}
     - Class: 114
-      Script: {instanceID: 12494}
+      Script: {instanceID: 12450}
     - Class: 114
-      Script: {instanceID: 12680}
+      Script: {instanceID: 12636}
     - Class: 114
-      Script: {instanceID: 12758}
+      Script: {instanceID: 12714}
     - Class: 114
-      Script: {instanceID: 12832}
+      Script: {instanceID: 12788}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12834}
     - Class: 114
-      Script: {instanceID: 12966}
+      Script: {instanceID: 12870}
     - Class: 114
-      Script: {instanceID: 13090}
+      Script: {instanceID: 12924}
     - Class: 114
-      Script: {instanceID: 13120}
+      Script: {instanceID: 13048}
     - Class: 114
-      Script: {instanceID: 13244}
+      Script: {instanceID: 13078}
     - Class: 114
-      Script: {instanceID: 13296}
+      Script: {instanceID: 13202}
     - Class: 114
-      Script: {instanceID: 13436}
+      Script: {instanceID: 13254}
     - Class: 114
-      Script: {instanceID: 13470}
+      Script: {instanceID: 13394}
     - Class: 114
-      Script: {instanceID: 13546}
+      Script: {instanceID: 13428}
     - Class: 114
-      Script: {instanceID: 13624}
+      Script: {instanceID: 13504}
     - Class: 114
-      Script: {instanceID: 15766}
-    - Class: 114
-      Script: {instanceID: 15770}
-    - Class: 114
-      Script: {instanceID: 15774}
+      Script: {instanceID: 13582}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -365,7 +365,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 0a8b7eb734a29252ef9b473c9ca5e7fc
+      Hash: 6cab00f830ef2ff0575274156b343f53
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BoardGrid
@@ -399,6 +399,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.XR.ARCore.dll
     namespaceName: UnityEngine.XR.ARCore
     className: ARCoreLoader
+  - hash:
+      serializedVersion: 2
+      Hash: e6b736b6fff32234787c65bff9b9363b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Pathfinding
   - hash:
       serializedVersion: 2
       Hash: 1268406d3f2e4b2c2b670b560b6db769
@@ -435,6 +441,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_Asset
+  - hash:
+      serializedVersion: 2
+      Hash: 9bcc685c411830ca89b9f2cfaee0f63b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SelectARObjectWithFinger
   - hash:
       serializedVersion: 2
       Hash: d4020bafcd3ccbb5601a6e6c8ac78be0
@@ -591,6 +603,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.XR.ARFoundation.dll
     namespaceName: UnityEngine.XR.ARFoundation
     className: ARAnchorManager
+  - hash:
+      serializedVersion: 2
+      Hash: b0b7fd443ba85723589ec83abe982993
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LocalGameManager
   - hash:
       serializedVersion: 2
       Hash: 290afc8da8e459e0b8dc7444bfaf5e35
@@ -819,24 +837,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
-  - hash:
-      serializedVersion: 2
-      Hash: e6b736b6fff32234787c65bff9b9363b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Pathfinding
-  - hash:
-      serializedVersion: 2
-      Hash: b0b7fd443ba85723589ec83abe982993
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: LocalGameManager
-  - hash:
-      serializedVersion: 2
-      Hash: 9bcc685c411830ca89b9f2cfaee0f63b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SelectARObjectWithFinger
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gridsystem.unity
