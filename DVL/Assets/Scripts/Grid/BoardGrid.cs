@@ -1,183 +1,202 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardGrid : MonoBehaviour
 {
-    public GameObject trackingManager;
+	public GameObject trackingManager;
 
-    //prefablist of tiles that can move
-    public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
-    //prefablist of tiles that are static
-    public List<GameObject> allPossibleStaticTiles = new List<GameObject>();
+	public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
+	public List<GameObject> allPossibleStaticTiles = new List<GameObject>();
 
-    //variables for instantiation
-    public static int size;
-    private int set_size = 7;
-    private float gridSpacing = 0.1f;
+	public static int size;
+	private int set_size = 7;
+	private float gridSpacing = 0.1f;
+	public int[] randomRoations;
 
-    //List of all tiles that are currently in the grid 
-    public List<Tile> grid = new List<Tile>();
+	public List<Tile> grid = new List<Tile>();
 
+	private void Start()
+	{
+		size = set_size;
+		SetUpGrid();
+	}
 
-    #region Handle Init
-    private void Awake()
-    {
-        size = set_size;
-        SetUpGrid();
-    }
-    //Get a random tile from the right list
-    private GameObject GetRandomTile(int row, int column)
-    {
-        if (row % 2 == 0 && column % 2 == 0)
-        {
-            int randomNumber = Random.Range(0, allPossibleStaticTiles.Count);           
-            return allPossibleStaticTiles[randomNumber];
-        }
-        else
-        {
-            int randomNumber = Random.Range(0, allPossibleMovingTiles.Count);
-            return allPossibleMovingTiles[randomNumber];
-        }
-    }
-    private void RemoveTileFromList(GameObject tile)
-    {
-        if(allPossibleMovingTiles.Contains(tile))
-        {
-            allPossibleMovingTiles.Remove(tile);
-        }
-        else if (allPossibleStaticTiles.Contains(tile))
-        {
-            allPossibleStaticTiles.Remove(tile);
-        }
-    }
-    //Creates the Basic Grid depending on the size
-    private void SetUpGrid()
-    {
-        for (int row = 0; row < size; row++)
-        {
-            for (int column = 0; column < size; column++)
-            {
-                var randomTile = GetRandomTile(row, column);
-                RemoveTileFromList(randomTile);
-                var tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0, column * gridSpacing), Quaternion.identity, this.transform);
-                var tilescript = tile.GetComponent<Tile>();             
-                tilescript.SetTileData(row, column);
-                grid.Add(tilescript);
-                if (row == 0 && column == 0 || row == 0 && column == 6 || row == 6 && column == 0 || row == 6 && column == 6)   
-                {
-                    GetComponent<SpawnPlayer>().SpawnPlayersInCorner(tilescript);
-                }
-            }
-        }
-        trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(allPossibleMovingTiles[0].GetComponent<Tile>().prefabColor);
-        RemoveTileFromList(allPossibleMovingTiles[0]);
-    }
-    #endregion
+	private GameObject GetRandomTile(int row, int column)
+	{
+		if (row % 2 == 0 && column % 2 == 0)
+		{
+			int index = Random.Range(0, allPossibleStaticTiles.Count);
+			return allPossibleStaticTiles[index];
+		}
+		int index2 = Random.Range(0, allPossibleMovingTiles.Count);
+		return allPossibleMovingTiles[index2];
+	}
 
-    #region TileMovement
-    //Pushes the newRoom into the Grid
-    public void InsertNewRoomPushing(Tile entryTile, Tile newRoom)
-    {
-        GridMovement move = GetMoveDir(entryTile);
-        GameObject instNewRoom = Instantiate(newRoom.gameObject);
-        instNewRoom.transform.SetParent(this.transform); 
-        instNewRoom.transform.localPosition = entryTile.transform.localPosition - move.moveDir;
+	private void RemoveTileFromList(GameObject tile)
+	{
+		if (allPossibleMovingTiles.Contains(tile))
+		{
+			allPossibleMovingTiles.Remove(tile);
+		}
+		else if (allPossibleStaticTiles.Contains(tile))
+		{
+			allPossibleStaticTiles.Remove(tile);
+		}
+	}
 
-        Tile instNewTile = instNewRoom.GetComponent<Tile>();
-        instNewTile.SetTileData(entryTile.row, entryTile.column);     
-        instNewTile.GetComponent<MeshRenderer>().material.color = instNewTile.prefabColor;
-        instNewTile.GetComponent<FindNearestGridSlot>().enabled = false;
-        
-        grid.Add(instNewTile);
-        AdjustColAndRow(instNewTile);
-        MoveAllTile(entryTile, instNewTile);
-    }
-    private void AdjustColAndRow(Tile newTile)
-    {
-        if (newTile.row == 0)
-            newTile.row -= 1;
-        else if (newTile.row == 6)
-            newTile.row += 1;
-        else if (newTile.column == 0)
-            newTile.column -= 1;
-        else if (newTile.column == 6)
-            newTile.column += 1;
-    }
+	private void SetUpGrid()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				GameObject randomTile = GetRandomTile(i, j);
+				RemoveTileFromList(randomTile);
+				GameObject tile = Instantiate(randomTile, new Vector3(i * gridSpacing, 0f, j * gridSpacing), Quaternion.identity, this.transform);
+				tile.transform.localEulerAngles = new Vector3(0f, SetRandomRotation(), 0f);
+				Tile component = tile.GetComponent<Tile>();
+				component.SetTileData(i, j);
+				grid.Add(component);
+				if ((i == 0 && j == 0) || (i == 0 && j == 6) || (i == 6 && j == 0) || (i == 6 && j == 6))
+				{
+					this.GetComponent<SpawnPlayer>().SpawnPlayersInCorner(component);
+				}
+			}
+		}
+		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(allPossibleMovingTiles[0]);
+		RemoveTileFromList(allPossibleMovingTiles[0]);
+	}
 
-    //Moves all matching Tiles depending on the GridMovement
-    private void MoveAllTile(Tile entrytile, Tile newtile)
-    {
-        bool vertical = entrytile.canMoveVertical;
-        bool horizontal = entrytile.canMoveHorizontal;
-        int col = entrytile.column;
-        int row = entrytile.row;
+	private int SetRandomRotation()
+	{
+		return randomRoations[Random.Range(0, randomRoations.Length)];
+	}
 
-        List<Tile> movedTileList = new List<Tile>();
-        GridMovement dir = GetMoveDir(entrytile);
-        foreach (Tile tile in grid)
-        {
-            tile.transform.localRotation = Quaternion.identity;
-            if (horizontal)
-            {
-                if (tile.row == row)
-                {
-                    tile.Move(dir);
-                    movedTileList.Add(tile);
-                }
-            }
-            else if (vertical)
-            {
-                if (tile.column == col)
-                {
-                    tile.Move(dir);
-                    movedTileList.Add(tile);
-                }
-            }                
-        }
-        foreach (Tile tile in movedTileList)
-        {
-            if (tile.row < 0 || tile.row > size - 1 || tile.column < 0 || tile.column > size - 1)
-            {
-                grid.Remove(tile);
-                trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(tile.prefabColor);
-                Destroy(tile.gameObject);
-                return;
-            }
-        }
-    }
+	public void InsertNewRoomPushing(Tile entryTile, Tile newRoom)
+	{
+		GridMovement moveDir = GetMoveDir(entryTile);
+		GameObject val = Object.Instantiate<GameObject>(newRoom.gameObject);
+		val.transform.SetParent(this.transform);
+		int num = SetNewRoomRotation(newRoom);
+		val.transform.localEulerAngles = new Vector3(0f, num, 0f);
+		val.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+		val.transform.localPosition = entryTile.transform.localPosition - moveDir.moveDir;
+		Tile component = val.GetComponent<Tile>();
+		component.SetTileData(entryTile.row, entryTile.column);
+		component.GetComponent<MeshRenderer>().material.color = component.prefabColor;
+		component.GetComponent<FindNearestGridSlot>().enabled = false;
+		grid.Add(component);
+		AdjustColAndRow(component);
+		MoveAllTile(entryTile, component);
+		Vector3 localEulerAngles = val.transform.localEulerAngles;
+	}
 
-    //Creates a Movement class depending on the input Tile
-    private GridMovement GetMoveDir(Tile moveTile)
-    {
-        GridMovement newMove = new GridMovement();
-        if (moveTile.canMoveVertical)
-        {
-            if (moveTile.row <= 0)
-            {
-                newMove.moveDir = new Vector3(gridSpacing, 0, 0);
-                newMove.rowChangeDir = 1;
-            }
-            else if (moveTile.row >= size - 1)
-            {
-                newMove.moveDir = new Vector3(-gridSpacing, 0, 0);
-                newMove.rowChangeDir = -1;
-            }
-        }
-        else if (moveTile.canMoveHorizontal)
-        {
-            if (moveTile.column <= 0)
-            {
-                newMove.moveDir = new Vector3(0, 0, gridSpacing);
-                newMove.colChangeDir = 1;
-            }
-            else if (moveTile.column >= size - 1)
-            {
-                newMove.moveDir = new Vector3(0, 0, -gridSpacing);
-                newMove.colChangeDir = -1;
-            }
-        }
-        return newMove;
-    }
-    #endregion
+	private void AdjustColAndRow(Tile newTile)
+	{
+		if (newTile.row == 0)
+		{
+			newTile.row--;
+		}
+		else if (newTile.row == 6)
+		{
+			newTile.row++;
+		}
+		else if (newTile.column == 0)
+		{
+			newTile.column--;
+		}
+		else if (newTile.column == 6)
+		{
+			newTile.column++;
+		}
+	}
+
+	private void MoveAllTile(Tile entrytile, Tile newtile)
+	{
+		bool canMoveVertical = entrytile.canMoveVertical;
+		bool canMoveHorizontal = entrytile.canMoveHorizontal;
+		int column = entrytile.column;
+		int row = entrytile.row;
+		List<Tile> list = new List<Tile>();
+		GridMovement moveDir = GetMoveDir(entrytile);
+		foreach (Tile item in grid)
+		{
+			if (canMoveHorizontal)
+			{
+				if (item.row == row)
+				{
+					item.Move(moveDir);
+					list.Add(item);
+				}
+			}
+			else if (canMoveVertical && item.column == column)
+			{
+				item.Move(moveDir);
+				list.Add(item);
+			}
+		}
+		foreach (Tile item2 in list)
+		{
+			if (item2.row < 0 || item2.row > size - 1 || item2.column < 0 || item2.column > size - 1)
+			{
+				grid.Remove(item2);
+				trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(item2.gameObject);
+				Object.Destroy(item2.gameObject);
+				break;
+			}
+		}
+	}
+
+	private GridMovement GetMoveDir(Tile moveTile)
+	{
+		GridMovement gridMovement = new GridMovement();
+		if (moveTile.canMoveVertical)
+		{
+			if (moveTile.row <= 0)
+			{
+				gridMovement.moveDir = new Vector3(gridSpacing, 0f, 0f);
+				gridMovement.rowChangeDir = 1;
+			}
+			else if (moveTile.row >= size - 1)
+			{
+				gridMovement.moveDir = new Vector3(0f - gridSpacing, 0f, 0f);
+				gridMovement.rowChangeDir = -1;
+			}
+		}
+		else if (moveTile.canMoveHorizontal)
+		{
+			if (moveTile.column <= 0)
+			{
+				gridMovement.moveDir = new Vector3(0f, 0f, gridSpacing);
+				gridMovement.colChangeDir = 1;
+			}
+			else if (moveTile.column >= size - 1)
+			{
+				gridMovement.moveDir = new Vector3(0f, 0f, 0f - gridSpacing);
+				gridMovement.colChangeDir = -1;
+			}
+		}
+		return gridMovement;
+	}
+
+	private int SetNewRoomRotation(Tile newRoom)
+	{
+		Dictionary<float, int> dictionary = new Dictionary<float, int>();
+		float num = Mathf.Abs(newRoom.transform.parent.transform.localEulerAngles.y - this.transform.localEulerAngles.y);
+		dictionary.Add(Mathf.Abs(num - 0f), 0);
+		dictionary.Add(Mathf.Abs(num - 90f), 90);
+		dictionary.Add(Mathf.Abs(num - 180f), 180);
+		dictionary.Add(Mathf.Abs(num - 270f), 270);
+		dictionary.Add(Mathf.Abs(num - 360f), 0);
+		float num2 = 400f;
+		foreach (float key in dictionary.Keys)
+		{
+			if (key < num2)
+			{
+				num2 = key;
+			}
+		}
+		return dictionary[num2];
+	}
 }
