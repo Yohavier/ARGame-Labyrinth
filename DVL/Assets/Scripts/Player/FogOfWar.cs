@@ -10,7 +10,8 @@ public class FogOfWar : MonoBehaviour
         fow = this;
     }
 
-    public void ChangePosition(Tile newPosition)
+	//call if player moves, to update fog of war
+    public void OnChangePlayerPosition(Tile newPosition)
     {
 		ClearCurrentActiveFOWItems();
 		foreach(Tile neighborTile in GetNeighbouringTiles(newPosition))
@@ -27,6 +28,7 @@ public class FogOfWar : MonoBehaviour
 		}
     }
 	
+	//clear and hide current list of active gameObjects 
 	private void ClearCurrentActiveFOWItems()
 	{
 		foreach (GameObject item in activeFogOfWarItems) 
@@ -36,6 +38,7 @@ public class FogOfWar : MonoBehaviour
 		activeFogOfWarItems.Clear();
 	}
 
+	//Returns List of all possibles neighbourtiles
 	private List<Tile> GetNeighbouringTiles(Tile a_Tile)
 	{
 		List<Tile> list = new List<Tile>();

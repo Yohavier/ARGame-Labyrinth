@@ -24,6 +24,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 		trackableDictionary.Add("T1", tilePrefabParent);
 	}
 
+	//Update function for the Image Tracker to get the right pos/rot
 	private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
 	{
 		foreach (var trackedImage in eventArgs.added)
@@ -41,6 +42,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 		}
 	}
 
+	//sets up the new Prefab that dropped out of the Grid 
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
 		tilePrefabParent.SetActive(false);
@@ -54,6 +56,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 		Invoke("ToggleBackOn", 2);
 	}
+
+	//Reactivates the Prefab after time 
 	private void ToggleBackOn()
 	{
 		tilePrefabParent.SetActive(true);

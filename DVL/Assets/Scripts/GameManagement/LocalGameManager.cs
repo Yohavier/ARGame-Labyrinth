@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//All Possible Player
 public enum playingPlayer
 {
 	Player1,
@@ -9,8 +10,10 @@ public enum playingPlayer
 }
 public class LocalGameManager : MonoBehaviour
 {
+	//Determines you playerChar
 	public playingPlayer viewOfPlayer;
 
+	//reference to the Player of this gameInstance
 	public GameObject activePlayer;
 
 	public static LocalGameManager local;

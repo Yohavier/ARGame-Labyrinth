@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	private FogOfWar playerFOW;
 	public Tile positionTile;
 
+	//called once after init to determine if this is the active player of the scene
 	public void SetUpPlayer(int count)
 	{
 		switch (count)
@@ -37,18 +38,21 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	//if the Player moves
 	public void ChangePlayerPosition(Tile newPos)
 	{
 		if(playerFOW != null)
-			playerFOW.ChangePosition(newPos);
+			playerFOW.OnChangePlayerPosition(newPos);
 		positionTile = newPos;
 	}
 
+	//Move along a List of Tiles
 	public void MoveToTarget(List<Tile> path)
 	{
 		this.StartCoroutine(Moving(path));
 	}
 
+	//moving "Animation"
 	private IEnumerator Moving(List<Tile> path)
 	{
 		foreach (Tile item in path)

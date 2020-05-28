@@ -6,6 +6,7 @@ public class SpawnPlayer : MonoBehaviour
 
 	private int playerCount;
 
+	//receives list of 4 corner tiles and places players there
 	public void SpawnPlayersInCorner(List<Tile> cornerTiles)
 	{
 		foreach(Tile corner in cornerTiles)

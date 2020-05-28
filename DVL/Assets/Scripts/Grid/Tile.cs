@@ -24,52 +24,23 @@ public class Tile : MonoBehaviour
 	public bool right;
 	public bool backward;
 	public bool left;
+
+	[Header("Pathfinding Costs")]
 	public int gCost;
 	public int hCost;
-
 	public int FCost => gCost + hCost;
 
+	//Set the Data on Init or if newly pushed into the grid (Called by BoardGrid)
 	public void SetTileData(int rowNum, int colNum)
 	{
 		this.GetComponent<MeshRenderer>().material.color = prefabColor;
 		row = rowNum;
 		column = colNum;
 		UpdateTileState();
-		UpdatePathfindingOptions();
+		UpdateTileMoveOptions();
 	}
 
-	private void UpdatePathfindingOptions()
-	{
-		if (transform.localEulerAngles.y == 0f)
-		{
-			forward = initForward;
-			right = initRight;
-			backward = initBackward;
-			left = initLeft;
-		}
-		else if (transform.localEulerAngles.y == 90f)
-		{
-			forward = initLeft;
-			right = initForward;
-			backward = initRight;
-			left = initBackward;
-		}
-		else if (transform.localEulerAngles.y == 180f)
-		{
-			forward = initBackward;
-			right = initLeft;
-			backward = initForward;
-			left = initRight;
-		}
-		else if (transform.localEulerAngles.y == 270f)
-		{
-			forward = initRight;
-			right = initBackward;
-			backward = initLeft;
-			left = initForward;
-		}
-	}
-
+	//call to move the Tile on the grid
 	public void Move(GridMovement move)
 	{
 		var targetPos = transform.localPosition + move.moveDir;
@@ -77,9 +48,11 @@ public class Tile : MonoBehaviour
 		row += move.rowChangeDir;
 		column += move.colChangeDir;
 		UpdateTileState();
-		UpdatePathfindingOptions();
+		UpdateTileMoveOptions();
 		MessagePlayer();
 	}
+
+	//if tile moves Updatae Player Pos and maybe fog of war
 	private void MessagePlayer()
 	{
 		var player = transform.GetComponentInChildren<Player>();
@@ -88,6 +61,8 @@ public class Tile : MonoBehaviour
 			player.ChangePlayerPosition(this);
 		}
 	}
+
+	//Lerp between 2 Tile position over Time
 	private IEnumerator MoveInterpolate(Vector3 startPos, Vector3 targetPos, float time)
 	{
 		float i = 0.0f;
@@ -95,7 +70,7 @@ public class Tile : MonoBehaviour
 		while (i < 1.0f)
 		{
 			i += Time.deltaTime * rate;
-			transform.position = Vector3.Lerp(startPos, targetPos, i);
+			transform.localPosition = Vector3.Lerp(startPos, targetPos, i);
 			yield return null;
 		}
 
@@ -106,6 +81,7 @@ public class Tile : MonoBehaviour
 		}
 	}
 
+	//Update the possible Movestates of the Tile
 	private void UpdateTileState()
 	{
 		if (row % 2 == 0 && column % 2 == 0)
@@ -135,6 +111,39 @@ public class Tile : MonoBehaviour
 		else
 		{
 			edgePiece = false;
+		}
+	}
+
+	//changes the move bools dependign on the rotation of the Tile in the Grid
+	private void UpdateTileMoveOptions()
+	{
+		if (transform.localEulerAngles.y == 0f)
+		{
+			forward = initForward;
+			right = initRight;
+			backward = initBackward;
+			left = initLeft;
+		}
+		else if (transform.localEulerAngles.y == 90f)
+		{
+			forward = initLeft;
+			right = initForward;
+			backward = initRight;
+			left = initBackward;
+		}
+		else if (transform.localEulerAngles.y == 180f)
+		{
+			forward = initBackward;
+			right = initLeft;
+			backward = initForward;
+			left = initRight;
+		}
+		else if (transform.localEulerAngles.y == 270f)
+		{
+			forward = initRight;
+			right = initBackward;
+			backward = initLeft;
+			left = initForward;
 		}
 	}
 }

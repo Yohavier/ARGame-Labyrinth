@@ -9,6 +9,7 @@ public class BoardGrid : MonoBehaviour
 
 	public GameObject trackingManager;
 	
+	//Prefab Lists of Tiles
 	public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
 	public List<GameObject> allPossibleStaticTiles = new List<GameObject>();
 
@@ -17,8 +18,10 @@ public class BoardGrid : MonoBehaviour
 	private float gridSpacing = 0.1f;
 	public int[] randomRoations;
 
+	//List of the current Grid
 	public List<Tile> grid = new List<Tile>();
 
+	#region Initialization 
 	private void Awake()
 	{
 		GridInstance = this;
@@ -29,6 +32,7 @@ public class BoardGrid : MonoBehaviour
 		SetUpGrid();
 	}
 
+	//Select a random Tile, out of the 2 lists
 	private GameObject GetRandomTile(int row, int column)
 	{
 		if (row % 2 == 0 && column % 2 == 0)
@@ -40,6 +44,7 @@ public class BoardGrid : MonoBehaviour
 		return allPossibleMovingTiles[index2];
 	}
 
+	//Remove a tile from the 2 lists
 	private void RemoveTileFromList(GameObject tile)
 	{
 		if (allPossibleMovingTiles.Contains(tile))
@@ -52,6 +57,7 @@ public class BoardGrid : MonoBehaviour
 		}
 	}
 
+	//Set up grid and calls to spawn Players 
 	private void SetUpGrid()
 	{
 		List<Tile> cornerTiles = new List<Tile>();
@@ -78,15 +84,18 @@ public class BoardGrid : MonoBehaviour
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
 	}
 
+	//Create Random Rotation for the Grid Tiles
 	private int SetRandomRotation()
 	{
 		return randomRoations[Random.Range(0, randomRoations.Length)];
 	}
+	#endregion
 
+	#region new Room
+	//inserts the Room into the grid and moves all depending tiles
 	public void InsertNewRoomPushing(Tile entryTile, Tile newRoom)
 	{
 		GridMovement moveDir = GetMoveDir(entryTile);
-		//GameObject val = Instantiate(newRoom.gameObject);
 		GameObject val = newRoom.gameObject;
 		int num = SetNewRoomRotation(newRoom);
 		val.transform.SetParent(this.transform);		
@@ -204,4 +213,5 @@ public class BoardGrid : MonoBehaviour
 		}
 		return dictionary[num2];
 	}
+    #endregion
 }

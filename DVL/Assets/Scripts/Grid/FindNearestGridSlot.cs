@@ -23,6 +23,7 @@ public class FindNearestGridSlot : MonoBehaviour
 		FindTileWithRays();
 	}
 
+	//get the tile that will be pushed away by inserting a new Tile
 	private void FindTileWithRays()
 	{
 		int hitCounter = 0;
@@ -50,26 +51,35 @@ public class FindNearestGridSlot : MonoBehaviour
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
+
+
 		switch (hitCounter)
 		{
 		case 1:
 			targetTile = target.GetComponent<Tile>();
 			return;
 		case 3:
-			if (targetTile != null)
-			{
-				if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
-				{
-					board.InsertNewRoomPushing(targetTile, this.GetComponent<Tile>());
-					targetTile = null;
-				}
-				return;
-			}
+			CallGridToPushRoom();
 			break;
 		}
+
+
 		if (hitCounter == 0)
 		{
 			targetTile = null;
+		}
+	}
+
+	private void CallGridToPushRoom()
+	{
+		if (targetTile != null)
+		{
+			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
+			{
+				board.InsertNewRoomPushing(targetTile, this.GetComponent<Tile>());
+				targetTile = null;
+			}
+			return;
 		}
 	}
 }

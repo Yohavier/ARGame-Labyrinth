@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+
+//A* pathfinding, always chooses shortest path
 public class Pathfinding : MonoBehaviour
 {
 	public Tile TargetPosition;
@@ -147,6 +149,7 @@ public class Pathfinding : MonoBehaviour
 		return num + num2;
 	}
 
+	//Send the possible Path to the Player if button is pushed
 	private void SendMovePathToPlayer()
 	{
 		if (CurrentSavedFinalPath.Count > 0)
