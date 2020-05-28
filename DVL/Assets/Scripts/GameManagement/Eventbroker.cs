@@ -11,13 +11,4 @@ public class Eventbroker : MonoBehaviour
     {
         eventbroker = this;
     }
-
-    public event Action<GameObject> onSignUpForFogOfWar;
-    public void SignUpForFogOfWar(GameObject gameItem)
-    {
-        if (onSignUpForFogOfWar != null)
-        {
-            onSignUpForFogOfWar(gameItem);
-        }
-    }
 }

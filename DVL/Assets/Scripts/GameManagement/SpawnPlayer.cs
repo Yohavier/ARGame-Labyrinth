@@ -1,18 +1,21 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class SpawnPlayer : MonoBehaviour
 {
 	public GameObject Player;
 
 	private int playerCount;
 
-	public void SpawnPlayersInCorner(Tile cornerTile)
+	public void SpawnPlayersInCorner(List<Tile> cornerTiles)
 	{
-		playerCount++;
-		GameObject player = Instantiate(Player);
-		player.GetComponent<Player>().SetUpPlayer(playerCount);
-		player.transform.SetParent(cornerTile.transform);
-		player.GetComponent<Player>().positionTile = cornerTile;
-		player.transform.localPosition = new Vector3(0f, 1f, 0f);
+		foreach(Tile corner in cornerTiles)
+		{
+			playerCount++;
+			GameObject player = Instantiate(Player);
+			player.GetComponent<Player>().SetUpPlayer(playerCount);
+			player.transform.SetParent(corner.transform);
+			player.GetComponent<Player>().ChangePlayerPosition(corner);
+			player.transform.localPosition = new Vector3(0f, 1f, 0f);
+		}
 	}
 }

@@ -78,8 +78,16 @@ public class Tile : MonoBehaviour
 		column += move.colChangeDir;
 		UpdateTileState();
 		UpdatePathfindingOptions();
+		MessagePlayer();
 	}
-
+	private void MessagePlayer()
+	{
+		var player = transform.GetComponentInChildren<Player>();
+		if (player == LocalGameManager.local.activePlayer)
+		{
+			player.ChangePlayerPosition(this);
+		}
+	}
 	private IEnumerator MoveInterpolate(Vector3 startPos, Vector3 targetPos, float time)
 	{
 		float i = 0.0f;

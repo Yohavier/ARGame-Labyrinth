@@ -1373,7 +1373,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256120828}
-  - component: {fileID: 256120827}
   - component: {fileID: 256120829}
   m_Layer: 0
   m_Name: LocalGameManager
@@ -1382,19 +1381,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &256120827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256120826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb0dd97dc42ec5e4f8d6de111968f3e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FogOfWarItems: []
 --- !u!4 &256120828
 Transform:
   m_ObjectHideFlags: 0

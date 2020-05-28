@@ -54,6 +54,7 @@ public class BoardGrid : MonoBehaviour
 
 	private void SetUpGrid()
 	{
+		List<Tile> cornerTiles = new List<Tile>();
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -67,13 +68,14 @@ public class BoardGrid : MonoBehaviour
 				grid.Add(component);
 				if ((i == 0 && j == 0) || (i == 0 && j == 6) || (i == 6 && j == 0) || (i == 6 && j == 6))
 				{
-					this.GetComponent<SpawnPlayer>().SpawnPlayersInCorner(component);
+					cornerTiles.Add(component);
 				}
 			}
-		}
+		}	
 		GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
 		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
+		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
 	}
 
 	private int SetRandomRotation()

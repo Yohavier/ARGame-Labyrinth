@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	public playingPlayer player;
-
+	private FogOfWar playerFOW;
 	public Tile positionTile;
 
 	public void SetUpPlayer(int count)
@@ -29,13 +29,19 @@ public class Player : MonoBehaviour
 		{
 			this.GetComponent<MeshRenderer>().enabled = false;
 			this.GetComponent<Pathfinding>().enabled = false;
-			Eventbroker.eventbroker.SignUpForFogOfWar(this.gameObject);
-			this.GetComponent<SphereCollider>().radius = 0.5f;
 		}
 		else
 		{
 			LocalGameManager.local.activePlayer = this.gameObject;
+			playerFOW = GetComponent<FogOfWar>();		
 		}
+	}
+
+	public void ChangePlayerPosition(Tile newPos)
+	{
+		if(playerFOW != null)
+			playerFOW.ChangePosition(newPos);
+		positionTile = newPos;
 	}
 
 	public void MoveToTarget(List<Tile> path)
@@ -51,23 +57,8 @@ public class Player : MonoBehaviour
 			this.transform.SetParent(tile.transform);
 			this.transform.localPosition = new Vector3(0f, 1f, 0f);
 			tile.GetComponent<MeshRenderer>().material.color = tile.prefabColor;
-			yield return (object)new WaitForSeconds(0.25f);
-		}
-	}
-
-	public void OnTriggerEnter(Collider other)
-	{
-		if (FogOfWar.fow.FogOfWarItems.Contains(other.gameObject))
-		{
-			other.GetComponent<MeshRenderer>().enabled = true;
-		}
-	}
-
-	public void OnTriggerExit(Collider other)
-	{
-		if (FogOfWar.fow.FogOfWarItems.Contains(other.gameObject))
-		{
-			other.GetComponent<MeshRenderer>().enabled = false;
+			ChangePlayerPosition(item);
+			yield return new WaitForSeconds(0.25f);
 		}
 	}
 }

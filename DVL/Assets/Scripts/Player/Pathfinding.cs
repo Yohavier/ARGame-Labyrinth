@@ -7,11 +7,8 @@ using UnityEngine.UI;
 public class Pathfinding : MonoBehaviour
 {
 	public Tile TargetPosition;
-
 	private Tile prevTile;
-
 	private List<Tile> grid;
-
 	private List<Tile> CurrentSavedFinalPath;
 
 	public Button startMoveButton;
