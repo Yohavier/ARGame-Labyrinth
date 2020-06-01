@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8371052983467692376}
   - component: {fileID: 8371052983467692379}
   - component: {fileID: 8371052983467692378}
+  - component: {fileID: 8123336228137544935}
   m_Layer: 8
   m_Name: StaticTile01
   m_TagString: Tile
@@ -112,7 +113,7 @@ MonoBehaviour:
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
-  prefabColor: {r: 0, g: 0, b: 0, a: 1}
+  prefabColor: {r: 0.32557008, g: 0.8113208, b: 0.11098258, a: 1}
   Parent: {fileID: 0}
   initForward: 1
   initRight: 1
@@ -124,6 +125,7 @@ MonoBehaviour:
   left: 0
   gCost: 0
   hCost: 0
+  isInFOW: 0
 --- !u!114 &8371052983467692378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +139,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.1
+--- !u!114 &8123336228137544935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371052983467692380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7612ea78ec4e3247a68adbfe86b06f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

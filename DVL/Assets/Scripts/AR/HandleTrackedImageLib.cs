@@ -52,8 +52,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 		droppedOutPrefab.transform.localRotation = Quaternion.identity;
 
 		droppedOutPrefab.GetComponent<FindNearestGridSlot>().enabled = true;
-		droppedOutPrefab.GetComponent<MeshRenderer>().material.color = droppedOutPrefab.GetComponent<Tile>().prefabColor;
-
+		
 		Invoke("ToggleBackOn", 2);
 	}
 
@@ -71,5 +70,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 	public void AddToDictionary(string tileName, GameObject tile)
 	{
 		trackableDictionary.Add(tileName, tile);
+
 	}
 }

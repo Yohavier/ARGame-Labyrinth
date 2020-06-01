@@ -9,15 +9,21 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	
 	//Lets the raycast only collide with certain things
 	public LayerMask mask;
-
+	public Tile DebugTile;
+	private Tile currentSelectedTarget;
+	public List<Tile> path;
 	private void Awake()
 	{
 		arCamera = FindObjectOfType<Camera>();
 	}
 
 	private void Update()
-	{
+	{		
 		RayCastOnTouch();
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			ManagePath(DebugTile);
+		}
 	}
 
 	//Sends Ray from touch position with the camera rot to select a path
@@ -32,12 +38,39 @@ public class SelectARObjectWithFinger : MonoBehaviour
 
 			if (touch.phase == TouchPhase.Began && Physics.Raycast(ray, out hitObject, mask))
 			{
-				Tile component = hitObject.transform.GetComponent<Tile>();
+				Tile hitTile = hitObject.transform.GetComponent<Tile>();
 				if (hitObject.transform.CompareTag("Tile"))
 				{
-					LocalGameManager.local.activePlayer.GetComponent<Pathfinding>().TargetPosition = component;
+					ManagePath(hitTile);
 				}
 			}
+		}
+	}
+
+	private void ManagePath(Tile targetTile)
+	{	
+		if(targetTile != currentSelectedTarget)
+		{
+			currentSelectedTarget = targetTile;
+			foreach (Tile t in path)
+			{
+				t.PrefabColor();
+			}
+			Pathfinding p = new Pathfinding(BoardGrid.GridInstance.grid, LocalGameManager.local.activePlayer.GetComponent<Player>().positionTile, targetTile);
+			path = p.FindPath();
+			foreach (Tile wayElement in path)
+			{
+				wayElement.GetComponent<MeshRenderer>().material.color = Color.red;
+			} 
+		}
+		else if(targetTile == currentSelectedTarget)
+		{
+			foreach (Tile wayElement in path)
+			{
+				wayElement.PrefabColor();
+			}
+			LocalGameManager.local.activePlayer.GetComponent<Player>().MoveToTarget(path);
+			currentSelectedTarget = null;
 		}
 	}
 }

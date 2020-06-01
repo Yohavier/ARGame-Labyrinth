@@ -1,42 +1,24 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-
 
 //A* pathfinding, always chooses shortest path
-public class Pathfinding : MonoBehaviour
+public class Pathfinding 
 {
-	public Tile TargetPosition;
-	private Tile prevTile;
 	private List<Tile> grid;
-	private List<Tile> CurrentSavedFinalPath;
+	private Tile start;
+	private Tile target;
 
-	public Button startMoveButton;
-
-	private void OnEnable()
+	public Pathfinding(List<Tile> boardGrid, Tile c_start, Tile c_target)
 	{
-		startMoveButton = FindObjectOfType<Button>();
-		startMoveButton.onClick.AddListener(SendMovePathToPlayer);
-		grid = FindObjectOfType<BoardGrid>().grid;
-	}
-	private void OnDisable()
-	{
-		startMoveButton.onClick.RemoveListener(SendMovePathToPlayer);
+		grid = boardGrid;
+		start = c_start;
+		target = c_target;
 	}
 
-	private void Update()
+	public List<Tile> FindPath()
 	{
-		if (TargetPosition != null && prevTile != TargetPosition)
-		{
-			prevTile = TargetPosition;
-			FindPath(this.GetComponent<Player>().positionTile, TargetPosition);
-		}
-	}
-
-	private void FindPath(Tile a_start, Tile a_target)
-	{
+		Tile a_start = start;
+		Tile a_target = target;
 		List<Tile> list = new List<Tile>();
 		HashSet<Tile> hashSet = new HashSet<Tile>();
 		list.Add(a_start);
@@ -54,8 +36,7 @@ public class Pathfinding : MonoBehaviour
 			hashSet.Add(tile);
 			if (tile == a_target)
 			{
-				GetFinalPath(a_start, a_target);
-				return;
+				return GetFinalPath(a_start, a_target);				
 			}
 			foreach (Tile neighbouringTile in GetNeighbouringTiles(tile))
 			{
@@ -76,22 +57,7 @@ public class Pathfinding : MonoBehaviour
 			}
 		}
 		MonoBehaviour.print((object)"No Path Found");
-		if (CurrentSavedFinalPath != null)
-		{
-			ClearPathMarks(CurrentSavedFinalPath);
-		}
-	}
-
-	private void ClearPathMarks(List<Tile> path)
-	{
-		if (path.Count != 0)
-		{
-			foreach (Tile item in path)
-			{
-				item.GetComponent<MeshRenderer>().material.color = item.prefabColor;
-			}
-		}
-		path.Clear();
+		return null;
 	}
 
 	private List<Tile> GetNeighbouringTiles(Tile a_Tile)
@@ -122,24 +88,17 @@ public class Pathfinding : MonoBehaviour
 		return list;
 	}
 
-	private void GetFinalPath(Tile start, Tile target)
+	private List<Tile> GetFinalPath(Tile start, Tile target)
 	{
-		if (CurrentSavedFinalPath != null)
-		{
-			ClearPathMarks(CurrentSavedFinalPath);
-		}
 		List<Tile> list = new List<Tile>();
 		Tile tile = target;
-		TargetPosition.GetComponent<MeshRenderer>().material.color = Color.red;
-		list.Add(TargetPosition);
-		while (tile != start)
+		while (target != start)
 		{
-			list.Add(tile);
-			tile.GetComponent<MeshRenderer>().material.color = Color.red;
-			tile = tile.Parent;
+			list.Add(target);
+			target = target.Parent;
 		}
 		list.Reverse();
-		CurrentSavedFinalPath = list;
+		return list;
 	}
 
 	private int GetManhattenDistance(Tile current, Tile neighbour)
@@ -147,15 +106,5 @@ public class Pathfinding : MonoBehaviour
 		int num = Mathf.Abs(current.row - neighbour.row);
 		int num2 = Mathf.Abs(current.column - neighbour.column);
 		return num + num2;
-	}
-
-	//Send the possible Path to the Player if button is pushed
-	private void SendMovePathToPlayer()
-	{
-		if (CurrentSavedFinalPath.Count > 0)
-		{
-			TargetPosition = null;
-			LocalGameManager.local.activePlayer.GetComponent<Player>().MoveToTarget(CurrentSavedFinalPath);
-		}
 	}
 }

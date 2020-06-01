@@ -112,7 +112,7 @@ MonoBehaviour:
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
-  prefabColor: {r: 0, g: 0, b: 0, a: 1}
+  prefabColor: {r: 0.32557008, g: 0.8113208, b: 0.11098258, a: 1}
   Parent: {fileID: 0}
   initForward: 1
   initRight: 1

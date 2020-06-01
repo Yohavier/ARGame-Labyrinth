@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 	public playingPlayer player;
 	private FogOfWar playerFOW;
 	public Tile positionTile;
+	public GameObject storedItem;
 
 	//called once after init to determine if this is the active player of the scene
 	public void SetUpPlayer(int count)
@@ -29,12 +30,11 @@ public class Player : MonoBehaviour
 		if (player != LocalGameManager.local.viewOfPlayer)
 		{
 			this.GetComponent<MeshRenderer>().enabled = false;
-			this.GetComponent<Pathfinding>().enabled = false;
 		}
 		else
 		{
 			LocalGameManager.local.activePlayer = this.gameObject;
-			playerFOW = GetComponent<FogOfWar>();		
+			playerFOW = GetComponent<FogOfWar>();
 		}
 	}
 
@@ -43,13 +43,19 @@ public class Player : MonoBehaviour
 	{
 		if(playerFOW != null)
 			playerFOW.OnChangePlayerPosition(newPos);
+
+
 		positionTile = newPos;
+		if(LocalGameManager.local.activePlayer == this.gameObject)
+		{
+			InformationPanel.playerPanel.SetCoordText(positionTile.row.ToString()+ " " + positionTile.column.ToString());
+		}
 	}
 
 	//Move along a List of Tiles
 	public void MoveToTarget(List<Tile> path)
 	{
-		this.StartCoroutine(Moving(path));
+		StartCoroutine(Moving(path));
 	}
 
 	//moving "Animation"
@@ -57,12 +63,31 @@ public class Player : MonoBehaviour
 	{
 		foreach (Tile item in path)
 		{
-			Tile tile = positionTile = item;
-			this.transform.SetParent(tile.transform);
-			this.transform.localPosition = new Vector3(0f, 1f, 0f);
-			tile.GetComponent<MeshRenderer>().material.color = tile.prefabColor;
-			ChangePlayerPosition(item);
+			if (checkForOtherPlayers(item))
+			{
+				this.transform.SetParent(item.transform);
+				this.transform.localPosition = new Vector3(0f, 1f, 0f);
+				ChangePlayerPosition(item);				
+			}
+			else
+			{
+				StopAllCoroutines();		
+			}
 			yield return new WaitForSeconds(0.25f);
 		}
+		CheckTileForOtherMods(path[path.Count-1]);
+	}
+
+	public virtual bool checkForOtherPlayers(Tile nextTile)
+	{
+		if (nextTile.GetComponentInChildren<Player>() != null)
+		{
+			return false;
+		}
+		return true;
+	}
+	public virtual void CheckTileForOtherMods(Tile target)
+	{
+
 	}
 }

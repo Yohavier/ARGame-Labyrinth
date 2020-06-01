@@ -8,7 +8,7 @@ public class BoardGrid : MonoBehaviour
 	public static BoardGrid GridInstance;
 
 	public GameObject trackingManager;
-	
+	public Dictionary<string, Tile> coordDic = new Dictionary<string, Tile>();
 	//Prefab Lists of Tiles
 	public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
 	public List<GameObject> allPossibleStaticTiles = new List<GameObject>();
@@ -61,18 +61,19 @@ public class BoardGrid : MonoBehaviour
 	private void SetUpGrid()
 	{
 		List<Tile> cornerTiles = new List<Tile>();
-		for (int i = 0; i < size; i++)
+		for (int row = 0; row < size; row++)
 		{
-			for (int j = 0; j < size; j++)
+			for (int column = 0; column < size; column++)
 			{
-				GameObject randomTile = GetRandomTile(i, j);
+				GameObject randomTile = GetRandomTile(row, column);
 				RemoveTileFromList(randomTile);
-				GameObject tile = Instantiate(randomTile, new Vector3(i * gridSpacing, 0f, j * gridSpacing), Quaternion.identity, this.transform);
+				GameObject tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0f, column * gridSpacing), Quaternion.identity, this.transform);
 				tile.transform.localEulerAngles = new Vector3(0f, SetRandomRotation(), 0f);
 				Tile component = tile.GetComponent<Tile>();
-				component.SetTileData(i, j);
+				component.SetTileData(row, column);
 				grid.Add(component);
-				if ((i == 0 && j == 0) || (i == 0 && j == 6) || (i == 6 && j == 0) || (i == 6 && j == 6))
+				coordDic.Add(row.ToString() + column.ToString(), component);
+				if ((row == 0 && column == 0) || (row == 0 && column == 6) || (row == 6 && column == 0) || (row == 6 && column == 6))
 				{
 					cornerTiles.Add(component);
 				}
@@ -82,6 +83,7 @@ public class BoardGrid : MonoBehaviour
 		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
+		GetComponent<SpawnItems>().SetItemOnGrid();
 	}
 
 	//Create Random Rotation for the Grid Tiles
@@ -104,7 +106,6 @@ public class BoardGrid : MonoBehaviour
 		val.transform.localPosition = entryTile.transform.localPosition - moveDir.moveDir;
 		Tile component = val.GetComponent<Tile>();
 		component.SetTileData(entryTile.row, entryTile.column);
-		component.GetComponent<MeshRenderer>().material.color = component.prefabColor;
 		component.GetComponent<FindNearestGridSlot>().enabled = false;
 		grid.Add(component);
 		AdjustColAndRow(component);
@@ -154,12 +155,23 @@ public class BoardGrid : MonoBehaviour
 				item.Move(moveDir);
 				list.Add(item);
 			}
+		}		
+	}
+
+	private void UpdateDic()
+	{
+		coordDic.Clear();
+		foreach(Tile t in grid)
+		{
+			coordDic.Add(t.row.ToString() + t.column.ToString(), t);
 		}
 	}
 
 	public void RemoveTileFromGrid(Tile removedTile)
 	{
 		grid.Remove(removedTile);
+		UpdateDic();
+		FogOfWar.fow.OnChangePlayerPosition(LocalGameManager.local.activePlayer.GetComponent<Player>().positionTile);
 	}
 
 	private GridMovement GetMoveDir(Tile moveTile)

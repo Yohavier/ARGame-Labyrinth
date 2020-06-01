@@ -30,10 +30,13 @@ public class Tile : MonoBehaviour
 	public int hCost;
 	public int FCost => gCost + hCost;
 
+	public bool isInFOW;
+
 	//Set the Data on Init or if newly pushed into the grid (Called by BoardGrid)
 	public void SetTileData(int rowNum, int colNum)
 	{
-		this.GetComponent<MeshRenderer>().material.color = prefabColor;
+		GetComponent<MeshRenderer>().material.color = Color.black;
+		isInFOW = true;
 		row = rowNum;
 		column = colNum;
 		UpdateTileState();
@@ -49,17 +52,6 @@ public class Tile : MonoBehaviour
 		column += move.colChangeDir;
 		UpdateTileState();
 		UpdateTileMoveOptions();
-		MessagePlayer();
-	}
-
-	//if tile moves Updatae Player Pos and maybe fog of war
-	private void MessagePlayer()
-	{
-		var player = transform.GetComponentInChildren<Player>();
-		if (player == LocalGameManager.local.activePlayer)
-		{
-			player.ChangePlayerPosition(this);
-		}
 	}
 
 	//Lerp between 2 Tile position over Time
@@ -145,5 +137,13 @@ public class Tile : MonoBehaviour
 			backward = initLeft;
 			left = initForward;
 		}
+	}
+
+	public void PrefabColor()
+	{
+		if (isInFOW)
+			GetComponent<MeshRenderer>().material.color = Color.black;
+		else
+			GetComponent<MeshRenderer>().material.color = prefabColor;
 	}
 }
