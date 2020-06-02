@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Collections;
 
 public class FogOfWar : MonoBehaviour
 {
@@ -24,15 +25,16 @@ public class FogOfWar : MonoBehaviour
 			{			
 				neighborTile.isInFOW = false;
 				neighborTile.PrefabColor();
-				var childTrans = neighborTile.GetComponentsInChildren<Transform>();
-				foreach (Transform trans in childTrans)
+				var childTrans = neighborTile.GetComponentsInChildren<MeshRenderer>();
+				foreach (MeshRenderer trans in childTrans)
 				{
 					if (trans.gameObject.layer != 8)
-					{
+					{	
 						trans.GetComponent<MeshRenderer>().enabled = true;
 						activeFogOfWarItems.Add(trans.gameObject);
 					}
 				}
+				neighborTile.GetComponentInChildren<ParticleSystem>().Stop();
 			}
 		}
 		else
@@ -40,8 +42,8 @@ public class FogOfWar : MonoBehaviour
 			finalFogPath.Add(newPosition);
 			newPosition.isInFOW = false;
 			newPosition.PrefabColor();
-			var childTrans = newPosition.GetComponentsInChildren<Transform>();
-			foreach (Transform trans in childTrans)
+			var childTrans = newPosition.GetComponentsInChildren<MeshRenderer>();
+			foreach (MeshRenderer trans in childTrans)
 			{
 				if (trans.gameObject.layer != 8)
 				{
@@ -49,6 +51,7 @@ public class FogOfWar : MonoBehaviour
 					activeFogOfWarItems.Add(trans.gameObject);
 				}
 			}
+			newPosition.GetComponentInChildren<ParticleSystem>().Stop();
 		}
     }
 	
@@ -59,6 +62,7 @@ public class FogOfWar : MonoBehaviour
 		{
 			t.isInFOW = true;
 			t.PrefabColor();
+			t.GetComponentInChildren<ParticleSystem>().Play();
 		}
 		foreach (GameObject item in activeFogOfWarItems) 
 		{
@@ -133,5 +137,10 @@ public class FogOfWar : MonoBehaviour
 				allNeighbors.Add(check);
 		}
 		return allNeighbors;
+	}
+
+	private IEnumerator FadeFogOut(ParticleSystem p)
+	{
+		yield return new WaitForSeconds(0.1f);
 	}
 }

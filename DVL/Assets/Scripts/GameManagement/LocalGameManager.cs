@@ -26,7 +26,11 @@ public class LocalGameManager : MonoBehaviour
 
 	private void Awake()
 	{
-		local = this;
+		local = this;	
+	}
+
+	private void Start()
+	{
 		InformationPanel.playerPanel.SetPlayerText(viewOfPlayer.ToString());
 	}
 

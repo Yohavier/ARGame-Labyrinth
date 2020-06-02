@@ -67,7 +67,7 @@ public class BoardGrid : MonoBehaviour
 			{
 				GameObject randomTile = GetRandomTile(row, column);
 				RemoveTileFromList(randomTile);
-				GameObject tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0f, column * gridSpacing), Quaternion.identity, this.transform);
+				GameObject tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0f, column * gridSpacing), Quaternion.identity, this.transform);			
 				tile.transform.localEulerAngles = new Vector3(0f, SetRandomRotation(), 0f);
 				Tile component = tile.GetComponent<Tile>();
 				component.SetTileData(row, column);
