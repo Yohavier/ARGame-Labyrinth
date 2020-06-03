@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
 					yield return null;
 				}
 				this.transform.SetParent(tile.transform);
-				this.transform.localPosition = new Vector3(0f, .5f, 0f);
+				this.transform.localPosition = Vector3.zero;
 				ChangePlayerPosition(tile);
 			}
 			else

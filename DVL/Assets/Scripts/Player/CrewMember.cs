@@ -23,6 +23,7 @@ public class CrewMember : Player
 				storedItem = item.gameObject;
 				storedItem.transform.SetParent(this.transform);
 				InformationPanel.playerPanel.SetItemText(item.itemName);
+				storedItem.GetComponent<MeshRenderer>().enabled = false;
 			}
 		}
 
@@ -33,6 +34,7 @@ public class CrewMember : Player
 			{
 				capsule.DisplayProgress();
 				storedItem.transform.SetParent(tile.transform);
+				storedItem.GetComponent<MeshRenderer>().enabled = true;
 				storedItem = null;
 				InformationPanel.playerPanel.SetItemText("none");
 			}

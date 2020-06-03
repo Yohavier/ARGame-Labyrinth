@@ -13,9 +13,11 @@ public class FindNearestGridSlot : MonoBehaviour
 
 	private BoardGrid board;
 
+	public LayerMask mask;
+
 	private void Start()
 	{
-		board = Object.FindObjectOfType<BoardGrid>();
+		board = FindObjectOfType<BoardGrid>();
 	}
 
 	private void Update()
@@ -27,25 +29,25 @@ public class FindNearestGridSlot : MonoBehaviour
 	private void FindTileWithRays()
 	{
 		int hitCounter = 0;
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, distance))
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * Hit.distance, Color.yellow);
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
-		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.forward), out Hit, distance))
+		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.forward), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, -transform.TransformDirection(Vector3.forward) * Hit.distance, Color.blue);
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Hit, distance))
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * Hit.distance, Color.red);
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
-		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.right), out Hit, distance))
+		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.right), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, -transform.TransformDirection(Vector3.right) * Hit.distance, Color.black);
 			target = Hit.collider.gameObject;

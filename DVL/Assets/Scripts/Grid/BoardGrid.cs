@@ -94,7 +94,7 @@ public class BoardGrid : MonoBehaviour
 	{
 		GameObject f = Instantiate(fog);
 		f.transform.SetParent(tile.transform);
-		f.transform.localPosition = new Vector3(0, 1,0);
+		f.transform.localPosition = new Vector3(0, 0.05f, 0);
 	}
 
 	//Create Random Rotation for the Grid Tiles
@@ -113,7 +113,6 @@ public class BoardGrid : MonoBehaviour
 		int num = SetNewRoomRotation(newRoom);
 		val.transform.SetParent(this.transform);		
 		val.transform.localEulerAngles = new Vector3(0f, num, 0f);
-		val.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		val.transform.localPosition = entryTile.transform.localPosition - moveDir.moveDir;
 		Tile component = val.GetComponent<Tile>();
 		component.SetTileData(entryTile.row, entryTile.column);

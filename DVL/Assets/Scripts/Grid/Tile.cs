@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
 	public bool canMoveHorizontal;
 	public bool canMoveVertical;
 
-	public Color prefabColor;
+	//public Color prefabColor;
 	public Tile Parent;
 
 	[Header("Init Variables")]
@@ -35,10 +35,10 @@ public class Tile : MonoBehaviour
 	//Set the Data on Init or if newly pushed into the grid (Called by BoardGrid)
 	public void SetTileData(int rowNum, int colNum)
 	{
-		GetComponent<MeshRenderer>().material.color = Color.black;
 		isInFOW = true;
 		row = rowNum;
 		column = colNum;
+		PrefabColor();
 		UpdateTileState();
 		UpdateTileMoveOptions();
 	}
@@ -141,9 +141,20 @@ public class Tile : MonoBehaviour
 
 	public void PrefabColor()
 	{
+		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
 		if (isInFOW)
-			GetComponent<MeshRenderer>().material.color = Color.black;
+		{			
+			foreach(MeshRenderer mesh in meshes)
+			{
+				mesh.material.color = Color.black;
+			}
+		}
 		else
-			GetComponent<MeshRenderer>().material.color = prefabColor;
+		{
+			foreach(MeshRenderer mesh in meshes)
+			{
+				mesh.material.color = Color.white;
+			}
+		}
 	}
 }

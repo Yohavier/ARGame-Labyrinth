@@ -30,7 +30,7 @@ public class SpawnItems : MonoBehaviour
             int rand = Random.Range(0, possiblePlaces.Count);
             GameObject newItem = Instantiate(items[i]);
             newItem.transform.SetParent(possiblePlaces[rand].transform);
-            newItem.transform.localPosition = new Vector3(0, 0.75f, 0);
+            newItem.transform.localPosition = Vector3.zero;
             possiblePlaces.Remove(possiblePlaces[rand]);
             newItem.GetComponent<MeshRenderer>().enabled = false;
         }

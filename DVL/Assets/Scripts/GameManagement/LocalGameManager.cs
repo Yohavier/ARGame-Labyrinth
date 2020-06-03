@@ -22,8 +22,6 @@ public class LocalGameManager : MonoBehaviour
 
 	public static LocalGameManager local;
 
-
-
 	private void Awake()
 	{
 		local = this;	

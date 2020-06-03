@@ -60,7 +60,11 @@ public class SelectARObjectWithFinger : MonoBehaviour
 			path = p.FindPath();
 			foreach (Tile wayElement in path)
 			{
-				wayElement.GetComponent<MeshRenderer>().material.color = Color.red;
+				MeshRenderer[] meshes = wayElement.GetComponentsInChildren<MeshRenderer>();
+				foreach(MeshRenderer mesh in meshes)
+				{
+					mesh.material.color = Color.red;
+				}
 			} 
 		}
 		else if(targetTile == currentSelectedTarget)
