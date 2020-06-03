@@ -25,13 +25,17 @@ public class CrewMember : Player
 				InformationPanel.playerPanel.SetItemText(item.itemName);
 			}
 		}
+
 		EscapeCapsule capsule = tile.GetComponent<EscapeCapsule>();
 		if (capsule != null)
 		{
-			capsule.DisplayProgress();
-			storedItem.transform.SetParent(tile.transform);
-			storedItem = null;
-			InformationPanel.playerPanel.SetItemText("none");
+			if(storedItem != null)
+			{
+				capsule.DisplayProgress();
+				storedItem.transform.SetParent(tile.transform);
+				storedItem = null;
+				InformationPanel.playerPanel.SetItemText("none");
+			}
 		}
 	}
 }

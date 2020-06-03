@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
 			if (checkForOtherPlayers(item))
 			{
 				this.transform.SetParent(item.transform);
-				this.transform.localPosition = new Vector3(0f, 1f, 0f);
+				this.transform.localPosition = new Vector3(0f, .5f, 0f);
 				ChangePlayerPosition(item);				
 			}
 			else

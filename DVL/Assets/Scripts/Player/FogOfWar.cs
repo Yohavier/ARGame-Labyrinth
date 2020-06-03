@@ -25,16 +25,19 @@ public class FogOfWar : MonoBehaviour
 			{			
 				neighborTile.isInFOW = false;
 				neighborTile.PrefabColor();
-				var childTrans = neighborTile.GetComponentsInChildren<MeshRenderer>();
-				foreach (MeshRenderer trans in childTrans)
+				var childMeshes = neighborTile.GetComponentsInChildren<MeshRenderer>();
+				foreach (MeshRenderer mesh in childMeshes)
 				{
-					if (trans.gameObject.layer != 8)
-					{	
-						trans.GetComponent<MeshRenderer>().enabled = true;
-						activeFogOfWarItems.Add(trans.gameObject);
+					if (mesh.CompareTag("Fog"))
+					{
+						mesh.GetComponent<MeshRenderer>().enabled = false;
 					}
+					else if (mesh.gameObject.layer != 8)
+					{	
+						mesh.GetComponent<MeshRenderer>().enabled = true;
+						activeFogOfWarItems.Add(mesh.gameObject);
+					}	
 				}
-				neighborTile.GetComponentInChildren<ParticleSystem>().Stop();
 			}
 		}
 		else
@@ -42,27 +45,37 @@ public class FogOfWar : MonoBehaviour
 			finalFogPath.Add(newPosition);
 			newPosition.isInFOW = false;
 			newPosition.PrefabColor();
-			var childTrans = newPosition.GetComponentsInChildren<MeshRenderer>();
-			foreach (MeshRenderer trans in childTrans)
+			var childMeshes = newPosition.GetComponentsInChildren<MeshRenderer>();
+			foreach (MeshRenderer mesh in childMeshes)
 			{
-				if (trans.gameObject.layer != 8)
+				if (mesh.CompareTag("Fog"))
 				{
-					trans.GetComponent<MeshRenderer>().enabled = true;
-					activeFogOfWarItems.Add(trans.gameObject);
+					mesh.GetComponent<MeshRenderer>().enabled = false;
+				}
+				else if (mesh.gameObject.layer != 8)
+				{
+					mesh.GetComponent<MeshRenderer>().enabled = true;
+					activeFogOfWarItems.Add(mesh.gameObject);			
 				}
 			}
-			newPosition.GetComponentInChildren<ParticleSystem>().Stop();
 		}
     }
 	
 	//clear and hide current list of active gameObjects 
 	private void ClearCurrentActiveFOWItems()
 	{
-		foreach(Tile t in BoardGrid.GridInstance.grid)
+		foreach(Tile t in finalFogPath)
 		{
 			t.isInFOW = true;
 			t.PrefabColor();
-			t.GetComponentInChildren<ParticleSystem>().Play();
+			var trans = t.GetComponentsInChildren<Transform>();
+			foreach(Transform tr in trans)
+			{
+				if (tr.CompareTag("Fog"))
+				{				
+					tr.GetComponent<MeshRenderer>().enabled = true;
+				}
+			}
 		}
 		foreach (GameObject item in activeFogOfWarItems) 
 		{

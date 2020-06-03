@@ -1068,6 +1068,12 @@ PrefabInstance:
       propertyPath: randomRoations.Array.data[3]
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 7612015550564188096, guid: 4f479eef290333147ad1d0af1d5efbfa,
+        type: 3}
+      propertyPath: fog
+      value: 
+      objectReference: {fileID: 7662999583797218981, guid: 7982ad04656bf84448b6067fe9500228,
+        type: 3}
     - target: {fileID: 8094775441164248056, guid: 4f479eef290333147ad1d0af1d5efbfa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1771,9 +1777,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player:
-  - {fileID: 3880104999750289996, guid: 08d3e9ebd5d91f843b384f0e374d46de, type: 3}
-  - {fileID: 3880104999750289996, guid: 08d3e9ebd5d91f843b384f0e374d46de, type: 3}
-  - {fileID: 3880104999750289996, guid: 08d3e9ebd5d91f843b384f0e374d46de, type: 3}
+  - {fileID: 843333541123865476, guid: f77fe4708f6ac144986613bb8dc83ef3, type: 3}
+  - {fileID: 843333541123865476, guid: f77fe4708f6ac144986613bb8dc83ef3, type: 3}
+  - {fileID: 843333541123865476, guid: f77fe4708f6ac144986613bb8dc83ef3, type: 3}
   - {fileID: 3880104999750289996, guid: 87fc39d5565365c488124e3d9c2c5c13, type: 3}
 --- !u!114 &1032333671
 MonoBehaviour:

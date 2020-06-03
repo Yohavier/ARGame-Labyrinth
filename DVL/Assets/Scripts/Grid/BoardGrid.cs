@@ -21,6 +21,8 @@ public class BoardGrid : MonoBehaviour
 	//List of the current Grid
 	public List<Tile> grid = new List<Tile>();
 
+	public GameObject fog;
+
 	#region Initialization 
 	private void Awake()
 	{
@@ -67,9 +69,11 @@ public class BoardGrid : MonoBehaviour
 			{
 				GameObject randomTile = GetRandomTile(row, column);
 				RemoveTileFromList(randomTile);
-				GameObject tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0f, column * gridSpacing), Quaternion.identity, this.transform);			
+				GameObject tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0f, column * gridSpacing), Quaternion.identity, this.transform);		
+				
 				tile.transform.localEulerAngles = new Vector3(0f, SetRandomRotation(), 0f);
 				Tile component = tile.GetComponent<Tile>();
+				CreateFogForTile(component);
 				component.SetTileData(row, column);
 				grid.Add(component);
 				coordDic.Add(row.ToString() + column.ToString(), component);
@@ -84,6 +88,13 @@ public class BoardGrid : MonoBehaviour
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
 		GetComponent<SpawnItems>().SetItemOnGrid();
+	}
+
+	public void CreateFogForTile(Tile tile)
+	{
+		GameObject f = Instantiate(fog);
+		f.transform.SetParent(tile.transform);
+		f.transform.localPosition = new Vector3(0, 1,0);
 	}
 
 	//Create Random Rotation for the Grid Tiles
