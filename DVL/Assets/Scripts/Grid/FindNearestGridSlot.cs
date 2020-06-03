@@ -13,39 +13,43 @@ public class FindNearestGridSlot : MonoBehaviour
 
 	private BoardGrid board;
 
+	public LayerMask mask;
+
 	private void Start()
 	{
-		board = Object.FindObjectOfType<BoardGrid>();
+		board = FindObjectOfType<BoardGrid>();
+		mask.value = System.Int32.MaxValue;
 	}
 
 	private void Update()
 	{
-		FindTileWithRays();
+		if (LocalGameManager.instance.GetTurn())
+			FindTileWithRays();
 	}
 
 	//get the tile that will be pushed away by inserting a new Tile
 	private void FindTileWithRays()
 	{
 		int hitCounter = 0;
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, distance))
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * Hit.distance, Color.yellow);
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
-		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.forward), out Hit, distance))
+		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.forward), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, -transform.TransformDirection(Vector3.forward) * Hit.distance, Color.blue);
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Hit, distance))
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * Hit.distance, Color.red);
 			target = Hit.collider.gameObject;
 			hitCounter++;
 		}
-		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.right), out Hit, distance))
+		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.right), out Hit, distance, mask))
 		{
 			Debug.DrawRay(transform.position, -transform.TransformDirection(Vector3.right) * Hit.distance, Color.black);
 			target = Hit.collider.gameObject;
@@ -76,7 +80,8 @@ public class FindNearestGridSlot : MonoBehaviour
 		{
 			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
 			{
-				board.InsertNewRoomPushing(targetTile, this.GetComponent<Tile>());
+				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
+				board.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
 				targetTile = null;
 			}
 			return;

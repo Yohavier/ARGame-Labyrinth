@@ -1,10 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System.Collections;
 
 public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar fow;
-	private List<GameObject> activeFogOfWarItems = new List<GameObject>();
+	public List<GameObject> activeFogOfWarItems = new List<GameObject>();
+	public int fogReach;
+	public List<Tile> finalFogPath = new List<Tile>();
+
 	private void Awake()
     {
         fow = this;
@@ -14,15 +19,43 @@ public class FogOfWar : MonoBehaviour
     public void OnChangePlayerPosition(Tile newPosition)
     {
 		ClearCurrentActiveFOWItems();
-		foreach(Tile neighborTile in GetNeighbouringTiles(newPosition))
+		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
-			var childTrans = neighborTile.GetComponentsInChildren<Transform>();
-			foreach(Transform trans in childTrans)
-			{
-				if (trans.gameObject.layer != 8)
+			foreach (Tile neighborTile in GetScalableNeighbouringTiles(newPosition))
+			{			
+				neighborTile.isInFOW = false;
+				neighborTile.PrefabColor();
+				var childMeshes = neighborTile.GetComponentsInChildren<MeshRenderer>();
+				foreach (MeshRenderer mesh in childMeshes)
 				{
-					trans.GetComponent<MeshRenderer>().enabled = true;
-					activeFogOfWarItems.Add(trans.gameObject);
+					if (mesh.CompareTag("Fog"))
+					{
+						mesh.GetComponent<MeshRenderer>().enabled = false;
+					}
+					else if (mesh.gameObject.layer != 8)
+					{	
+						mesh.GetComponent<MeshRenderer>().enabled = true;
+						activeFogOfWarItems.Add(mesh.gameObject);
+					}	
+				}
+			}
+		}
+		else
+		{
+			finalFogPath.Add(newPosition);
+			newPosition.isInFOW = false;
+			newPosition.PrefabColor();
+			var childMeshes = newPosition.GetComponentsInChildren<MeshRenderer>();
+			foreach (MeshRenderer mesh in childMeshes)
+			{
+				if (mesh.CompareTag("Fog"))
+				{
+					mesh.GetComponent<MeshRenderer>().enabled = false;
+				}
+				else if (mesh.gameObject.layer != 8)
+				{
+					mesh.GetComponent<MeshRenderer>().enabled = true;
+					activeFogOfWarItems.Add(mesh.gameObject);			
 				}
 			}
 		}
@@ -31,39 +64,96 @@ public class FogOfWar : MonoBehaviour
 	//clear and hide current list of active gameObjects 
 	private void ClearCurrentActiveFOWItems()
 	{
-		foreach (GameObject item in activeFogOfWarItems) 
+		foreach(Tile t in BoardGrid.instance.grid)
 		{
-			item.GetComponent<MeshRenderer>().enabled = false;
-		}
-		activeFogOfWarItems.Clear();
-	}
-
-	//Returns List of all possibles neighbourtiles
-	private List<Tile> GetNeighbouringTiles(Tile a_Tile)
-	{
-		List<Tile> list = new List<Tile>();
-		foreach (Tile item in BoardGrid.GridInstance.grid)
-		{
-			if ((item.column == a_Tile.column && (item.row == a_Tile.row - 1 || item.row == a_Tile.row + 1)) || (item.row == a_Tile.row && (item.column == a_Tile.column - 1 || item.column == a_Tile.column + 1)))
+			t.isInFOW = true;
+			t.PrefabColor();
+			var trans = t.GetComponentsInChildren<Transform>();
+			foreach(Transform tr in trans)
 			{
-				if (item.column == a_Tile.column - 1 && a_Tile.backward && item.forward)
-				{
-					list.Add(item);
-				}
-				else if (item.column == a_Tile.column + 1 && a_Tile.forward && item.backward)
-				{
-					list.Add(item);
-				}
-				else if (item.row == a_Tile.row - 1 && a_Tile.left && item.right)
-				{
-					list.Add(item);
-				}
-				else if (item.row == a_Tile.row + 1 && a_Tile.right && item.left)
-				{
-					list.Add(item);
+				if (tr.CompareTag("Fog"))
+				{				
+					tr.GetComponent<MeshRenderer>().enabled = true;
 				}
 			}
 		}
-		return list;
+		foreach (GameObject item in activeFogOfWarItems) 
+		{
+			if(item != null)
+			{
+				item.GetComponent<MeshRenderer>().enabled = false;
+			} 
+		}
+		activeFogOfWarItems.Clear();
+		finalFogPath.Clear();
+	}
+
+	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
+	{
+		List<Tile> toCheck = new List<Tile>();
+		finalFogPath.Add(a_tile);
+		toCheck.Add(a_tile);
+
+		for (int i = 0; i < fogReach; i++)
+		{
+			if (toCheck.Count > 0)
+			{
+				List<Tile> neighbour = new List<Tile>();
+				foreach (Tile t in toCheck)
+				{
+					neighbour = neighbour.Union(AllNeighboursOfTile(t)).ToList();
+				}
+				foreach (Tile t in neighbour)
+				{
+					if (!finalFogPath.Contains(t))
+					{
+						finalFogPath.Add(t);
+						toCheck.Add(t);
+					}
+				}
+			}
+		}
+		return finalFogPath;
+	}
+
+	//forward + col
+	//right +row
+	private List<Tile> AllNeighboursOfTile(Tile tile)
+	{
+		List<Tile> allNeighbors = new List<Tile>();
+		
+		if(tile.column - 1 >= 0)
+		{
+			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column - 1).ToString()];
+			if(check.forward && tile.backward)
+				allNeighbors.Add(check);
+		}	
+
+		if(tile.column + 1 <= 6)
+		{
+			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column + 1).ToString()];
+			if (check.backward && tile.forward)
+				allNeighbors.Add(check);
+		}
+
+		if(tile.row - 1 >= 0)
+		{
+			Tile check = BoardGrid.instance.coordDic[(tile.row - 1).ToString() + tile.column.ToString()];
+			if (check.right && tile.left)
+				allNeighbors.Add(check);
+		}
+
+		if(tile.row + 1 <= 6)
+		{
+			Tile check = BoardGrid.instance.coordDic[(tile.row + 1).ToString() + tile.column.ToString()];
+			if (check.left && tile.right)
+				allNeighbors.Add(check);
+		}
+		return allNeighbors;
+	}
+
+	private IEnumerator FadeFogOut(ParticleSystem p)
+	{
+		yield return new WaitForSeconds(0.1f);
 	}
 }

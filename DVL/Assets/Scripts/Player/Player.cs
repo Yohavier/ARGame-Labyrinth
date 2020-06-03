@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 	public playingPlayer player;
 	private FogOfWar playerFOW;
 	public Tile positionTile;
+	public GameObject storedItem;
 
 	//called once after init to determine if this is the active player of the scene
 	public void SetUpPlayer(int count)
@@ -26,15 +27,15 @@ public class Player : MonoBehaviour
 			player = playingPlayer.Enemy;
 			break;
 		}
-		if (player != LocalGameManager.local.viewOfPlayer)
+
+		if (player != LocalGameManager.instance.localPlayerIndex)
 		{
 			this.GetComponent<MeshRenderer>().enabled = false;
-			this.GetComponent<Pathfinding>().enabled = false;
 		}
 		else
 		{
-			LocalGameManager.local.activePlayer = this.gameObject;
-			playerFOW = GetComponent<FogOfWar>();		
+			LocalGameManager.instance.activePlayer = this.gameObject;
+			playerFOW = GetComponent<FogOfWar>();
 		}
 	}
 
@@ -43,26 +44,69 @@ public class Player : MonoBehaviour
 	{
 		if(playerFOW != null)
 			playerFOW.OnChangePlayerPosition(newPos);
+
+
 		positionTile = newPos;
+		if(LocalGameManager.instance.activePlayer == this.gameObject)
+		{
+			InformationPanel.playerPanel.SetCoordText(positionTile.row.ToString()+ " " + positionTile.column.ToString());
+		}
 	}
 
 	//Move along a List of Tiles
 	public void MoveToTarget(List<Tile> path)
 	{
-		this.StartCoroutine(Moving(path));
+		if (path.Count > 0)
+			StartCoroutine(Moving(path, 1));
 	}
 
-	//moving "Animation"
-	private IEnumerator Moving(List<Tile> path)
+	private IEnumerator Moving(List<Tile> path, float time)
 	{
-		foreach (Tile item in path)
+		foreach(Tile tile in path)
 		{
-			Tile tile = positionTile = item;
-			this.transform.SetParent(tile.transform);
-			this.transform.localPosition = new Vector3(0f, 1f, 0f);
-			tile.GetComponent<MeshRenderer>().material.color = tile.prefabColor;
-			ChangePlayerPosition(item);
-			yield return new WaitForSeconds(0.25f);
+			if (checkForOtherPlayers(tile))
+			{
+				AdjustRotation(tile);
+				float i = 0.0f;
+				float rate = 1.0f / time;
+				while (i < 1.0f)
+				{
+					i += Time.deltaTime * rate;
+					var movementVector = Vector3.Lerp(new Vector3(positionTile.transform.position.x, transform.position.y, positionTile.transform.position.z),
+													  new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z), i);
+					transform.position = movementVector;				
+					yield return null;
+				}
+				this.transform.SetParent(tile.transform);
+				this.transform.localPosition = Vector3.zero;
+				ChangePlayerPosition(tile);
+			}
+			else
+			{
+				StopAllCoroutines();
+			}
+			yield return null;
 		}
+		CheckTileForOtherMods(path[path.Count - 1]);
 	}
+
+	private void AdjustRotation(Tile lookTarget)
+	{
+		Vector3 relativePos = lookTarget.transform.position - transform.position;
+
+		// the second argument, upwards, defaults to Vector3.up
+		Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+		transform.rotation = rotation;
+		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+	}
+
+	public virtual bool checkForOtherPlayers(Tile nextTile)
+	{
+		if (nextTile.GetComponentInChildren<Player>() != null)
+		{
+			return false;
+		}
+		return true;
+	}
+	public virtual void CheckTileForOtherMods(Tile target) { }
 }

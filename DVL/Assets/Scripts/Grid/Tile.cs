@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
 	public bool canMoveHorizontal;
 	public bool canMoveVertical;
 
-	public Color prefabColor;
+	//public Color prefabColor;
 	public Tile Parent;
 
 	[Header("Init Variables")]
@@ -30,12 +30,17 @@ public class Tile : MonoBehaviour
 	public int hCost;
 	public int FCost => gCost + hCost;
 
+	public bool isInFOW;
+
+	public int index = -1; //Identifier of tile, -1 invalid index
+
 	//Set the Data on Init or if newly pushed into the grid (Called by BoardGrid)
 	public void SetTileData(int rowNum, int colNum)
 	{
-		this.GetComponent<MeshRenderer>().material.color = prefabColor;
+		isInFOW = true;
 		row = rowNum;
 		column = colNum;
+		PrefabColor();
 		UpdateTileState();
 		UpdateTileMoveOptions();
 	}
@@ -49,17 +54,6 @@ public class Tile : MonoBehaviour
 		column += move.colChangeDir;
 		UpdateTileState();
 		UpdateTileMoveOptions();
-		MessagePlayer();
-	}
-
-	//if tile moves Updatae Player Pos and maybe fog of war
-	private void MessagePlayer()
-	{
-		var player = transform.GetComponentInChildren<Player>();
-		if (player == LocalGameManager.local.activePlayer)
-		{
-			player.ChangePlayerPosition(this);
-		}
 	}
 
 	//Lerp between 2 Tile position over Time
@@ -69,14 +63,16 @@ public class Tile : MonoBehaviour
 		float rate = 1.0f / time;
 		while (i < 1.0f)
 		{
+			BoardGrid.instance.inMove = true;
 			i += Time.deltaTime * rate;
 			transform.localPosition = Vector3.Lerp(startPos, targetPos, i);
 			yield return null;
 		}
 
-		if (row < 0 || row > BoardGrid.GridInstance.size - 1 || column < 0 || column > BoardGrid.GridInstance.size - 1)
+		if (row < 0 || row > BoardGrid.instance.size - 1 || column < 0 || column > BoardGrid.instance.size - 1)
 		{
-			BoardGrid.GridInstance.RemoveTileFromGrid(this);
+			BoardGrid.instance.inMove = false;
+			BoardGrid.instance.RemoveTileFromGrid(this);
 			HandleTrackedImageLib.CustomTrackingManagerInstance.ChangeTrackedPrefab(this.gameObject);
 		}
 	}
@@ -104,7 +100,7 @@ public class Tile : MonoBehaviour
 			canMoveVertical = true;
 			canMoveHorizontal = true;
 		}
-		if (row == 0 || column == 0 || column == BoardGrid.GridInstance.size - 1 || row == BoardGrid.GridInstance.size - 1)
+		if (row == 0 || column == 0 || column == BoardGrid.instance.size - 1 || row == BoardGrid.instance.size - 1)
 		{
 			edgePiece = true;
 		}
@@ -144,6 +140,25 @@ public class Tile : MonoBehaviour
 			right = initBackward;
 			backward = initLeft;
 			left = initForward;
+		}
+	}
+
+	public void PrefabColor()
+	{
+		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+		if (isInFOW)
+		{			
+			foreach(MeshRenderer mesh in meshes)
+			{
+				mesh.material.color = Color.black;
+			}
+		}
+		else
+		{
+			foreach(MeshRenderer mesh in meshes)
+			{
+				mesh.material.color = Color.white;
+			}
 		}
 	}
 }
