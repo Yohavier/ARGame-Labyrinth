@@ -55,27 +55,47 @@ public class Player : MonoBehaviour
 	//Move along a List of Tiles
 	public void MoveToTarget(List<Tile> path)
 	{
-		StartCoroutine(Moving(path));
+		StartCoroutine(Moving(path, 1));
 	}
 
-	//moving "Animation"
-	private IEnumerator Moving(List<Tile> path)
+	private IEnumerator Moving(List<Tile> path, float time)
 	{
-		foreach (Tile item in path)
+		foreach(Tile tile in path)
 		{
-			if (checkForOtherPlayers(item))
+			if (checkForOtherPlayers(tile))
 			{
-				this.transform.SetParent(item.transform);
+				AdjustRotation(tile);
+				float i = 0.0f;
+				float rate = 1.0f / time;
+				while (i < 1.0f)
+				{
+					i += Time.deltaTime * rate;
+					var movementVector = Vector3.Lerp(new Vector3(positionTile.transform.position.x, transform.position.y, positionTile.transform.position.z),
+													  new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z), i);
+					transform.position = movementVector;				
+					yield return null;
+				}
+				this.transform.SetParent(tile.transform);
 				this.transform.localPosition = new Vector3(0f, .5f, 0f);
-				ChangePlayerPosition(item);				
+				ChangePlayerPosition(tile);
 			}
 			else
 			{
-				StopAllCoroutines();		
+				StopAllCoroutines();
 			}
-			yield return new WaitForSeconds(0.25f);
+			yield return null;
 		}
-		CheckTileForOtherMods(path[path.Count-1]);
+		CheckTileForOtherMods(path[path.Count - 1]);
+	}
+
+	private void AdjustRotation(Tile lookTarget)
+	{
+		Vector3 relativePos = lookTarget.transform.position - transform.position;
+
+		// the second argument, upwards, defaults to Vector3.up
+		Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+		transform.rotation = rotation;
+		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 	}
 
 	public virtual bool checkForOtherPlayers(Tile nextTile)
@@ -86,8 +106,5 @@ public class Player : MonoBehaviour
 		}
 		return true;
 	}
-	public virtual void CheckTileForOtherMods(Tile target)
-	{
-
-	}
+	public virtual void CheckTileForOtherMods(Tile target) { }
 }
