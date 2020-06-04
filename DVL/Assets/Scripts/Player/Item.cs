@@ -5,4 +5,8 @@ using UnityEngine;
 public class Item: MonoBehaviour
 {
     public string itemName;
+<<<<<<< HEAD
+=======
+    public bool isStored;
+>>>>>>> Jonas
 }

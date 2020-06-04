@@ -46,18 +46,21 @@ public class BoardGrid : MonoBehaviour
 		size = set_size;
 	}
 
-	/*private void OnGUI()
+	private void OnGUI()
 	{
-		foreach (Tile tile in grid)
+		if (NetworkManager.instance.isDebug)
 		{
-			Vector2 pos = Camera.main.WorldToScreenPoint(tile.transform.position);
-			pos.y = Screen.height - pos.y;
-			string label = tile.index.ToString() + System.Environment.NewLine + tile.row.ToString() + System.Environment.NewLine + tile.column.ToString();
-			Vector2 size = GUI.skin.label.CalcSize(new GUIContent(label));
-			pos -= size / 2;
-			GUI.Label(new Rect(pos, new Vector2(200, 200)), tile.index.ToString());
+			foreach (Tile tile in grid)
+			{
+				Vector2 pos = Camera.main.WorldToScreenPoint(tile.transform.position);
+				pos.y = Screen.height - pos.y;
+				string label = tile.index.ToString() + System.Environment.NewLine + tile.row.ToString() + System.Environment.NewLine + tile.column.ToString();
+				Vector2 size = GUI.skin.label.CalcSize(new GUIContent(label));
+				pos -= size / 2;
+				GUI.Label(new Rect(pos, new Vector2(200, 200)), tile.index.ToString());
+			}
 		}
-	}*/
+	}
 
 	private void Update()
 	{
@@ -131,6 +134,7 @@ public class BoardGrid : MonoBehaviour
 			}
 		}
 		GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
+		CreateFogForTile(leftOverTile.GetComponent<Tile>());
 		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);

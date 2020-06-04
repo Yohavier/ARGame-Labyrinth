@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-//TODO: Item shows back up if stored
 public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar fow;
@@ -31,51 +30,23 @@ public class FogOfWar : MonoBehaviour
 			return;
 		}
 
-		ClearCurrentActiveFOWItems();
+		HideEverythingInFOW();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
-			foreach (Tile neighborTile in GetScalableNeighbouringTiles(newPosition))
-			{			
-				neighborTile.isInFOW = false;
-				neighborTile.PrefabColor();
-				var childMeshes = neighborTile.GetComponentsInChildren<MeshRenderer>();
-				foreach (MeshRenderer mesh in childMeshes)
-				{
-					if (mesh.CompareTag("Fog"))
-					{
-						mesh.GetComponent<MeshRenderer>().enabled = false;
-					}
-					else if (mesh.gameObject.layer != 8)
-					{	
-						mesh.GetComponent<MeshRenderer>().enabled = true;
-						activeFogOfWarItems.Add(mesh.gameObject);
-					}	
-				}
-			}
+			List<Tile> neighbours = GetScalableNeighbouringTiles(newPosition);
+			ToggleVisiblePartOn(neighbours);
 		}
 		else
 		{
 			finalFogPath.Add(newPosition);
-			newPosition.isInFOW = false;
-			newPosition.PrefabColor();
-			var childMeshes = newPosition.GetComponentsInChildren<MeshRenderer>();
-			foreach (MeshRenderer mesh in childMeshes)
-			{
-				if (mesh.CompareTag("Fog"))
-				{
-					mesh.GetComponent<MeshRenderer>().enabled = false;
-				}
-				else if (mesh.gameObject.layer != 8)
-				{
-					mesh.GetComponent<MeshRenderer>().enabled = true;
-					activeFogOfWarItems.Add(mesh.gameObject);			
-				}
-			}
+			List<Tile> neighbours = new List<Tile>();
+			neighbours.Add(newPosition);
+			ToggleVisiblePartOn(neighbours);			
 		}
     }
 	
-	//clear and hide current list of active gameObjects 
-	private void ClearCurrentActiveFOWItems()
+	//clear and hide complete grid
+	private void HideEverythingInFOW()
 	{
 		foreach(Tile t in BoardGrid.instance.grid)
 		{
@@ -101,6 +72,35 @@ public class FogOfWar : MonoBehaviour
 		finalFogPath.Clear();
 	}
 
+	//Toogle everything on that is in FOW(passed list) range 
+	private void ToggleVisiblePartOn(List<Tile> neighbours)
+	{
+		foreach (Tile neighborTile in neighbours)
+		{
+			neighborTile.isInFOW = false;
+			neighborTile.PrefabColor();
+			var childMeshes = neighborTile.GetComponentsInChildren<MeshRenderer>();
+			foreach (MeshRenderer mesh in childMeshes)
+			{
+				if (mesh.CompareTag("Fog"))
+				{
+					mesh.GetComponent<MeshRenderer>().enabled = false;
+				}
+				else if (mesh.gameObject.layer != 8)
+				{
+					if (mesh.GetComponent<Item>())
+					{
+						if (mesh.GetComponent<Item>().isStored)
+						{
+							break;
+						}
+					}
+					mesh.GetComponent<MeshRenderer>().enabled = true;
+					activeFogOfWarItems.Add(mesh.gameObject);
+				}
+			}
+		}
+	}
 	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
 	{
 		List<Tile> toCheck = new List<Tile>();
