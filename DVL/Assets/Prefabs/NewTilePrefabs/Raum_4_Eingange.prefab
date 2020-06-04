@@ -141,7 +141,8 @@ MonoBehaviour:
   left: 0
   gCost: 0
   hCost: 0
-  isInFOW: 0
+  isInFOW: 1
+  index: -1
 --- !u!114 &6197246589265692887
 MonoBehaviour:
   m_ObjectHideFlags: 0

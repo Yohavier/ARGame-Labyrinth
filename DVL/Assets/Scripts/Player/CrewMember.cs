@@ -24,6 +24,7 @@ public class CrewMember : Player
 				storedItem.transform.SetParent(this.transform);
 				InformationPanel.playerPanel.SetItemText(item.itemName);
 				storedItem.GetComponent<MeshRenderer>().enabled = false;
+				NetworkClient.instance.SendItemCollected(tile);
 			}
 		}
 

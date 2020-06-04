@@ -17,7 +17,7 @@ public class SpawnPlayer : MonoBehaviour
 			player.transform.SetParent(corner.transform);
 			player.GetComponent<Player>().ChangePlayerPosition(corner);
 			player.transform.localPosition = Vector3.zero;
-			GameManager.GameManagerInstance.allPlayers.Add(player);
+			GameManager.instance.allPlayers.Add(player);
 		}
 	}
 }

@@ -8,7 +8,7 @@ public class Enemy : Player
     {  
         if (nextTile.GetComponentInChildren<Player>() != null)
         {
-            GameManager.GameManagerInstance.KillPlayer(nextTile.GetComponentInChildren<Player>());
+            GameManager.instance.KillPlayer(nextTile.GetComponentInChildren<Player>());
             return true;
         }
         return true;

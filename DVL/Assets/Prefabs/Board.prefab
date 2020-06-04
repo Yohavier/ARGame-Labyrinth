@@ -43,10 +43,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a6eb054bb099a499774e1d1a17d168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  set_size: 7
-  TilePrefab: {fileID: 5948340331024992089, guid: c2d656d1d74dad1418e98a727f375023,
-    type: 3}
-  gridSpacing: 0.1
+  trackingManager: {fileID: 0}
+  trackingInstance: {fileID: 0}
+  allPossibleMovingTiles: []
+  allPossibleStaticTiles: []
+  seedList: []
+  seedCount: -1
+  readyToSetup: 0
+  inMove: 0
+  tileCount: 0
+  size: 0
+  randomRoations: 
   grid: []
-  even: {fileID: 2100000, guid: 08966927a823f8447a47b636198394a4, type: 2}
-  odd: {fileID: 2100000, guid: f167b8cc6659d9046a42d5abfcccdfeb, type: 2}
+  trackedTile: {fileID: 0}
+  lastTrackedTile: {fileID: 0}
+  fog: {fileID: 7662999583797218981, guid: 7982ad04656bf84448b6067fe9500228, type: 3}

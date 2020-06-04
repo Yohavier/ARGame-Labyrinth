@@ -3,14 +3,13 @@ using System.Collections.Generic;
 //Global stuff for all players 
 public class GameManager : MonoBehaviour
 {
-	public static GameManager GameManagerInstance;
-
+	public static GameManager instance;
 	private int capsuleCount;
 	public List<GameObject> allPlayers = new List<GameObject>();
 
 	private void Awake()
 	{
-		GameManagerInstance = this;
+		instance = this;
 	}
 
 	public void CheckWinConditionCrew()

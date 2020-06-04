@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
+//TODO: Item shows back up if stored
 public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar fow;
@@ -15,11 +16,23 @@ public class FogOfWar : MonoBehaviour
         fow = this;
     }
 
+	private void Start()
+	{
+		if(NetworkManager.instance.isDebug)
+			DebugFog();	
+	}
+
 	//call if player moves, to update fog of war
-    public void OnChangePlayerPosition(Tile newPosition)
+	public void OnChangePlayerPosition(Tile newPosition)
     {
+		if (NetworkManager.instance.isDebug)
+		{
+			DebugFog();
+			return;
+		}
+
 		ClearCurrentActiveFOWItems();
-		if (BoardGrid.GridInstance.grid.Contains(newPosition))
+		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
 			foreach (Tile neighborTile in GetScalableNeighbouringTiles(newPosition))
 			{			
@@ -64,7 +77,7 @@ public class FogOfWar : MonoBehaviour
 	//clear and hide current list of active gameObjects 
 	private void ClearCurrentActiveFOWItems()
 	{
-		foreach(Tile t in finalFogPath)
+		foreach(Tile t in BoardGrid.instance.grid)
 		{
 			t.isInFOW = true;
 			t.PrefabColor();
@@ -124,36 +137,53 @@ public class FogOfWar : MonoBehaviour
 		
 		if(tile.column - 1 >= 0)
 		{
-			Tile check = BoardGrid.GridInstance.coordDic[tile.row.ToString() + (tile.column - 1).ToString()];
+			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column - 1).ToString()];
 			if(check.forward && tile.backward)
 				allNeighbors.Add(check);
 		}	
 
 		if(tile.column + 1 <= 6)
 		{
-			Tile check = BoardGrid.GridInstance.coordDic[tile.row.ToString() + (tile.column + 1).ToString()];
+			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column + 1).ToString()];
 			if (check.backward && tile.forward)
 				allNeighbors.Add(check);
 		}
 
 		if(tile.row - 1 >= 0)
 		{
-			Tile check = BoardGrid.GridInstance.coordDic[(tile.row - 1).ToString() + tile.column.ToString()];
+			Tile check = BoardGrid.instance.coordDic[(tile.row - 1).ToString() + tile.column.ToString()];
 			if (check.right && tile.left)
 				allNeighbors.Add(check);
 		}
 
 		if(tile.row + 1 <= 6)
 		{
-			Tile check = BoardGrid.GridInstance.coordDic[(tile.row + 1).ToString() + tile.column.ToString()];
+			Tile check = BoardGrid.instance.coordDic[(tile.row + 1).ToString() + tile.column.ToString()];
 			if (check.left && tile.right)
 				allNeighbors.Add(check);
 		}
 		return allNeighbors;
 	}
 
-	private IEnumerator FadeFogOut(ParticleSystem p)
+	public void DebugFog()
 	{
-		yield return new WaitForSeconds(0.1f);
+		foreach (Tile t in BoardGrid.instance.grid)
+		{
+			t.isInFOW = false;
+			t.PrefabColor();
+			List<MeshRenderer> meshes = t.GetComponentsInChildren<MeshRenderer>().ToList();
+			foreach(MeshRenderer mesh in meshes)
+			{
+				if (mesh.CompareTag("Fog"))
+				{
+					mesh.enabled = false;
+				}
+				else
+				{
+					mesh.enabled = true;
+					mesh.material.color = Color.white;
+				}				
+			}
+		}
 	}
 }

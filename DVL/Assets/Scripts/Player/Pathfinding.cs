@@ -103,8 +103,12 @@ public class Pathfinding
 
 	private int GetManhattenDistance(Tile current, Tile neighbour)
 	{
-		int num = Mathf.Abs(current.row - neighbour.row);
-		int num2 = Mathf.Abs(current.column - neighbour.column);
-		return num + num2;
+		if(current != null && neighbour != null)
+		{
+			int num = Mathf.Abs(current.row - neighbour.row);
+			int num2 = Mathf.Abs(current.column - neighbour.column);
+			return num + num2;
+		}
+		return 0;
 	}
 }

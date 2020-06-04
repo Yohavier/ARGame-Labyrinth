@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	public playingPlayer player;
-	private FogOfWar playerFOW;
+	public FogOfWar playerFOW;
 	public Tile positionTile;
 	public GameObject storedItem;
 
@@ -27,13 +27,14 @@ public class Player : MonoBehaviour
 			player = playingPlayer.Enemy;
 			break;
 		}
-		if (player != LocalGameManager.local.viewOfPlayer)
+
+		if (player != LocalGameManager.instance.localPlayerIndex)
 		{
 			this.GetComponent<MeshRenderer>().enabled = false;
 		}
 		else
 		{
-			LocalGameManager.local.activePlayer = this.gameObject;
+			LocalGameManager.instance.activePlayer = this.gameObject;
 			playerFOW = GetComponent<FogOfWar>();
 		}
 	}
@@ -41,12 +42,21 @@ public class Player : MonoBehaviour
 	//if the Player moves
 	public void ChangePlayerPosition(Tile newPos)
 	{
-		if(playerFOW != null)
+		if (playerFOW != null)
+		{
 			playerFOW.OnChangePlayerPosition(newPos);
+		}		
+		else
+		{
+			if(LocalGameManager.instance.activePlayer != null)
+			{
+				LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
+			}		
+		}
 
 
 		positionTile = newPos;
-		if(LocalGameManager.local.activePlayer == this.gameObject)
+		if(LocalGameManager.instance.activePlayer == this.gameObject)
 		{
 			InformationPanel.playerPanel.SetCoordText(positionTile.row.ToString()+ " " + positionTile.column.ToString());
 		}
@@ -55,7 +65,8 @@ public class Player : MonoBehaviour
 	//Move along a List of Tiles
 	public void MoveToTarget(List<Tile> path)
 	{
-		StartCoroutine(Moving(path, 1));
+		if (path.Count > 0)
+			StartCoroutine(Moving(path, 1));
 	}
 
 	private IEnumerator Moving(List<Tile> path, float time)

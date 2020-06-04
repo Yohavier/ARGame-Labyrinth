@@ -22,7 +22,8 @@ public class FindNearestGridSlot : MonoBehaviour
 
 	private void Update()
 	{
-		FindTileWithRays();
+		if (LocalGameManager.instance.GetTurn())
+			FindTileWithRays();
 	}
 
 	//get the tile that will be pushed away by inserting a new Tile
@@ -78,7 +79,8 @@ public class FindNearestGridSlot : MonoBehaviour
 		{
 			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
 			{
-				board.InsertNewRoomPushing(targetTile, this.GetComponent<Tile>());
+				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
+				board.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
 				targetTile = null;
 			}
 			return;

@@ -6,6 +6,6 @@ public class EscapeCapsule : MonoBehaviour
 {
     public void DisplayProgress()
     {
-        GameManager.GameManagerInstance.CheckWinConditionCrew();
+        GameManager.instance.CheckWinConditionCrew();
     }
 }

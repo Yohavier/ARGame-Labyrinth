@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class SpawnItems : MonoBehaviour
     {
         int itemCount = items.Count;
 
-        foreach(Tile t in BoardGrid.GridInstance.grid)
+        foreach(Tile t in BoardGrid.instance.grid)
         {
             if(t.canMoveVertical || t.canMoveHorizontal)
             {
@@ -21,13 +22,13 @@ public class SpawnItems : MonoBehaviour
                 }
             }
         }
-        StartPlacing();
+        StartPlacingWithSeed();
     }
-    private void StartPlacing()
+    private void StartPlacingWithSeed()
     {
         for (int i = 0; i < items.Count; i++)
         {
-            int rand = Random.Range(0, possiblePlaces.Count);
+            int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * possiblePlaces.Count - 1));
             GameObject newItem = Instantiate(items[i]);
             newItem.transform.SetParent(possiblePlaces[rand].transform);
             newItem.transform.localPosition = Vector3.zero;
