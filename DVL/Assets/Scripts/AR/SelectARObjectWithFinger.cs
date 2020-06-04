@@ -74,7 +74,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	}
 
 
-	//TODO: Hide prefab colors if not local player
 	public void ManagePath(Tile targetTile, playingPlayer playerIndex)
 	{
 		Player playerObject = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<Player>();

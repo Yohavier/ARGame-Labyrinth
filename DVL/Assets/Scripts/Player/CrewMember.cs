@@ -21,6 +21,7 @@ public class CrewMember : Player
 			if (item != null)
 			{
 				storedItem = item.gameObject;
+				item.isStored = true;
 				storedItem.transform.SetParent(this.transform);
 				InformationPanel.playerPanel.SetItemText(item.itemName);
 				storedItem.GetComponent<MeshRenderer>().enabled = false;

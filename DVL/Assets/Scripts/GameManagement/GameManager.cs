@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 //Global stuff for all players 
 public class GameManager : MonoBehaviour
 {
