@@ -146,7 +146,7 @@ public class Tile : MonoBehaviour
 	public void PrefabColor()
 	{
 		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-		if (isInFOW)
+		if (isInFOW && !NetworkManager.instance.isDebug)
 		{			
 			foreach(MeshRenderer mesh in meshes)
 			{

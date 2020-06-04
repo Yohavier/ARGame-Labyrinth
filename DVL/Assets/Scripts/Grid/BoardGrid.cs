@@ -122,6 +122,7 @@ public class BoardGrid : MonoBehaviour
 				tileCount++;
 				component.index = tileCount;
 				grid.Add(component);
+				CreateFogForTile(component);
 				coordDic.Add(row.ToString() + column.ToString(), component);
 				if ((row == 0 && column == 0) || (row == 0 && column == 6) || (row == 6 && column == 0) || (row == 6 && column == 6))
 				{
@@ -138,6 +139,8 @@ public class BoardGrid : MonoBehaviour
 
 	public void CreateFogForTile(Tile tile)
 	{
+		if (NetworkManager.instance.isDebug)
+			return;
 		GameObject f = Instantiate(fog);
 		f.transform.SetParent(tile.transform);
 		f.transform.localPosition = new Vector3(0, 0.05f, 0);

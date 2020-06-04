@@ -300,7 +300,6 @@ MonoBehaviour:
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
-  prefabColor: {r: 0, g: 0, b: 0.5019608, a: 1}
   Parent: {fileID: 0}
   initForward: 1
   initRight: 0
@@ -313,6 +312,7 @@ MonoBehaviour:
   gCost: 0
   hCost: 0
   isInFOW: 0
+  index: -1
 --- !u!114 &8371052983467692378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,3 +326,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.1
+  mask:
+    serializedVersion: 2
+    m_Bits: 256

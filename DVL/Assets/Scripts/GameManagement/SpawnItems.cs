@@ -33,7 +33,7 @@ public class SpawnItems : MonoBehaviour
             newItem.transform.SetParent(possiblePlaces[rand].transform);
             newItem.transform.localPosition = Vector3.zero;
             possiblePlaces.Remove(possiblePlaces[rand]);
-            newItem.GetComponent<MeshRenderer>().enabled = true;
+            newItem.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }

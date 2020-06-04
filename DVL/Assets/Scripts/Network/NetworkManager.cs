@@ -8,12 +8,18 @@ using UnityEngine;
 
 class NetworkManager : MonoBehaviour
 {
+    public static NetworkManager instance;
     public bool isServer;
+    public bool isDebug;
     public string serverIP = "127.0.0.1";
 
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
-        serverIP = "192.168.178.35";
+        serverIP = "192.168.0.206";
     }
 
     //TODO: Nicer GUI
@@ -30,7 +36,11 @@ class NetworkManager : MonoBehaviour
             NetworkServer.instance.SetupServer();
             NetworkClient.instance.Connect(serverIP);
         }
-
+        if (GUILayout.Button("Debug") && isServer)//click to toggle debug
+        {
+            isDebug = !isDebug;                 
+            Debug.Log("Debug: " + isDebug);
+        }
         if (GUILayout.Button("Client")) //Click to attempt joining a hosted match
         {
             NetworkClient.instance.Connect(serverIP);
@@ -51,5 +61,14 @@ class NetworkManager : MonoBehaviour
                 NetworkClient.instance.SendTurnChange();
             }
         }
+    }
+
+    //select right integer for bool
+    private int DebugStateToOthers(bool state)
+    {
+        if (state)
+            return 1;
+        else
+            return 0;
     }
 }

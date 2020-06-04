@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: d43099a2c0cda4b4586c3b789cc17fe9, type: 3}
+  - {fileID: 2100000, guid: 274da53afbe45f149ba9601f66f3e5a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
+  playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}
 --- !u!114 &-1801657048653225923

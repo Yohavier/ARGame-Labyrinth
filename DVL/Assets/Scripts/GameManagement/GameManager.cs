@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
-
 	private int capsuleCount;
 	public List<GameObject> allPlayers = new List<GameObject>();
 

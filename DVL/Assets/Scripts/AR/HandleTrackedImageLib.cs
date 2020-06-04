@@ -45,6 +45,26 @@ public class HandleTrackedImageLib : MonoBehaviour
 	//sets up the new Prefab that dropped out of the Grid 
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
+		if (NetworkManager.instance.isDebug)
+		{
+			droppedOutPrefab.GetComponent<Tile>().isInFOW = false;
+			droppedOutPrefab.GetComponent<Tile>().PrefabColor();
+			var meshes = droppedOutPrefab.GetComponentsInChildren<MeshRenderer>();
+			foreach (MeshRenderer mesh in meshes)
+			{
+				if (mesh.CompareTag("Fog"))
+				{
+					mesh.enabled = false;
+				}
+				else
+				{
+					mesh.enabled = true;
+					mesh.material.color = Color.white;
+				}
+			}
+		}
+
+
 		tilePrefabParent.SetActive(false);
 
 		droppedOutPrefab.transform.SetParent(tilePrefabParent.transform);

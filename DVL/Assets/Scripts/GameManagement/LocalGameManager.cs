@@ -22,7 +22,6 @@ public class LocalGameManager : MonoBehaviour
 
 	//reference to the Player of this gameInstance
 	public GameObject activePlayer;
-	
 
 	public static LocalGameManager instance;
 

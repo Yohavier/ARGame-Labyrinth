@@ -69,67 +69,67 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11244}
+      Script: {instanceID: 11266}
     - Class: 114
-      Script: {instanceID: 11258}
+      Script: {instanceID: 11280}
     - Class: 114
-      Script: {instanceID: 11438}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11444}
+      Script: {instanceID: 11468}
     - Class: 114
-      Script: {instanceID: 11480}
+      Script: {instanceID: 11504}
     - Class: 114
-      Script: {instanceID: 11488}
+      Script: {instanceID: 11512}
     - Class: 114
-      Script: {instanceID: 11528}
+      Script: {instanceID: 11554}
     - Class: 114
-      Script: {instanceID: 11878}
+      Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 11984}
+      Script: {instanceID: 12012}
     - Class: 114
-      Script: {instanceID: 12014}
+      Script: {instanceID: 12042}
     - Class: 114
-      Script: {instanceID: 12110}
+      Script: {instanceID: 12138}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12282}
     - Class: 114
-      Script: {instanceID: 12354}
+      Script: {instanceID: 12388}
     - Class: 114
-      Script: {instanceID: 12368}
+      Script: {instanceID: 12402}
     - Class: 114
-      Script: {instanceID: 12714}
+      Script: {instanceID: 12748}
     - Class: 114
-      Script: {instanceID: 12792}
+      Script: {instanceID: 12826}
     - Class: 114
-      Script: {instanceID: 12866}
+      Script: {instanceID: 12900}
     - Class: 114
-      Script: {instanceID: 12902}
+      Script: {instanceID: 12936}
     - Class: 114
-      Script: {instanceID: 12914}
+      Script: {instanceID: 12948}
     - Class: 114
-      Script: {instanceID: 13004}
+      Script: {instanceID: 13040}
     - Class: 114
-      Script: {instanceID: 13108}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13130}
+      Script: {instanceID: 13146}
     - Class: 114
-      Script: {instanceID: 13160}
+      Script: {instanceID: 13168}
     - Class: 114
-      Script: {instanceID: 13284}
+      Script: {instanceID: 13198}
     - Class: 114
-      Script: {instanceID: 13336}
+      Script: {instanceID: 13322}
     - Class: 114
-      Script: {instanceID: 13364}
+      Script: {instanceID: 13374}
     - Class: 114
-      Script: {instanceID: 13478}
+      Script: {instanceID: 13402}
     - Class: 114
-      Script: {instanceID: 13512}
+      Script: {instanceID: 13516}
     - Class: 114
-      Script: {instanceID: 13588}
+      Script: {instanceID: 13550}
     - Class: 114
-      Script: {instanceID: 13668}
+      Script: {instanceID: 13626}
     - Class: 114
-      Script: {instanceID: 17892}
+      Script: {instanceID: 13706}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -459,7 +459,7 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
-      Hash: 9d7c88e50b3365d895db54b1e943f921
+      Hash: d6668060568029bf5a901b9f1646a312
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SelectARObjectWithFinger
@@ -621,7 +621,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 887ae078fd909d3d4737bbab1c490be6
+      Hash: 6b452fbc1cbff29c7c4dc294a0a7ec83
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Enemy
@@ -645,7 +645,7 @@ ScriptsOnlyBuild:
     className: ARTrackedImage
   - hash:
       serializedVersion: 2
-      Hash: 887ae078fd909d3d4737bbab1c490be6
+      Hash: 6b452fbc1cbff29c7c4dc294a0a7ec83
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -667,6 +667,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: b9f044190c7338d226d2a639f2d32c82
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NetworkManager
   - hash:
       serializedVersion: 2
       Hash: 16dacd04869a876ea4bea0d1d2e77e34
@@ -747,7 +753,7 @@ ScriptsOnlyBuild:
     className: ARMeshManager
   - hash:
       serializedVersion: 2
-      Hash: 887ae078fd909d3d4737bbab1c490be6
+      Hash: 6b452fbc1cbff29c7c4dc294a0a7ec83
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CrewMember
@@ -883,13 +889,7 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
-  - hash:
-      serializedVersion: 2
-      Hash: dfddba95645c186ff6ff292567624860
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: NetworkManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/Gridsystem.unity
-  playerPath: C:/Users/x/Documents/medientechnik/AR Boardgame/project5/Labyrinth-Jonas/Build/DVL.exe
+  playerPath: C:/Users/Jonas/Documents/Uni/HSDMasterMedieninformatik/ARBoardgame/Builds/DVL.exe

@@ -10,7 +10,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	
 	//Lets the raycast only collide with certain things
 	public LayerMask mask;
-	public Tile DebugTile;
 	private Tile currentSelectedTarget;
 	public List<Tile> path;
 	private void Awake()
@@ -59,35 +58,63 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	//TODO: Hide prefab colors if not local player
 	public void ManagePath(Tile targetTile, playingPlayer playerIndex)
 	{
-
 		Player playerObject = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<Player>();
-		if(targetTile != currentSelectedTarget)
+
+		if (targetTile == null)
 		{
 			currentSelectedTarget = targetTile;
+			HandlePreviousPath();
+			if (path != null)
+				path.Clear();
+		}
+		else if (targetTile != currentSelectedTarget)
+		{
+			currentSelectedTarget = targetTile;
+			HandlePreviousPath();
+			if (path != null) 
+				path.Clear();
+			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, currentSelectedTarget);
+			path = p.FindPath();
+			if (path != null)
+			{
+				print(playerObject);
+				print(LocalGameManager.instance.activePlayer);
+				if (NetworkManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)
+				{
+					foreach (Tile t in path)
+					{
+						MeshRenderer[] meshes = t.GetComponentsInChildren<MeshRenderer>();
+						foreach (MeshRenderer mesh in meshes)
+						{
+							mesh.material.color = Color.red;
+						}
+					}
+				}
+			}
+		}
+		else if (path != null && targetTile == currentSelectedTarget)
+		{
+			Debug.Log(path.Count);
+			HandlePreviousPath();
+			foreach(Tile t in path)
+			{
+				t.PrefabColor();
+			}
+			playerObject.MoveToTarget(path);
+			currentSelectedTarget = null;
+		}
+		else
+			Debug.LogWarning("Something went wrong with path");
+	}
+
+	private void HandlePreviousPath()
+	{
+		if (path != null)
+		{
 			foreach (Tile t in path)
 			{
 				t.PrefabColor();
 			}
-			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, targetTile);
-			path = p.FindPath();
-			foreach (Tile wayElement in path)
-			{
-				MeshRenderer[] meshes = wayElement.GetComponentsInChildren<MeshRenderer>();
-				foreach(MeshRenderer mesh in meshes)
-				{
-					mesh.material.color = Color.red;
-				}
-			} 
-		}
-		else if(targetTile == currentSelectedTarget)
-		{
-			foreach (Tile wayElement in path)
-			{
-				wayElement.PrefabColor();
-			}
-			//LocalGameManager.instance.activePlayer.GetComponent<Player>().MoveToTarget(path);
-			playerObject.MoveToTarget(path);
-			currentSelectedTarget = null;
 		}
 	}
 }

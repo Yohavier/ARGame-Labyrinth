@@ -15,9 +15,21 @@ public class FogOfWar : MonoBehaviour
         fow = this;
     }
 
+	private void Start()
+	{
+		if(NetworkManager.instance.isDebug)
+			DebugFog();	
+	}
+
 	//call if player moves, to update fog of war
-    public void OnChangePlayerPosition(Tile newPosition)
+	public void OnChangePlayerPosition(Tile newPosition)
     {
+		if (NetworkManager.instance.isDebug)
+		{
+			DebugFog();
+			return;
+		}
+
 		ClearCurrentActiveFOWItems();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
@@ -152,8 +164,25 @@ public class FogOfWar : MonoBehaviour
 		return allNeighbors;
 	}
 
-	private IEnumerator FadeFogOut(ParticleSystem p)
+	public void DebugFog()
 	{
-		yield return new WaitForSeconds(0.1f);
+		foreach (Tile t in BoardGrid.instance.grid)
+		{
+			t.isInFOW = false;
+			t.PrefabColor();
+			List<MeshRenderer> meshes = t.GetComponentsInChildren<MeshRenderer>().ToList();
+			foreach(MeshRenderer mesh in meshes)
+			{
+				if (mesh.CompareTag("Fog"))
+				{
+					mesh.enabled = false;
+				}
+				else
+				{
+					mesh.enabled = true;
+					mesh.material.color = Color.white;
+				}				
+			}
+		}
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	public playingPlayer player;
-	private FogOfWar playerFOW;
+	public FogOfWar playerFOW;
 	public Tile positionTile;
 	public GameObject storedItem;
 
@@ -42,8 +42,17 @@ public class Player : MonoBehaviour
 	//if the Player moves
 	public void ChangePlayerPosition(Tile newPos)
 	{
-		if(playerFOW != null)
+		if (playerFOW != null)
+		{
 			playerFOW.OnChangePlayerPosition(newPos);
+		}		
+		else
+		{
+			if(LocalGameManager.instance.activePlayer != null)
+			{
+				LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
+			}		
+		}
 
 
 		positionTile = newPos;

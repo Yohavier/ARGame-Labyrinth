@@ -18,7 +18,6 @@ public class FindNearestGridSlot : MonoBehaviour
 	private void Start()
 	{
 		board = FindObjectOfType<BoardGrid>();
-		mask.value = System.Int32.MaxValue;
 	}
 
 	private void Update()

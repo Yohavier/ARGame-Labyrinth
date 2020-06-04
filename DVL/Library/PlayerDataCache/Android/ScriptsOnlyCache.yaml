@@ -4,7 +4,6 @@ ScriptsOnlyBuild:
     - BoardGrid
     - CrewMember
     - Enemy
-    - EscapeCapsule
     - Eventbroker
     - FindNearestGridSlot
     - FogOfWar
@@ -13,6 +12,7 @@ ScriptsOnlyBuild:
     - InformationPanel
     - Item
     - LocalGameManager
+    - NetworkManager
     - SelectARObjectWithFinger
     - SpawnItems
     - SpawnPlayer
@@ -68,67 +68,67 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11266}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11280}
     - Class: 114
-      Script: {instanceID: 11366}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11372}
+      Script: {instanceID: 11468}
     - Class: 114
-      Script: {instanceID: 11408}
+      Script: {instanceID: 11504}
     - Class: 114
-      Script: {instanceID: 11416}
+      Script: {instanceID: 11512}
     - Class: 114
-      Script: {instanceID: 11456}
+      Script: {instanceID: 11554}
     - Class: 114
-      Script: {instanceID: 11806}
+      Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 11912}
+      Script: {instanceID: 12012}
     - Class: 114
-      Script: {instanceID: 11942}
+      Script: {instanceID: 12042}
     - Class: 114
-      Script: {instanceID: 12038}
-    - Class: 114
-      Script: {instanceID: 12176}
+      Script: {instanceID: 12138}
     - Class: 114
       Script: {instanceID: 12282}
     - Class: 114
-      Script: {instanceID: 12296}
+      Script: {instanceID: 12388}
     - Class: 114
-      Script: {instanceID: 12304}
+      Script: {instanceID: 12402}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12748}
     - Class: 114
-      Script: {instanceID: 12720}
+      Script: {instanceID: 12826}
     - Class: 114
-      Script: {instanceID: 12794}
+      Script: {instanceID: 12900}
     - Class: 114
-      Script: {instanceID: 12830}
+      Script: {instanceID: 12936}
     - Class: 114
-      Script: {instanceID: 12842}
+      Script: {instanceID: 12948}
     - Class: 114
-      Script: {instanceID: 12932}
+      Script: {instanceID: 13040}
     - Class: 114
-      Script: {instanceID: 13036}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13058}
+      Script: {instanceID: 13146}
     - Class: 114
-      Script: {instanceID: 13088}
+      Script: {instanceID: 13168}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 13198}
     - Class: 114
-      Script: {instanceID: 13264}
+      Script: {instanceID: 13322}
     - Class: 114
-      Script: {instanceID: 13292}
+      Script: {instanceID: 13374}
     - Class: 114
-      Script: {instanceID: 13406}
-    - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13402}
     - Class: 114
       Script: {instanceID: 13516}
     - Class: 114
-      Script: {instanceID: 13596}
+      Script: {instanceID: 13550}
+    - Class: 114
+      Script: {instanceID: 13626}
+    - Class: 114
+      Script: {instanceID: 13706}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -236,7 +236,7 @@ ScriptsOnlyBuild:
     className: XRGeneralSettings
   - hash:
       serializedVersion: 2
-      Hash: 48030999bf15beeebcfc4559fd75b857
+      Hash: 0ebeda314597943e75d8309d7484beae
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -380,7 +380,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 6cab00f830ef2ff0575274156b343f53
+      Hash: 8731c7b1bab245aef60dc8dbf6b6cce2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BoardGrid
@@ -458,7 +458,7 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
-      Hash: 9d7c88e50b3365d895db54b1e943f921
+      Hash: d6668060568029bf5a901b9f1646a312
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SelectARObjectWithFinger
@@ -488,7 +488,7 @@ ScriptsOnlyBuild:
     className: HandleTrackedImageLib
   - hash:
       serializedVersion: 2
-      Hash: cbdaf6289eb255feedd0bee0a753faee
+      Hash: 454071e6cd15073d0b0093009b69abaa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FindNearestGridSlot
@@ -632,7 +632,7 @@ ScriptsOnlyBuild:
     className: ARAnchorManager
   - hash:
       serializedVersion: 2
-      Hash: b0b7fd443ba85723589ec83abe982993
+      Hash: b4c072b73a7ec1e079227d8d0062aec7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LocalGameManager
@@ -666,6 +666,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: b9f044190c7338d226d2a639f2d32c82
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NetworkManager
   - hash:
       serializedVersion: 2
       Hash: 16dacd04869a876ea4bea0d1d2e77e34
@@ -878,7 +884,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: f175c70d1069cfe76160a4409754db64
+      Hash: 2fb36fe1b204d9fd78c9216f204cd0c6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
