@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
+//TODO: Item shows back up if stored
 public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar fow;

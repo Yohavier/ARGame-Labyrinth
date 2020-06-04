@@ -24,13 +24,17 @@ public class SelectARObjectWithFinger : MonoBehaviour
 			return;
 
 		RayCastOnTouch();
+
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			#if UNITY_EDITOR
+#if UNITY_EDITOR
 			NetworkClient.instance.SendPlayerMove(Selection.activeGameObject.GetComponent<Tile>());
 			ManagePath(Selection.activeGameObject.GetComponent<Tile>(), LocalGameManager.instance.localPlayerIndex);
-			#endif
+#endif
 		}
+#if UNITY_STANDALONE
+		MouseRay();
+#endif
 	}
 
 	//Sends Ray from touch position with the camera rot to select a path
@@ -54,6 +58,21 @@ public class SelectARObjectWithFinger : MonoBehaviour
 			}
 		}
 	}
+	private void MouseRay()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+
+			if (Physics.Raycast(ray, out hit, 100, mask))
+			{
+				ManagePath(hit.transform.GetComponent<Tile>(), LocalGameManager.instance.localPlayerIndex);
+				NetworkClient.instance.SendPlayerMove(hit.transform.GetComponent<Tile>());
+			}
+		}
+	}
+
 
 	//TODO: Hide prefab colors if not local player
 	public void ManagePath(Tile targetTile, playingPlayer playerIndex)

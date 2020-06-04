@@ -36,7 +36,7 @@ class NetworkManager : MonoBehaviour
             NetworkServer.instance.SetupServer();
             NetworkClient.instance.Connect(serverIP);
         }
-        if (GUILayout.Button("Debug") && isServer)//click to toggle debug
+        if (GUILayout.Button("Debug"))//click to toggle debug
         {
             isDebug = !isDebug;                 
             Debug.Log("Debug: " + isDebug);

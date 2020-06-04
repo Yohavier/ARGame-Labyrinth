@@ -27,14 +27,13 @@ public class LocalGameManager : MonoBehaviour
 
 	private void Awake()
 	{
-		instance = this;	
+		instance = this;
+		currentTurnPlayer = playingPlayer.Invalid;
 	}
 
 	private void Start()
 	{
-		InformationPanel.playerPanel.SetPlayerText(localPlayerIndex.ToString());
-
-		currentTurnPlayer = playingPlayer.Invalid;
+		//InformationPanel.playerPanel.SetPlayerText(localPlayerIndex.ToString());	
 	}
 
 	public bool GetTurn()
