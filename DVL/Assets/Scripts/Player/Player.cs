@@ -4,37 +4,37 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public playingPlayer player;
+	public playingPlayer playerIndex;
 	public FogOfWar playerFOW;
 	public Tile positionTile;
 	public GameObject storedItem;
 
-	//called once after init to determine if this is the active player of the scene
+	//initialization of players
 	public void SetUpPlayer(int count)
 	{
 		switch (count)
 		{
 		case 1:
-			player = playingPlayer.Player1;
+			playerIndex = playingPlayer.Player1;
 			break;
 		case 2:
-			player = playingPlayer.Player2;
+			playerIndex = playingPlayer.Player2;
 			break;
 		case 3:
-			player = playingPlayer.Player3;
+			playerIndex = playingPlayer.Player3;
 			break;
 		case 4:
-			player = playingPlayer.Enemy;
+			playerIndex = playingPlayer.Enemy;
 			break;
 		}
 
-		if (player != LocalGameManager.instance.localPlayerIndex)
+		if (playerIndex != LocalGameManager.instance.localPlayerIndex)
 		{
-			this.GetComponent<MeshRenderer>().enabled = false;
+			GetComponent<MeshRenderer>().enabled = false;
 		}
 		else
 		{
-			LocalGameManager.instance.activePlayer = this.gameObject;
+			LocalGameManager.instance.activePlayer = gameObject;
 			playerFOW = GetComponent<FogOfWar>();
 		}
 	}
@@ -42,23 +42,18 @@ public class Player : MonoBehaviour
 	//if the Player moves
 	public void ChangePlayerPosition(Tile newPos)
 	{
+		positionTile = newPos;
+
 		if (playerFOW != null)
 		{
-			playerFOW.OnChangePlayerPosition(newPos);
-		}		
-		else
-		{
-			if(LocalGameManager.instance.activePlayer != null)
-			{
-				LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
-			}		
+			//if active playre call his FOW
+			playerFOW.OnChangePlayerPosition(positionTile);
+			InformationPanel.instance.SetCoordText(positionTile.row.ToString() + " " + positionTile.column.ToString());
 		}
-
-
-		positionTile = newPos;
-		if(LocalGameManager.instance.activePlayer == this.gameObject)
+		else if(LocalGameManager.instance.activePlayer != null)
 		{
-			InformationPanel.playerPanel.SetCoordText(positionTile.row.ToString()+ " " + positionTile.column.ToString());
+			//if not active Player, call active players FOW
+			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
 		}
 	}
 
@@ -69,11 +64,12 @@ public class Player : MonoBehaviour
 			StartCoroutine(Moving(path, 1));
 	}
 
+	//Moving Player Along Path
 	private IEnumerator Moving(List<Tile> path, float time)
 	{
 		foreach(Tile tile in path)
 		{
-			if (checkForOtherPlayers(tile))
+			if (CheckForOtherPlayers(tile))
 			{
 				AdjustRotation(tile);
 				float i = 0.0f;
@@ -86,8 +82,8 @@ public class Player : MonoBehaviour
 					transform.position = movementVector;				
 					yield return null;
 				}
-				this.transform.SetParent(tile.transform);
-				this.transform.localPosition = Vector3.zero;
+				transform.SetParent(tile.transform);
+				transform.localPosition = Vector3.zero;
 				ChangePlayerPosition(tile);
 			}
 			else
@@ -99,6 +95,7 @@ public class Player : MonoBehaviour
 		CheckTileForOtherMods(path[path.Count - 1]);
 	}
 
+	//Rotate player in move direction
 	private void AdjustRotation(Tile lookTarget)
 	{
 		Vector3 relativePos = lookTarget.transform.position - transform.position;
@@ -109,7 +106,7 @@ public class Player : MonoBehaviour
 		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 	}
 
-	public virtual bool checkForOtherPlayers(Tile nextTile)
+	public virtual bool CheckForOtherPlayers(Tile nextTile)
 	{
 		if (nextTile.GetComponentInChildren<Player>() != null)
 		{

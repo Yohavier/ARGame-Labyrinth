@@ -82,6 +82,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 		{
 			currentSelectedTarget = targetTile;
 			HandlePreviousPath();
+
 			if (path != null)
 				path.Clear();
 		}
@@ -89,14 +90,14 @@ public class SelectARObjectWithFinger : MonoBehaviour
 		{
 			currentSelectedTarget = targetTile;
 			HandlePreviousPath();
+
 			if (path != null) 
 				path.Clear();
+
 			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, currentSelectedTarget);
 			path = p.FindPath();
 			if (path != null)
 			{
-				print(playerObject);
-				print(LocalGameManager.instance.activePlayer);
 				if (NetworkManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)
 				{
 					foreach (Tile t in path)
