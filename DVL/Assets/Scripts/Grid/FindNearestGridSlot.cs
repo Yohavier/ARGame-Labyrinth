@@ -2,23 +2,10 @@ using UnityEngine;
 
 public class FindNearestGridSlot : MonoBehaviour
 {
-	public float distance = 0.07f;
-
+	public float distance = 0.1f;
 	private GameObject target;
-
 	private Tile targetTile;
-
-	[SerializeField]
-	private RaycastHit Hit;
-
-	private BoardGrid board;
-
 	public LayerMask mask;
-
-	private void Start()
-	{
-		board = FindObjectOfType<BoardGrid>();
-	}
 
 	private void Update()
 	{
@@ -30,31 +17,11 @@ public class FindNearestGridSlot : MonoBehaviour
 	private void FindTileWithRays()
 	{
 		int hitCounter = 0;
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, distance, mask))
-		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * Hit.distance, Color.yellow);
-			target = Hit.collider.gameObject;
-			hitCounter++;
-		}
-		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.forward), out Hit, distance, mask))
-		{
-			Debug.DrawRay(transform.position, -transform.TransformDirection(Vector3.forward) * Hit.distance, Color.blue);
-			target = Hit.collider.gameObject;
-			hitCounter++;
-		}
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Hit, distance, mask))
-		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * Hit.distance, Color.red);
-			target = Hit.collider.gameObject;
-			hitCounter++;
-		}
-		if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.right), out Hit, distance, mask))
-		{
-			Debug.DrawRay(transform.position, -transform.TransformDirection(Vector3.right) * Hit.distance, Color.black);
-			target = Hit.collider.gameObject;
-			hitCounter++;
-		}
 
+		hitCounter += SendRay(transform.TransformDirection(Vector3.forward));
+		hitCounter += SendRay(-transform.TransformDirection(Vector3.forward));
+		hitCounter += SendRay(transform.TransformDirection(Vector3.right));
+		hitCounter += SendRay(-transform.TransformDirection(Vector3.right));
 
 		switch (hitCounter)
 		{
@@ -66,13 +33,29 @@ public class FindNearestGridSlot : MonoBehaviour
 			break;
 		}
 
-
 		if (hitCounter == 0)
 		{
 			targetTile = null;
 		}
 	}
 
+	//Create a raycast root is this gameObject
+	private int SendRay(Vector3 rayDirection)
+	{
+		RaycastHit Hit;
+		if (Physics.Raycast(transform.position, rayDirection, out Hit, distance, mask))
+		{
+			Debug.DrawRay(transform.position, rayDirection * Hit.distance, Color.red);
+			target = Hit.collider.gameObject;
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	//call and push room into grid
 	private void CallGridToPushRoom()
 	{
 		if (targetTile != null)
@@ -80,10 +63,9 @@ public class FindNearestGridSlot : MonoBehaviour
 			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
 			{
 				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
-				board.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
+				BoardGrid.instance.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
 				targetTile = null;
 			}
-			return;
 		}
 	}
 }

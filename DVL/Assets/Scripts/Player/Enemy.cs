@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy : Player
 {
-    public override bool checkForOtherPlayers(Tile nextTile)
+    //Check for crew members
+    public override bool CheckForOtherPlayers(Tile nextTile)
     {  
-        if (nextTile.GetComponentInChildren<Player>() != null)
+        if (nextTile.GetComponentInChildren<CrewMember>() != null)
         {
-            GameManager.instance.KillPlayer(nextTile.GetComponentInChildren<Player>());
+            GameManager.instance.KillPlayer(nextTile.GetComponentInChildren<CrewMember>());
             return true;
         }
         return true;

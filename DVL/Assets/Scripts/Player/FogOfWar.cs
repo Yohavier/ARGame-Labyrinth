@@ -15,12 +15,6 @@ public class FogOfWar : MonoBehaviour
         fow = this;
     }
 
-	private void Start()
-	{
-		if(NetworkManager.instance.isDebug)
-			DebugFog();	
-	}
-
 	//call if player moves, to update fog of war
 	public void OnChangePlayerPosition(Tile newPosition)
     {

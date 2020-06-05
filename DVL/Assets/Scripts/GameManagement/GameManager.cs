@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 	public void CheckWinConditionCrew()
 	{
 		capsuleCount++;
-		InformationPanel.playerPanel.SetProgressText(capsuleCount.ToString());
+		InformationPanel.instance.SetProgressText(capsuleCount.ToString());
 		if (capsuleCount == 4)
 		{
 			Debug.Log("Crew wins");
@@ -30,24 +30,24 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void KillPlayer(Player player)
+	public void KillPlayer(CrewMember crew)
 	{
 		foreach (GameObject g in allPlayers)
 		{
-			if (player.gameObject == g)
+			if (crew.gameObject == g)
 			{
-				if (player.storedItem != null)
+				if (crew.storedItem != null)
 				{
-					player.storedItem.transform.SetParent(player.positionTile.transform);
-					if (!player.positionTile.isInFOW)
+					crew.storedItem.transform.SetParent(crew.positionTile.transform);
+					if (!crew.positionTile.isInFOW)
 					{
-						player.storedItem.GetComponent<MeshRenderer>().enabled = true;
-						FogOfWar.fow.activeFogOfWarItems.Add(player.storedItem);
+						crew.storedItem.GetComponent<MeshRenderer>().enabled = true;
+						FogOfWar.fow.activeFogOfWarItems.Add(crew.storedItem);
 					}
 				}
-				FogOfWar.fow.activeFogOfWarItems.Remove(player.gameObject);
+				FogOfWar.fow.activeFogOfWarItems.Remove(crew.gameObject);
 				CheckWinConditionMonster();
-				Destroy(player.gameObject);
+				Destroy(crew.gameObject);
 			}
 		}
 	}

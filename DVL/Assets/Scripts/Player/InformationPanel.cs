@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InformationPanel : MonoBehaviour
 {
-    public static InformationPanel playerPanel;
+    public static InformationPanel instance;
 
     public Text player;
     public Text items;
@@ -14,7 +14,7 @@ public class InformationPanel : MonoBehaviour
 
     private void Awake()
     {
-        playerPanel = this;
+        instance = this;
     }
 
     public void SetPlayerText(string text)

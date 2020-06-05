@@ -100,6 +100,8 @@ public class Tile : MonoBehaviour
 			canMoveVertical = true;
 			canMoveHorizontal = true;
 		}
+
+		
 		if (row == 0 || column == 0 || column == BoardGrid.instance.size - 1 || row == BoardGrid.instance.size - 1)
 		{
 			edgePiece = true;
