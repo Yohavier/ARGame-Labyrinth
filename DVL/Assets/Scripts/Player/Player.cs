@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
 	public FogOfWar playerFOW;
 	public Tile positionTile;
 	public GameObject storedItem;
+	public bool isPlayerMoving;
 
 	//initialization of players
 	public void SetUpPlayer(int count)
@@ -35,6 +37,9 @@ public class Player : MonoBehaviour
 		else
 		{
 			LocalGameManager.instance.activePlayer = gameObject;
+			InformationPanel.instance.SetPlayerText(playerIndex.ToString());
+			InformationPanel.instance.SetItemText("None");
+			InformationPanel.instance.SetProgressText("0");
 			playerFOW = GetComponent<FogOfWar>();
 		}
 	}
@@ -67,6 +72,7 @@ public class Player : MonoBehaviour
 	//Moving Player Along Path
 	private IEnumerator Moving(List<Tile> path, float time)
 	{
+		isPlayerMoving = true;
 		foreach(Tile tile in path)
 		{
 			if (CheckForOtherPlayers(tile))
@@ -85,14 +91,19 @@ public class Player : MonoBehaviour
 				transform.SetParent(tile.transform);
 				transform.localPosition = Vector3.zero;
 				ChangePlayerPosition(tile);
+				LocalGameManager.instance.StepsLeft--;
 			}
 			else
 			{
+				isPlayerMoving = false;
 				StopAllCoroutines();
 			}
 			yield return null;
 		}
-		CheckTileForOtherMods(path[path.Count - 1]);
+		isPlayerMoving = false;
+
+		if (LocalGameManager.instance.localPlayerIndex == LocalGameManager.instance.currentTurnPlayer)
+			CheckTileForOtherMods(path[path.Count - 1]);
 	}
 
 	//Rotate player in move direction
@@ -114,5 +125,27 @@ public class Player : MonoBehaviour
 		}
 		return true;
 	}
-	public virtual void CheckTileForOtherMods(Tile target) { }
+	public virtual void CheckTileForOtherMods(Tile target) 
+	{
+		if(target.hasLeftDoor|| target.hasRightDoor || target.hasForwardDoor || target.hasBackwardDoor)
+        {
+			InformationPanel.instance.SetToggleDoorsButton(true);
+			InformationPanel.instance.toggleDoorsButton.onClick.AddListener(() => ToggleDoors(target));
+        }
+        else
+        {
+			RemoveToggleDoorsListener();
+        }
+	}
+	private void ToggleDoors(Tile tile)
+    {
+		RemoveToggleDoorsListener();
+		tile.ToggleDoors();
+    }
+
+	private void RemoveToggleDoorsListener()
+    {
+		InformationPanel.instance.SetToggleDoorsButton(false);
+		InformationPanel.instance.toggleDoorsButton.onClick.RemoveAllListeners();
+    }
 }

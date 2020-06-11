@@ -62,13 +62,4 @@ class NetworkManager : MonoBehaviour
             }
         }
     }
-
-    //select right integer for bool
-    private int DebugStateToOthers(bool state)
-    {
-        if (state)
-            return 1;
-        else
-            return 0;
-    }
 }

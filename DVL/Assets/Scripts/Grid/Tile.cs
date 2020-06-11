@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+
 public class Tile : MonoBehaviour
 {
 	public int row;
@@ -29,6 +30,12 @@ public class Tile : MonoBehaviour
 	public int gCost;
 	public int hCost;
 	public int FCost => gCost + hCost;
+
+	[Header("Doors")]
+	public bool hasForwardDoor;
+	public bool hasRightDoor;
+	public bool hasBackwardDoor;
+	public bool hasLeftDoor;
 
 	public bool isInFOW;
 
@@ -163,4 +170,19 @@ public class Tile : MonoBehaviour
 			}
 		}
 	}
+
+	public void ToggleDoors()
+    {
+		if (hasBackwardDoor)
+			initBackward = !initBackward;
+		if (hasForwardDoor)
+			initForward = !initForward;
+		if (hasRightDoor)
+			initRight = !initRight;
+		if (hasLeftDoor)
+			initLeft = !initLeft;
+
+		UpdateTileMoveOptions();
+		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+    }
 }

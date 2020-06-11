@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class SelectARObjectWithFinger : MonoBehaviour
 {
@@ -22,19 +23,14 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	{
 		if (!LocalGameManager.instance.GetTurn())
 			return;
+        if (LocalGameManager.instance.StepsLeft > 0 && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isPlayerMoving)
+        {
+			RayCastOnTouch();
 
-		RayCastOnTouch();
-
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-#if UNITY_EDITOR
-			NetworkClient.instance.SendPlayerMove(Selection.activeGameObject.GetComponent<Tile>());
-			ManagePath(Selection.activeGameObject.GetComponent<Tile>(), LocalGameManager.instance.localPlayerIndex);
+#if UNITY_EDITOR || UNITY_STANDALONE
+			MouseRay();
 #endif
 		}
-#if UNITY_STANDALONE
-		MouseRay();
-#endif
 	}
 
 	//Sends Ray from touch position with the camera rot to select a path
@@ -95,7 +91,10 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				path.Clear();
 
 			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, currentSelectedTarget);
-			path = p.FindPath();
+			if(playerIndex == LocalGameManager.instance.localPlayerIndex)
+				path = p.FindPath(LocalGameManager.instance.StepsLeft);
+            else
+				path = p.FindPath(100);
 			if (path != null)
 			{
 				if (NetworkManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)

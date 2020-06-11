@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -23,9 +24,36 @@ public class HandleTrackedImageLib : MonoBehaviour
 		manager.trackedImagesChanged += OnTrackedImagesChanged;
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
 		SetUpBoardTracker();
+#if UNITY_STANDALONE || UNITY_EDITOR
+		GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+		plane.transform.position = new Vector3(0, 0, 0);
+		plane.transform.rotation = Quaternion.identity;
+		plane.transform.localScale = new Vector3(10, 10, 10);
+		plane.GetComponent<MeshRenderer>().enabled = false;
+		plane.name = "DebugPlane";
+		plane.layer = 9;
+#endif
 	}
 
-	private void SetUpBoardTracker()
+    private void Update()
+    {
+#if UNITY_STANDALONE || UNITY_EDITOR
+        if (Input.GetKey(KeyCode.Space))
+        {
+			RaycastHit hit;
+			Ray mousePos = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if (Physics.Raycast(mousePos.origin, mousePos.direction, out hit, 2, 1<<9))
+            {
+				if(hit.transform.name == "DebugPlane")
+                {
+					tilePrefabParent.transform.position = hit.point;
+                }
+            }
+        }
+#endif
+	}
+
+    private void SetUpBoardTracker()
     {
 		BoardTrackers.Add("BottomLeft");
 		BoardTrackers.Add("BottomRight");

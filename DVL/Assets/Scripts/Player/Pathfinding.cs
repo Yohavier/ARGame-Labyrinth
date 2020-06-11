@@ -15,7 +15,7 @@ public class Pathfinding
 		target = c_target;
 	}
 
-	public List<Tile> FindPath()
+	public List<Tile> FindPath(int stepsLeft)
 	{
 		Tile a_start = start;
 		Tile a_target = target;
@@ -36,7 +36,7 @@ public class Pathfinding
 			hashSet.Add(tile);
 			if (tile == a_target)
 			{
-				return GetFinalPath(a_start, a_target);				
+				return GetFinalPath(a_start, a_target, stepsLeft);				
 			}
 			foreach (Tile neighbouringTile in GetNeighbouringTiles(tile))
 			{
@@ -56,7 +56,7 @@ public class Pathfinding
 				}
 			}
 		}
-		MonoBehaviour.print((object)"No Path Found");
+		Debug.LogWarning("No Path Found!");
 		return null;
 	}
 
@@ -88,7 +88,7 @@ public class Pathfinding
 		return list;
 	}
 
-	private List<Tile> GetFinalPath(Tile start, Tile target)
+	private List<Tile> GetFinalPath(Tile start, Tile target, int steps)
 	{
 		List<Tile> list = new List<Tile>();
 		Tile tile = target;
@@ -98,6 +98,11 @@ public class Pathfinding
 			target = target.Parent;
 		}
 		list.Reverse();
+		if (list.Count > steps)
+        {
+			Debug.LogWarning("Chosen Path is to long!");
+			return null;
+		}
 		return list;
 	}
 

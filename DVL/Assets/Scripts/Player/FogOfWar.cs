@@ -16,6 +16,7 @@ public class FogOfWar : MonoBehaviour
     }
 
 	//call if player moves, to update fog of war
+	//TODO: Item display pops up after moving when other players picked it up
 	public void OnChangePlayerPosition(Tile newPosition)
     {
 		if (NetworkManager.instance.isDebug)
@@ -82,10 +83,12 @@ public class FogOfWar : MonoBehaviour
 				}
 				else if (mesh.gameObject.layer != 8)
 				{
-					if (mesh.GetComponent<Item>())
+					Item item = mesh.GetComponent<Item>();
+					if (item != null)
 					{
-						if (mesh.GetComponent<Item>().isStored)
+						if (item.GetComponentInParent<Player>())
 						{
+							Debug.Log(item + " is stored in " + item.GetComponentInParent<Player>());
 							break;
 						}
 					}
