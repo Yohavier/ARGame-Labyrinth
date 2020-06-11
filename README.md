@@ -1,2 +1,2 @@
-# Labyrinth
+# Penumbra
 AR Boardgame
