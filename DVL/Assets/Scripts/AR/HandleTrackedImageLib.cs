@@ -106,11 +106,11 @@ public class HandleTrackedImageLib : MonoBehaviour
 			return;
 
 		boardPrefab.transform.localPosition = trackedImage.transform.localPosition - GetOffset(trackedImage);
-		boardPrefab.transform.localRotation = trackedImage.transform.localRotation;
+		boardPrefab.transform.localEulerAngles = GetRotation(trackedImage);
 	}
-	private Vector3 GetOffset(ARTrackedImage offset)
+	private Vector3 GetOffset(ARTrackedImage image)
     {
-        switch(offset.referenceImage.name)
+        switch(image.referenceImage.name)
         {
 			case "BottomLeft":
 				return Vector3.zero;
@@ -124,4 +124,21 @@ public class HandleTrackedImageLib : MonoBehaviour
 				return Vector3.zero;
 		}
     }
+
+	private Vector3 GetRotation(ARTrackedImage image)
+    {
+		Vector3 gy = GyroModifyCamera().eulerAngles;
+		Vector3 a = new Vector3(gy.x, image.transform.localEulerAngles.y, gy.z);
+		return a;
+	}
+
+	Quaternion GyroModifyCamera()
+	{
+		return GyroToUnity(Input.gyro.attitude);
+	}
+
+	private static Quaternion GyroToUnity(Quaternion q)
+	{
+		return new Quaternion(q.x, q.y, -q.z, -q.w);
+	}
 }
