@@ -7,10 +7,11 @@ using UnityEngine.XR.ARSubsystems;
 public class HandleTrackedImageLib : MonoBehaviour
 {
 	private ARTrackedImageManager manager;
-	public GameObject board;
+	private GameObject boardPrefab;
 	public GameObject tilePrefabParent;
 	public static HandleTrackedImageLib CustomTrackingManagerInstance;
-	private Dictionary<string, GameObject> trackableDictionary = new Dictionary<string, GameObject>();
+
+	private List<string> BoardTrackers = new List<string>();
 
 	private void Awake()
 	{
@@ -20,28 +21,44 @@ public class HandleTrackedImageLib : MonoBehaviour
 	{
 		manager = this.GetComponent<ARTrackedImageManager>();
 		manager.trackedImagesChanged += OnTrackedImagesChanged;
-		trackableDictionary.Add("Board", board);
-		trackableDictionary.Add("T1", tilePrefabParent);
+		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
+		SetUpBoardTracker();
 	}
 
+	private void SetUpBoardTracker()
+    {
+		BoardTrackers.Add("BottomLeft");
+		BoardTrackers.Add("BottomRight");
+		BoardTrackers.Add("TopLeft");
+		BoardTrackers.Add("TopRight");
+	}
 	//Update function for the Image Tracker to get the right pos/rot
 	private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
 	{
 		foreach (var trackedImage in eventArgs.added)
 		{
+			//TODO: Why not Vector3(1f,1f,1f)?
 			trackedImage.transform.localScale = new Vector3(0.01f, 1f, 0.01f);
 		}
 		foreach (var trackedImage in eventArgs.updated)
 		{
-			if (trackableDictionary.ContainsKey(trackedImage.referenceImage.name))
+			if (BoardTrackers.Contains(trackedImage.referenceImage.name))
 			{
-				trackableDictionary[trackedImage.referenceImage.name].SetActive(true);
-				trackableDictionary[trackedImage.referenceImage.name].transform.localPosition = trackedImage.transform.localPosition;
-				trackableDictionary[trackedImage.referenceImage.name].transform.localRotation = trackedImage.transform.localRotation;
+				//TODO: What if Multiple trackers are visible
+				//TODO: stop rotation with gyroscope
+				HandleMultiTracker(trackedImage);
+			}
+			else
+			{
+				if (trackedImage.trackingState != TrackingState.Tracking)
+					return;
+
+				tilePrefabParent.SetActive(true);
+				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
+				tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;	
 			}
 		}
 	}
-
 	//sets up the new Prefab that dropped out of the Grid 
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
@@ -82,15 +99,29 @@ public class HandleTrackedImageLib : MonoBehaviour
 	{
 		tilePrefabParent.SetActive(true);
 	}
+	private void HandleMultiTracker(ARTrackedImage trackedImage)
+    {
+		boardPrefab.SetActive(true);
+		if (trackedImage.trackingState != TrackingState.Tracking)
+			return;
 
-	public void RemoveFromDictionary(string tileName)
-	{
-		trackableDictionary.Remove(tileName);
+		boardPrefab.transform.localPosition = trackedImage.transform.localPosition - GetOffset(trackedImage);
+		boardPrefab.transform.localRotation = trackedImage.transform.localRotation;
 	}
-
-	public void AddToDictionary(string tileName, GameObject tile)
-	{
-		trackableDictionary.Add(tileName, tile);
-
-	}
+	private Vector3 GetOffset(ARTrackedImage offset)
+    {
+        switch(offset.referenceImage.name)
+        {
+			case "BottomLeft":
+				return Vector3.zero;
+			case "BottomRight":
+				return boardPrefab.transform.right * 0.6f;
+			case "TopLeft":
+				return (boardPrefab.transform.right + boardPrefab.transform.forward) * 0.6f;
+			case "TopRight":
+				return boardPrefab.transform.forward * 0.6f;
+			default:
+				return Vector3.zero;
+		}
+    }
 }
