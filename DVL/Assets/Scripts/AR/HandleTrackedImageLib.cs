@@ -32,6 +32,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 		BoardTrackers.Add("TopLeft");
 		BoardTrackers.Add("TopRight");
 	}
+
 	//Update function for the Image Tracker to get the right pos/rot
 	private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
 	{
@@ -40,25 +41,28 @@ public class HandleTrackedImageLib : MonoBehaviour
 			//TODO: Why not Vector3(1f,1f,1f)?
 			trackedImage.transform.localScale = new Vector3(0.01f, 1f, 0.01f);
 		}
+
+		List<ARTrackedImage> multiTrackList = new List<ARTrackedImage>();
 		foreach (var trackedImage in eventArgs.updated)
 		{
 			if (BoardTrackers.Contains(trackedImage.referenceImage.name))
 			{
-				//TODO: What if Multiple trackers are visible
-				//TODO: stop rotation with gyroscope
-				HandleMultiTracker(trackedImage);
+				if(trackedImage.trackingState == TrackingState.Tracking)
+					multiTrackList.Add(trackedImage);
 			}
 			else
 			{
-				if (trackedImage.trackingState != TrackingState.Tracking)
-					return;
-
-				tilePrefabParent.SetActive(true);
-				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
-				tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;	
+				if (trackedImage.trackingState == TrackingState.Tracking)
+                {
+					HandleSingleTracker(trackedImage);
+                }				
 			}
 		}
+
+		if(multiTrackList.Count>0)
+			HandleMultiTracker(multiTrackList[0]);
 	}
+
 	//sets up the new Prefab that dropped out of the Grid 
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
@@ -108,7 +112,16 @@ public class HandleTrackedImageLib : MonoBehaviour
 		boardPrefab.transform.localPosition = trackedImage.transform.localPosition - GetOffset(trackedImage);
 		boardPrefab.transform.localEulerAngles = GetRotation(trackedImage);
 	}
-	private Vector3 GetOffset(ARTrackedImage image)
+
+	private void HandleSingleTracker(ARTrackedImage trackedImage)
+    {
+		tilePrefabParent.SetActive(true);
+		tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
+		tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
+	}
+
+    #region calculate the right position and rotation
+    private Vector3 GetOffset(ARTrackedImage image)
     {
         switch(image.referenceImage.name)
         {
@@ -124,21 +137,19 @@ public class HandleTrackedImageLib : MonoBehaviour
 				return Vector3.zero;
 		}
     }
-
 	private Vector3 GetRotation(ARTrackedImage image)
     {
 		Vector3 gy = GyroModifyCamera().eulerAngles;
 		Vector3 a = new Vector3(gy.x, image.transform.localEulerAngles.y, gy.z);
 		return a;
 	}
-
 	Quaternion GyroModifyCamera()
 	{
 		return GyroToUnity(Input.gyro.attitude);
 	}
-
 	private static Quaternion GyroToUnity(Quaternion q)
 	{
 		return new Quaternion(q.x, q.y, -q.z, -q.w);
 	}
+    #endregion
 }
