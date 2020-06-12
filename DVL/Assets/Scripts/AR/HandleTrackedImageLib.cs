@@ -61,7 +61,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 				if (hit.transform.name == "DebugPlane")
 				{
 					tilePrefabParent.transform.position = hit.point;
-				}
+				}	
 			}
 		}
 	}
@@ -77,8 +77,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	{
 		foreach (var trackedImage in eventArgs.added)
 		{
-			//TODO: Why not Vector3(1f,1f,1f)?
-			trackedImage.transform.localScale = new Vector3(0.01f, 1f, 0.01f);
+			trackedImage.transform.localScale = new Vector3(1f, 1f, 1f);
 		}
 
 		List<ARTrackedImage> multiTrackList = new List<ARTrackedImage>();

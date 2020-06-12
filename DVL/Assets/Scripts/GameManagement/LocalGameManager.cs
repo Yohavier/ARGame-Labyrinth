@@ -25,6 +25,20 @@ public class LocalGameManager : MonoBehaviour
 
 	public static LocalGameManager instance;
 
+	//Fields for the dice
+	private int diceListenerCounter;
+	private bool rolledDice;
+	private int stepsLeft = 0;
+	public int StepsLeft
+	{
+		get { return stepsLeft; }
+		set
+		{ 
+			stepsLeft = value;
+			InformationPanel.instance.SetLeftStepsText(value.ToString());
+		}
+	}
+
 	private void Awake()
 	{
 		instance = this;
@@ -38,6 +52,7 @@ public class LocalGameManager : MonoBehaviour
 	{
 		return localPlayerIndex != playingPlayer.Invalid && currentTurnPlayer != playingPlayer.Invalid;
 	}
+	//TODO: Call SetRollDiceButton only once at beginning of your turn
     private void Update()
     {
         if (GetTurn())
@@ -50,21 +65,13 @@ public class LocalGameManager : MonoBehaviour
 			}
             else
             {
-				SetRollDiceButton();
+				HandleRollDiceButton();
 			}
 		}
     }
 
-    private int diceListenerCounter;
-	private bool rolledDice = false;
-	private int stepsLeft = 0;
-	public int StepsLeft
-    {
-        get { return stepsLeft; }
-        set { stepsLeft = value; }
-    }
-		
-	private void SetRollDiceButton()
+    #region Handle Roll Dice extension
+    private void HandleRollDiceButton()
 	{
 		if (diceListenerCounter == 0 && !rolledDice)
 		{
@@ -72,15 +79,23 @@ public class LocalGameManager : MonoBehaviour
 			InformationPanel.instance.SetRollDiceButton(true);
 			InformationPanel.instance.rollDiceButton.onClick.AddListener(RollDice);
 		}
+        else
+        {
+			RemoveRollDiceButtonListener();
+        }
 	}
 	private void RollDice()
     {
-		stepsLeft = Random.Range(1, 7);
-		stepsLeft = 100;
+		StepsLeft = Random.Range(1, 7);
 		rolledDice = true;
-		diceListenerCounter = 0;
+		RemoveRollDiceButtonListener();
+		print("rolled a " + StepsLeft);
+    }
+	private void RemoveRollDiceButtonListener()
+    {
 		InformationPanel.instance.SetRollDiceButton(false);
 		InformationPanel.instance.rollDiceButton.onClick.RemoveAllListeners();
-		print("rolled a " + stepsLeft);
+		diceListenerCounter--;
     }
+    #endregion
 }

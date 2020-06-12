@@ -24,6 +24,7 @@ public class InformationPanel : MonoBehaviour
     public Text items;
     public Text coords;
     public Text progress;
+    public Text steps;
 
     private void Awake()
     {
@@ -78,6 +79,11 @@ public class InformationPanel : MonoBehaviour
     public void SetProgressText(string text)
     {
         progress.text = "Progress: " + text;
+    }
+
+    public void SetLeftStepsText(string text)
+    {
+        steps.text = "Steps Left: " + text;
     }
     #endregion
 }
