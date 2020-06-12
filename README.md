@@ -3,10 +3,9 @@ AR Boardgame
 
 # Multitracker for the board
 <img width="200" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">
-![](DVL/Assets/ImageLibrary/BottomLeft.jpeg)
-![](DVL/Assets/ImageLibrary/BottomRight.jpeg)
-![](DVL/Assets/ImageLibrary/TopLeft.jpeg)
-![](DVL/Assets/ImageLibrary/TopRight.jpeg)
+<img width="200" src="DVL/Assets/ImageLibrary/BottomRight.jpeg">
+<img width="200" src="DVL/Assets/ImageLibrary/TopLeft.jpeg">
+<img width="200" src="DVL/Assets/ImageLibrary/TopRight.jpeg">
 
 # Tracker for the loose Tile
-![](DVL/Assets/ImageLibrary/Tile.jpeg)
+<img width="200" src="DVL/Assets/ImageLibrary/Tile.jpeg">
