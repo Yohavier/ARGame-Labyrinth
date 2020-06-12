@@ -2,7 +2,6 @@
 AR Boardgame
 
 # Multitracker for the board
-<img width="200" src=":/DVL/Assets/ImageLibrary/BottomLeft.jpeg"/>
 ![](DVL/Assets/ImageLibrary/BottomLeft.jpeg)
 ![](DVL/Assets/ImageLibrary/BottomRight.jpeg)
 ![](DVL/Assets/ImageLibrary/TopLeft.jpeg)
