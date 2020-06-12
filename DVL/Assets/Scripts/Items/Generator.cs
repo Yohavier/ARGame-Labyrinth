@@ -7,7 +7,7 @@ public class Generator : MonoBehaviour
     [SerializeField] private int activationsNeeded = 0;
     public int currentActivations;
 
-    public void ActivateGenerator()
+    public void RepairGenerator()
     {
         currentActivations++;
         CheckGeneratorState();

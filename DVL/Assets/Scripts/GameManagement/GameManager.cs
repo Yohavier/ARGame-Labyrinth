@@ -19,17 +19,18 @@ public class GameManager : MonoBehaviour
 		InformationPanel.instance.SetProgressText(capsuleCount.ToString());
 		if (capsuleCount == 4)
 		{
-			Debug.Log("Crew wins");
+			Debug.Log("Crew wins!");
 		}
 	}
 	public void CheckWinConditionMonster()
 	{
 		if (allPlayers.Count == 0)
 		{
-			Debug.Log("Monster wins");
+			Debug.Log("Monster wins!");
 		}
 	}
 
+	//TODO: Crashes the game 
 	public void KillPlayer(CrewMember crew)
 	{
 		foreach (GameObject g in allPlayers)

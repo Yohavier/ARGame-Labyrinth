@@ -11,24 +11,10 @@ public class Player : MonoBehaviour
 	public GameObject storedItem;
 	public bool isPlayerMoving;
 
-	//initialization of players
-	public void SetUpPlayer(int count)
+    #region Initialization
+    public void SetUpPlayer(int count)
 	{
-		switch (count)
-		{
-		case 1:
-			playerIndex = playingPlayer.Player1;
-			break;
-		case 2:
-			playerIndex = playingPlayer.Player2;
-			break;
-		case 3:
-			playerIndex = playingPlayer.Player3;
-			break;
-		case 4:
-			playerIndex = playingPlayer.Enemy;
-			break;
-		}
+		playerIndex = ChooseRightIndex(count);
 
 		if (playerIndex != LocalGameManager.instance.localPlayerIndex)
 		{
@@ -37,15 +23,37 @@ public class Player : MonoBehaviour
 		else
 		{
 			LocalGameManager.instance.activePlayer = gameObject;
-			InformationPanel.instance.SetPlayerText(playerIndex.ToString());
-			InformationPanel.instance.SetItemText("None");
-			InformationPanel.instance.SetProgressText("0");
 			playerFOW = GetComponent<FogOfWar>();
+			SetInformations();
 		}
 	}
+	private playingPlayer ChooseRightIndex(int count)
+    {
+		switch (count)
+		{
+			case 1:
+				return playingPlayer.Player1;
+			case 2:
+				return playingPlayer.Player2;
+			case 3:
+				return playingPlayer.Player3;
+			case 4:
+				return playingPlayer.Enemy;
+			default:
+				Debug.LogWarning("Player Initializaion went wrong!");
+				return playingPlayer.Invalid;
+		}
+	}
+	private void SetInformations()
+    {
+		InformationPanel.instance.SetPlayerText(playerIndex.ToString());
+		InformationPanel.instance.SetItemText("None");
+		InformationPanel.instance.SetProgressText("0");
+	}
+    #endregion
 
-	//if the Player moves
-	public void ChangePlayerPosition(Tile newPos)
+    #region Player Movement
+    public void ChangePlayerPosition(Tile newPos)
 	{
 		positionTile = newPos;
 
@@ -116,8 +124,11 @@ public class Player : MonoBehaviour
 		transform.rotation = rotation;
 		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 	}
+    #endregion
 
-	public virtual bool CheckForOtherPlayers(Tile nextTile)
+
+    //Check for other Players
+    public virtual bool CheckForOtherPlayers(Tile nextTile)
 	{
 		if (nextTile.GetComponentInChildren<Player>() != null)
 		{
@@ -125,27 +136,34 @@ public class Player : MonoBehaviour
 		}
 		return true;
 	}
-	public virtual void CheckTileForOtherMods(Tile target) 
+	public virtual void CheckTileForOtherMods(Tile tile) 
 	{
-		if(target.hasLeftDoor|| target.hasRightDoor || target.hasForwardDoor || target.hasBackwardDoor)
-        {
+		//Check for Doors
+		HandleDoors(tile);
+	}
+
+    #region Handle the Door extension
+    private void HandleDoors(Tile tile)
+    {
+		if (tile.hasLeftDoor || tile.hasRightDoor || tile.hasForwardDoor || tile.hasBackwardDoor)
+		{
 			InformationPanel.instance.SetToggleDoorsButton(true);
-			InformationPanel.instance.toggleDoorsButton.onClick.AddListener(() => ToggleDoors(target));
-        }
-        else
-        {
+			InformationPanel.instance.toggleDoorsButton.onClick.AddListener(() => ToggleDoors(tile));
+		}
+		else
+		{
 			RemoveToggleDoorsListener();
-        }
+		}
 	}
 	private void ToggleDoors(Tile tile)
     {
 		RemoveToggleDoorsListener();
 		tile.ToggleDoors();
     }
-
 	private void RemoveToggleDoorsListener()
     {
 		InformationPanel.instance.SetToggleDoorsButton(false);
 		InformationPanel.instance.toggleDoorsButton.onClick.RemoveAllListeners();
     }
+    #endregion
 }

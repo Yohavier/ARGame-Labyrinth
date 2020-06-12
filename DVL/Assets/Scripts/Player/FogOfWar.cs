@@ -16,7 +16,6 @@ public class FogOfWar : MonoBehaviour
     }
 
 	//call if player moves, to update fog of war
-	//TODO: Item display pops up after moving when other players picked it up
 	public void OnChangePlayerPosition(Tile newPosition)
     {
 		if (NetworkManager.instance.isDebug)

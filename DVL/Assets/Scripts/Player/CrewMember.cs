@@ -15,50 +15,36 @@ public class CrewMember : Player
 		}
 		return true;
 	}
-
-	//Checks if there is something on the tile
 	public override void CheckTileForOtherMods(Tile tile)
 	{
+		//Check for doors
 		base.CheckTileForOtherMods(tile);
+
 		//check for item
+		HandlePickUpItem(tile);
+
+		//Check for Generator
+		HandleRepairGenerator(tile);
+
+		//Check for escape capsule mod
+		HandleDropItem(tile);
+	}
+
+    #region Handle Pickup Item extension
+	private void HandlePickUpItem(Tile tile) 
+	{
 		Item item = tile.GetComponentInChildren<Item>();
-		if(item != null && storedItem == null)
+		if (item != null && storedItem == null)
 		{
 			InformationPanel.instance.SetPickUpItemButton(true);
 			InformationPanel.instance.pickUpItemButton.onClick.AddListener(() => PickUpItem(item, tile));
 		}
-        else
-        {
+		else
+		{
 			RemovePickUpButtonListener();
 		}
-
-		//Check for Generator
-		Generator generator = tile.GetComponentInChildren<Generator>();
-		if(generator != null)
-        {
-			InformationPanel.instance.SetRepairGeneratorButton(true);
-			InformationPanel.instance.repairGeneratorButton.onClick.AddListener(() => Repair(generator));
-        }
-        else
-        {
-			RemoveRepairButtonListener();
-		}
-
-		//Check for escape capsule mod
-		EscapeCapsule capsule = tile.GetComponent<EscapeCapsule>();
-		if (capsule != null && storedItem != null)
-		{
-			InformationPanel.instance.SetDropItemButton(true);
-			InformationPanel.instance.dropItemButton.onClick.AddListener(() => DropItemInCapsule(capsule, tile));
-		}
-        else
-        {
-			RemoveDropItemButtonListener();
-        }
 	}
-
-	//Pick item up if possible
-	private void PickUpItem(Item item, Tile tile)
+    private void PickUpItem(Item item, Tile tile)
 	{ 
 		RemovePickUpButtonListener();
 
@@ -70,27 +56,28 @@ public class CrewMember : Player
 		InformationPanel.instance.SetItemText(item.itemName);
 		storedItem.GetComponent<MeshRenderer>().enabled = false;		
 	}
-
     private void RemovePickUpButtonListener()
     {
 		InformationPanel.instance.SetPickUpItemButton(false);
 		InformationPanel.instance.pickUpItemButton.onClick.RemoveAllListeners();
 	}
+    #endregion
 
-	private void RemoveDropItemButtonListener()
+    #region Handle Drop Item extension
+	private void HandleDropItem(Tile tile)
     {
-		InformationPanel.instance.SetDropItemButton(false);
-		InformationPanel.instance.dropItemButton.onClick.RemoveAllListeners();
-    }
-
-	private void RemoveRepairButtonListener()
-    {
-		InformationPanel.instance.SetRepairGeneratorButton(false);
-		InformationPanel.instance.repairGeneratorButton.onClick.RemoveAllListeners();
+		EscapeCapsule capsule = tile.GetComponent<EscapeCapsule>();
+		if (capsule != null && storedItem != null)
+		{
+			InformationPanel.instance.SetDropItemButton(true);
+			InformationPanel.instance.dropItemButton.onClick.AddListener(() => DropItem(capsule, tile));
+		}
+		else
+		{
+			RemoveDropItemButtonListener();
+		}
 	}
-
-	//if over capsule drop stored item
-	private void DropItemInCapsule(EscapeCapsule capsule, Tile tile)
+	private void DropItem(EscapeCapsule capsule, Tile tile)
 	{
 		if (storedItem != null)
 		{
@@ -101,10 +88,36 @@ public class CrewMember : Player
 			InformationPanel.instance.SetItemText("none");
 		}
 	}
-
-	private void Repair(Generator generator)
+	private void RemoveDropItemButtonListener()
     {
-		RemoveRepairButtonListener();
-		generator.ActivateGenerator();
+		InformationPanel.instance.SetDropItemButton(false);
+		InformationPanel.instance.dropItemButton.onClick.RemoveAllListeners();
     }
+	#endregion
+
+	#region Handle Repair Generator extension
+	private void HandleRepairGenerator(Tile tile)
+    {
+		Generator generator = tile.GetComponentInChildren<Generator>();
+		if (generator != null)
+		{
+			InformationPanel.instance.SetRepairGeneratorButton(true);
+			InformationPanel.instance.repairGeneratorButton.onClick.AddListener(() => RepairGenerator(generator));
+		}
+		else
+		{
+			RemoveRepairGeneratorButtonListener();
+		}
+	}
+	private void RepairGenerator(Generator generator)
+	{
+		RemoveRepairGeneratorButtonListener();
+		generator.RepairGenerator();
+	}
+	private void RemoveRepairGeneratorButtonListener()
+	{
+		InformationPanel.instance.SetRepairGeneratorButton(false);
+		InformationPanel.instance.repairGeneratorButton.onClick.RemoveAllListeners();
+	}
+	#endregion
 }
