@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -25,6 +26,13 @@ public class HandleTrackedImageLib : MonoBehaviour
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
 		SetUpBoardTracker();
 #if UNITY_STANDALONE || UNITY_EDITOR
+		PCSetUP();
+#endif
+	}
+
+	//Set Up a plane for PC play
+	private void PCSetUP()
+    {
 		GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
 		plane.transform.position = new Vector3(0, 0, 0);
 		plane.transform.rotation = Quaternion.identity;
@@ -32,33 +40,36 @@ public class HandleTrackedImageLib : MonoBehaviour
 		plane.GetComponent<MeshRenderer>().enabled = false;
 		plane.name = "DebugPlane";
 		plane.layer = 9;
-#endif
 	}
 
     private void Update()
     {
 #if UNITY_STANDALONE || UNITY_EDITOR
-        if (Input.GetKey(KeyCode.Space))
-        {
-			RaycastHit hit;
-			Ray mousePos = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(mousePos.origin, mousePos.direction, out hit, 2, 1<<9))
-            {
-				if(hit.transform.name == "DebugPlane")
-                {
-					tilePrefabParent.transform.position = hit.point;
-                }
-            }
-        }
+		MouseController();
 #endif
 	}
 
+	//Cast a ray to handle the tilePrefabParent with mouse
+	private void MouseController()
+    {
+		if (Input.GetKey(KeyCode.LeftShift))
+		{
+			RaycastHit hit;
+			Ray mousePos = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if (Physics.Raycast(mousePos.origin, mousePos.direction, out hit, 2, 1 << 9))
+			{
+				if (hit.transform.name == "DebugPlane")
+				{
+					tilePrefabParent.transform.position = hit.point;
+				}	
+			}
+		}
+	}
+
+	//Includes all Multitrackernames to List
     private void SetUpBoardTracker()
     {
-		BoardTrackers.Add("BottomLeft");
-		BoardTrackers.Add("BottomRight");
-		BoardTrackers.Add("TopLeft");
-		BoardTrackers.Add("TopRight");
+		BoardTrackers.AddMany("BottomLeft", "BottomRight", "TopLeft", "TopRight");
 	}
 
 	//Update function for the Image Tracker to get the right pos/rot
@@ -66,8 +77,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	{
 		foreach (var trackedImage in eventArgs.added)
 		{
-			//TODO: Why not Vector3(1f,1f,1f)?
-			trackedImage.transform.localScale = new Vector3(0.01f, 1f, 0.01f);
+			trackedImage.transform.localScale = new Vector3(1f, 1f, 1f);
 		}
 
 		List<ARTrackedImage> multiTrackList = new List<ARTrackedImage>();
