@@ -21,10 +21,14 @@ public class HandleTrackedImageLib : MonoBehaviour
 	}
 	private void Start()
 	{
-		manager = this.GetComponent<ARTrackedImageManager>();
-		manager.trackedImagesChanged += OnTrackedImagesChanged;
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
+
+#if UNITY_ANDROID
+		manager = GetComponent<ARTrackedImageManager>();
+		manager.trackedImagesChanged += OnTrackedImagesChanged;
 		SetUpBoardTracker();
+#endif
+
 #if UNITY_STANDALONE || UNITY_EDITOR
 		PCSetUP();
 #endif
@@ -73,6 +77,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	}
 
 	//Update function for the Image Tracker to get the right pos/rot
+
 	private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
 	{
 		foreach (var trackedImage in eventArgs.added)
@@ -157,8 +162,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 		tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
 		tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
 	}
-
-    #region calculate the right position and rotation
+	#region calculate the right position and rotation
     private Vector3 GetOffset(ARTrackedImage image)
     {
         switch(image.referenceImage.name)
@@ -175,6 +179,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 				return Vector3.zero;
 		}
     }
+
 	private Vector3 GetRotation(ARTrackedImage image)
     {
 		Vector3 gy = GyroModifyCamera().eulerAngles;
@@ -189,5 +194,5 @@ public class HandleTrackedImageLib : MonoBehaviour
 	{
 		return new Quaternion(q.x, q.y, -q.z, -q.w);
 	}
-    #endregion
+	#endregion
 }

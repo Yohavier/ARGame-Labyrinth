@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1407596364351541080}
   - component: {fileID: -4665849741639523091}
   - component: {fileID: -1801657048653225923}
+  - component: {fileID: 9177211659678062321}
   m_Layer: 2
   m_Name: char_0001
   m_TagString: Untagged
@@ -93,10 +94,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b5b5edc0336c843bd7905bfc8f2db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 0
+  playerIndex: 0
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}
+  isPlayerMoving: 0
 --- !u!114 &-1801657048653225923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +114,17 @@ MonoBehaviour:
   activeFogOfWarItems: []
   fogReach: 2
   finalFogPath: []
+--- !u!114 &9177211659678062321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843333541123865476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4b194c934550f419475c9b7d73f007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FootstepTrace: {fileID: 1908457873458129919, guid: 0528761b57c6bcc48b8b0ce9d2ef5f1c,
+    type: 3}

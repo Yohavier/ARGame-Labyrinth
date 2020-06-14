@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 920928509933661192}
   - component: {fileID: -4508481158287321049}
   - component: {fileID: 1912101412428776392}
+  - component: {fileID: 8537136716339130455}
   m_Layer: 2
   m_Name: Enemy
   m_TagString: Untagged
@@ -107,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0dd97dc42ec5e4f8d6de111968f3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeFogOfWarItems: []
   fogReach: 2
   finalFogPath: []
 --- !u!114 &1912101412428776392
@@ -121,5 +123,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68ba8eaf9a84884da2a4d4aeb40d711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 0
+  playerIndex: 0
+  playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
+  storedItem: {fileID: 0}
+  isPlayerMoving: 0
+--- !u!114 &8537136716339130455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880104999750289996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4b194c934550f419475c9b7d73f007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FootstepTrace: {fileID: 1908457873458129919, guid: 0528761b57c6bcc48b8b0ce9d2ef5f1c,
+    type: 3}

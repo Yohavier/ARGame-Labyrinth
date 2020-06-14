@@ -18,7 +18,6 @@ public class LocalGameManager : MonoBehaviour
 
 	//Player index of current turn
 	public playingPlayer currentTurnPlayer;
-	private playingPlayer previousTurn;
 
 	//reference to the Player of this gameInstance
 	public GameObject activePlayer;
@@ -28,7 +27,7 @@ public class LocalGameManager : MonoBehaviour
 	//Fields for the dice
 	private int diceListenerCounter;
 	private bool rolledDice;
-	private int stepsLeft = 0;
+	private int stepsLeft = 100;
 	public int StepsLeft
 	{
 		get { return stepsLeft; }
@@ -52,9 +51,11 @@ public class LocalGameManager : MonoBehaviour
 	{
 		return localPlayerIndex != playingPlayer.Invalid && currentTurnPlayer != playingPlayer.Invalid;
 	}
+
 	//TODO: Call SetRollDiceButton only once at beginning of your turn
     private void Update()
     {
+		/*
         if (GetTurn())
         {
 			if (previousTurn != currentTurnPlayer)
@@ -67,7 +68,7 @@ public class LocalGameManager : MonoBehaviour
             {
 				HandleRollDiceButton();
 			}
-		}
+		}*/
     }
 
     #region Handle Roll Dice extension

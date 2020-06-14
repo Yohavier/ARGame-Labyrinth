@@ -23,13 +23,10 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	{
 		if (!LocalGameManager.instance.GetTurn())
 			return;
-        if (LocalGameManager.instance.StepsLeft > 0 && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isPlayerMoving)
+        if (LocalGameManager.instance.StepsLeft > 0)
         {
 			RayCastOnTouch();
-
-#if UNITY_EDITOR || UNITY_STANDALONE
 			MouseRay();
-#endif
 		}
 	}
 
@@ -56,6 +53,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	}
 	private void MouseRay()
 	{
+#if UNITY_EDITOR || UNITY_STANDALONE
 		if (Input.GetMouseButtonDown(0))
 		{
 			Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);
@@ -67,6 +65,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				NetworkClient.instance.SendPlayerMove(hit.transform.GetComponent<Tile>());
 			}
 		}
+#endif
 	}
 
 
@@ -95,6 +94,8 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				path = p.FindPath(LocalGameManager.instance.StepsLeft);
             else
 				path = p.FindPath(100);
+			
+			//Color path red
 			if (path != null)
 			{
 				if (NetworkManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)

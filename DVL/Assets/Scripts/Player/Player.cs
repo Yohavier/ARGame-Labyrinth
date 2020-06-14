@@ -9,12 +9,13 @@ public class Player : MonoBehaviour
 	public FogOfWar playerFOW;
 	public Tile positionTile;
 	public GameObject storedItem;
-	public bool isPlayerMoving;
+	private WalkingTraces trace;
 
     #region Initialization
     public void SetUpPlayer(int count)
 	{
 		playerIndex = ChooseRightIndex(count);
+		trace = GetComponent<WalkingTraces>();
 
 		if (playerIndex != LocalGameManager.instance.localPlayerIndex)
 		{
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			LocalGameManager.instance.activePlayer = gameObject;
+			LocalGameManager.instance.activePlayer = gameObject;		
 			playerFOW = GetComponent<FogOfWar>();
 			SetInformations();
 		}
@@ -68,6 +69,16 @@ public class Player : MonoBehaviour
 			//if not active Player, call active players FOW
 			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
 		}
+
+		CreatePositionIndicatorTrace();
+	}
+
+	private void CreatePositionIndicatorTrace()
+    {
+		if (trace != null)
+		{
+			trace.SpawnParticlesystem(positionTile);
+		}
 	}
 
 	//Move along a List of Tiles
@@ -80,7 +91,6 @@ public class Player : MonoBehaviour
 	//Moving Player Along Path
 	private IEnumerator Moving(List<Tile> path, float time)
 	{
-		isPlayerMoving = true;
 		foreach(Tile tile in path)
 		{
 			if (CheckForOtherPlayers(tile))
@@ -103,12 +113,10 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				isPlayerMoving = false;
 				StopAllCoroutines();
 			}
 			yield return null;
 		}
-		isPlayerMoving = false;
 
 		if (LocalGameManager.instance.localPlayerIndex == LocalGameManager.instance.currentTurnPlayer)
 			CheckTileForOtherMods(path[path.Count - 1]);

@@ -38,20 +38,19 @@ public class SpawnItems : MonoBehaviour
             int row = possiblePlaces[rand].row;
 
             dicKeys.AddMany(
-                row.ToString() + (col - 1).ToString(), 
-                row.ToString() + (col + 1).ToString(), 
-                (row - 1).ToString() + col.ToString(), 
+                row.ToString() + (col - 1).ToString(),
+                row.ToString() + (col + 1).ToString(),
+                (row - 1).ToString() + col.ToString(),
                 (row + 1).ToString() + col.ToString(),
                 (row + 1).ToString() + (col + 1).ToString(),
-                (row - 1).ToString() + (col + 1).ToString());
+                (row - 1).ToString() + (col - 1).ToString()
+                );
 
-            foreach(string key in dicKeys)
+            foreach (string key in dicKeys)
             {
                 HandlePlacesList(key);
             }
             dicKeys.Clear();
-            possiblePlaces.Remove(possiblePlaces[rand]);
-            
         }
     }
 

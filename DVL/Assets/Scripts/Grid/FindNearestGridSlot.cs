@@ -9,7 +9,7 @@ public class FindNearestGridSlot : MonoBehaviour
 
 	private void Update()
 	{
-		if (LocalGameManager.instance.GetTurn() && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isPlayerMoving)
+		if (LocalGameManager.instance.GetTurn())
 			FindTileWithRays();
 	}
 
