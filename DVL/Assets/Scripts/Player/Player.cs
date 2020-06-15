@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public Tile positionTile;
 	public GameObject storedItem;
 	private WalkingTraces trace;
+	public bool isWalking;
 
     #region Initialization
     public void SetUpPlayer(int count)
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour
 	//Moving Player Along Path
 	private IEnumerator Moving(List<Tile> path, float time)
 	{
+		isWalking = true;
 		foreach(Tile tile in path)
 		{
 			if (CheckForOtherPlayers(tile))
@@ -114,12 +116,14 @@ public class Player : MonoBehaviour
 			else
 			{
 				StopAllCoroutines();
+				isWalking = false;
 			}
 			yield return null;
 		}
 
 		if (LocalGameManager.instance.localPlayerIndex == LocalGameManager.instance.currentTurnPlayer)
 			CheckTileForOtherMods(path[path.Count - 1]);
+		isWalking = false;
 	}
 
 	//Rotate player in move direction

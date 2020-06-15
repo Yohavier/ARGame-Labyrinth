@@ -21,12 +21,15 @@ public class SelectARObjectWithFinger : MonoBehaviour
 
 	private void Update()
 	{
-		if (!LocalGameManager.instance.GetTurn())
-			return;
-        if (LocalGameManager.instance.StepsLeft > 0)
+        if (!LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
         {
-			RayCastOnTouch();
-			MouseRay();
+			if (!LocalGameManager.instance.GetTurn())
+				return;
+			if (LocalGameManager.instance.StepsLeft > 0)
+			{
+				RayCastOnTouch();
+				MouseRay();
+			}
 		}
 	}
 

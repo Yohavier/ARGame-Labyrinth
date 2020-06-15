@@ -14,21 +14,24 @@ public class WalkingTraces : MonoBehaviour
         {
             if (LocalGameManager.instance.activePlayer != null)
             {
-                if (!tile.isInFOW)
-                    return;
-
-                Tile A = LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile;
-                Tile B = tile;
-
-                float distance = (A.transform.position - B.transform.position).sqrMagnitude;
-                Debug.Log(distance);
-
-                if (distance < 0.1)
+                if (VisibilityCheck(tile))
                 {
                     GameObject trace = Instantiate(FootstepTrace);
                     trace.transform.localPosition = tile.transform.localPosition;
-                }
+                }             
             }
         }
+    }
+
+    private bool VisibilityCheck(Tile tile)
+    {
+        if (!tile.isInFOW || !BoardGrid.instance.grid.Contains(tile))
+            return false;
+
+        DetectDirectNeighbours n = new DetectDirectNeighbours();
+        if (n.Detect(tile).Contains(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile))
+            return true;
+        else
+            return false;
     }
 }
