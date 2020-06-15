@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class FindNearestGridSlot : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class FindNearestGridSlot : MonoBehaviour
 
 	private void Update()
 	{
-		if (LocalGameManager.instance.GetTurn() && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
-			FindTileWithRays();
+        if (LocalGameManager.instance.activePlayer)
+        {
+			if (LocalGameManager.instance.GetTurn() && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
+				FindTileWithRays();
+		}
 	}
 
 	//get the tile that will be pushed away by inserting a new Tile

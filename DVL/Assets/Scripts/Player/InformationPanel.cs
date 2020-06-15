@@ -29,9 +29,6 @@ public class InformationPanel : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-    private void Start()
-    {
         MenuPanelButton.onClick.AddListener(ToggleMenuPanel);
     }
 

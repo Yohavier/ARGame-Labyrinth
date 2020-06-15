@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class WalkingTraces : MonoBehaviour
 {
-    [SerializeField] GameObject FootstepTrace;
+    [SerializeField] public GameObject FootstepTrace;
 
     public void SpawnParticlesystem(Tile tile)
     {

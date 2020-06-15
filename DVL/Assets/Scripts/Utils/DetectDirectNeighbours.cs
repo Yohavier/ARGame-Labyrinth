@@ -23,7 +23,6 @@ public class DetectDirectNeighbours
         AddToList((tile.row + 1).ToString(), (tile.column - 1).ToString());
         AddToList((tile.row - 1).ToString(), (tile.column + 1).ToString());
         AddToList((tile.row + 1).ToString(), (tile.column + 1).ToString());
-        Debug.Log(neighbours.Count);
         return neighbours;
     }
 
