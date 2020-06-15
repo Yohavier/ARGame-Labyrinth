@@ -98,7 +98,6 @@ MonoBehaviour:
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}
-  isPlayerMoving: 0
 --- !u!114 &-1801657048653225923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,5 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4b194c934550f419475c9b7d73f007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FootstepTrace: {fileID: 1908457873458129919, guid: 0528761b57c6bcc48b8b0ce9d2ef5f1c,
+  FootstepTrace: {fileID: 2346861649380739133, guid: 411a81cb29324404f957dbc01f68809f,
     type: 3}
