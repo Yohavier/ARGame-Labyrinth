@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SocialPlatforms;
 
 public class FogOfWar : MonoBehaviour
 {
@@ -28,14 +29,14 @@ public class FogOfWar : MonoBehaviour
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
 			List<Tile> neighbours = GetScalableNeighbouringTiles(newPosition);
-			ToggleVisiblePartOn(neighbours);
+			ToggleVisiblePartOn(newPosition, neighbours);
 		}
 		else
 		{
 			finalFogPath.Add(newPosition);
 			List<Tile> neighbours = new List<Tile>();
 			neighbours.Add(newPosition);
-			ToggleVisiblePartOn(neighbours);			
+			ToggleVisiblePartOn(newPosition, neighbours);			
 		}
     }
 	
@@ -67,8 +68,9 @@ public class FogOfWar : MonoBehaviour
 	}
 
 	//Toogle everything on that is in FOW(passed list) range 
-	private void ToggleVisiblePartOn(List<Tile> neighbours)
+	private void ToggleVisiblePartOn(Tile tile, List<Tile> neighbours)
 	{
+		neighbours.AddRange(CheckWindow(tile));
 		foreach (Tile neighborTile in neighbours)
 		{
 			neighborTile.isInFOW = false;
@@ -97,6 +99,38 @@ public class FogOfWar : MonoBehaviour
 			}
 		}
 	}
+
+	private List<Tile> CheckWindow(Tile tile)
+    {
+		List<Tile> windowTiles = new List<Tile>();
+		string key = "";
+		if (tile.ingameForwardModule == TileDirectionModule.WINDOW)
+		{
+			key = tile.row.ToString() + (tile.column + 1).ToString();
+			if (BoardGrid.instance.coordDic.ContainsKey(key))
+				windowTiles.Add(BoardGrid.instance.coordDic[key]);
+        }
+        if (tile.ingameBackwardModule == TileDirectionModule.WINDOW)
+        {
+			key = tile.row.ToString() + (tile.column - 1).ToString();
+			if(BoardGrid.instance.coordDic.ContainsKey(key))
+				windowTiles.Add(BoardGrid.instance.coordDic[key]);
+		}
+        if (tile.ingameRightModule == TileDirectionModule.WINDOW)
+        {
+			key = (tile.row + 1).ToString() + tile.column.ToString();
+			if(BoardGrid.instance.coordDic.ContainsKey(key))
+				windowTiles.Add(BoardGrid.instance.coordDic[key]);
+		}
+        if (tile.ingameLeftModule == TileDirectionModule.WINDOW)
+        {
+			key = (tile.row - 1).ToString() + tile.column.ToString();
+			if(BoardGrid.instance.coordDic.ContainsKey(key))
+				windowTiles.Add(BoardGrid.instance.coordDic[key]);
+		}
+		return windowTiles;
+    }
+
 	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
 	{
 		List<Tile> toCheck = new List<Tile>();
@@ -134,28 +168,28 @@ public class FogOfWar : MonoBehaviour
 		if(tile.column - 1 >= 0)
 		{
 			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column - 1).ToString()];
-			if(check.forward && tile.backward)
+			if(check.ingameForwardModule == TileDirectionModule.NONE && tile.ingameBackwardModule == TileDirectionModule.NONE)
 				allNeighbors.Add(check);
 		}	
 
 		if(tile.column + 1 <= 6)
 		{
 			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column + 1).ToString()];
-			if (check.backward && tile.forward)
+			if (check.ingameBackwardModule == TileDirectionModule.NONE && tile.ingameForwardModule == TileDirectionModule.NONE) 
 				allNeighbors.Add(check);
 		}
 
 		if(tile.row - 1 >= 0)
 		{
 			Tile check = BoardGrid.instance.coordDic[(tile.row - 1).ToString() + tile.column.ToString()];
-			if (check.right && tile.left)
+			if (check.ingameRightModule == TileDirectionModule.NONE && tile.ingameLeftModule == TileDirectionModule.NONE) 
 				allNeighbors.Add(check);
 		}
 
 		if(tile.row + 1 <= 6)
 		{
 			Tile check = BoardGrid.instance.coordDic[(tile.row + 1).ToString() + tile.column.ToString()];
-			if (check.left && tile.right)
+			if (check.ingameLeftModule == TileDirectionModule.NONE && tile.ingameRightModule == TileDirectionModule.NONE)
 				allNeighbors.Add(check);
 		}
 		return allNeighbors;

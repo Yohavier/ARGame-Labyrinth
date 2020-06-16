@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
     #region Handle the Door extension
     private void HandleDoors(Tile tile)
     {
-		if (tile.hasLeftDoor || tile.hasRightDoor || tile.hasForwardDoor || tile.hasBackwardDoor)
+		if (tile.ingameForwardModule == TileDirectionModule.DOOR || tile.ingameBackwardModule == TileDirectionModule.DOOR || tile.ingameRightModule == TileDirectionModule.DOOR || tile.ingameLeftModule == TileDirectionModule.DOOR)
 		{
 			InformationPanel.instance.SetToggleDoorsButton(true);
 			InformationPanel.instance.toggleDoorsButton.onClick.AddListener(() => ToggleDoors(tile));

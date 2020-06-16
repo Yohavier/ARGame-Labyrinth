@@ -67,19 +67,19 @@ public class Pathfinding
 		{
 			if ((item.column == a_Tile.column && (item.row == a_Tile.row - 1 || item.row == a_Tile.row + 1)) || (item.row == a_Tile.row && (item.column == a_Tile.column - 1 || item.column == a_Tile.column + 1)))
 			{
-				if (item.column == a_Tile.column - 1 && a_Tile.backward && item.forward)
+				if (item.column == a_Tile.column - 1 && a_Tile.CheckModulation(a_Tile.ingameBackwardModule) && item.CheckModulation(item.ingameForwardModule))
 				{
 					list.Add(item);
 				}
-				else if (item.column == a_Tile.column + 1 && a_Tile.forward && item.backward)
+				else if (item.column == a_Tile.column + 1 && a_Tile.CheckModulation(a_Tile.ingameForwardModule) && item.CheckModulation(item.ingameBackwardModule))
 				{
 					list.Add(item);
 				}
-				else if (item.row == a_Tile.row - 1 && a_Tile.left && item.right)
+				else if (item.row == a_Tile.row - 1 && a_Tile.CheckModulation(a_Tile.ingameLeftModule) && item.CheckModulation(item.ingameRightModule))
 				{
 					list.Add(item);
 				}
-				else if (item.row == a_Tile.row + 1 && a_Tile.right && item.left)
+				else if (item.row == a_Tile.row + 1 && a_Tile.CheckModulation(a_Tile.ingameRightModule) && item.CheckModulation(item.ingameLeftModule))
 				{
 					list.Add(item);
 				}

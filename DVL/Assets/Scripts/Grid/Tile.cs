@@ -1,42 +1,58 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Threading;
 
+public enum TileDirectionModule { NONE, WALL, DOOR, WINDOW}
 public class Tile : MonoBehaviour
 {
-	public int row;
-	public int column;
+	public int row;	//right - left
+	public int column; //forward - backward
 
-	public bool edgePiece;
-	public bool canMoveHorizontal;
-	public bool canMoveVertical;
-
-	//public Color prefabColor;
-	public Tile Parent;
-
-	[Header("Init Variables")]
-	public bool initForward;
-	public bool initRight;
-	public bool initBackward;
-	public bool initLeft;
-
-	[Header("Dynamik Variables")]
-	public bool forward;
-	public bool right;
-	public bool backward;
-	public bool left;
+	[HideInInspector] public bool edgePiece;
+	[HideInInspector] public bool canMoveHorizontal;
+	[HideInInspector] public bool canMoveVertical;
 
 	[Header("Pathfinding Costs")]
-	public int gCost;
-	public int hCost;
-	public int FCost => gCost + hCost;
+	[HideInInspector] public int gCost;
+	[HideInInspector] public int hCost;
+	[HideInInspector] public int FCost => gCost + hCost;
+	[HideInInspector] public Tile Parent;
 
-	[Header("Doors")]
-	public bool hasForwardDoor;
-	public bool hasRightDoor;
-	public bool hasBackwardDoor;
-	public bool hasLeftDoor;
+	[Header("Modules")]
+	public TileDirectionModule initForwardModule;
+	public TileDirectionModule initBackwardModule;
+	public TileDirectionModule initRightModule;
+	public TileDirectionModule initLeftModule;
 
+
+	[HideInInspector] public TileDirectionModule ingameForwardModule;
+	[HideInInspector] public TileDirectionModule ingameBackwardModule;
+	[HideInInspector] public TileDirectionModule ingameRightModule;
+	[HideInInspector] public TileDirectionModule ingameLeftModule;
+
+	public bool CheckModulation(TileDirectionModule modulation)
+    {
+        switch (modulation)
+        {
+			case TileDirectionModule.NONE:
+				return true;
+			case TileDirectionModule.WALL:
+				return false;
+			case TileDirectionModule.WINDOW:
+				return false;
+			case TileDirectionModule.DOOR:
+				if (doorOpen)
+					return true;
+				else
+					return false;
+			default:
+				Debug.LogError("Invalid Movement on Tile " + gameObject.name);
+				return false;
+        }			
+    }
+
+	private bool doorOpen = true;
 	public bool isInFOW;
 
 	public int index = -1; //Identifier of tile, -1 invalid index
@@ -124,31 +140,31 @@ public class Tile : MonoBehaviour
 	{
 		if (transform.localEulerAngles.y == 0f)
 		{
-			forward = initForward;
-			right = initRight;
-			backward = initBackward;
-			left = initLeft;
+			ingameForwardModule = initForwardModule;
+			ingameBackwardModule = initBackwardModule;
+			ingameRightModule = initRightModule;
+			ingameLeftModule = initLeftModule;
 		}
 		else if (transform.localEulerAngles.y == 90f)
 		{
-			forward = initLeft;
-			right = initForward;
-			backward = initRight;
-			left = initBackward;
+			ingameForwardModule = initLeftModule;
+			ingameBackwardModule = initRightModule;
+			ingameRightModule = initForwardModule;
+			ingameLeftModule = initBackwardModule;
 		}
 		else if (transform.localEulerAngles.y == 180f)
 		{
-			forward = initBackward;
-			right = initLeft;
-			backward = initForward;
-			left = initRight;
+			ingameForwardModule = initBackwardModule;
+			ingameBackwardModule = initForwardModule;
+			ingameRightModule = initLeftModule;
+			ingameLeftModule = initRightModule;
 		}
 		else if (transform.localEulerAngles.y == 270f)
 		{
-			forward = initRight;
-			right = initBackward;
-			backward = initLeft;
-			left = initForward;
+			ingameForwardModule = initRightModule;
+			ingameBackwardModule = initLeftModule;
+			ingameRightModule = initBackwardModule;
+			ingameLeftModule = initForwardModule;
 		}
 	}
 
@@ -173,16 +189,22 @@ public class Tile : MonoBehaviour
 
 	public void ToggleDoors()
     {
-		if (hasBackwardDoor)
-			initBackward = !initBackward;
-		if (hasForwardDoor)
-			initForward = !initForward;
-		if (hasRightDoor)
-			initRight = !initRight;
-		if (hasLeftDoor)
-			initLeft = !initLeft;
+		doorOpen = !doorOpen;
+		if (doorOpen)
+			OpenTileDoors();
+		else
+			CloseTileDoors();
 
-		UpdateTileMoveOptions();
 		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+    }
+
+	private void OpenTileDoors()
+    {
+		//Play Animation
+    }
+
+	private void CloseTileDoors()
+    {
+		//Play Animation
     }
 }

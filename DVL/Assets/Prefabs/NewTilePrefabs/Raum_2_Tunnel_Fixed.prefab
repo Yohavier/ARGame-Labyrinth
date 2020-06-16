@@ -541,6 +541,15 @@ MonoBehaviour:
   left: 0
   gCost: 0
   hCost: 0
+  hasForwardDoor: 0
+  hasRightDoor: 0
+  hasBackwardDoor: 0
+  hasLeftDoor: 0
+  initForwardModule: 0
+  initBackwardModule: 0
+  initRightModule: 1
+  initLeftModule: 1
+  openDoors: 1
   isInFOW: 1
   index: -1
 --- !u!114 &1273216404330949494

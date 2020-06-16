@@ -51,17 +51,17 @@ MonoBehaviour:
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
-  Parent: {fileID: 0}
-  initForward: 1
-  initRight: 1
-  initBackward: 0
-  initLeft: 1
-  forward: 0
-  right: 0
-  backward: 0
-  left: 0
   gCost: 0
   hCost: 0
+  Parent: {fileID: 0}
+  initForwardModule: 0
+  initBackwardModule: 3
+  initRightModule: 0
+  initLeftModule: 0
+  ingameForwardModule: 0
+  ingameBackwardModule: 0
+  ingameRightModule: 0
+  ingameLeftModule: 0
   isInFOW: 1
   index: -1
 --- !u!114 &-3561782529711248619
