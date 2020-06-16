@@ -93,12 +93,12 @@ public class NetworkClient
 
     private void HandleTurnChange(Msg msg)
     {
-        playingPlayer currentTurnPlayer = (playingPlayer)msg.ReadInt();
+        PlayerIndex currentTurnPlayer = (PlayerIndex)msg.ReadInt();
         LocalGameManager.instance.currentTurnPlayer = currentTurnPlayer;
     }
     private void HandleSetupPlayer(Msg msg)
     {
-        playingPlayer playerID = (playingPlayer)msg.ReadInt();
+        PlayerIndex playerID = (PlayerIndex)msg.ReadInt();
         LocalGameManager.instance.localPlayerIndex = playerID;
     }
     private void HandleTileMove(Msg msg)
@@ -135,14 +135,14 @@ public class NetworkClient
 
     private void HandlePlayerMove(Msg msg)
     {
-        playingPlayer playerIndex = (playingPlayer)msg.ReadInt();
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
         SelectARObjectWithFinger.instance.ManagePath(BoardGrid.instance.grid.Find(x => x.index == targetTileindex), playerIndex);
     }
 
     private void HandleItemCollected(Msg msg)
     {
-        playingPlayer playerIndex = (playingPlayer)msg.ReadInt();
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
         var item = BoardGrid.instance.grid.Find(x => x.index == targetTileindex).GetComponentInChildren<Item>();
         if (item != null)

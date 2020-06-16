@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 public class ServerPlayerState
 {
-    playingPlayer playerID;
+    PlayerIndex playerID;
 }

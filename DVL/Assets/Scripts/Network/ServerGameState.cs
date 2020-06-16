@@ -10,5 +10,5 @@ public class ServerGameState
     public int playerCount;
     public int maxPlayerCount = 4;
     public List<float> gridSeed = new List<float>();
-    public playingPlayer currentTurnPlayer = playingPlayer.Invalid;
+    public PlayerIndex currentTurnPlayer = PlayerIndex.Invalid;
 }

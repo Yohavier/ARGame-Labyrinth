@@ -1,37 +1,56 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CrewMember : Player
 {
 	//Cant move to next Tile if there is already a player instance inside
 	public override bool CheckForOtherPlayers(Tile nextTile)
 	{
-		if (nextTile.GetComponentInChildren<Player>() != null)
+		Player player = nextTile.GetComponentInChildren<Player>();
+		if ( player != null)
 		{
-			return false;
+			if (player.playerState == PlayerState.ALIVE)
+            {
+				return false;
+			}
+            else if(player.playerState == PlayerState.DYING)
+            {
+				HandleHealPlayer(player);
+			}
 		}
 		return true;
 	}
 	public override void CheckTileForOtherMods(Tile tile)
 	{
-		//Check for doors
-		base.CheckTileForOtherMods(tile);
+		if(playerState == PlayerState.ALIVE)
+        {
+			//Check for doors
+			base.CheckTileForOtherMods(tile);
 
-		//check for item
-		HandlePickUpItem(tile);
+			//check for item
+			HandlePickUpItem(tile);
 
-		//Check for Generator
-		HandleRepairGenerator(tile);
+			//Check for Generator
+			HandleRepairGenerator(tile);
 
-		//Check for escape capsule mod
-		HandleDropItem(tile);
+			//Check for escape capsule mod
+			HandleDropItem(tile);
+		}
 	}
+    protected override void Dead()
+    {
+		GameManager.instance.CheckWinConditionMonster();
+
+		if (storedItem != null) 
+			DropItem(null, positionTile);
+    }
+    protected override void Dying()
+    {
+		Debug.Log("me is dying");
+    }
+
 
     #region Handle Pickup Item extension
-	private void HandlePickUpItem(Tile tile) 
+    private void HandlePickUpItem(Tile tile) 
 	{
 		Item item = tile.GetComponentInChildren<Item>();
 		if (item != null && storedItem == null)
@@ -81,7 +100,9 @@ public class CrewMember : Player
 	{
 		if (storedItem != null)
 		{
-			capsule.DisplayProgress();
+			if (capsule != null) 
+				capsule.DisplayProgress();
+
 			storedItem.transform.SetParent(tile.transform);
 			storedItem.GetComponent<MeshRenderer>().enabled = true;
 			storedItem = null;
@@ -119,5 +140,23 @@ public class CrewMember : Player
 		InformationPanel.instance.SetRepairGeneratorButton(false);
 		InformationPanel.instance.repairGeneratorButton.onClick.RemoveAllListeners();
 	}
-	#endregion
+    #endregion
+
+    #region Handle Heal Player extension
+	private void HandleHealPlayer(Player player)
+    {
+		InformationPanel.instance.SetHealPlayerButton(true);
+		InformationPanel.instance.healPlayerButton.onClick.AddListener(() => HealPlayer(player));
+    }
+	private void HealPlayer(Player player)
+    {
+		player.playerState = PlayerState.ALIVE;
+		RemoveHealPlayerButtonListener();
+    }
+	private void RemoveHealPlayerButtonListener()
+    {
+		InformationPanel.instance.SetHealPlayerButton(false);
+		InformationPanel.instance.healPlayerButton.onClick.RemoveAllListeners();
+    }
+    #endregion
 }

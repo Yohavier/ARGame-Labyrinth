@@ -3,17 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
+public enum PlayerState { DEAD, ALIVE, DYING}
 public class Player : MonoBehaviour
 {
-	public playingPlayer playerIndex;
+	public PlayerIndex playerIndex;
 	public FogOfWar playerFOW;
 	public Tile positionTile;
 	public GameObject storedItem;
 	private WalkingTraces trace;
 	public bool isWalking;
 
-    #region Initialization
-    public void SetUpPlayer(int count)
+	public PlayerState _playerState;
+	public PlayerState playerState
+    {
+        get
+        {
+			return _playerState;
+        }
+        set
+        {
+			_playerState = value;
+			if(_playerState == PlayerState.DYING)
+            {
+				Dying();
+            }
+			else if(_playerState == PlayerState.DEAD)
+            {
+				Dead();
+            }
+        }
+    }
+
+	#region Initialization
+	public void SetUpPlayer(int count)
 	{
 		playerIndex = ChooseRightIndex(count);
 		trace = GetComponent<WalkingTraces>();
@@ -24,26 +46,27 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			LocalGameManager.instance.activePlayer = gameObject;		
+			LocalGameManager.instance.activePlayer = gameObject;
+			playerState = PlayerState.ALIVE;
 			playerFOW = GetComponent<FogOfWar>();
 			SetInformations();
 		}
 	}
-	private playingPlayer ChooseRightIndex(int count)
+	private PlayerIndex ChooseRightIndex(int count)
     {
 		switch (count)
 		{
 			case 1:
-				return playingPlayer.Player1;
+				return PlayerIndex.Player1;
 			case 2:
-				return playingPlayer.Player2;
+				return PlayerIndex.Player2;
 			case 3:
-				return playingPlayer.Player3;
+				return PlayerIndex.Player3;
 			case 4:
-				return playingPlayer.Enemy;
+				return PlayerIndex.Enemy;
 			default:
 				Debug.LogWarning("Player Initializaion went wrong!");
-				return playingPlayer.Invalid;
+				return PlayerIndex.Invalid;
 		}
 	}
 	private void SetInformations()
@@ -126,7 +149,7 @@ public class Player : MonoBehaviour
 		isWalking = false;
 	}
 
-	//Rotate player in move direction
+	//Rotate player in move direction 
 	private void AdjustRotation(Tile lookTarget)
 	{
 		Vector3 relativePos = lookTarget.transform.position - transform.position;
@@ -148,11 +171,15 @@ public class Player : MonoBehaviour
 		}
 		return true;
 	}
+	
+	//TODO: Call on each Turn begin
 	public virtual void CheckTileForOtherMods(Tile tile) 
 	{
 		//Check for Doors
 		HandleDoors(tile);
 	}
+	protected virtual void Dying() { }
+	protected virtual void Dead() { }
 
     #region Handle the Door extension
     private void HandleDoors(Tile tile)

@@ -18,6 +18,7 @@ public class InformationPanel : MonoBehaviour
     public Button dropItemButton;
     public Button rollDiceButton;
     public Button toggleDoorsButton;
+    public Button healPlayerButton;
 
     [Header("Informations")]
     public Text player;
@@ -57,6 +58,10 @@ public class InformationPanel : MonoBehaviour
     public void SetToggleDoorsButton(bool interactable)
     {
         toggleDoorsButton.interactable = interactable;
+    }
+    public void SetHealPlayerButton(bool interactable)
+    {
+        healPlayerButton.interactable = interactable;
     }
     #endregion
 

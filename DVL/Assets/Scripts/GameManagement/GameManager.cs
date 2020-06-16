@@ -29,27 +29,4 @@ public class GameManager : MonoBehaviour
 			Debug.Log("Monster wins!");
 		}
 	}
-
-	//TODO: Crashes the game 
-	public void KillPlayer(CrewMember crew)
-	{
-		foreach (GameObject g in allPlayers)
-		{
-			if (crew.gameObject == g)
-			{
-				if (crew.storedItem != null)
-				{
-					crew.storedItem.transform.SetParent(crew.positionTile.transform);
-					if (!crew.positionTile.isInFOW)
-					{
-						crew.storedItem.GetComponent<MeshRenderer>().enabled = true;
-						FogOfWar.fow.activeFogOfWarItems.Add(crew.storedItem);
-					}
-				}
-				FogOfWar.fow.activeFogOfWarItems.Remove(crew.gameObject);
-				CheckWinConditionMonster();
-				Destroy(crew.gameObject);
-			}
-		}
-	}
 }

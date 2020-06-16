@@ -23,14 +23,18 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	{
         if (LocalGameManager.instance.activePlayer)
         {
-			if (!LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
-			{
-				if (!LocalGameManager.instance.GetTurn())
-					return;
-				if (LocalGameManager.instance.StepsLeft > 0)
+			if(LocalGameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
+            {
+				if (!LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
 				{
-					RayCastOnTouch();
-					MouseRay();
+					if (LocalGameManager.instance.GetTurn())
+                    {
+						if (LocalGameManager.instance.StepsLeft > 0)
+						{
+							RayCastOnTouch();
+							MouseRay();
+						}
+					}
 				}
 			}
 		}
@@ -75,7 +79,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	}
 
 
-	public void ManagePath(Tile targetTile, playingPlayer playerIndex)
+	public void ManagePath(Tile targetTile, PlayerIndex playerIndex)
 	{
 		Player playerObject = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<Player>();
 

@@ -4,7 +4,7 @@ using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public enum playingPlayer
+public enum PlayerIndex
 {
 	Invalid = -1,
 	Player1,
@@ -12,16 +12,16 @@ public enum playingPlayer
 	Player3,
 	Enemy
 }
-
+//TODO: Add Turn Counter and notificator on turn change
 public enum playerState { Alive, Dead}
 public class LocalGameManager : MonoBehaviour
 {
 	//Determines you playerChar
-	public playingPlayer localPlayerIndex;
+	public PlayerIndex localPlayerIndex;
 
 	//Player index of current turn
-	public playingPlayer currentTurnPlayer;
-	private playingPlayer previousTurn;
+	public PlayerIndex currentTurnPlayer;
+	private PlayerIndex previousTurn;
 
 	//reference to the Player of this gameInstance
 	public GameObject activePlayer;
@@ -46,7 +46,7 @@ public class LocalGameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		currentTurnPlayer = playingPlayer.Invalid;
+		currentTurnPlayer = PlayerIndex.Invalid;
 	}
     private void Update()
     {
@@ -70,7 +70,7 @@ public class LocalGameManager : MonoBehaviour
 	}
 	public bool GetInMatch()
 	{
-		return localPlayerIndex != playingPlayer.Invalid && currentTurnPlayer != playingPlayer.Invalid;
+		return localPlayerIndex != PlayerIndex.Invalid && currentTurnPlayer != PlayerIndex.Invalid;
 	}
 
 	public void NextTurn()

@@ -6,12 +6,21 @@ public class Enemy : Player
 {
     //Check for crew members
     public override bool CheckForOtherPlayers(Tile nextTile)
-    {  
-        if (nextTile.GetComponentInChildren<CrewMember>() != null)
+    {
+		CrewMember crewMember = nextTile.GetComponentInChildren<CrewMember>();
+
+		if (crewMember != null)
         {
-            GameManager.instance.KillPlayer(nextTile.GetComponentInChildren<CrewMember>());
-            return true;
+			if(crewMember.playerState == PlayerState.ALIVE)
+            {
+				KillPlayer(crewMember);
+			}
         }
         return true;
     }
+
+	public void KillPlayer(CrewMember crewMember)
+	{
+		crewMember.playerState = PlayerState.DYING;
+	}
 }

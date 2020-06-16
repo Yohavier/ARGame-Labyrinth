@@ -12,8 +12,13 @@ public class FindNearestGridSlot : MonoBehaviour
 	{
         if (LocalGameManager.instance.activePlayer)
         {
-			if (LocalGameManager.instance.GetTurn() && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
-				FindTileWithRays();
+			if(LocalGameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
+            {
+				if (LocalGameManager.instance.GetTurn() && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
+                {
+					FindTileWithRays();
+				}
+			}
 		}
 	}
 

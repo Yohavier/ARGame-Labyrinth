@@ -27,7 +27,7 @@ public class NetworkServer
     //Send client data after connecting
     private void SetupNewPlayer(ClientReference client)
     {
-        Msg msg = BuildPlayerSetupMessage((playingPlayer)gameState.playerCount);
+        Msg msg = BuildPlayerSetupMessage((PlayerIndex)gameState.playerCount);
         UnicastMessage(msg.Serialize(), client.clientSocket);
         gameState.playerCount++;
     }
@@ -42,9 +42,9 @@ public class NetworkServer
 
     private void HandleChangeTurn()
     {
-        playingPlayer nextTurnPlayer = gameState.currentTurnPlayer + 1;
-        if (nextTurnPlayer > playingPlayer.Enemy || (int)nextTurnPlayer >= clientList.Count)
-            nextTurnPlayer = playingPlayer.Player1;
+        PlayerIndex nextTurnPlayer = gameState.currentTurnPlayer + 1;
+        if (nextTurnPlayer > PlayerIndex.Enemy || (int)nextTurnPlayer >= clientList.Count)
+            nextTurnPlayer = PlayerIndex.Player1;
         Msg msg = BuildTurnChangeMessage(nextTurnPlayer);
         gameState.currentTurnPlayer = nextTurnPlayer;
         BroadcastMessage(msg.Serialize());
@@ -123,14 +123,14 @@ public class NetworkServer
         }
     }
 
-    private Msg BuildPlayerSetupMessage(playingPlayer nextPlayer)
+    private Msg BuildPlayerSetupMessage(PlayerIndex nextPlayer)
     {
         Msg msg = new Msg(MsgOpcode.opSetupPlayer, 4);
         msg.Write((int)nextPlayer);
         return msg;
     }
 
-    private Msg BuildTurnChangeMessage(playingPlayer nextTurnPlayer)
+    private Msg BuildTurnChangeMessage(PlayerIndex nextTurnPlayer)
     {
         Msg msg = new Msg(MsgOpcode.opTurnChange, 4);
         msg.Write((int)nextTurnPlayer);
