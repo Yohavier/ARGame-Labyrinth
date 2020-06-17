@@ -12,7 +12,7 @@ public class Eventbroker : MonoBehaviour
     {
         instance = this;
     }
-
+    
     public event Action onNotifyNextTurn;
     public void NotifyNextTurn()
     {

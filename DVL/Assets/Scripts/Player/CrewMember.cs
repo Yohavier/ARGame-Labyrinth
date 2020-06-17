@@ -2,6 +2,8 @@
 
 public class CrewMember : Player
 {
+	public int maxDeathTurnCounter;
+	private int deathTurnCounter = 0;
 	//Cant move to next Tile if there is already a player instance inside
 	public override bool CheckForOtherPlayers(Tile nextTile)
 	{
@@ -14,7 +16,9 @@ public class CrewMember : Player
 			}
             else if(player.playerState == PlayerState.DYING)
             {
-				HandleHealPlayer(player);
+				CrewMember crewMember = player.GetComponent<CrewMember>();
+				if (crewMember) 
+					HandleHealPlayer(crewMember);
 			}
 		}
 		return true;
@@ -36,18 +40,51 @@ public class CrewMember : Player
 			HandleDropItem(tile);
 		}
 	}
+	
+    #region HandleNextTurn
+    public override void NotifyNextTurn(bool toggle)
+    {
+        if(toggle)
+        {
+			CheckTileForOtherMods(positionTile);
+        }
+        else
+        {
+			RemoveAllEventListeners();
+        }
+    }
+	private void RemoveAllEventListeners()
+    {
+		RemoveToggleDoorsListener();
+		RemovePickUpButtonListener();
+		RemoveHealPlayerButtonListener();
+		RemoveDropItemButtonListener();
+		RemoveRepairGeneratorButtonListener();
+    }
+    #endregion
+
+    #region Handle Dying
     protected override void Dead()
     {
 		GameManager.instance.CheckWinConditionMonster();
-
+		GetComponent<MeshRenderer>().material.color = Color.black;
+		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
 		if (storedItem != null) 
 			DropItem(null, positionTile);
     }
     protected override void Dying()
     {
-		Debug.Log("me is dying");
+		Eventbroker.instance.onNotifyNextTurn += CheckDeathCounter;
     }
-
+	protected override void CheckDeathCounter()
+    {
+		deathTurnCounter++;
+		if(deathTurnCounter == maxDeathTurnCounter)
+        {
+			playerState = PlayerState.DEAD;
+        }
+    }
+    #endregion
 
     #region Handle Pickup Item extension
     private void HandlePickUpItem(Tile tile) 
@@ -143,16 +180,22 @@ public class CrewMember : Player
     #endregion
 
     #region Handle Heal Player extension
-	private void HandleHealPlayer(Player player)
+	private void HandleHealPlayer(CrewMember crewMember)
     {
 		InformationPanel.instance.SetHealPlayerButton(true);
-		InformationPanel.instance.healPlayerButton.onClick.AddListener(() => HealPlayer(player));
+		InformationPanel.instance.healPlayerButton.onClick.AddListener(() => HealPlayer(crewMember));
     }
-	private void HealPlayer(Player player)
+	private void HealPlayer(CrewMember crewMember)
     {
-		player.playerState = PlayerState.ALIVE;
+		crewMember.GetHealedByOtherPlayer();
 		RemoveHealPlayerButtonListener();
     }
+	public void GetHealedByOtherPlayer()
+    {
+		deathTurnCounter = 0;
+		playerState = PlayerState.ALIVE;
+		GetComponent<MeshRenderer>().material.color = Color.white;
+	}
 	private void RemoveHealPlayerButtonListener()
     {
 		InformationPanel.instance.SetHealPlayerButton(false);

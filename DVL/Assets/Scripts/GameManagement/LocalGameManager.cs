@@ -12,8 +12,7 @@ public enum PlayerIndex
 	Player3,
 	Enemy
 }
-//TODO: Add Turn Counter and notificator on turn change
-public enum playerState { Alive, Dead}
+
 public class LocalGameManager : MonoBehaviour
 {
 	//Determines you playerChar
@@ -30,7 +29,6 @@ public class LocalGameManager : MonoBehaviour
 
 	//Fields for the dice
 	private int stepsLeft = 0;
-	public int turnCounter = 0;
 
 	public int StepsLeft
 	{
@@ -62,22 +60,22 @@ public class LocalGameManager : MonoBehaviour
     {
 		if(previousTurn != currentTurnPlayer)
         {
+			previousTurn = currentTurnPlayer;
 			Eventbroker.instance.NotifyNextTurn();
         }
     }
 	private void NotifyNextTurn()
     {
-		previousTurn = currentTurnPlayer;
-		turnCounter++;
-		InformationPanel.instance.SetTurnCounterText(turnCounter.ToString());
-
 		if (GetTurn())
         {
-			YourNextTurn();
+			HandleRollDiceButton();
 		}
         else
         {
 			RemoveRollDiceButtonListener();
+
+			if (activePlayer)
+				activePlayer.GetComponent<Player>().NotifyNextTurn(false);
 		}
     }
     public bool GetTurn()
@@ -89,17 +87,6 @@ public class LocalGameManager : MonoBehaviour
 		return localPlayerIndex != PlayerIndex.Invalid && currentTurnPlayer != PlayerIndex.Invalid;
 	}
 
-	public void YourNextTurn()
-    {
-        if (GetTurn())
-        {
-			HandleRollDiceButton();
-		}
-        else
-        {
-			RemoveRollDiceButtonListener();
-        }
-	}
 
     #region Handle Roll Dice extension
     private void HandleRollDiceButton()
@@ -114,7 +101,9 @@ public class LocalGameManager : MonoBehaviour
     {
 		StepsLeft = Random.Range(1, 7);
 		RemoveRollDiceButtonListener();
-		print("rolled a " + StepsLeft);
+
+		if(activePlayer)
+			activePlayer.GetComponent<Player>().NotifyNextTurn(true);
     }
 	private void RemoveRollDiceButtonListener()
     {

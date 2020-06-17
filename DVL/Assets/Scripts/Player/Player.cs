@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public enum PlayerState { DEAD, ALIVE, DYING}
+public enum PlayerState { ALIVE, DEAD, DYING}
 public class Player : MonoBehaviour
 {
 	public PlayerIndex playerIndex;
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
         set
         {
 			_playerState = value;
+			InformationPanel.instance.SetStateText(_playerState.ToString());
 			if(_playerState == PlayerState.DYING)
             {
 				Dying();
@@ -172,7 +173,6 @@ public class Player : MonoBehaviour
 		return true;
 	}
 	
-	//TODO: Call on each Turn begin
 	public virtual void CheckTileForOtherMods(Tile tile) 
 	{
 		//Check for Doors
@@ -180,6 +180,7 @@ public class Player : MonoBehaviour
 	}
 	protected virtual void Dying() { }
 	protected virtual void Dead() { }
+	protected virtual void CheckDeathCounter() { }
 
     #region Handle the Door extension
     private void HandleDoors(Tile tile)
@@ -199,10 +200,12 @@ public class Player : MonoBehaviour
 		RemoveToggleDoorsListener();
 		tile.ToggleDoors();
     }
-	private void RemoveToggleDoorsListener()
+	public void RemoveToggleDoorsListener()
     {
 		InformationPanel.instance.SetToggleDoorsButton(false);
 		InformationPanel.instance.toggleDoorsButton.onClick.RemoveAllListeners();
     }
     #endregion
+	
+	public virtual void NotifyNextTurn(bool toggle) { }
 }

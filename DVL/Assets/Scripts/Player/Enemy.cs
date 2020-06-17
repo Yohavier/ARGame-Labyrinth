@@ -7,14 +7,17 @@ public class Enemy : Player
     //Check for crew members
     public override bool CheckForOtherPlayers(Tile nextTile)
     {
-		CrewMember crewMember = nextTile.GetComponentInChildren<CrewMember>();
+		var crewMembers = nextTile.GetComponentsInChildren<CrewMember>();
 
-		if (crewMember != null)
+		if (crewMembers != null)
         {
-			if(crewMember.playerState == PlayerState.ALIVE)
+			foreach(CrewMember crew in crewMembers)
             {
-				KillPlayer(crewMember);
-			}
+                if (crew.playerState == PlayerState.ALIVE)
+                {
+                    KillPlayer(crew);
+                }
+            }			
         }
         return true;
     }
