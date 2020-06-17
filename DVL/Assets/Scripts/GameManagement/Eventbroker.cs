@@ -7,9 +7,18 @@ using System;
 //If Events are needed
 public class Eventbroker : MonoBehaviour
 {
-    public static Eventbroker eventbroker;
+    public static Eventbroker instance;
     public Eventbroker()
     {
-        eventbroker = this;
+        instance = this;
+    }
+
+    public event Action onNotifyNextTurn;
+    public void NotifyNextTurn()
+    {
+        if(onNotifyNextTurn!=null)
+        {
+            onNotifyNextTurn();
+        }
     }
 }

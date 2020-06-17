@@ -30,6 +30,8 @@ public class LocalGameManager : MonoBehaviour
 
 	//Fields for the dice
 	private int stepsLeft = 0;
+	public int turnCounter = 0;
+
 	public int StepsLeft
 	{
 		get { return stepsLeft; }
@@ -48,21 +50,35 @@ public class LocalGameManager : MonoBehaviour
 		instance = this;
 		currentTurnPlayer = PlayerIndex.Invalid;
 	}
+    private void OnEnable()
+    {
+		Eventbroker.instance.onNotifyNextTurn += NotifyNextTurn;
+    }
+	private void OnDisable()
+    {
+		Eventbroker.instance.onNotifyNextTurn -= NotifyNextTurn;
+	}
     private void Update()
     {
-        if (GetTurn())
+		if(previousTurn != currentTurnPlayer)
         {
-			if(previousTurn != currentTurnPlayer)
-            {
-				previousTurn = currentTurnPlayer;
-				NextTurn();
-            } 
+			Eventbroker.instance.NotifyNextTurn();
         }
-		else if(previousTurn != currentTurnPlayer)
+    }
+	private void NotifyNextTurn()
+    {
+		previousTurn = currentTurnPlayer;
+		turnCounter++;
+		InformationPanel.instance.SetTurnCounterText(turnCounter.ToString());
+
+		if (GetTurn())
         {
-			previousTurn = currentTurnPlayer;
+			YourNextTurn();
+		}
+        else
+        {
 			RemoveRollDiceButtonListener();
-        }
+		}
     }
     public bool GetTurn()
 	{
@@ -73,7 +89,7 @@ public class LocalGameManager : MonoBehaviour
 		return localPlayerIndex != PlayerIndex.Invalid && currentTurnPlayer != PlayerIndex.Invalid;
 	}
 
-	public void NextTurn()
+	public void YourNextTurn()
     {
         if (GetTurn())
         {
@@ -104,7 +120,6 @@ public class LocalGameManager : MonoBehaviour
     {
         if (InformationPanel.instance)
 		{
-			Debug.Log("f");
 			InformationPanel.instance.SetRollDiceButton(false);
 			InformationPanel.instance.rollDiceButton.onClick.RemoveAllListeners();
 		}
