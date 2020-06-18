@@ -197,7 +197,7 @@ public class Tile : MonoBehaviour
 		else
 			CloseTileDoors();
 
-		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this, false);
     }
 
 	private void OpenTileDoors()

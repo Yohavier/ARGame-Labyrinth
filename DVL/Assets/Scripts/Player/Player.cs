@@ -91,13 +91,13 @@ public class Player : MonoBehaviour
 		if (playerFOW != null)
 		{
 			//if active playre call his FOW
-			playerFOW.OnChangePlayerPosition(positionTile);
+			playerFOW.OnChangePlayerPosition(positionTile, false);
 			InformationPanel.instance.SetCoordText(positionTile.row.ToString() + " " + positionTile.column.ToString());
 		}
 		else if(LocalGameManager.instance.activePlayer != null)
 		{
 			//if not active Player, call active players FOW
-			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
+			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile, false);	
 		}
 
 		CreatePositionIndicatorTrace();

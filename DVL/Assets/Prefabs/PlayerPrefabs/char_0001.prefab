@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9177211659678062321}
   m_Layer: 2
   m_Name: char_0001
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b5b5edc0336c843bd7905bfc8f2db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceModificator: 0
+  fogOfWarModificator: 0
   playerIndex: 0
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
@@ -114,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeFogOfWarItems: []
-  fogReach: 2
   finalFogPath: []
 --- !u!114 &9177211659678062321
 MonoBehaviour:

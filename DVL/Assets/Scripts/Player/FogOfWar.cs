@@ -6,7 +6,6 @@ using UnityEngine.SocialPlatforms;
 
 public class FogOfWar : MonoBehaviour
 {
-    public static FogOfWar fow;
 	public List<GameObject> activeFogOfWarItems = new List<GameObject>();
 	private int fogReach
     {
@@ -15,13 +14,8 @@ public class FogOfWar : MonoBehaviour
 	private int FogReach = 2;
 	public List<Tile> finalFogPath = new List<Tile>();
 
-	private void Awake()
-    {
-        fow = this;
-    }
-
 	//call if player moves, to update fog of war
-	public void OnChangePlayerPosition(Tile newPosition)
+	public void OnChangePlayerPosition(Tile newPosition, bool communication)
     {
 		if (NetworkManager.instance.isDebug)
 		{
@@ -29,7 +23,11 @@ public class FogOfWar : MonoBehaviour
 			return;
 		}
 
-		HideEverythingInFOW();
+		if(communication == false)
+        {
+			HideEverythingInFOW();
+		}
+
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
 			List<Tile> neighbours = GetScalableNeighbouringTiles(newPosition);
@@ -55,8 +53,15 @@ public class FogOfWar : MonoBehaviour
 			foreach(Transform tr in trans)
 			{
 				if (tr.CompareTag("Fog"))
-				{				
+				{
 					tr.GetComponent<MeshRenderer>().enabled = true;
+				}
+				else if (tr.CompareTag("Player"))
+				{
+					if (tr != LocalGameManager.instance.activePlayer)
+					{
+						tr.GetComponent<MeshRenderer>().enabled = false;
+					}
 				}
 			}
 		}
