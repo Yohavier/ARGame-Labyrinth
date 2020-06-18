@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3854916392060215574}
   m_Layer: 8
   m_Name: pPlane2
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,6 @@ MonoBehaviour:
   ingameBackwardModule: 0
   ingameRightModule: 0
   ingameLeftModule: 0
-  doorOpen: 1
   isInFOW: 1
   index: -1
 --- !u!114 &6197246589265692887

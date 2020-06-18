@@ -175,14 +175,16 @@ public class Tile : MonoBehaviour
 		{			
 			foreach(MeshRenderer mesh in meshes)
 			{
-				mesh.material.color = Color.black;
+				if(mesh.CompareTag("Tile"))
+					mesh.material.color = Color.black;
 			}
 		}
 		else
 		{
 			foreach(MeshRenderer mesh in meshes)
 			{
-				mesh.material.color = Color.white;
+				if (mesh.CompareTag("Tile"))
+					mesh.material.color = Color.white;
 			}
 		}
 	}

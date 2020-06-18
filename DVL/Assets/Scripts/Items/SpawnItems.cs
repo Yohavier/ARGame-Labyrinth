@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class SpawnItems : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
-    public List<Tile> possiblePlaces = new List<Tile>();
+    public List<Tile> itemsPossiblePlaces = new List<Tile>();
+
+    public List<GameObject> powerUps = new List<GameObject>();
+    public List<Tile> powerUpsPossiblePlaces = new List<Tile>();
 
     public void SetItemOnGrid()
     {
@@ -16,28 +20,33 @@ public class SpawnItems : MonoBehaviour
             {
                 if ((t.row > 1 && t.row < 5)|| (t.column > 1 && t.column < 5))
                 {
-                    possiblePlaces.Add(t);
+                    itemsPossiblePlaces.Add(t);
                 }
             }
         }
-        StartPlacingWithSeed();
+        powerUpsPossiblePlaces = itemsPossiblePlaces;
+        StartPlacingItemsWithSeed();
+        StartPlacingPowerUpsWithSeed();
     }
-    private void StartPlacingWithSeed()
+    private void StartPlacingItemsWithSeed()
     {
         List<string> dicKeys = new List<string>();
 
         for (int i = 0; i < items.Count; i++)
         {
-            int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * possiblePlaces.Count - 1));
+            int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * itemsPossiblePlaces.Count - 1));
             GameObject newItem = Instantiate(items[i]);
-            newItem.transform.SetParent(possiblePlaces[rand].transform);
+            newItem.transform.SetParent(itemsPossiblePlaces[rand].transform);
             newItem.transform.localPosition = Vector3.zero;
             newItem.GetComponent<MeshRenderer>().enabled = false;
 
-            int col = possiblePlaces[rand].column;
-            int row = possiblePlaces[rand].row;
+            int col = itemsPossiblePlaces[rand].column;
+            int row = itemsPossiblePlaces[rand].row;
+
+            powerUpsPossiblePlaces.Remove(itemsPossiblePlaces[rand]);
 
             dicKeys.AddMany(
+                row.ToString() + col.ToString(),
                 row.ToString() + (col - 1).ToString(),
                 row.ToString() + (col + 1).ToString(),
                 (row - 1).ToString() + col.ToString(),
@@ -54,13 +63,27 @@ public class SpawnItems : MonoBehaviour
         }
     }
 
+    private void StartPlacingPowerUpsWithSeed()
+    {
+        for(int i = 0; i < powerUps.Count; i++)
+        {
+            int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * powerUpsPossiblePlaces.Count - 1));
+            GameObject newPowerUp = Instantiate(powerUps[i]);
+            newPowerUp.transform.SetParent(powerUpsPossiblePlaces[rand].transform);
+            newPowerUp.transform.localPosition = Vector3.zero;
+            newPowerUp.GetComponent<MeshRenderer>().enabled = false;
+
+            powerUpsPossiblePlaces.RemoveAt(rand);
+        }
+    }
+
     private void HandlePlacesList(string key)
     {
         if (BoardGrid.instance.coordDic.ContainsKey(key))
         {
             Tile n = BoardGrid.instance.coordDic[key];
-            if (possiblePlaces.Contains(n))
-                possiblePlaces.Remove(n);
+            if (itemsPossiblePlaces.Contains(n))
+                itemsPossiblePlaces.Remove(n);
         }
     }
 }

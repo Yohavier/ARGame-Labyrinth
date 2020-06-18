@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 7158725007895300146}
   m_Layer: 8
   m_Name: pPlane2
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

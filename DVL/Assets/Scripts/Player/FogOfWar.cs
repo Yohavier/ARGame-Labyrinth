@@ -211,7 +211,6 @@ public class FogOfWar : MonoBehaviour
 				else
 				{
 					mesh.enabled = true;
-					mesh.material.color = Color.white;
 				}				
 			}
 		}

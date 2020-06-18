@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2887982340012366847}
   m_Layer: 8
   m_Name: polySurface3
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8161653021617798476}
   m_Layer: 8
   m_Name: polySurface6
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 6842628115345193470}
   m_Layer: 8
   m_Name: polySurface2
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 8606333898983356145}
   m_Layer: 8
   m_Name: polySurface5
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 6798928225230103130}
   m_Layer: 8
   m_Name: polySurface7
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 8715924279755159077}
   m_Layer: 8
   m_Name: polySurface4
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -530,26 +530,17 @@ MonoBehaviour:
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
-  Parent: {fileID: 0}
-  initForward: 1
-  initRight: 0
-  initBackward: 1
-  initLeft: 0
-  forward: 0
-  right: 0
-  backward: 0
-  left: 0
   gCost: 0
   hCost: 0
-  hasForwardDoor: 0
-  hasRightDoor: 0
-  hasBackwardDoor: 0
-  hasLeftDoor: 0
+  Parent: {fileID: 0}
   initForwardModule: 0
   initBackwardModule: 0
   initRightModule: 1
   initLeftModule: 1
-  openDoors: 1
+  ingameForwardModule: 0
+  ingameBackwardModule: 0
+  ingameRightModule: 0
+  ingameLeftModule: 0
   isInFOW: 1
   index: -1
 --- !u!114 &1273216404330949494

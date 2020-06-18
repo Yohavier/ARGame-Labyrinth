@@ -1641,7 +1641,6 @@ MonoBehaviour:
   localPlayerIndex: 0
   currentTurnPlayer: 0
   activePlayer: {fileID: 0}
-  turnCounter: 0
 --- !u!1 &340507156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2949,7 +2948,10 @@ MonoBehaviour:
   - {fileID: 8117746027487259920, guid: da20fb15f5f902a4dbac957441d3e7f9, type: 3}
   - {fileID: 8117746027487259920, guid: 88c592a604f881849a6095d5b4a35168, type: 3}
   - {fileID: 8117746027487259920, guid: 8dfefe4f63aaa994bb67353472130260, type: 3}
-  possiblePlaces: []
+  itemsPossiblePlaces: []
+  powerUps:
+  - {fileID: 1581023916314948738, guid: 7fe5fd987daab174da9f649bb6cf123d, type: 3}
+  powerUpsPossiblePlaces: []
 --- !u!1 &1237465934
 GameObject:
   m_ObjectHideFlags: 0
