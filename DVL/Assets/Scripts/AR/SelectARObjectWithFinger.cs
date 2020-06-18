@@ -115,7 +115,8 @@ public class SelectARObjectWithFinger : MonoBehaviour
 						MeshRenderer[] meshes = t.GetComponentsInChildren<MeshRenderer>();
 						foreach (MeshRenderer mesh in meshes)
 						{
-							mesh.material.color = Color.red;
+							if(mesh.CompareTag("Tile"))
+								mesh.material.color = Color.red;
 						}
 					}
 				}
@@ -123,7 +124,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 		}
 		else if (path != null && targetTile == currentSelectedTarget)
 		{
-			Debug.Log(path.Count);
 			HandlePreviousPath();
 			foreach(Tile t in path)
 			{

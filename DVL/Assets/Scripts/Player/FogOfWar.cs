@@ -8,7 +8,11 @@ public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar fow;
 	public List<GameObject> activeFogOfWarItems = new List<GameObject>();
-	public int fogReach;
+	private int fogReach
+    {
+        get { return FogReach + GetComponent<Player>().fogOfWarModificator; }
+    }
+	private int FogReach = 2;
 	public List<Tile> finalFogPath = new List<Tile>();
 
 	private void Awake()

@@ -6,6 +6,11 @@ using UnityEngine.SocialPlatforms;
 public enum PlayerState { ALIVE, DEAD, DYING}
 public class Player : MonoBehaviour
 {
+	[Header("Player Modifications")]
+	public int diceModificator = 0;
+	public int fogOfWarModificator = 0;
+
+
 	public PlayerIndex playerIndex;
 	public FogOfWar playerFOW;
 	public Tile positionTile;

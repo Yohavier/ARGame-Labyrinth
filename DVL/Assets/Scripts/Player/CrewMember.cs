@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CrewMember : Player
 {
@@ -38,11 +39,57 @@ public class CrewMember : Player
 
 			//Check for escape capsule mod
 			HandleDropItem(tile);
+
+			//Check for PowerUps
+			HandlePowerUps(tile);
 		}
-	}
+    }
 	
-    #region HandleNextTurn
-    public override void NotifyNextTurn(bool toggle)
+	//TODO: Synchonize Power Up Pick up with other players
+	#region HandlePowerUps
+	private void HandlePowerUps(Tile tile)
+    {
+        if (tile)
+        {
+			PowerUp powerUP = tile.GetComponentInChildren<PowerUp>();
+			if (powerUP)
+			{
+				var freeSlot = CanCollectPowerUp();
+				if (freeSlot != null)
+				{
+					StorePowerUp(freeSlot, powerUP);
+				}
+			}
+		}
+    }
+	private Button CanCollectPowerUp()
+    {
+		var ui = InformationPanel.instance;
+		if(ui.powerUpSlot1.GetComponent<PowerUpSlot>().storedPowerUp == null)
+        {
+			return ui.powerUpSlot1;
+        }
+		else if (ui.powerUpSlot2.GetComponent<PowerUpSlot>().storedPowerUp == null)
+        {
+			return ui.powerUpSlot2;
+		}
+		else
+        {
+			return null;
+        }
+    }
+
+	private void StorePowerUp(Button freeSlot, PowerUp powerUp)
+    {
+		freeSlot.interactable = true;
+		freeSlot.image.sprite = powerUp.powerUpImage;
+		freeSlot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
+		powerUp.gameObject.SetActive(false);
+    }
+	#endregion
+
+	#region HandleNextTurn
+	public override void NotifyNextTurn(bool toggle)
     {
         if(toggle)
         {

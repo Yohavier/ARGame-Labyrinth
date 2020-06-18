@@ -28,7 +28,7 @@ public class LocalGameManager : MonoBehaviour
 	public static LocalGameManager instance;
 
 	//Fields for the dice
-	private int stepsLeft = 0;
+	private int stepsLeft = 100;
 
 	public int StepsLeft
 	{
@@ -99,7 +99,7 @@ public class LocalGameManager : MonoBehaviour
 	}
 	private void RollDice()
     {
-		StepsLeft = Random.Range(1, 7);
+		//StepsLeft = Random.Range(1, 7);
 		RemoveRollDiceButtonListener();
 
 		if(activePlayer)

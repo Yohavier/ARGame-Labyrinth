@@ -1,22 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
-public class PowerUp : MonoBehaviour
+public abstract class PowerUp : MonoBehaviour
 {
-    private void OnCollect()
-    {
+    public GameObject powerUpPrefab;
+    public Sprite powerUpImage;
 
-    }
-    private void OnDrop()
-    {
-
-    }
-    private bool CanStore()
-    {
-        return true;
-    }
-
-    protected virtual void OnUse() { }
-    protected virtual bool CanUse() { return true; }
+    public abstract void OnUse();
+    protected abstract bool CanUse();
 }
+

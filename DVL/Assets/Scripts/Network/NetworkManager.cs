@@ -39,7 +39,6 @@ class NetworkManager : MonoBehaviour
         if (GUILayout.Button("Debug"))//click to toggle debug
         {
             isDebug = !isDebug;                 
-            Debug.Log("Debug: " + isDebug);
         }
         if (GUILayout.Button("Client")) //Click to attempt joining a hosted match
         {

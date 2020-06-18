@@ -28,6 +28,10 @@ public class InformationPanel : MonoBehaviour
     public Text steps;
     public Text state;
 
+    [Header("PowerUpSlots")]
+    public Button powerUpSlot1;
+    public Button powerUpSlot2;
+
     private void Awake()
     {
         instance = this;
