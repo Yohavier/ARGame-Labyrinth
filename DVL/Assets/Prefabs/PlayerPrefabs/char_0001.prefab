@@ -95,7 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceModificator: 0
-  fogOfWarModificator: 0
+  fogOfWarRadius: 2
+  footstepDetectionRadius: 1
   playerIndex: 0
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
@@ -118,7 +119,6 @@ MonoBehaviour:
   fogMask:
     serializedVersion: 2
     m_Bits: 7168
-  activeFogOfWarItems: []
   finalFogPath: []
 --- !u!114 &9177211659678062321
 MonoBehaviour:

@@ -29,7 +29,7 @@ public class WalkingTraces : MonoBehaviour
             return false;
 
         DetectDirectNeighbours n = new DetectDirectNeighbours();
-        if (n.DetectCircle(tile).Contains(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile))
+        if (n.DetectTileRadius(tile,LocalGameManager.instance.activePlayer.GetComponent<Player>().footstepDetectionRadius, false).Contains(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile))
             return true;
         else
             return false;

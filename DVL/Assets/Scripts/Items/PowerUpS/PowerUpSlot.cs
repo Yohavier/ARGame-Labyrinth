@@ -10,7 +10,7 @@ public class PowerUpSlot : MonoBehaviour
     public void UsePowerUp()
     {
         var a = Instantiate(storedPowerUp);
-        a.GetComponent<PowerUp>().OnUse();
+        a.GetComponent<PowerUpBase>().OnUse();
 
         ResetPowerUpSlot();
     }

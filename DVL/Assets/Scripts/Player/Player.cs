@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 {
 	[Header("Player Modifications")]
 	public int diceModificator = 0;
-	public int fogOfWarModificator = 0;
+	public int fogOfWarRadius = 2;
+	public int footstepDetectionRadius = 1;
 
 	public CommunicatorPowerUp communicatorPowerUp
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommunicatorPowerUp : PowerUp
+public class CommunicatorPowerUp : PowerUpBase  
 {
     public GameObject targetForCommunication;
     public override void OnUse()

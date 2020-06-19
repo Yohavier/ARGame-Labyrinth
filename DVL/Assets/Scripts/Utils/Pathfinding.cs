@@ -38,7 +38,8 @@ public class Pathfinding
 			{
 				return GetFinalPath(a_start, a_target, stepsLeft);				
 			}
-			foreach (Tile neighbouringTile in GetNeighbouringTiles(tile))
+			DetectDirectNeighbours n = new DetectDirectNeighbours();
+			foreach (Tile neighbouringTile in n.DetectMoveOptionsFromSingleTile(tile))
 			{
 				if (!hashSet.Contains(neighbouringTile))
 				{
@@ -58,34 +59,6 @@ public class Pathfinding
 		}
 		Debug.LogWarning("No Path Found!");
 		return null;
-	}
-
-	private List<Tile> GetNeighbouringTiles(Tile a_Tile)
-	{
-		List<Tile> list = new List<Tile>();
-		foreach (Tile item in grid)
-		{
-			if ((item.column == a_Tile.column && (item.row == a_Tile.row - 1 || item.row == a_Tile.row + 1)) || (item.row == a_Tile.row && (item.column == a_Tile.column - 1 || item.column == a_Tile.column + 1)))
-			{
-				if (item.column == a_Tile.column - 1 && a_Tile.CheckModulation(a_Tile.ingameBackwardModule) && item.CheckModulation(item.ingameForwardModule))
-				{
-					list.Add(item);
-				}
-				else if (item.column == a_Tile.column + 1 && a_Tile.CheckModulation(a_Tile.ingameForwardModule) && item.CheckModulation(item.ingameBackwardModule))
-				{
-					list.Add(item);
-				}
-				else if (item.row == a_Tile.row - 1 && a_Tile.CheckModulation(a_Tile.ingameLeftModule) && item.CheckModulation(item.ingameRightModule))
-				{
-					list.Add(item);
-				}
-				else if (item.row == a_Tile.row + 1 && a_Tile.CheckModulation(a_Tile.ingameRightModule) && item.CheckModulation(item.ingameLeftModule))
-				{
-					list.Add(item);
-				}
-			}
-		}
-		return list;
 	}
 
 	private List<Tile> GetFinalPath(Tile start, Tile target, int steps)

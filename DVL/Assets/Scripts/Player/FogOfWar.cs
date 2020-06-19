@@ -1,26 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.Collections;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UI;
-using System.Runtime.InteropServices;
 
 public class FogOfWar : MonoBehaviour
 {
 	public LayerMask fogMask;
 	public List<Tile> finalFogPath = new List<Tile>();
 
-	private int fogReach
-    {
-        get { return _fogReach + GetComponent<Player>().fogOfWarModificator; }
-    }
-	private int _fogReach = 2;
-
 	//call if player moves, to update fog of war
 	public void OnChangePlayerPosition(Tile newPosition)
     {
-
 		if (NetworkManager.instance.isDebug)
 		{
 			DebugFog();
@@ -30,7 +19,8 @@ public class FogOfWar : MonoBehaviour
 		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
-			neighbours = GetScalableNeighbouringTiles(newPosition);
+			DetectDirectNeighbours n = new DetectDirectNeighbours();
+			neighbours = n.DetectTileRadius(newPosition, LocalGameManager.instance.activePlayer.GetComponent<Player>().fogOfWarRadius, true);
 		}
 		else
 		{
@@ -69,9 +59,9 @@ public class FogOfWar : MonoBehaviour
 	private List<Tile> GetCommunicatorTile(CommunicatorPowerUp powerUp) 
 	{
 		Player targetPlayer = powerUp.targetForCommunication.GetComponent<Player>();
-		return GetScalableNeighbouringTiles(targetPlayer.positionTile);
+		DetectDirectNeighbours n = new DetectDirectNeighbours();
+		return n.DetectTileRadius(targetPlayer.positionTile, targetPlayer.fogOfWarRadius, true);
 	}
-
 	private List<Tile> GetWindowsInTile(Tile tile)
 	{
 		List<Tile> windowTiles = new List<Tile>();
@@ -139,77 +129,12 @@ public class FogOfWar : MonoBehaviour
 			}
 		}
 	}
-	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
-	{
-		List<Tile> neighbours = new List<Tile>();
-		List<Tile> toCheck = new List<Tile>();
-		List<Tile> allneighbours = new List<Tile>();
-
-		allneighbours.Add(a_tile);
-		toCheck.Add(a_tile);
-
-
-		for (int i = 0; i < fogReach; i++)
-		{
-			//for every Tile in to check get the neighbours
-			for (int j = 0; j < toCheck.Count; j++)
-            {
-				allneighbours = allneighbours.Union(AllTilesInWay(toCheck[j])).ToList();
-			}
-
-			//for every neighbour check if already in path and in to check
-			for (int k = 0; k < allneighbours.Count; k++)
-			{
-                if (!neighbours.Contains(allneighbours[k]))
-                {
-					if (!toCheck.Contains(allneighbours[k]))
-						toCheck.Add(allneighbours[k]);
-
-					neighbours.Add(allneighbours[k]);
-				}
-			}
-		}
-		return neighbours;
-	}
-	private List<Tile> AllTilesInWay(Tile tile)
-	{	
-		List<Tile> allNeighbors = new List<Tile>();
-		
-		if(tile.column - 1 >= 0)
-		{
-			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column - 1).ToString()];
-			if(check.ingameForwardModule == TileDirectionModule.NONE && tile.ingameBackwardModule == TileDirectionModule.NONE)
-				allNeighbors.Add(check);
-		}	
-
-		if(tile.column + 1 <= 6)
-		{
-			Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column + 1).ToString()];
-			if (check.ingameBackwardModule == TileDirectionModule.NONE && tile.ingameForwardModule == TileDirectionModule.NONE) 
-				allNeighbors.Add(check);
-		}
-
-		if(tile.row - 1 >= 0)
-		{
-			Tile check = BoardGrid.instance.coordDic[(tile.row - 1).ToString() + tile.column.ToString()];
-			if (check.ingameRightModule == TileDirectionModule.NONE && tile.ingameLeftModule == TileDirectionModule.NONE) 
-				allNeighbors.Add(check);
-		}
-
-		if(tile.row + 1 <= 6)
-		{
-			Tile check = BoardGrid.instance.coordDic[(tile.row + 1).ToString() + tile.column.ToString()];
-			if (check.ingameLeftModule == TileDirectionModule.NONE && tile.ingameRightModule == TileDirectionModule.NONE)
-				allNeighbors.Add(check);
-		}
-		return allNeighbors;
-	}	
 	private bool CheckIfIsInFogMask(GameObject toCheck)
     {
 		return fogMask == (fogMask | (1 << toCheck.layer));
     }
 
-	//TODO: Kaputt
+	//TODO: Fix Debug Mode
 	public void DebugFog()
 	{
 		foreach (Tile t in BoardGrid.instance.grid)

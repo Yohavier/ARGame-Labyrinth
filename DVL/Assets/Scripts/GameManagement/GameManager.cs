@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-//Global stuff for all players 
+//TODO move everything to localgamemanager
+//TODO Handle WinCondition in here
+//TODO Rename Class
+//TODO make static classes Singleton/ScriptableObject(LocalGameManager, FogOfWar, EventBroker, HandleTrackedImageLib, selectARObjectWithFInger, BoardGrid, InformationPanel)
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
+
 	private int capsuleCount;
 	public List<GameObject> allPlayers = new List<GameObject>();
 

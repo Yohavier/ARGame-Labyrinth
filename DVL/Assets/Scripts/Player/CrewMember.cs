@@ -51,7 +51,7 @@ public class CrewMember : Player
     {
         if (tile)
         {
-			PowerUp powerUP = tile.GetComponentInChildren<PowerUp>();
+			PowerUpBase powerUP = tile.GetComponentInChildren<PowerUpBase>();
 			if (powerUP)
 			{
 				var freeSlot = CanCollectPowerUp();
@@ -79,7 +79,7 @@ public class CrewMember : Player
         }
     }
 
-	private void StorePowerUp(Button freeSlot, PowerUp powerUp)
+	private void StorePowerUp(Button freeSlot, PowerUpBase powerUp)
     {
 		freeSlot.interactable = true;
 		freeSlot.image.sprite = powerUp.powerUpImage;
