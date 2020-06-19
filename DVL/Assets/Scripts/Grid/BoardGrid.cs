@@ -244,7 +244,7 @@ public class BoardGrid : MonoBehaviour
 		lastTrackedTile.index = removedTile.index;
 		grid.Remove(removedTile);
 		UpdateDic();
-		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile, false);
+		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
 	}
 
 	private GridMovement GetMoveDir(Tile moveTile)

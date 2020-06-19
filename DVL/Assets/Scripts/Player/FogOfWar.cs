@@ -9,16 +9,16 @@ using System.Runtime.InteropServices;
 public class FogOfWar : MonoBehaviour
 {
 	public LayerMask fogMask;
-
 	public List<Tile> finalFogPath = new List<Tile>();
+
 	private int fogReach
     {
-        get { return FogReach + GetComponent<Player>().fogOfWarModificator; }
+        get { return _fogReach + GetComponent<Player>().fogOfWarModificator; }
     }
-	private int FogReach = 2;
+	private int _fogReach = 2;
 
 	//call if player moves, to update fog of war
-	public void OnChangePlayerPosition(Tile newPosition, bool communication)
+	public void OnChangePlayerPosition(Tile newPosition)
     {
 
 		if (NetworkManager.instance.isDebug)
@@ -26,15 +26,6 @@ public class FogOfWar : MonoBehaviour
 			DebugFog();
 			return;
 		}
-
-		if(communication == false)
-        {
-            if (finalFogPath.Contains(newPosition))
-			{
-				finalFogPath.Remove(newPosition);
-            }
-		}
-
 
 		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
@@ -45,7 +36,11 @@ public class FogOfWar : MonoBehaviour
 		{
 			neighbours.Add(newPosition);					
 		}
-		neighbours.AddRange(CheckWindow(newPosition));
+		neighbours.AddRange(GetWindowsInTile(newPosition));
+
+		if (GetComponent<Player>().communicatorPowerUp)
+			neighbours.AddRange(GetCommunicatorTile(GetComponent<Player>().communicatorPowerUp));
+
 
 		
 		List<Tile> tempNonVis = new List<Tile>();
@@ -69,11 +64,15 @@ public class FogOfWar : MonoBehaviour
 
 		ToggleNonVisibleTiles(tempNonVis);
 		ToggleVisibleTilesOn(tempNewVis);
-
-		finalFogPath = neighbours;
 	}
 
-	private List<Tile> CheckWindow(Tile tile)
+	private List<Tile> GetCommunicatorTile(CommunicatorPowerUp powerUp) 
+	{
+		Player targetPlayer = powerUp.targetForCommunication.GetComponent<Player>();
+		return GetScalableNeighbouringTiles(targetPlayer.positionTile);
+	}
+
+	private List<Tile> GetWindowsInTile(Tile tile)
 	{
 		List<Tile> windowTiles = new List<Tile>();
 		string key = "";
@@ -107,6 +106,7 @@ public class FogOfWar : MonoBehaviour
     {
         for (int i = 0; i < nonVisibleList.Count; i++)
         {
+			finalFogPath.Remove(nonVisibleList[i]);
 			nonVisibleList[i].isInFOW = true;
 			nonVisibleList[i].PrefabColor();
 			MeshRenderer[] tileMeshes = nonVisibleList[i].GetComponentsInChildren<MeshRenderer>();
@@ -122,12 +122,13 @@ public class FogOfWar : MonoBehaviour
     }
 	private void ToggleVisibleTilesOn(List<Tile> visibleList)
 	{
-		foreach (Tile tile in visibleList)
-		{	
-			tile.isInFOW = false;
-			tile.PrefabColor();
+        for (int i = 0; i < visibleList.Count; i++)
+        {
+			finalFogPath.Add(visibleList[i]);
+			visibleList[i].isInFOW = false;
+			visibleList[i].PrefabColor();
 
-			MeshRenderer[] tileMeshes = tile.GetComponentsInChildren<MeshRenderer>();
+			MeshRenderer[] tileMeshes = visibleList[i].GetComponentsInChildren<MeshRenderer>();
 
 			foreach (MeshRenderer mesh in tileMeshes)
 			{
@@ -138,7 +139,6 @@ public class FogOfWar : MonoBehaviour
 			}
 		}
 	}
-
 	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
 	{
 		List<Tile> neighbours = new List<Tile>();
@@ -171,7 +171,6 @@ public class FogOfWar : MonoBehaviour
 		}
 		return neighbours;
 	}
-
 	private List<Tile> AllTilesInWay(Tile tile)
 	{	
 		List<Tile> allNeighbors = new List<Tile>();
@@ -204,13 +203,13 @@ public class FogOfWar : MonoBehaviour
 				allNeighbors.Add(check);
 		}
 		return allNeighbors;
-	}
-	
+	}	
 	private bool CheckIfIsInFogMask(GameObject toCheck)
     {
 		return fogMask == (fogMask | (1 << toCheck.layer));
     }
 
+	//TODO: Kaputt
 	public void DebugFog()
 	{
 		foreach (Tile t in BoardGrid.instance.grid)

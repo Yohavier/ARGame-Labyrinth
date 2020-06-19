@@ -10,6 +10,16 @@ public class Player : MonoBehaviour
 	public int diceModificator = 0;
 	public int fogOfWarModificator = 0;
 
+	public CommunicatorPowerUp communicatorPowerUp
+    {
+        get { return _communicatorPowerUp; }
+        set 
+		{ 
+			_communicatorPowerUp = value;
+			ChangePlayerPosition(positionTile);	
+		}
+    }
+	private CommunicatorPowerUp _communicatorPowerUp;
 
 	public PlayerIndex playerIndex;
 	public FogOfWar playerFOW;
@@ -91,13 +101,13 @@ public class Player : MonoBehaviour
 		if (playerFOW != null)
 		{
 			//if active player call his FOW
-			playerFOW.OnChangePlayerPosition(positionTile, false);
+			playerFOW.OnChangePlayerPosition(positionTile);
 			InformationPanel.instance.SetCoordText(positionTile.row.ToString() + " " + positionTile.column.ToString());
 		}
 		else if(LocalGameManager.instance.activePlayer != null)
 		{
 			//if not active Player, call active players FOW
-			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile, false);	
+			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
 		}
 
 		CreatePositionIndicatorTrace();

@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class CommunicatorPowerUp : PowerUp
 {
-    private GameObject playerForCommunication;
+    public GameObject targetForCommunication;
     public override void OnUse()
     {
-        playerForCommunication = GetOpenPlayer();
+        targetForCommunication = GetOpenPlayer();
 
-        if (playerForCommunication)
+        if (targetForCommunication)
         {
-            FogOfWar otherFOW = playerForCommunication.GetComponent<FogOfWar>();
-            otherFOW.enabled = true;
-            otherFOW.OnChangePlayerPosition(playerForCommunication.GetComponent<Player>().positionTile, true);
+            LocalGameManager.instance.activePlayer.GetComponent<Player>().communicatorPowerUp = this;
             Eventbroker.instance.onNotifyNextTurn += NotifyNextTurn;
         }
     }
@@ -21,7 +19,7 @@ public class CommunicatorPowerUp : PowerUp
     private void NotifyNextTurn()
     {
         Eventbroker.instance.onNotifyNextTurn -= NotifyNextTurn;
-        playerForCommunication.GetComponent<FogOfWar>().enabled = false;
+        LocalGameManager.instance.activePlayer.GetComponent<Player>().communicatorPowerUp = null;
         Destroy(this.gameObject);
     }
 

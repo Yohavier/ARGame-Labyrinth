@@ -8,7 +8,7 @@ public class ScannerPowerUp : PowerUp
     {
         var player = LocalGameManager.instance.activePlayer;
         player.GetComponent<Player>().fogOfWarModificator++;
-        player.GetComponent<FogOfWar>().OnChangePlayerPosition(player.GetComponent<Player>().positionTile, false);
+        player.GetComponent<FogOfWar>().OnChangePlayerPosition(player.GetComponent<Player>().positionTile);
         Destroy(this.gameObject);
     }
 
