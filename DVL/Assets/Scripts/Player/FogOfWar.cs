@@ -3,20 +3,24 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class FogOfWar : MonoBehaviour
 {
-	public List<GameObject> activeFogOfWarItems = new List<GameObject>();
+	public LayerMask fogMask;
+
+	public List<Tile> finalFogPath = new List<Tile>();
 	private int fogReach
     {
         get { return FogReach + GetComponent<Player>().fogOfWarModificator; }
     }
 	private int FogReach = 2;
-	public List<Tile> finalFogPath = new List<Tile>();
 
 	//call if player moves, to update fog of war
 	public void OnChangePlayerPosition(Tile newPosition, bool communication)
     {
+
 		if (NetworkManager.instance.isDebug)
 		{
 			DebugFog();
@@ -25,92 +29,52 @@ public class FogOfWar : MonoBehaviour
 
 		if(communication == false)
         {
-			HideEverythingInFOW();
+            if (finalFogPath.Contains(newPosition))
+			{
+				finalFogPath.Remove(newPosition);
+            }
 		}
 
+
+		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
-			List<Tile> neighbours = GetScalableNeighbouringTiles(newPosition);
-			ToggleVisiblePartOn(newPosition, neighbours);
+			neighbours = GetScalableNeighbouringTiles(newPosition);
 		}
 		else
 		{
-			finalFogPath.Add(newPosition);
-			List<Tile> neighbours = new List<Tile>();
-			neighbours.Add(newPosition);
-			ToggleVisiblePartOn(newPosition, neighbours);			
+			neighbours.Add(newPosition);					
 		}
-    }
-	
-	//clear and hide complete grid
-	private void HideEverythingInFOW()
-	{
-		foreach(Tile t in BoardGrid.instance.grid)
-		{
-			t.isInFOW = true;
-			t.PrefabColor();
-			var trans = t.GetComponentsInChildren<Transform>();
-			foreach(Transform tr in trans)
-			{
-				if (tr.CompareTag("Fog"))
-				{
-					tr.GetComponent<MeshRenderer>().enabled = true;
-				}
-				else if (tr.CompareTag("Player"))
-				{
-					if (tr != LocalGameManager.instance.activePlayer)
-					{
-						tr.GetComponent<MeshRenderer>().enabled = false;
-					}
-				}
-			}
-		}
-		foreach (GameObject item in activeFogOfWarItems) 
-		{
-			if(item != null)
-			{
-				item.GetComponent<MeshRenderer>().enabled = false;
-			} 
-		}
-		activeFogOfWarItems.Clear();
-		finalFogPath.Clear();
-	}
+		neighbours.AddRange(CheckWindow(newPosition));
 
-	//Toogle everything on that is in FOW(passed list) range 
-	private void ToggleVisiblePartOn(Tile tile, List<Tile> neighbours)
-	{
-		neighbours.AddRange(CheckWindow(tile));
-		foreach (Tile neighborTile in neighbours)
-		{
-			neighborTile.isInFOW = false;
-			neighborTile.PrefabColor();
-			var childMeshes = neighborTile.GetComponentsInChildren<MeshRenderer>();
-			foreach (MeshRenderer mesh in childMeshes)
-			{
-				if (mesh.CompareTag("Fog"))
-				{
-					mesh.GetComponent<MeshRenderer>().enabled = false;
-				}
-				else if (mesh.gameObject.layer != 8)
-				{
-					Item item = mesh.GetComponent<Item>();
-					if (item != null)
-					{
-						if (item.GetComponentInParent<Player>())
-						{
-							Debug.Log(item + " is stored in " + item.GetComponentInParent<Player>());
-							break;
-						}
-					}
-					mesh.GetComponent<MeshRenderer>().enabled = true;
-					activeFogOfWarItems.Add(mesh.gameObject);
-				}
-			}
-		}
+		
+		List<Tile> tempNonVis = new List<Tile>();
+		List<Tile> tempNewVis = new List<Tile>();
+
+		for (int i = 0; i < finalFogPath.Count; i++)
+        {
+            if (!neighbours.Contains(finalFogPath[i]))
+            {
+				tempNonVis.Add(finalFogPath[i]);
+            }
+        }
+		
+        for (int j = 0; j < neighbours.Count; j++)
+        {
+            if (!finalFogPath.Contains(neighbours[j]))
+            {
+				tempNewVis.Add(neighbours[j]);
+            }
+        }
+
+		ToggleNonVisibleTiles(tempNonVis);
+		ToggleVisibleTilesOn(tempNewVis);
+
+		finalFogPath = neighbours;
 	}
 
 	private List<Tile> CheckWindow(Tile tile)
-    {
+	{
 		List<Tile> windowTiles = new List<Tile>();
 		string key = "";
 		if (tile.ingameForwardModule == TileDirectionModule.WINDOW)
@@ -118,60 +82,98 @@ public class FogOfWar : MonoBehaviour
 			key = tile.row.ToString() + (tile.column + 1).ToString();
 			if (BoardGrid.instance.coordDic.ContainsKey(key))
 				windowTiles.Add(BoardGrid.instance.coordDic[key]);
-        }
-        if (tile.ingameBackwardModule == TileDirectionModule.WINDOW)
-        {
+		}
+		if (tile.ingameBackwardModule == TileDirectionModule.WINDOW)
+		{
 			key = tile.row.ToString() + (tile.column - 1).ToString();
-			if(BoardGrid.instance.coordDic.ContainsKey(key))
+			if (BoardGrid.instance.coordDic.ContainsKey(key))
 				windowTiles.Add(BoardGrid.instance.coordDic[key]);
 		}
-        if (tile.ingameRightModule == TileDirectionModule.WINDOW)
-        {
+		if (tile.ingameRightModule == TileDirectionModule.WINDOW)
+		{
 			key = (tile.row + 1).ToString() + tile.column.ToString();
-			if(BoardGrid.instance.coordDic.ContainsKey(key))
+			if (BoardGrid.instance.coordDic.ContainsKey(key))
 				windowTiles.Add(BoardGrid.instance.coordDic[key]);
 		}
-        if (tile.ingameLeftModule == TileDirectionModule.WINDOW)
-        {
+		if (tile.ingameLeftModule == TileDirectionModule.WINDOW)
+		{
 			key = (tile.row - 1).ToString() + tile.column.ToString();
-			if(BoardGrid.instance.coordDic.ContainsKey(key))
+			if (BoardGrid.instance.coordDic.ContainsKey(key))
 				windowTiles.Add(BoardGrid.instance.coordDic[key]);
 		}
 		return windowTiles;
-    }
+	}
+	private void ToggleNonVisibleTiles(List<Tile> nonVisibleList)
+    {
+        for (int i = 0; i < nonVisibleList.Count; i++)
+        {
+			nonVisibleList[i].isInFOW = true;
+			nonVisibleList[i].PrefabColor();
+			MeshRenderer[] tileMeshes = nonVisibleList[i].GetComponentsInChildren<MeshRenderer>();
 
-	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
-	{
-		List<Tile> toCheck = new List<Tile>();
-		finalFogPath.Add(a_tile);
-		toCheck.Add(a_tile);
-
-		for (int i = 0; i < fogReach; i++)
-		{
-			if (toCheck.Count > 0)
+			foreach (MeshRenderer mesh in tileMeshes)
 			{
-				List<Tile> neighbour = new List<Tile>();
-				foreach (Tile t in toCheck)
+				if (CheckIfIsInFogMask(mesh.gameObject))
 				{
-					neighbour = neighbour.Union(AllNeighboursOfTile(t)).ToList();
+					mesh.GetComponent<MeshRenderer>().enabled = false;
 				}
-				foreach (Tile t in neighbour)
+			}
+		}	
+    }
+	private void ToggleVisibleTilesOn(List<Tile> visibleList)
+	{
+		foreach (Tile tile in visibleList)
+		{	
+			tile.isInFOW = false;
+			tile.PrefabColor();
+
+			MeshRenderer[] tileMeshes = tile.GetComponentsInChildren<MeshRenderer>();
+
+			foreach (MeshRenderer mesh in tileMeshes)
+			{
+				if (CheckIfIsInFogMask(mesh.gameObject))
 				{
-					if (!finalFogPath.Contains(t))
-					{
-						finalFogPath.Add(t);
-						toCheck.Add(t);
-					}
+					mesh.GetComponent<MeshRenderer>().enabled = true;
 				}
 			}
 		}
-		return finalFogPath;
 	}
 
-	//forward + col
-	//right +row
-	private List<Tile> AllNeighboursOfTile(Tile tile)
+	private List<Tile> GetScalableNeighbouringTiles(Tile a_tile)
 	{
+		List<Tile> neighbours = new List<Tile>();
+		List<Tile> toCheck = new List<Tile>();
+		List<Tile> allneighbours = new List<Tile>();
+
+		allneighbours.Add(a_tile);
+		toCheck.Add(a_tile);
+
+
+		for (int i = 0; i < fogReach; i++)
+		{
+			//for every Tile in to check get the neighbours
+			for (int j = 0; j < toCheck.Count; j++)
+            {
+				allneighbours = allneighbours.Union(AllTilesInWay(toCheck[j])).ToList();
+			}
+
+			//for every neighbour check if already in path and in to check
+			for (int k = 0; k < allneighbours.Count; k++)
+			{
+                if (!neighbours.Contains(allneighbours[k]))
+                {
+					if (!toCheck.Contains(allneighbours[k]))
+						toCheck.Add(allneighbours[k]);
+
+					neighbours.Add(allneighbours[k]);
+				}
+			}
+		}
+		return neighbours;
+	}
+
+	private List<Tile> AllTilesInWay(Tile tile)
+	{	
 		List<Tile> allNeighbors = new List<Tile>();
 		
 		if(tile.column - 1 >= 0)
@@ -203,6 +205,11 @@ public class FogOfWar : MonoBehaviour
 		}
 		return allNeighbors;
 	}
+	
+	private bool CheckIfIsInFogMask(GameObject toCheck)
+    {
+		return fogMask == (fogMask | (1 << toCheck.layer));
+    }
 
 	public void DebugFog()
 	{

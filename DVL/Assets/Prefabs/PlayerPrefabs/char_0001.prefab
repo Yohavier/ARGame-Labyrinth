@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4665849741639523091}
   - component: {fileID: -1801657048653225923}
   - component: {fileID: 9177211659678062321}
-  m_Layer: 2
+  m_Layer: 12
   m_Name: char_0001
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -115,6 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0dd97dc42ec5e4f8d6de111968f3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fogMask:
+    serializedVersion: 2
+    m_Bits: 7168
   activeFogOfWarItems: []
   finalFogPath: []
 --- !u!114 &9177211659678062321

@@ -157,7 +157,7 @@ public class CrewMember : Player
 		item.isStored = true;
 		storedItem.transform.SetParent(this.transform);
 		InformationPanel.instance.SetItemText(item.itemName);
-		storedItem.GetComponent<MeshRenderer>().enabled = false;		
+		storedItem.gameObject.SetActive(false);	
 	}
     private void RemovePickUpButtonListener()
     {
@@ -186,9 +186,8 @@ public class CrewMember : Player
 		{
 			if (capsule != null) 
 				capsule.DisplayProgress();
-
+			storedItem.gameObject.SetActive(true);
 			storedItem.transform.SetParent(tile.transform);
-			storedItem.GetComponent<MeshRenderer>().enabled = true;
 			storedItem = null;
 			InformationPanel.instance.SetItemText("none");
 		}
@@ -200,6 +199,7 @@ public class CrewMember : Player
     }
 	#endregion
 
+	//TODO: Hook up to GameManager and Progress
 	#region Handle Repair Generator extension
 	private void HandleRepairGenerator(Tile tile)
     {

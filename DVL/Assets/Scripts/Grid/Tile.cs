@@ -53,7 +53,27 @@ public class Tile : MonoBehaviour
     }
 
 	private bool doorOpen = true;
-	public bool isInFOW;
+
+	private bool IsInFOW;
+	public bool isInFOW
+    {
+        get
+        {
+			return IsInFOW;
+        }
+        set
+        {
+			IsInFOW= value;
+			ToggleRoof(value);
+        }
+    }
+
+	private void ToggleRoof(bool toggle)
+    {
+		//Debug.Log(this.name + " has Roof " + toggle);
+    }
+
+	
 
 	public int index = -1; //Identifier of tile, -1 invalid index
 

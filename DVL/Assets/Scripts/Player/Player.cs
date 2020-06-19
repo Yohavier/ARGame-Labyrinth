@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
 		if (playerFOW != null)
 		{
-			//if active playre call his FOW
+			//if active player call his FOW
 			playerFOW.OnChangePlayerPosition(positionTile, false);
 			InformationPanel.instance.SetCoordText(positionTile.row.ToString() + " " + positionTile.column.ToString());
 		}

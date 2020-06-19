@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 540146135546387557}
   - component: {fileID: 3723123279874394027}
   - component: {fileID: 8790451605201695519}
-  m_Layer: 0
-  m_Name: Cylinder
+  m_Layer: 10
+  m_Name: Powercell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +108,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Powercell
+  isStored: 0
