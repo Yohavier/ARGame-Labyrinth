@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public enum PlayerState { ALIVE, DEAD, DYING}
 public class Player : MonoBehaviour
 {
-	[Header("Player Modifications")]
-	public int diceModificator = 0;
-	public int fogOfWarRadius = 2;
-	public int footstepDetectionRadius = 1;
+	[Header("Player Stats")]
+	public PlayerIndex playerIndex;
+	public SO_PlayerClass playerRole;
 
+	public int diceModificator = 0;
+	public int fogOfWarRadius = 0;
+	public int footstepDetectionRadius =  0;
+	public int repairSpeed = 0;
+	public int maxDeathTurnCounter = 0;
+
+
+	//PowerUps
+	private CommunicatorPowerUp _communicatorPowerUp;
 	public CommunicatorPowerUp communicatorPowerUp
     {
         get { return _communicatorPowerUp; }
@@ -20,15 +27,15 @@ public class Player : MonoBehaviour
 			ChangePlayerPosition(positionTile);	
 		}
     }
-	private CommunicatorPowerUp _communicatorPowerUp;
 
-	public PlayerIndex playerIndex;
-	public FogOfWar playerFOW;
-	public Tile positionTile;
-	public GameObject storedItem;
-	private WalkingTraces trace;
-	public bool isWalking;
+	[HideInInspector] public FogOfWar playerFOW;
+	[HideInInspector] public Tile positionTile;
+	[HideInInspector] public GameObject storedItem;
+	[HideInInspector] private WalkingTraces trace;
+	[HideInInspector] public bool isWalking;
 
+
+	//Health Status of player
 	public PlayerState _playerState;
 	public PlayerState playerState
     {
@@ -50,6 +57,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+	
 
 	#region Initialization
 	public void SetUpPlayer(int count)
@@ -60,6 +68,7 @@ public class Player : MonoBehaviour
 		if (playerIndex != LocalGameManager.instance.localPlayerIndex)
 		{
 			GetComponent<MeshRenderer>().enabled = false;
+			Destroy(GetComponent<FogOfWar>());
 		}
 		else
 		{
@@ -67,6 +76,9 @@ public class Player : MonoBehaviour
 			playerState = PlayerState.ALIVE;
 			playerFOW = GetComponent<FogOfWar>();
 			SetInformations();
+
+			playerRole = InformationPanel.instance.GetPlayerRoleStats(this);
+			playerRole.SetPlayerStats(this);
 		}
 	}
 	private PlayerIndex ChooseRightIndex(int count)

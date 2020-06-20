@@ -116,7 +116,7 @@ public class Tile : MonoBehaviour
 		{
 			BoardGrid.instance.inMove = false;
 			BoardGrid.instance.RemoveTileFromGrid(this);
-			HandleTrackedImageLib.CustomTrackingManagerInstance.ChangeTrackedPrefab(this.gameObject);
+			HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);
 		}
 	}
 

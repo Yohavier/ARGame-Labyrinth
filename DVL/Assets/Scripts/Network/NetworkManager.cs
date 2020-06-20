@@ -19,7 +19,7 @@ class NetworkManager : MonoBehaviour
     }
     private void Start()
     {
-        serverIP = "192.168.0.206";
+        serverIP = "192.168.178.14";
     }
 
     //TODO: Nicer GUI

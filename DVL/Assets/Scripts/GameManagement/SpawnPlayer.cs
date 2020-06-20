@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 public class SpawnPlayer : MonoBehaviour
 {
 	public GameObject[] Player;

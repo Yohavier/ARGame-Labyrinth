@@ -11,13 +11,13 @@ public class HandleTrackedImageLib : MonoBehaviour
 	private ARTrackedImageManager manager;
 	private GameObject boardPrefab;
 	public GameObject tilePrefabParent;
-	public static HandleTrackedImageLib CustomTrackingManagerInstance;
+	public static HandleTrackedImageLib instance;
 
 	private List<string> BoardTrackers = new List<string>();
 
 	private void Awake()
 	{
-		CustomTrackingManagerInstance = this;
+		instance = this;
 	}
 	private void Start()
 	{

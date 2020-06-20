@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class CrewMember : Player
 {
-	public int maxDeathTurnCounter;
 	private int deathTurnCounter = 0;
 	//Cant move to next Tile if there is already a player instance inside
 	public override bool CheckForOtherPlayers(Tile nextTile)
@@ -186,6 +185,7 @@ public class CrewMember : Player
 		{
 			if (capsule != null) 
 				capsule.DisplayProgress();
+
 			storedItem.gameObject.SetActive(true);
 			storedItem.transform.SetParent(tile.transform);
 			storedItem = null;
@@ -199,7 +199,6 @@ public class CrewMember : Player
     }
 	#endregion
 
-	//TODO: Hook up to GameManager and Progress
 	#region Handle Repair Generator extension
 	private void HandleRepairGenerator(Tile tile)
     {
@@ -217,7 +216,7 @@ public class CrewMember : Player
 	private void RepairGenerator(Generator generator)
 	{
 		RemoveRepairGeneratorButtonListener();
-		generator.RepairGenerator();
+		generator.RepairGenerator(repairSpeed);
 	}
 	private void RemoveRepairGeneratorButtonListener()
 	{

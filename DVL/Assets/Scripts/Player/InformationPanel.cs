@@ -32,6 +32,11 @@ public class InformationPanel : MonoBehaviour
     public Button powerUpSlot1;
     public Button powerUpSlot2;
 
+    [Header("Player Role")]
+    public Dropdown playerRoleMenu;
+    public List<SO_PlayerClass> playerRoles;
+    public SO_PlayerClass selectedPlayerRole;
+
     private void Awake()
     {
         instance = this;
@@ -96,6 +101,41 @@ public class InformationPanel : MonoBehaviour
     public void SetStateText(string text)
     {
         state.text = "State: " + text;
+    }
+    #endregion
+
+    #region CharacterSelection
+    private void Start()
+    {
+        playerRoleMenu.ClearOptions();
+        CreateDropDownMenu();
+        playerRoleMenu.onValueChanged.AddListener(delegate {
+            DropdownValueChanged(playerRoleMenu);
+        });
+    }
+
+    private void CreateDropDownMenu()
+    {
+        foreach (SO_PlayerClass so in playerRoles)
+        {
+            var n = new Dropdown.OptionData();
+            n.text = so.name;
+            playerRoleMenu.options.Add(n);
+        }
+        DropdownValueChanged(playerRoleMenu);
+    }
+
+    public void DropdownValueChanged(Dropdown change)
+    {
+        selectedPlayerRole = playerRoles[change.value];
+        Debug.Log(playerRoles[change.value].name);
+    }
+
+    //TODO: Send to all other Players as well
+    public SO_PlayerClass GetPlayerRoleStats(Player player)
+    {
+        playerRoleMenu.interactable = false;
+        return selectedPlayerRole;
     }
     #endregion
 }

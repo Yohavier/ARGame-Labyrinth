@@ -10,12 +10,6 @@ public class FogOfWar : MonoBehaviour
 	//call if player moves, to update fog of war
 	public void OnChangePlayerPosition(Tile newPosition)
     {
-		if (NetworkManager.instance.isDebug)
-		{
-			DebugFog();
-			return;
-		}
-
 		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
@@ -51,6 +45,11 @@ public class FogOfWar : MonoBehaviour
 				tempNewVis.Add(neighbours[j]);
             }
         }
+
+		if (NetworkManager.instance.isDebug)
+		{
+			tempNewVis = DebugFog();
+		}
 
 		ToggleNonVisibleTiles(tempNonVis);
 		ToggleVisibleTilesOn(tempNewVis);
@@ -134,25 +133,8 @@ public class FogOfWar : MonoBehaviour
 		return fogMask == (fogMask | (1 << toCheck.layer));
     }
 
-	//TODO: Fix Debug Mode
-	public void DebugFog()
+	public List<Tile> DebugFog()
 	{
-		foreach (Tile t in BoardGrid.instance.grid)
-		{
-			t.isInFOW = false;
-			t.PrefabColor();
-			List<MeshRenderer> meshes = t.GetComponentsInChildren<MeshRenderer>().ToList();
-			foreach(MeshRenderer mesh in meshes)
-			{
-				if (mesh.CompareTag("Fog"))
-				{
-					mesh.enabled = false;
-				}
-				else
-				{
-					mesh.enabled = true;
-				}				
-			}
-		}
+		return BoardGrid.instance.grid;
 	}
 }
