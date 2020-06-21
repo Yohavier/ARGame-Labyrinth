@@ -219,6 +219,16 @@ public class Tile : MonoBehaviour
 
 		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
     }
+	public void ToggleDoors(bool toggle)
+    {
+		doorOpen = toggle;
+		if (doorOpen)
+			OpenTileDoors();
+		else
+			CloseTileDoors();
+
+		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+	}
 
 	private void OpenTileDoors()
     {
@@ -228,5 +238,17 @@ public class Tile : MonoBehaviour
 	private void CloseTileDoors()
     {
 		//Play Animation
+    }
+
+	public bool TileContainsDoor()
+    {
+		if(ingameForwardModule== TileDirectionModule.DOOR || ingameBackwardModule == TileDirectionModule.DOOR || ingameLeftModule == TileDirectionModule.DOOR || ingameRightModule == TileDirectionModule.DOOR)
+        {
+			return true;
+        }
+        else
+        {
+			return false;
+        }
     }
 }

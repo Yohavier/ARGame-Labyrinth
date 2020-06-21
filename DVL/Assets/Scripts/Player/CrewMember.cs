@@ -80,10 +80,15 @@ public class CrewMember : Player
 
 	private void StorePowerUp(Button freeSlot, PowerUpBase powerUp)
     {
-		freeSlot.interactable = true;
+        if (freeSlot.GetComponent<PowerUpSlot>().storedPowerUp != null)
+        {
+			freeSlot.GetComponent<PowerUpSlot>().DropEverythingInSlot();
+        }
+
 		freeSlot.image.sprite = powerUp.powerUpImage;
 		freeSlot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
-		powerUp.gameObject.SetActive(false);
+		freeSlot.interactable = true;
+		Destroy(powerUp.GetComponent<MeshRenderer>());
     }
 	#endregion
 

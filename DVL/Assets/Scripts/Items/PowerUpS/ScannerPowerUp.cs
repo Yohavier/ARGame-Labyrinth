@@ -1,19 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScannerPowerUp : PowerUpBase
 {
-    public override void OnUse()
+    public override void OnUse(Player player, PowerUpSlot slot)
     {
-        var player = LocalGameManager.instance.activePlayer;
-        player.GetComponent<Player>().fogOfWarRadius++;
-        player.GetComponent<FogOfWar>().OnChangePlayerPosition(player.GetComponent<Player>().positionTile);
-        Destroy(this.gameObject);
-    }
-
-    protected override bool CanUse()
-    {
-        return true;
+        player.fogOfWarRadius++;
+        player.GetComponent<FogOfWar>().OnChangePlayerPosition(player.positionTile);
+        slot.GetComponent<Button>().interactable = false;
     }
 }
