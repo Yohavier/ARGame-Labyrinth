@@ -2720,9 +2720,8 @@ GameObject:
   - component: {fileID: 657489869}
   - component: {fileID: 657489868}
   - component: {fileID: 657489867}
-  - component: {fileID: 657489866}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: CharacterSelectionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2747,28 +2746,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 0}
+  m_AnchoredPosition: {x: 60, y: -268}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &657489866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657489864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568cd65ee05e2bc4eb35fa4af51434dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterSelectionMenu: {fileID: 0}
-  playerRoles:
-  - {fileID: 11400000, guid: 16a66955f40421e41b219f3241a15589, type: 2}
-  - {fileID: 11400000, guid: cdc297f9ba19fd24f936f8258d9bc59a, type: 2}
-  - {fileID: 11400000, guid: 99e4d057a9440af4594e3f95e7c26f54, type: 2}
-  - {fileID: 11400000, guid: 8e029422f220840419331b870f2fbfed, type: 2}
-  selectedPlayerRole: {fileID: 0}
 --- !u!114 &657489867
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,51 +1,58 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-//TODO: make static functions
 public class DetectDirectNeighbours
 {
     private List<Tile> neighbours = new List<Tile>();
     private Dictionary<string, Tile> dic;
-
-    int row;
-    int column;
 
     public DetectDirectNeighbours()
     {
         dic = BoardGrid.instance.coordDic;
     }
 
-    public List<Tile> DetectSingleRadiusTile(Tile tile)
+    public static List<Tile> DetectSingleRadiusTile(Tile tile)
+    {
+        if (tile == null)
+            return null;
+        List<Tile> neighbours = new List<Tile>();
+        List<string> addKeyList = new List<string>();
+
+        addKeyList.AddMany(
+            tile.row.ToString() + (tile.column + 1).ToString(),
+            tile.row.ToString()+ (tile.column - 1).ToString(),
+            (tile.row + 1).ToString() + tile.column.ToString(),
+            (tile.row - 1).ToString(), tile.column.ToString(),
+            (tile.row - 1).ToString(), (tile.column - 1).ToString(),
+            (tile.row + 1).ToString(), (tile.column - 1).ToString(), 
+            (tile.row - 1).ToString(), (tile.column + 1).ToString(),
+            (tile.row + 1).ToString(), (tile.column + 1).ToString()
+            );
+
+        neighbours = AddToList(addKeyList, neighbours);
+        return neighbours;
+    }
+
+    public static List<Tile> DetectCross(Tile tile)
     {
         if (tile == null)
             return null;
 
-        AddToList(tile.row.ToString(), (tile.column + 1).ToString());
-        AddToList(tile.row.ToString(), (tile.column - 1).ToString());
-        AddToList((tile.row + 1).ToString(), tile.column.ToString());
-        AddToList((tile.row - 1).ToString(), tile.column.ToString());
-        AddToList((tile.row - 1).ToString(), (tile.column - 1).ToString());
-        AddToList((tile.row + 1).ToString(), (tile.column - 1).ToString());
-        AddToList((tile.row - 1).ToString(), (tile.column + 1).ToString());
-        AddToList((tile.row + 1).ToString(), (tile.column + 1).ToString());
+        List<Tile> neighbours = new List<Tile>();
+        List<string> addKeyList = new List<string>();
 
+        addKeyList.AddMany(
+            tile.row.ToString() + (tile.column + 1).ToString(),
+            tile.row.ToString() + (tile.column - 1).ToString(),
+            (tile.row + 1).ToString(), tile.column.ToString(),
+            (tile.row - 1).ToString(), tile.column.ToString()
+            );
+
+        neighbours = AddToList(addKeyList, neighbours);
         return neighbours;
     }
 
-    public List<Tile> DetectCross(Tile tile)
-    {
-        if (tile == null)
-            return null;
-
-        AddToList(tile.row.ToString(), (tile.column + 1).ToString());
-        AddToList(tile.row.ToString(), (tile.column - 1).ToString());
-        AddToList((tile.row + 1).ToString(), tile.column.ToString());
-        AddToList((tile.row - 1).ToString(), tile.column.ToString());
-
-        return neighbours;
-    }
-
-    public List <Tile> DetectTileRadius(Tile tile, int radius, bool beMovable)
+    public static List<Tile> DetectTileRadius(Tile tile, int radius, bool beMovable)
     {
         if (tile == null)
             return null;
@@ -84,7 +91,7 @@ public class DetectDirectNeighbours
         return neighbours;
     }
 
-    public List<Tile> DetectMoveOptionsFromSingleTile(Tile tile)
+    public static List<Tile> DetectMoveOptionsFromSingleTile(Tile tile)
     {
         if (tile == null)
             return null;
@@ -121,9 +128,21 @@ public class DetectDirectNeighbours
         return allNeighbors;
     }
 
-    private void AddToList(string row, string column)
+    private static List<Tile> AddToList(List<string> keyAddList, List<Tile> actualList)
     {
-        if (dic.ContainsKey(row + column))
-            neighbours.Add(dic[row + column]);
+        var dic = BoardGrid.instance.coordDic;
+
+        foreach (string key in keyAddList)
+        {
+            if (dic.ContainsKey(key))
+            {
+                if (!actualList.Contains(dic[key]))
+                {
+                    actualList.Add(dic[key]);
+                }
+            }
+        }
+
+        return actualList;
     }
 }

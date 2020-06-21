@@ -28,8 +28,7 @@ public class WalkingTraces : MonoBehaviour
         if (!tile.isInFOW || !BoardGrid.instance.grid.Contains(tile))
             return false;
 
-        DetectDirectNeighbours n = new DetectDirectNeighbours();
-        if (n.DetectTileRadius(tile,LocalGameManager.instance.activePlayer.GetComponent<Player>().footstepDetectionRadius, false).Contains(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile))
+        if (DetectDirectNeighbours.DetectTileRadius(tile,LocalGameManager.instance.activePlayer.GetComponent<Player>().footstepDetectionRadius, false).Contains(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile))
             return true;
         else
             return false;

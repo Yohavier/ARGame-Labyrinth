@@ -38,8 +38,8 @@ public class Pathfinding
 			{
 				return GetFinalPath(a_start, a_target, stepsLeft);				
 			}
-			DetectDirectNeighbours n = new DetectDirectNeighbours();
-			foreach (Tile neighbouringTile in n.DetectMoveOptionsFromSingleTile(tile))
+
+			foreach (Tile neighbouringTile in DetectDirectNeighbours.DetectMoveOptionsFromSingleTile(tile))
 			{
 				if (!hashSet.Contains(neighbouringTile))
 				{

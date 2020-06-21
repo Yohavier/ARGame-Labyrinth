@@ -13,8 +13,8 @@ public class FogOfWar : MonoBehaviour
 		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
-			DetectDirectNeighbours n = new DetectDirectNeighbours();
-			neighbours = n.DetectTileRadius(newPosition, LocalGameManager.instance.activePlayer.GetComponent<Player>().fogOfWarRadius, true);
+			//DetectDirectNeighbours n = new DetectDirectNeighbours();
+			neighbours = DetectDirectNeighbours.DetectTileRadius(newPosition, LocalGameManager.instance.activePlayer.GetComponent<Player>().fogOfWarRadius, true);
 		}
 		else
 		{
@@ -58,8 +58,7 @@ public class FogOfWar : MonoBehaviour
 	private List<Tile> GetCommunicatorTile(CommunicatorPowerUp powerUp) 
 	{
 		Player targetPlayer = powerUp.targetForCommunication.GetComponent<Player>();
-		DetectDirectNeighbours n = new DetectDirectNeighbours();
-		return n.DetectTileRadius(targetPlayer.positionTile, targetPlayer.fogOfWarRadius, true);
+		return DetectDirectNeighbours.DetectTileRadius(targetPlayer.positionTile, targetPlayer.fogOfWarRadius, true);
 	}
 	private List<Tile> GetWindowsInTile(Tile tile)
 	{
