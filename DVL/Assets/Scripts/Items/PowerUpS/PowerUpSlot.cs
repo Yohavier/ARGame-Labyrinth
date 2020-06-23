@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 //TODO: Exchange Items if wanted
 //Active PowerUps: Communicator and Scanner
-//if Power up active, lock in slot
 //to drop, deactivate it
-//if dropped = destroyed
 
 public class PowerUpSlot : MonoBehaviour
 {
