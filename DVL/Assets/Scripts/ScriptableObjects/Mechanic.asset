@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Mechanic
   diceModificator: 0
-  fogOfWarRadius: 0
-  footstepDetectionRadius: 0
-  repaitSpeed: 0
+  fogOfWarRadius: 1
+  footstepDetectionRadius: 1
+  repairSpeed: 1
+  maxDeathTurnCounter: 0

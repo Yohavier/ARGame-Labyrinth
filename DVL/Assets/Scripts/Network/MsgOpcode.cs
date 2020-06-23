@@ -10,9 +10,15 @@ public enum MsgOpcode //ID for Message Header
     opBoardSetup = 2,
     opPlayerMove = 3,
     opItemCollected = 4,
+    opPlayerKilled = 5,
+    opPlayerHealed = 6,
+    opGeneratorRepaired = 7,
+    opDoorHackUsed = 8,
 
     //100-200 Server handles message, updates and sends reply to all clients
     opTurnChange = 100,
+    opReadyChange = 101,
+    opPlayerConnected = 102,
 
     //>=200 Server sends reply to one client
     opSetupPlayer = 200,

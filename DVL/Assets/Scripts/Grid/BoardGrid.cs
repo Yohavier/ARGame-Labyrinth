@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using Assets.Scripts.GameManagement;
 
 public class BoardGrid : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class BoardGrid : MonoBehaviour
 
 	public GameObject fog;
 
+	public Tile FindTileByIndex(int tileIndex)
+	{
+		return grid.Find(x => x.index == tileIndex);
+	}
+
 	#region Initialization 
 	private void Awake()
 	{
@@ -48,7 +54,7 @@ public class BoardGrid : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (NetworkManager.instance.isDebug)
+		if (GUIManager.instance.isDebug)
 		{
 			foreach (Tile tile in grid)
 			{
@@ -143,7 +149,7 @@ public class BoardGrid : MonoBehaviour
 
 	public void CreateFogForTile(Tile tile)
 	{
-		if (NetworkManager.instance.isDebug)
+		if (GUIManager.instance.isDebug)
 			return;
 		GameObject f = Instantiate(fog);
 		f.transform.SetParent(tile.transform);

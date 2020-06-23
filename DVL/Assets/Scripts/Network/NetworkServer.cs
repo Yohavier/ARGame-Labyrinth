@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using UnityEngine;
 
 public class NetworkServer
@@ -27,8 +28,18 @@ public class NetworkServer
     //Send client data after connecting
     private void SetupNewPlayer(ClientReference client)
     {
-        Msg msg = BuildPlayerSetupMessage((PlayerIndex)gameState.playerCount);
+        PlayerIndex playerIndex = (PlayerIndex)gameState.playerCount;
+        client.playerState.playerID = playerIndex;
+        Msg msg = BuildPlayerSetupMessage(playerIndex);
         UnicastMessage(msg.Serialize(), client.clientSocket);
+        Msg msg2 = new Msg(MsgOpcode.opPlayerConnected, 256);
+        msg2.Write(clientList.Count);
+        for (int i = 0; i < clientList.Count; i++)
+        {
+            msg2.Write(clientList[i].clientSocket.RemoteEndPoint.ToString().Split(':')[0]);
+        }
+        BroadcastMessage(msg2.Serialize());
+
         gameState.playerCount++;
     }
 
@@ -36,9 +47,25 @@ public class NetworkServer
     //TODO: Only start game if everyone selected a role, maybe a ready button
     public void StartMatch()
     {
+        for (int i = 0; i < clientList.Count; i++)
+        {
+            if (!clientList[i].playerState.isReady)
+            {
+                Debug.LogWarning("Not all Players ready");
+                return;
+            }
+        }
         HandleChangeTurn();
         Msg boardMsg = BuildBoardSetupMessage();
         BroadcastMessage(boardMsg.Serialize());
+    }
+
+    private void SendReadyChange(ClientReference client)
+    {
+        Msg msg = new Msg(MsgOpcode.opReadyChange, 8);
+        msg.Write(Convert.ToInt32(client.playerState.isReady));
+        msg.Write((int)client.playerState.playerID);
+        BroadcastMessage(msg.Serialize());
     }
 
     private void HandleChangeTurn()
@@ -49,6 +76,14 @@ public class NetworkServer
         Msg msg = BuildTurnChangeMessage(nextTurnPlayer);
         gameState.currentTurnPlayer = nextTurnPlayer;
         BroadcastMessage(msg.Serialize());
+    }
+
+    private void HandleReadyChange(Msg msg, Socket clientSocket)
+    {
+        bool value = Convert.ToBoolean(msg.ReadInt());
+        ClientReference client = clientList.Find(x => x.clientSocket == clientSocket);
+        client.playerState.isReady = value;
+        SendReadyChange(client);
     }
 
     //Accept connection, wait for receiving data
@@ -68,7 +103,6 @@ public class NetworkServer
     {
         Socket clientSocket = (Socket)result.AsyncState;
         int numBytes = clientSocket.EndReceive(result);
-        Debug.Log("Received Data " + numBytes);
         byte[] data = new byte[numBytes];
         Buffer.BlockCopy(buffer, 0, data, 0, numBytes);
         HandleMessage(new Msg(data), clientSocket);
@@ -77,6 +111,7 @@ public class NetworkServer
 
     private void HandleMessage(Msg msg, Socket clientSocket)
     {
+        Debug.Log("Server: Received " + msg.opcode);
         if ((int)msg.opcode < 100) //Reflect received data to all other clients
         {
             BroadcastMessageExclusive(msg.Serialize(), clientSocket);
@@ -87,6 +122,9 @@ public class NetworkServer
         {
             case MsgOpcode.opTurnChange:
                 HandleChangeTurn();
+                break;
+            case MsgOpcode.opReadyChange:
+                HandleReadyChange(msg, clientSocket);
                 break;
         }
     }
@@ -101,6 +139,7 @@ public class NetworkServer
     private void UnicastMessage(byte[] data, Socket clientSocket)
     {
         clientSocket.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), clientSocket);
+        Thread.Sleep(100);
     }
 
     //Send message to all clients
@@ -110,6 +149,7 @@ public class NetworkServer
         {
             clientList[i].clientSocket.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), clientList[i].clientSocket);
         }
+        Thread.Sleep(100);
     }
 
     //Send message to all clients except one
@@ -122,6 +162,7 @@ public class NetworkServer
 
             clientList[i].clientSocket.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), clientList[i].clientSocket);
         }
+        Thread.Sleep(100);
     }
 
     private Msg BuildPlayerSetupMessage(PlayerIndex nextPlayer)

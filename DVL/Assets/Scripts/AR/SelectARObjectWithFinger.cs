@@ -1,3 +1,4 @@
+using Assets.Scripts.GameManagement;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -108,7 +109,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 			//Color path red
 			if (path != null)
 			{
-				if (NetworkManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)
+				if (GUIManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)
 				{
 					foreach (Tile t in path)
 					{

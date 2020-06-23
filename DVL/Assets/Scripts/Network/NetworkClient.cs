@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.GameManagement;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -65,6 +66,7 @@ public class NetworkClient
 
     private void HandleMessage(Msg msg)
     {
+        Debug.Log("Client: Received " + msg.opcode);
         switch (msg.opcode)
         {
             case MsgOpcode.opTileMove:
@@ -82,8 +84,26 @@ public class NetworkClient
             case MsgOpcode.opItemCollected:
                 HandleItemCollected(msg);
                 break;
+            case MsgOpcode.opPlayerKilled:
+                HandlePlayerKilled(msg);
+                break;
+            case MsgOpcode.opPlayerHealed:
+                HandlePlayerHealed(msg);
+                break;
+            case MsgOpcode.opGeneratorRepaired:
+                HandleGeneratorRepaired(msg);
+                break;
+            case MsgOpcode.opDoorHackUsed:
+                HandleDoorHackUsed(msg);
+                break;
             case MsgOpcode.opTurnChange:
                 HandleTurnChange(msg);
+                break;
+            case MsgOpcode.opReadyChange:
+                HandleReadyChange(msg);
+                break;
+            case MsgOpcode.opPlayerConnected:
+                HandlePlayerConnected(msg);
                 break;
             case MsgOpcode.opSetupPlayer:
                 HandleSetupPlayer(msg);
@@ -94,6 +114,7 @@ public class NetworkClient
     private void HandleTurnChange(Msg msg)
     {
         PlayerIndex currentTurnPlayer = (PlayerIndex)msg.ReadInt();
+        //GUIManager.instance.nextTurnButton.interactable = currentTurnPlayer == LocalGameManager.instance.localPlayerIndex;
         LocalGameManager.instance.currentTurnPlayer = currentTurnPlayer;
     }
     private void HandleSetupPlayer(Msg msg)
@@ -125,26 +146,28 @@ public class NetworkClient
 
     private void HandleBoardSetup(Msg msg)
     {
+        //InformationPanel.instance.enabled = true;
         BoardGrid.instance.seedList.Clear();
         BoardGrid.instance.seedCount = -1;
         for (int i = 0; i < 49; i++)
             BoardGrid.instance.seedList.Add(msg.ReadFloat());
 
         BoardGrid.instance.readyToSetup = true;//.SetUpGrid();
+        GUIManager.instance.needsMenuUpdate = true;
     }
 
     private void HandlePlayerMove(Msg msg)
     {
         PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
-        SelectARObjectWithFinger.instance.ManagePath(BoardGrid.instance.grid.Find(x => x.index == targetTileindex), playerIndex);
+        SelectARObjectWithFinger.instance.ManagePath(BoardGrid.instance.FindTileByIndex(targetTileindex), playerIndex);
     }
 
     private void HandleItemCollected(Msg msg)
     {
         PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
-        var item = BoardGrid.instance.grid.Find(x => x.index == targetTileindex).GetComponentInChildren<Item>();
+        var item = BoardGrid.instance.FindTileByIndex(targetTileindex).GetComponentInChildren<Item>();
         if (item != null)
         {
             item.transform.SetParent(GameManager.instance.allPlayers[(int)playerIndex].transform);
@@ -153,6 +176,64 @@ public class NetworkClient
 
         else
             Debug.LogError("No Item found");
+    }
+
+    private void HandlePlayerKilled(Msg msg)
+    {
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
+        Player player = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<Player>();
+        GameManager.instance.KillPlayer(player);
+    }
+
+    private void HandlePlayerHealed(Msg msg)
+    {
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
+        CrewMember player = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<CrewMember>();
+        player.GetHealedByOtherPlayer();
+    }
+
+    private void HandleGeneratorRepaired(Msg msg)
+    {
+        int repairSpeed = msg.ReadInt();
+        Generator.instance.RepairGenerator(repairSpeed);
+    }
+
+    private void HandleDoorHackUsed(Msg msg)
+    {
+        int tileIndex = msg.ReadInt();
+        Tile tile = BoardGrid.instance.FindTileByIndex(tileIndex);
+        tile.ToggleDoors();
+    }
+
+    private void HandleReadyChange(Msg msg)
+    {
+
+    }
+
+    private void HandlePlayerConnected(Msg msg)
+    {
+        int count = msg.ReadInt();
+        if (count > 0)
+        {
+            string ip1 = msg.ReadString();
+            GUIManager.instance.player1Text = "Player 1: " + ip1;
+        }
+        if (count > 1)
+        {
+            string ip2 = msg.ReadString();
+            GUIManager.instance.player2Text = "Player 2: " + ip2;
+        }
+        if (count > 2)
+        {
+            string ip3 = msg.ReadString();
+            GUIManager.instance.player3Text = "Player 3: " + ip3;
+
+        }
+        if (count > 3)
+        {
+            string ip4 = msg.ReadString();
+            GUIManager.instance.player4Text = "Player 4: " + ip4;
+        }
     }
 
     public void SendGridMove(Tile entryTile, Tile newRoom)
@@ -190,6 +271,41 @@ public class NetworkClient
         Msg msg = new Msg(MsgOpcode.opItemCollected, 8);
         msg.Write((int)LocalGameManager.instance.localPlayerIndex);
         msg.Write(itemTile.index);
+        Send(msg);
+    }
+
+    public void SendPlayerKilled(PlayerIndex playerIndex)
+    {
+        Msg msg = new Msg(MsgOpcode.opPlayerKilled, 4);
+        msg.Write((int)playerIndex);
+        Send(msg);
+    }
+
+    public void SendPlayerHealed(PlayerIndex playerIndex)
+    {
+        Msg msg = new Msg(MsgOpcode.opPlayerKilled, 4);
+        msg.Write((int)playerIndex);
+        Send(msg);
+    }
+
+    public void SendGeneratorRepaired(int repairSpeed)
+    {
+        Msg msg = new Msg(MsgOpcode.opGeneratorRepaired, 4);
+        msg.Write(repairSpeed);
+        Send(msg);
+    }
+
+    public void SendDoorHackUsed(Tile targetTile)
+    {
+        Msg msg = new Msg(MsgOpcode.opDoorHackUsed, 4);
+        msg.Write(targetTile.index);
+        Send(msg);
+    }
+
+    public void SendReadyChanged(bool value)
+    {
+        Msg msg = new Msg(MsgOpcode.opReadyChange, 4);
+        msg.Write(Convert.ToInt32(value));
         Send(msg);
     }
 }

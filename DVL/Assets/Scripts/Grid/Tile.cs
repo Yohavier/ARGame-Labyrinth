@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Threading;
+using Assets.Scripts.GameManagement;
 
 public enum TileDirectionModule { NONE, WALL, DOOR, WINDOW}
 public class Tile : MonoBehaviour
@@ -191,7 +192,7 @@ public class Tile : MonoBehaviour
 	public void PrefabColor()
 	{
 		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-		if (isInFOW && !NetworkManager.instance.isDebug)
+		if (isInFOW && !GUIManager.instance.isDebug)
 		{			
 			foreach(MeshRenderer mesh in meshes)
 			{
@@ -219,6 +220,16 @@ public class Tile : MonoBehaviour
 
 		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
     }
+	public void ToggleDoors(bool toggle)
+    {
+		doorOpen = toggle;
+		if (doorOpen)
+			OpenTileDoors();
+		else
+			CloseTileDoors();
+
+		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+	}
 
 	private void OpenTileDoors()
     {
@@ -228,5 +239,17 @@ public class Tile : MonoBehaviour
 	private void CloseTileDoors()
     {
 		//Play Animation
+    }
+
+	public bool TileContainsDoor()
+    {
+		if(ingameForwardModule== TileDirectionModule.DOOR || ingameBackwardModule == TileDirectionModule.DOOR || ingameLeftModule == TileDirectionModule.DOOR || ingameRightModule == TileDirectionModule.DOOR)
+        {
+			return true;
+        }
+        else
+        {
+			return false;
+        }
     }
 }

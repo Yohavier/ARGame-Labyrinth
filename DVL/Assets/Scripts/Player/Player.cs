@@ -1,3 +1,4 @@
+using Assets.Scripts.GameManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         set
         {
 			_playerState = value;
+			GUIManager.instance.playerCanvas.SetActive(true);
 			InformationPanel.instance.SetStateText(_playerState.ToString());
 			if(_playerState == PlayerState.DYING)
             {
@@ -203,37 +205,10 @@ public class Player : MonoBehaviour
 	
 	public virtual void CheckTileForOtherMods(Tile tile) 
 	{
-		//Check for Doors
-		HandleDoors(tile);
 	}
 	protected virtual void Dying() { }
 	protected virtual void Dead() { }
 	protected virtual void CheckDeathCounter() { }
-
-    #region Handle the Door extension
-    private void HandleDoors(Tile tile)
-    {
-		if (tile.ingameForwardModule == TileDirectionModule.DOOR || tile.ingameBackwardModule == TileDirectionModule.DOOR || tile.ingameRightModule == TileDirectionModule.DOOR || tile.ingameLeftModule == TileDirectionModule.DOOR)
-		{
-			InformationPanel.instance.SetToggleDoorsButton(true);
-			InformationPanel.instance.toggleDoorsButton.onClick.AddListener(() => ToggleDoors(tile));
-		}
-		else
-		{
-			RemoveToggleDoorsListener();
-		}
-	}
-	private void ToggleDoors(Tile tile)
-    {
-		RemoveToggleDoorsListener();
-		tile.ToggleDoors();
-    }
-	public void RemoveToggleDoorsListener()
-    {
-		InformationPanel.instance.SetToggleDoorsButton(false);
-		InformationPanel.instance.toggleDoorsButton.onClick.RemoveAllListeners();
-    }
-    #endregion
 	
 	public virtual void NotifyNextTurn(bool toggle) { }
 }

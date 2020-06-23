@@ -1,3 +1,4 @@
+using Assets.Scripts.GameManagement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -109,7 +110,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	//sets up the new Prefab that dropped out of the Grid 
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
-		if (NetworkManager.instance.isDebug)
+		if (GUIManager.instance.isDebug)
 		{
 			droppedOutPrefab.GetComponent<Tile>().isInFOW = false;
 			droppedOutPrefab.GetComponent<Tile>().PrefabColor();

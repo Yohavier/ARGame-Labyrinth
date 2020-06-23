@@ -41,6 +41,7 @@ public class InformationPanel : MonoBehaviour
     {
         instance = this;
         MenuPanelButton.onClick.AddListener(ToggleMenuPanel);
+        SetUpDropDownMenu();
     }
 
     private void ToggleMenuPanel()
@@ -105,7 +106,7 @@ public class InformationPanel : MonoBehaviour
     #endregion
 
     #region CharacterSelection
-    private void Start()
+    private void SetUpDropDownMenu()
     {
         playerRoleMenu.ClearOptions();
         CreateDropDownMenu();

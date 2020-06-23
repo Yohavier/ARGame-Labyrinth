@@ -14,12 +14,6 @@ public class CrewMember : Player
             {
 				return false;
 			}
-            else if(player.playerState == PlayerState.DYING)
-            {
-				CrewMember crewMember = player.GetComponent<CrewMember>();
-				if (crewMember) 
-					HandleHealPlayer(crewMember);
-			}
 		}
 		return true;
 	}
@@ -80,10 +74,15 @@ public class CrewMember : Player
 
 	private void StorePowerUp(Button freeSlot, PowerUpBase powerUp)
     {
-		freeSlot.interactable = true;
+        if (freeSlot.GetComponent<PowerUpSlot>().storedPowerUp != null)
+        {
+			freeSlot.GetComponent<PowerUpSlot>().DropEverythingInSlot();
+        }
+
 		freeSlot.image.sprite = powerUp.powerUpImage;
 		freeSlot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
-		powerUp.gameObject.SetActive(false);
+		freeSlot.interactable = true;
+		Destroy(powerUp.GetComponent<MeshRenderer>());
     }
 	#endregion
 
@@ -101,9 +100,7 @@ public class CrewMember : Player
     }
 	private void RemoveAllEventListeners()
     {
-		RemoveToggleDoorsListener();
 		RemovePickUpButtonListener();
-		RemoveHealPlayerButtonListener();
 		RemoveDropItemButtonListener();
 		RemoveRepairGeneratorButtonListener();
     }
@@ -217,6 +214,7 @@ public class CrewMember : Player
 	{
 		RemoveRepairGeneratorButtonListener();
 		generator.RepairGenerator(repairSpeed);
+		NetworkClient.instance.SendGeneratorRepaired(repairSpeed);
 	}
 	private void RemoveRepairGeneratorButtonListener()
 	{
@@ -226,26 +224,12 @@ public class CrewMember : Player
     #endregion
 
     #region Handle Heal Player extension
-	private void HandleHealPlayer(CrewMember crewMember)
-    {
-		InformationPanel.instance.SetHealPlayerButton(true);
-		InformationPanel.instance.healPlayerButton.onClick.AddListener(() => HealPlayer(crewMember));
-    }
-	private void HealPlayer(CrewMember crewMember)
-    {
-		crewMember.GetHealedByOtherPlayer();
-		RemoveHealPlayerButtonListener();
-    }
+
 	public void GetHealedByOtherPlayer()
     {
 		deathTurnCounter = 0;
 		playerState = PlayerState.ALIVE;
 		GetComponent<MeshRenderer>().material.color = Color.white;
 	}
-	private void RemoveHealPlayerButtonListener()
-    {
-		InformationPanel.instance.SetHealPlayerButton(false);
-		InformationPanel.instance.healPlayerButton.onClick.RemoveAllListeners();
-    }
     #endregion
 }

@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
 		instance = this;
 	}
 
+	public void KillPlayer(Player player)
+	{
+		player.playerState = PlayerState.DYING;
+	}
+
 	public void CheckWinConditionCrew()
 	{
 		capsuleCount++;

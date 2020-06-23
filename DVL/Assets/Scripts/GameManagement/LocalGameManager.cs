@@ -50,7 +50,7 @@ public class LocalGameManager : MonoBehaviour
 	}
     private void OnEnable()
     {
-		Eventbroker.instance.onNotifyNextTurn += NotifyNextTurn;
+		//Eventbroker.instance.onNotifyNextTurn += NotifyNextTurn;
     }
 	private void OnDisable()
     {
@@ -102,7 +102,7 @@ public class LocalGameManager : MonoBehaviour
 		//StepsLeft = Random.Range(1, 7);
 		RemoveRollDiceButtonListener();
 
-		if(activePlayer)
+		//if(activePlayer)
 			activePlayer.GetComponent<Player>().NotifyNextTurn(true);
     }
 	private void RemoveRollDiceButtonListener()

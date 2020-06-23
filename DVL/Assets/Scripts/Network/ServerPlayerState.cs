@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 
 public class ServerPlayerState
 {
-    PlayerIndex playerID;
+    public PlayerIndex playerID = PlayerIndex.Invalid;
+    public bool isReady;
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Text;
 using UnityEngine;
 
 public class Msg
@@ -65,6 +66,15 @@ public class Msg
         Write(value.z);
     }
 
+    public void Write(string value)
+    {
+        byte[] buffer = Encoding.Unicode.GetBytes(value);
+        int bufferSize = buffer.Length;
+        Write(bufferSize);
+        Buffer.BlockCopy(buffer, 0, data, writeOffset, bufferSize);
+        writeOffset += bufferSize;
+    }
+
     public int ReadInt()
     {
         int value = BitConverter.ToInt32(data, readOffset);
@@ -82,5 +92,13 @@ public class Msg
     public Vector3 ReadVector3()
     {
         return new Vector3(ReadFloat(), ReadFloat(), ReadFloat());
+    }
+
+    public string ReadString()
+    {
+        int bufferSize = ReadInt();
+        string value = Encoding.Unicode.GetString(data, readOffset, bufferSize);
+        readOffset += bufferSize;
+        return value;
     }
 }
