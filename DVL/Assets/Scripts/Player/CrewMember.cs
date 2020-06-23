@@ -37,7 +37,7 @@ public class CrewMember : Player
 			HandlePowerUps(tile);
 		}
     }
-	
+
 	//TODO: Synchonize Power Up Pick up with other players
 	#region HandlePowerUps
 	private void HandlePowerUps(Tile tile)
@@ -112,7 +112,7 @@ public class CrewMember : Player
 		GameManager.instance.CheckWinConditionMonster();
 		GetComponent<MeshRenderer>().material.color = Color.black;
 		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
-		if (storedItem != null) 
+		if (storedItem != null)
 			DropItem(null, positionTile);
     }
     protected override void Dying()
@@ -130,7 +130,7 @@ public class CrewMember : Player
     #endregion
 
     #region Handle Pickup Item extension
-    private void HandlePickUpItem(Tile tile) 
+    private void HandlePickUpItem(Tile tile)
 	{
 		Item item = tile.GetComponentInChildren<Item>();
 		if (item != null && storedItem == null)
@@ -144,7 +144,7 @@ public class CrewMember : Player
 		}
 	}
     private void PickUpItem(Item item, Tile tile)
-	{ 
+	{
 		RemovePickUpButtonListener();
 
 		NetworkClient.instance.SendItemCollected(tile);
@@ -153,7 +153,7 @@ public class CrewMember : Player
 		item.isStored = true;
 		storedItem.transform.SetParent(this.transform);
 		InformationPanel.instance.SetItemText(item.itemName);
-		storedItem.gameObject.SetActive(false);	
+		storedItem.gameObject.SetActive(false);
 	}
     private void RemovePickUpButtonListener()
     {
@@ -180,7 +180,7 @@ public class CrewMember : Player
 	{
 		if (storedItem != null)
 		{
-			if (capsule != null) 
+			if (capsule != null)
 				capsule.DisplayProgress();
 
 			storedItem.gameObject.SetActive(true);
