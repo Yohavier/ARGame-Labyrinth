@@ -33,7 +33,6 @@ public class NetworkServer
     }
 
     //Send all clients match start data
-    //TODO: Only start game if everyone selected a role, maybe a ready button
     public void StartMatch()
     {
         HandleChangeTurn();

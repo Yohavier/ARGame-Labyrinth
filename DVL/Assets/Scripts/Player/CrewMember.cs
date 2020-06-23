@@ -14,12 +14,6 @@ public class CrewMember : Player
             {
 				return false;
 			}
-            else if(player.playerState == PlayerState.DYING)
-            {
-				CrewMember crewMember = player.GetComponent<CrewMember>();
-				if (crewMember) 
-					HandleHealPlayer(crewMember);
-			}
 		}
 		return true;
 	}
@@ -108,7 +102,6 @@ public class CrewMember : Player
     {
 		RemoveToggleDoorsListener();
 		RemovePickUpButtonListener();
-		RemoveHealPlayerButtonListener();
 		RemoveDropItemButtonListener();
 		RemoveRepairGeneratorButtonListener();
     }
@@ -231,26 +224,11 @@ public class CrewMember : Player
     #endregion
 
     #region Handle Heal Player extension
-	private void HandleHealPlayer(CrewMember crewMember)
-    {
-		InformationPanel.instance.SetHealPlayerButton(true);
-		InformationPanel.instance.healPlayerButton.onClick.AddListener(() => HealPlayer(crewMember));
-    }
-	private void HealPlayer(CrewMember crewMember)
-    {
-		crewMember.GetHealedByOtherPlayer();
-		RemoveHealPlayerButtonListener();
-    }
 	public void GetHealedByOtherPlayer()
     {
 		deathTurnCounter = 0;
 		playerState = PlayerState.ALIVE;
 		GetComponent<MeshRenderer>().material.color = Color.white;
 	}
-	private void RemoveHealPlayerButtonListener()
-    {
-		InformationPanel.instance.SetHealPlayerButton(false);
-		InformationPanel.instance.healPlayerButton.onClick.RemoveAllListeners();
-    }
     #endregion
 }
