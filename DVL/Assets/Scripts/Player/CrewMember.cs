@@ -143,11 +143,12 @@ public class CrewMember : Player
 			RemovePickUpButtonListener();
 		}
 	}
-    private void PickUpItem(Item item, Tile tile)
+    public void PickUpItem(Item item, Tile tile)
 	{
-		RemovePickUpButtonListener();
+		if(LocalGameManager.instance.activePlayer == this.gameObject)
+			NetworkClient.instance.SendItemCollected(tile);
 
-		NetworkClient.instance.SendItemCollected(tile);
+		RemovePickUpButtonListener();
 
 		storedItem = item.gameObject;
 		item.isStored = true;

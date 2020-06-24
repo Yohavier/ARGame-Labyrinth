@@ -167,12 +167,11 @@ public class NetworkClient
     {
         PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
-        var item = BoardGrid.instance.FindTileByIndex(targetTileindex).GetComponentInChildren<Item>();
-        if (item != null)
-        {
-            item.transform.SetParent(GameManager.instance.allPlayers[(int)playerIndex].transform);
-            item.GetComponent<MeshRenderer>().enabled = false;
-        }
+
+        var tile = BoardGrid.instance.FindTileByIndex(targetTileindex);
+        var item = tile.GetComponentInChildren<Item>();
+        if(tile && item)
+            GameManager.instance.allPlayers[(int)playerIndex].GetComponent<CrewMember>().PickUpItem(item, tile);
 
         else
             Debug.LogError("No Item found");
