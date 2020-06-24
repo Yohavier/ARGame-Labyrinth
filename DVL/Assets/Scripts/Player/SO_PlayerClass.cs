@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Player;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ using UnityEngine;
 public class SO_PlayerClass : ScriptableObject
 {
 	public string roleName;
+	public RoleIndex roleIndex = RoleIndex.Invalid;
 	public int diceModificator;
 	public int fogOfWarRadius;
 	public int footstepDetectionRadius;

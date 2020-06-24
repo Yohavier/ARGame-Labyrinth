@@ -1,4 +1,5 @@
 using Assets.Scripts.GameManagement;
+using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,27 +40,35 @@ public class Player : MonoBehaviour
 	//Health Status of player
 	public PlayerState _playerState;
 	public PlayerState playerState
-    {
-        get
-        {
+	{
+		get
+		{
 			return _playerState;
-        }
-        set
-        {
+		}
+		set
+		{
 			_playerState = value;
-			GUIManager.instance.playerCanvas.SetActive(true);
-			InformationPanel.instance.SetStateText(_playerState.ToString());
-			if(_playerState == PlayerState.DYING)
-            {
+
+			if (IsLocalPlayer())
+			{
+				InformationPanel.instance.SetStateText(_playerState.ToString());
+			}
+
+			if (_playerState == PlayerState.DYING)
+			{
 				Dying();
-            }
-			else if(_playerState == PlayerState.DEAD)
-            {
+			}
+			else if (_playerState == PlayerState.DEAD)
+			{
 				Dead();
-            }
-        }
-    }
-	
+			}
+		}
+	}
+
+	public bool IsLocalPlayer()
+	{
+		return playerIndex == LocalGameManager.instance.localPlayerIndex;
+	}
 
 	#region Initialization
 	public void SetUpPlayer(int count)
@@ -67,8 +76,15 @@ public class Player : MonoBehaviour
 		playerIndex = ChooseRightIndex(count);
 		trace = GetComponent<WalkingTraces>();
 
-		if (playerIndex != LocalGameManager.instance.localPlayerIndex)
+		if (NetworkClient.instance.networkPlayers[count - 1].roleIndex > RoleIndex.Invalid)
 		{
+			playerRole = InformationPanel.instance.playerRoles[(int)NetworkClient.instance.networkPlayers[count - 1].roleIndex];
+			playerRole.SetPlayerStats(this);
+		}
+
+		if (!IsLocalPlayer())
+		{
+
 			GetComponent<MeshRenderer>().enabled = false;
 			Destroy(GetComponent<FogOfWar>());
 		}
@@ -78,9 +94,6 @@ public class Player : MonoBehaviour
 			playerState = PlayerState.ALIVE;
 			playerFOW = GetComponent<FogOfWar>();
 			SetInformations();
-
-			playerRole = InformationPanel.instance.GetPlayerRoleStats(this);
-			playerRole.SetPlayerStats(this);
 		}
 	}
 	private PlayerIndex ChooseRightIndex(int count)

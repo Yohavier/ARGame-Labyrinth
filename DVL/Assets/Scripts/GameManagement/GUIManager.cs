@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,21 +26,14 @@ namespace Assets.Scripts.GameManagement
         public Button nextTurnButton;
         public Button debugButton;
         public Toggle readyToggle;
-        public Text player1Label;
-        public Text player2Label;
-        public Text player3Label;
-        public Text player4Label;
+        public Text[] playerLabels = new Text[4];
+
         string serverIP = "192.168.194.169";
         public bool isServer = false;
-        public bool isDebug = false;
-
-        public string player1Text = "Player 1: ";
-        public string player2Text = "Player 2: ";
-        public string player3Text = "Player 3: ";
-        public string player4Text = "Player 4: ";
+        public bool isDebug = true;
 
         public bool needsMenuUpdate = false;
-        public bool needsTurnUpdate = false;
+        public bool needsPlayerUpdate = false;
 
         private void Awake()
         {
@@ -54,10 +48,10 @@ namespace Assets.Scripts.GameManagement
             nextTurnButton = GameObject.Find("NextTurnButton").GetComponent<Button>();
             debugButton = GameObject.Find("DebugButton").GetComponent<Button>();
             readyToggle = GameObject.Find("ReadyToggle").GetComponent<Toggle>();
-            player1Label = GameObject.Find("Player1Label").GetComponent<Text>();
-            player2Label = GameObject.Find("Player2Label").GetComponent<Text>();
-            player3Label = GameObject.Find("Player3Label").GetComponent<Text>();
-            player4Label = GameObject.Find("Player4Label").GetComponent<Text>();
+            playerLabels[0] = GameObject.Find("Player1Label").GetComponent<Text>();
+            playerLabels[1] = GameObject.Find("Player2Label").GetComponent<Text>();
+            playerLabels[2] = GameObject.Find("Player3Label").GetComponent<Text>();
+            playerLabels[3] = GameObject.Find("Player4Label").GetComponent<Text>();
 
             hostButton.onClick.AddListener(() => OnHostButtonClick());
             joinButton.onClick.AddListener(() => OnJoinButtonClick());
@@ -68,6 +62,7 @@ namespace Assets.Scripts.GameManagement
             hostIPInput.text = serverIP;
             lobbyCanvas.SetActive(false);
             instance = this;
+            isDebug = true;
         }
 
         private void Start()
@@ -84,13 +79,16 @@ namespace Assets.Scripts.GameManagement
                 needsMenuUpdate = false;
             }
 
-            player1Label.enabled = false;
-            player1Label.text = player1Text;
-            player2Label.text = player2Text;
-            player3Label.text = player3Text;
-            player4Label.text = player4Text;
+            if (needsPlayerUpdate)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    playerLabels[i].text = "Player" + (i + 1) + ": " + NetworkClient.instance.networkPlayers[i].ip + " " + (NetworkClient.instance.networkPlayers[i].isReady ? "✓" : "") + Environment.NewLine
+                    + "Role: " + NetworkClient.instance.networkPlayers[i].roleIndex;
+                }
 
-            player1Label.enabled = true;
+                needsPlayerUpdate = false;
+            }
         }
 
         void OnTurnChange()
@@ -107,6 +105,10 @@ namespace Assets.Scripts.GameManagement
         void OnDebugButtonClicked()
         {
             isDebug = !isDebug;
+            if (isDebug)
+                DebugConsole.instance.enabled = true;
+            else
+                DebugConsole.instance.enabled = false;
         }
 
         void OnNextTurnButtonClick()

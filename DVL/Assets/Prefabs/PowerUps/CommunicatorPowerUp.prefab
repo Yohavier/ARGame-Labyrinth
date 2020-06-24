@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5846568563934291465}
   - component: {fileID: 7540680545440688929}
   - component: {fileID: 7692635741405087096}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: CommunicatorPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,3 +94,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 3724763658437694737}
   powerUpImage: {fileID: 21300000, guid: 17c030f9b1ff29f43875d207715824ef, type: 3}
+  targetForCommunication: {fileID: 0}
+  playerWhoActivated: {fileID: 0}

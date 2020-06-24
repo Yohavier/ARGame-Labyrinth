@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Standart
   m_EditorClassIdentifier: 
   roleName: Standart
+  roleIndex: 3
   diceModificator: 0
   fogOfWarRadius: 3
   footstepDetectionRadius: 1

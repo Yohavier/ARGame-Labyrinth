@@ -34,8 +34,6 @@ public class BoardGrid : MonoBehaviour
 	public Tile trackedTile;
 	public Tile lastTrackedTile;
 
-	public GameObject fog;
-
 	public Tile FindTileByIndex(int tileIndex)
 	{
 		return grid.Find(x => x.index == tileIndex);
@@ -131,7 +129,6 @@ public class BoardGrid : MonoBehaviour
 				tileCount++;
 				component.index = tileCount;
 				grid.Add(component);
-				CreateFogForTile(component);
 				coordDic.Add(row.ToString() + column.ToString(), component);
 				if ((row == 0 && column == 0) || (row == 0 && column == 6) || (row == 6 && column == 0) || (row == 6 && column == 6))
 				{
@@ -140,20 +137,10 @@ public class BoardGrid : MonoBehaviour
 			}
 		}
 		GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
-		CreateFogForTile(leftOverTile.GetComponent<Tile>());
 		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
 		GetComponent<SpawnItems>().SetItemOnGrid();
-	}
-
-	public void CreateFogForTile(Tile tile)
-	{
-		if (GUIManager.instance.isDebug)
-			return;
-		GameObject f = Instantiate(fog);
-		f.transform.SetParent(tile.transform);
-		f.transform.localPosition = new Vector3(0, 0.05f, 0);
 	}
 	#endregion
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -13,7 +14,7 @@ public class Msg
     public byte[] data; //Serialized data buffer
 
     //Constructor for messages to send
-    public Msg (MsgOpcode _opcode, int size)
+    public Msg(MsgOpcode _opcode, int size)
     {
         opcode = _opcode;
         writeOffset = 0;
@@ -30,7 +31,7 @@ public class Msg
     //Combine header and body in one stream to send over the network
     public byte[] Serialize()
     {
-        int size = data.Length  + 2 * sizeof(int);
+        int size = data.Length + 2 * sizeof(int);
         byte[] serialized = new byte[size];
         Buffer.BlockCopy(BitConverter.GetBytes((int)opcode), 0, serialized, 0, 4);
         Buffer.BlockCopy(BitConverter.GetBytes(writeOffset), 0, serialized, 4, 4);
@@ -59,6 +60,12 @@ public class Msg
         writeOffset += sizeof(float);
     }
 
+    public void Write(bool value)
+    {
+        Buffer.BlockCopy(BitConverter.GetBytes(value), 0, data, writeOffset, sizeof(bool));
+        writeOffset += sizeof(bool);
+    }
+
     public void Write(Vector3 value)
     {
         Write(value.x);
@@ -75,6 +82,25 @@ public class Msg
         writeOffset += bufferSize;
     }
 
+    public void Write(byte[] serializedString)
+    {
+        int bufferSize = serializedString.Length;
+        Write(bufferSize);
+        Buffer.BlockCopy(serializedString, 0, data, writeOffset, bufferSize);
+        writeOffset += bufferSize;
+    }
+
+    public void Write(NetworkPlayerState value)
+    {
+        byte[] ipSerialized = Encoding.Unicode.GetBytes(value.ip);
+        //int dataSize = sizeof(int) + 2 * sizeof(bool) + ipSerialized.Length;
+        Write((int)value.playerID);
+        Write((int)value.roleIndex);
+        Write(value.isReady);
+        Write(value.connected);
+        Write(ipSerialized);
+    }
+
     public int ReadInt()
     {
         int value = BitConverter.ToInt32(data, readOffset);
@@ -89,6 +115,13 @@ public class Msg
         return value;
     }
 
+    public bool ReadBool()
+    {
+        bool value = BitConverter.ToBoolean(data, readOffset);
+        readOffset += sizeof(bool);
+        return value;
+    }
+
     public Vector3 ReadVector3()
     {
         return new Vector3(ReadFloat(), ReadFloat(), ReadFloat());
@@ -100,5 +133,10 @@ public class Msg
         string value = Encoding.Unicode.GetString(data, readOffset, bufferSize);
         readOffset += bufferSize;
         return value;
+    }
+
+    public NetworkPlayerState ReadPlayerState()
+    {
+        return new NetworkPlayerState((PlayerIndex)ReadInt(), (RoleIndex)ReadInt(), ReadBool(), ReadBool(), ReadString());
     }
 }

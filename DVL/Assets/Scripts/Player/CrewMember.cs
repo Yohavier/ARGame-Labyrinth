@@ -37,7 +37,7 @@ public class CrewMember : Player
 			HandlePowerUps(tile);
 		}
     }
-	
+
 	//TODO: Synchonize Power Up Pick up with other players
 	#region HandlePowerUps
 	private void HandlePowerUps(Tile tile)
@@ -47,6 +47,7 @@ public class CrewMember : Player
 			PowerUpBase powerUP = tile.GetComponentInChildren<PowerUpBase>();
 			if (powerUP)
 			{
+				NetworkClient.instance.SendPowerUpCollected(tile);
 				var freeSlot = CanCollectPowerUp();
 				if (freeSlot != null)
 				{
@@ -109,28 +110,32 @@ public class CrewMember : Player
     #region Handle Dying
     protected override void Dead()
     {
+		Debug.Log(playerIndex + " died");
 		GameManager.instance.CheckWinConditionMonster();
 		GetComponent<MeshRenderer>().material.color = Color.black;
 		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
-		if (storedItem != null) 
+		if (storedItem != null)
 			DropItem(null, positionTile);
     }
     protected override void Dying()
     {
+		Debug.Log(playerIndex + " is dying");
 		Eventbroker.instance.onNotifyNextTurn += CheckDeathCounter;
     }
 	protected override void CheckDeathCounter()
     {
 		deathTurnCounter++;
-		if(deathTurnCounter == maxDeathTurnCounter)
+		if(deathTurnCounter >= maxDeathTurnCounter)
         {
 			playerState = PlayerState.DEAD;
         }
-    }
+		else
+			Debug.Log(playerIndex + " is dying " + deathTurnCounter + "/" + maxDeathTurnCounter);
+	}
     #endregion
 
     #region Handle Pickup Item extension
-    private void HandlePickUpItem(Tile tile) 
+    private void HandlePickUpItem(Tile tile)
 	{
 		Item item = tile.GetComponentInChildren<Item>();
 		if (item != null && storedItem == null)
@@ -143,17 +148,19 @@ public class CrewMember : Player
 			RemovePickUpButtonListener();
 		}
 	}
-    private void PickUpItem(Item item, Tile tile)
-	{ 
-		RemovePickUpButtonListener();
+    public void PickUpItem(Item item, Tile tile)
+	{
+		if(IsLocalPlayer())
+			NetworkClient.instance.SendItemCollected(tile);
 
-		NetworkClient.instance.SendItemCollected(tile);
+		RemovePickUpButtonListener();
 
 		storedItem = item.gameObject;
 		item.isStored = true;
 		storedItem.transform.SetParent(this.transform);
 		InformationPanel.instance.SetItemText(item.itemName);
-		storedItem.gameObject.SetActive(false);	
+		storedItem.gameObject.SetActive(false);
+		storedItem.gameObject.layer = 10;
 	}
     private void RemovePickUpButtonListener()
     {
@@ -176,15 +183,19 @@ public class CrewMember : Player
 			RemoveDropItemButtonListener();
 		}
 	}
-	private void DropItem(EscapeCapsule capsule, Tile tile)
+	public void DropItem(EscapeCapsule capsule, Tile tile)
 	{
 		if (storedItem != null)
 		{
-			if (capsule != null) 
+			if (capsule != null)
 				capsule.DisplayProgress();
+
+			if (IsLocalPlayer())
+				NetworkClient.instance.SendItemDropped(tile);
 
 			storedItem.gameObject.SetActive(true);
 			storedItem.transform.SetParent(tile.transform);
+			storedItem.layer = 8;
 			storedItem = null;
 			InformationPanel.instance.SetItemText("none");
 		}

@@ -11,19 +11,23 @@ public class Enemy : Player
 
 		if (crewMembers != null)
         {
-			foreach(CrewMember crew in crewMembers)
+            if (LocalGameManager.instance.GetTurn())
             {
-                if (crew.playerState == PlayerState.ALIVE)
+                foreach (CrewMember crew in crewMembers)
                 {
-                    KillPlayer(crew);
+                    if (crew.playerState == PlayerState.ALIVE)
+                    {
+                        KillPlayer(crew);
+                    }
                 }
-            }			
+            }
         }
         return true;
     }
 
 	public void KillPlayer(CrewMember crewMember)
 	{
+        NetworkClient.instance.SendPlayerKilled(crewMember.playerIndex);
 		crewMember.playerState = PlayerState.DYING;
 	}
 }
