@@ -155,7 +155,6 @@ public class CrewMember : Player
 		storedItem.transform.SetParent(this.transform);
 		InformationPanel.instance.SetItemText(item.itemName);
 		storedItem.gameObject.SetActive(false);
-		storedItem.gameObject.layer = 10;
 	}
     private void RemovePickUpButtonListener()
     {
