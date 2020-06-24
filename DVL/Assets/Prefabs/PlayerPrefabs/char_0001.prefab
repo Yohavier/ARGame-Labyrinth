@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4665849741639523091}
   - component: {fileID: -1801657048653225923}
   - component: {fileID: 9177211659678062321}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: char_0001
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -94,16 +94,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b5b5edc0336c843bd7905bfc8f2db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
+  playerRole: {fileID: 0}
   diceModificator: 0
   fogOfWarRadius: 2
   footstepDetectionRadius: 1
-  playerIndex: 0
+  repairSpeed: 0
+  maxDeathTurnCounter: 3
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}
   isWalking: 0
   _playerState: 0
-  maxDeathTurnCounter: 3
 --- !u!114 &-1801657048653225923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogMask:
     serializedVersion: 2
-    m_Bits: 7168
+    m_Bits: 1
   finalFogPath: []
 --- !u!114 &9177211659678062321
 MonoBehaviour:

@@ -132,7 +132,6 @@ public class FogOfWar : MonoBehaviour
     {
 		return fogMask == (fogMask | (1 << toCheck.layer));
     }
-
 	public List<Tile> DebugFog()
 	{
 		return BoardGrid.instance.grid;

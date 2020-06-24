@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tile
-  - Fog
   layers:
   - Default
   - TransparentFX
@@ -17,7 +16,7 @@ TagManager:
   - 
   - Tile
   - Debug
-  - 
+  - NotAffectedByFOW
   - 
   - 
   - 
