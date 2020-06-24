@@ -799,7 +799,7 @@ PrefabInstance:
         type: 3}
       propertyPath: allPossibleStaticTiles.Array.data[7]
       value: 
-      objectReference: {fileID: 685311385835113072, guid: 1fce8bc4d34a9bd49bd6e7b838986d21,
+      objectReference: {fileID: 8863377977654506450, guid: 98726e10322afbb4d8bdc98102a87899,
         type: 3}
     - target: {fileID: 7612015550564188096, guid: 4f479eef290333147ad1d0af1d5efbfa,
         type: 3}
