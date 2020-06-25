@@ -464,13 +464,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   column: 0
+  DoorOpenClip: {fileID: 0}
+  DoorCloseClip: {fileID: 0}
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
   gCost: 0
   hCost: 0
   Parent: {fileID: 0}
-  initForwardModule: 1
+  initForwardModule: 3
   initBackwardModule: 0
   initRightModule: 0
   initLeftModule: 0
@@ -478,6 +480,7 @@ MonoBehaviour:
   ingameBackwardModule: 0
   ingameRightModule: 0
   ingameLeftModule: 0
+  doorOpen: 1
   index: -1
 --- !u!65 &4727548385636503575
 BoxCollider:

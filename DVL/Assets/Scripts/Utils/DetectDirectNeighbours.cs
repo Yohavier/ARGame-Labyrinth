@@ -101,28 +101,28 @@ public class DetectDirectNeighbours
         if (tile.column - 1 >= 0)
         {
             Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column - 1).ToString()];
-            if (check.ingameForwardModule == TileDirectionModule.NONE && tile.ingameBackwardModule == TileDirectionModule.NONE)
+            if ((check.ingameForwardModule == TileDirectionModule.NONE || (check.ingameForwardModule == TileDirectionModule.DOOR && check.doorOpen)) && (tile.ingameBackwardModule == TileDirectionModule.NONE || (tile.ingameBackwardModule == TileDirectionModule.DOOR && tile.doorOpen)))
                 allNeighbors.Add(check);
         }
 
         if (tile.column + 1 <= 6)
         {
             Tile check = BoardGrid.instance.coordDic[tile.row.ToString() + (tile.column + 1).ToString()];
-            if (check.ingameBackwardModule == TileDirectionModule.NONE && tile.ingameForwardModule == TileDirectionModule.NONE)
+            if ((check.ingameBackwardModule == TileDirectionModule.NONE || (check.ingameBackwardModule == TileDirectionModule.DOOR && check.doorOpen)) && (tile.ingameForwardModule == TileDirectionModule.NONE || (tile.ingameForwardModule == TileDirectionModule.DOOR && tile.doorOpen)))
                 allNeighbors.Add(check);
         }
 
         if (tile.row - 1 >= 0)
         {
             Tile check = BoardGrid.instance.coordDic[(tile.row - 1).ToString() + tile.column.ToString()];
-            if (check.ingameRightModule == TileDirectionModule.NONE && tile.ingameLeftModule == TileDirectionModule.NONE)
+            if ((check.ingameRightModule == TileDirectionModule.NONE || (check.ingameRightModule == TileDirectionModule.DOOR && check.doorOpen)) && (tile.ingameLeftModule == TileDirectionModule.NONE || (tile.ingameLeftModule == TileDirectionModule.DOOR && tile.doorOpen)))
                 allNeighbors.Add(check);
         }
 
         if (tile.row + 1 <= 6)
         {
             Tile check = BoardGrid.instance.coordDic[(tile.row + 1).ToString() + tile.column.ToString()];
-            if (check.ingameLeftModule == TileDirectionModule.NONE && tile.ingameRightModule == TileDirectionModule.NONE)
+            if ((check.ingameLeftModule == TileDirectionModule.NONE || (check.ingameLeftModule == TileDirectionModule.DOOR && check.doorOpen)) && (tile.ingameRightModule == TileDirectionModule.NONE || (tile.ingameRightModule == TileDirectionModule.DOOR && tile.doorOpen)))
                 allNeighbors.Add(check);
         }
         return allNeighbors;

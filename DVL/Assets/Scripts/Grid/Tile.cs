@@ -3,12 +3,18 @@ using UnityEngine;
 using System.Collections;
 using System.Threading;
 using Assets.Scripts.GameManagement;
+using System.Collections.Generic;
 
 public enum TileDirectionModule { NONE, WALL, DOOR, WINDOW}
 public class Tile : MonoBehaviour
 {
 	public int row;	//right - left
 	public int column; //forward - backward
+
+	//Door animation
+	private Animation anim;
+	public AnimationClip DoorOpenClip;
+	public AnimationClip DoorCloseClip;
 
 	[HideInInspector] public bool edgePiece;
 	[HideInInspector] public bool canMoveHorizontal;
@@ -53,7 +59,7 @@ public class Tile : MonoBehaviour
         }			
     }
 
-	private bool doorOpen = true;
+	public bool doorOpen = true;
 
 	private bool IsInFOW;
 	public bool isInFOW
@@ -74,9 +80,12 @@ public class Tile : MonoBehaviour
 		//Debug.Log(this.name + " has Roof " + toggle);
     }
 
-	
+    private void Awake()
+    {
+		anim = GetComponent<Animation>();
+    }
 
-	public int index = -1; //Identifier of tile, -1 invalid index
+    public int index = -1; //Identifier of tile, -1 invalid index
 
 	//Set the Data on Init or if newly pushed into the grid (Called by BoardGrid)
 	public void SetTileData(int rowNum, int colNum)
@@ -233,12 +242,14 @@ public class Tile : MonoBehaviour
 
 	private void OpenTileDoors()
     {
-		//Play Animation
-    }
+		anim.clip = DoorOpenClip;
+		anim.Play();
+	}
 
 	private void CloseTileDoors()
     {
-		//Play Animation
+		anim.clip = DoorCloseClip;
+		anim.Play();
     }
 
 	public bool TileContainsDoor()
