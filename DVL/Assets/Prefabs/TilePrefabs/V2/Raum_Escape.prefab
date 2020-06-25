@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 187567525089523621}
   - component: {fileID: 8890346281459497426}
   - component: {fileID: 524273980471915626}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Tuer2
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3104623050144954025}
   - component: {fileID: 2358822837436771019}
   - component: {fileID: 6872829461309393275}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Tuer_Rahmen2
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5946793354696539044}
   - component: {fileID: 3221086491163012167}
   - component: {fileID: 2475934178292184421}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: pPlane1
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 7077614829870359927}
   - component: {fileID: 2357657676948846157}
   - component: {fileID: 4646520166412620588}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Tuer1
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 7898751075071363283}
   - component: {fileID: 4846274382001296670}
   - component: {fileID: 8739036207301808217}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Tuer_Rahmen5
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 6842799418597402362}
   - component: {fileID: 8235258578800901883}
   - component: {fileID: 7927556796090570025}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Tuer_Rahmen4
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 4469385058431145334}
   - component: {fileID: 5765872838213426224}
   - component: {fileID: 1121108936268094809}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Tuer_Rahmen3
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 5261459075628519143}
   - component: {fileID: 8509982998991951388}
   - component: {fileID: -7491060358173675825}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Raum_Escape
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -608,6 +608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   column: 0
+  DoorOpenClip: {fileID: 0}
+  DoorCloseClip: {fileID: 0}
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
@@ -622,6 +624,7 @@ MonoBehaviour:
   ingameBackwardModule: 0
   ingameRightModule: 0
   ingameLeftModule: 0
+  doorOpen: 1
   index: -1
 --- !u!114 &5261459075628519143
 MonoBehaviour:

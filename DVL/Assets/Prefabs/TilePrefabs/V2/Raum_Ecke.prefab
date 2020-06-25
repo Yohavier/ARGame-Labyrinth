@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,6 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   column: 0
+  DoorOpenClip: {fileID: 0}
+  DoorCloseClip: {fileID: 0}
   edgePiece: 0
   canMoveHorizontal: 0
   canMoveVertical: 0
@@ -223,6 +225,7 @@ MonoBehaviour:
   ingameBackwardModule: 0
   ingameRightModule: 0
   ingameLeftModule: 0
+  doorOpen: 1
   index: -1
 --- !u!114 &6971387037002941455
 MonoBehaviour:
@@ -311,7 +314,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -390,7 +393,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a22c13d5b96134186e64de117aca19, type: 2}
+  - {fileID: 2100000, guid: 1735167373a3bf346bbf3a82ea155ba7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

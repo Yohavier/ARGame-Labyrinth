@@ -30,7 +30,7 @@ namespace Assets.Scripts.GameManagement
 
         string serverIP = "192.168.194.169";
         public bool isServer = false;
-        public bool isDebug = true;
+        public bool isDebug = false;
 
         public bool needsMenuUpdate = false;
         public bool needsPlayerUpdate = false;
@@ -62,7 +62,7 @@ namespace Assets.Scripts.GameManagement
             hostIPInput.text = serverIP;
             lobbyCanvas.SetActive(false);
             instance = this;
-            isDebug = true;
+            isDebug = false;
         }
 
         private void Start()
