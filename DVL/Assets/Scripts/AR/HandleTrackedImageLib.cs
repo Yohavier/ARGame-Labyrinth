@@ -117,15 +117,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 			var meshes = droppedOutPrefab.GetComponentsInChildren<MeshRenderer>();
 			foreach (MeshRenderer mesh in meshes)
 			{
-				if (mesh.CompareTag("Fog"))
-				{
-					mesh.enabled = false;
-				}
-				else
-				{
-					mesh.enabled = true;
-					mesh.material.color = Color.white;
-				}
+				mesh.enabled = true;
+				mesh.material.color = Color.white;
 			}
 		}
 
