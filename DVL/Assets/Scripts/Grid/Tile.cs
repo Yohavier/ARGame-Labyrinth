@@ -71,13 +71,26 @@ public class Tile : MonoBehaviour
         set
         {
 			IsInFOW= value;
-			ToggleRoof(value);
+			ToggleFOW(value);
         }
     }
 
-	private void ToggleRoof(bool toggle)
+	private void ToggleFOW(bool toggle)
     {
-		//Debug.Log(this.name + " has Roof " + toggle);
+		MeshRenderer[] tileMeshes = GetComponentsInChildren<MeshRenderer>();
+
+		foreach (MeshRenderer mesh in tileMeshes)
+		{
+			if (!mesh.gameObject.CompareTag("Tile"))
+				mesh.GetComponent<MeshRenderer>().enabled = !toggle;
+			else if (mesh.gameObject.CompareTag("Tile"))
+				PrefabColor(mesh);
+		}
+	}
+
+	public void UpdateTileFOW()
+    {
+		ToggleFOW(isInFOW);
     }
 
     private void Awake()
@@ -216,6 +229,18 @@ public class Tile : MonoBehaviour
 				if (mesh.CompareTag("Tile"))
 					mesh.material.color = Color.white;
 			}
+		}
+	}
+
+	public void PrefabColor(MeshRenderer mesh)
+	{
+		if (isInFOW && !GUIManager.instance.isDebug)
+		{
+			mesh.material.color = Color.black;
+		}
+		else
+		{
+			mesh.material.color = Color.white;
 		}
 	}
 

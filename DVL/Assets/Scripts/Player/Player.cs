@@ -178,6 +178,7 @@ public class Player : MonoBehaviour
 				transform.SetParent(tile.transform);
 				transform.localPosition = Vector3.zero;
 				ChangePlayerPosition(tile);
+				tile.UpdateTileFOW();
 				LocalGameManager.instance.StepsLeft--;
 			}
 			else

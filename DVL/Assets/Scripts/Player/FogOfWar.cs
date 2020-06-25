@@ -97,16 +97,6 @@ public class FogOfWar : MonoBehaviour
         {
 			finalFogPath.Remove(nonVisibleList[i]);
 			nonVisibleList[i].isInFOW = true;
-			nonVisibleList[i].PrefabColor();
-			MeshRenderer[] tileMeshes = nonVisibleList[i].GetComponentsInChildren<MeshRenderer>();
-
-			foreach (MeshRenderer mesh in tileMeshes)
-			{
-				if (CheckIfIsInFogMask(mesh.gameObject))
-				{
-					mesh.GetComponent<MeshRenderer>().enabled = false;
-				}
-			}
 		}	
     }
 	private void ToggleVisibleTilesOn(List<Tile> visibleList)
@@ -115,17 +105,6 @@ public class FogOfWar : MonoBehaviour
         {
 			finalFogPath.Add(visibleList[i]);
 			visibleList[i].isInFOW = false;
-			visibleList[i].PrefabColor();
-
-			MeshRenderer[] tileMeshes = visibleList[i].GetComponentsInChildren<MeshRenderer>();
-
-			foreach (MeshRenderer mesh in tileMeshes)
-			{
-				if (CheckIfIsInFogMask(mesh.gameObject))
-				{
-					mesh.GetComponent<MeshRenderer>().enabled = true;
-				}
-			}
 		}
 	}
 	private bool CheckIfIsInFogMask(GameObject toCheck)
