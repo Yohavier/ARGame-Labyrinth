@@ -47,6 +47,7 @@ public class CrewMember : Player
 			PowerUpBase powerUP = tile.GetComponentInChildren<PowerUpBase>();
 			if (powerUP)
 			{
+				NetworkClient.instance.SendPowerUpCollected(tile);
 				var freeSlot = CanCollectPowerUp();
 				if (freeSlot != null)
 				{
@@ -109,6 +110,7 @@ public class CrewMember : Player
     #region Handle Dying
     protected override void Dead()
     {
+		Debug.Log(playerIndex + " died");
 		GameManager.instance.CheckWinConditionMonster();
 		GetComponent<MeshRenderer>().material.color = Color.black;
 		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
@@ -117,16 +119,19 @@ public class CrewMember : Player
     }
     protected override void Dying()
     {
+		Debug.Log(playerIndex + " is dying");
 		Eventbroker.instance.onNotifyNextTurn += CheckDeathCounter;
     }
 	protected override void CheckDeathCounter()
     {
 		deathTurnCounter++;
-		if(deathTurnCounter == maxDeathTurnCounter)
+		if(deathTurnCounter >= maxDeathTurnCounter)
         {
 			playerState = PlayerState.DEAD;
         }
-    }
+		else
+			Debug.Log(playerIndex + " is dying " + deathTurnCounter + "/" + maxDeathTurnCounter);
+	}
     #endregion
 
     #region Handle Pickup Item extension
@@ -145,7 +150,7 @@ public class CrewMember : Player
 	}
     public void PickUpItem(Item item, Tile tile)
 	{
-		if(LocalGameManager.instance.activePlayer == this.gameObject)
+		if(IsLocalPlayer())
 			NetworkClient.instance.SendItemCollected(tile);
 
 		RemovePickUpButtonListener();
@@ -177,12 +182,15 @@ public class CrewMember : Player
 			RemoveDropItemButtonListener();
 		}
 	}
-	private void DropItem(EscapeCapsule capsule, Tile tile)
+	public void DropItem(EscapeCapsule capsule, Tile tile)
 	{
 		if (storedItem != null)
 		{
 			if (capsule != null)
 				capsule.DisplayProgress();
+
+			if (IsLocalPlayer())
+				NetworkClient.instance.SendItemDropped(tile);
 
 			storedItem.gameObject.SetActive(true);
 			storedItem.transform.SetParent(tile.transform);

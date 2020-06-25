@@ -14,11 +14,14 @@ public enum MsgOpcode //ID for Message Header
     opPlayerHealed = 6,
     opGeneratorRepaired = 7,
     opDoorHackUsed = 8,
+    opPowerUpCollected = 9,
+    opItemDropped = 10,
 
     //100-200 Server handles message, updates and sends reply to all clients
     opTurnChange = 100,
     opReadyChange = 101,
     opPlayerConnected = 102,
+    opRoleChange = 103,
 
     //>=200 Server sends reply to one client
     opSetupPlayer = 200,

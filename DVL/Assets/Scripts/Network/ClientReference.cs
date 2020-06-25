@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 public class ClientReference
 {
     public Socket clientSocket;
-    public ServerPlayerState playerState;
+    public NetworkPlayerState playerState;
 
     public ClientReference(Socket socket)
     {
         clientSocket = socket;
-        playerState = new ServerPlayerState();
+        playerState = new NetworkPlayerState();
     }
 }

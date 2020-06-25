@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Juggernaut
   m_EditorClassIdentifier: 
   roleName: Juggernaut
+  roleIndex: 4
   diceModificator: 0
   fogOfWarRadius: 2
   footstepDetectionRadius: 1

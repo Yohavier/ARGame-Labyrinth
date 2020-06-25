@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.GameManagement;
+using Assets.Scripts.Player;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ public class NetworkClient
     private byte[] buffer = new byte[1024];
     private int connectionAttempts = 0;
     public bool isSetup = false;
+    public NetworkPlayerState[] networkPlayers = { new NetworkPlayerState(), new NetworkPlayerState(), new NetworkPlayerState(), new NetworkPlayerState() };
 
     public void Connect(string serverIP)
     {
@@ -96,11 +98,20 @@ public class NetworkClient
             case MsgOpcode.opDoorHackUsed:
                 HandleDoorHackUsed(msg);
                 break;
+            case MsgOpcode.opPowerUpCollected:
+                HandlePowerUpCollected(msg);
+                break;
+            case MsgOpcode.opItemDropped:
+                HandleItemDropped(msg);
+                break;
             case MsgOpcode.opTurnChange:
                 HandleTurnChange(msg);
                 break;
             case MsgOpcode.opReadyChange:
                 HandleReadyChange(msg);
+                break;
+            case MsgOpcode.opRoleChange:
+                HandleRoleChange(msg);
                 break;
             case MsgOpcode.opPlayerConnected:
                 HandlePlayerConnected(msg);
@@ -170,11 +181,11 @@ public class NetworkClient
 
         var tile = BoardGrid.instance.FindTileByIndex(targetTileindex);
         var item = tile.GetComponentInChildren<Item>();
-        if(tile && item)
+        if (tile && item)
             GameManager.instance.allPlayers[(int)playerIndex].GetComponent<CrewMember>().PickUpItem(item, tile);
 
         else
-            Debug.LogError("No Item found");
+            Debug.LogError("Client: No Item found");
     }
 
     private void HandlePlayerKilled(Msg msg)
@@ -204,35 +215,54 @@ public class NetworkClient
         tile.ToggleDoors();
     }
 
+    private void HandlePowerUpCollected(Msg msg)
+    {
+        int tileIndex = msg.ReadInt();
+        Tile tile = BoardGrid.instance.FindTileByIndex(tileIndex);
+        UnityEngine.Object.Destroy(tile.GetComponentInChildren<PowerUpBase>().GetComponent<MeshRenderer>());
+    }
+
+    private void HandleItemDropped(Msg msg)
+    {
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
+        int tileIndex = msg.ReadInt();
+        CrewMember player = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<CrewMember>();
+        Tile tile = BoardGrid.instance.FindTileByIndex(tileIndex);
+        player.DropItem(tile.GetComponent<EscapeCapsule>(), tile);
+    }
+
     private void HandleReadyChange(Msg msg)
     {
-
+        GUIManager.instance.needsPlayerUpdate = true;
+        networkPlayers[msg.ReadInt()].isReady = msg.ReadBool();
     }
 
     private void HandlePlayerConnected(Msg msg)
     {
-        int count = msg.ReadInt();
-        if (count > 0)
-        {
-            string ip1 = msg.ReadString();
-            GUIManager.instance.player1Text = "Player 1: " + ip1;
-        }
-        if (count > 1)
-        {
-            string ip2 = msg.ReadString();
-            GUIManager.instance.player2Text = "Player 2: " + ip2;
-        }
-        if (count > 2)
-        {
-            string ip3 = msg.ReadString();
-            GUIManager.instance.player3Text = "Player 3: " + ip3;
+        GUIManager.instance.needsPlayerUpdate = true;
 
-        }
-        if (count > 3)
+        int count = msg.ReadInt();
+        for (int i = 0; i < count; i++)
         {
-            string ip4 = msg.ReadString();
-            GUIManager.instance.player4Text = "Player 4: " + ip4;
+            NetworkPlayerState playerState = msg.ReadPlayerState();
+            if (playerState.playerID <= PlayerIndex.Invalid || playerState.playerID > PlayerIndex.Enemy)
+            {
+                Debug.LogError("Client: Connected Player ID was out of bounds");
+                continue;
+            }
+
+            networkPlayers[(int)playerState.playerID] = playerState;
         }
+    }
+
+    private void HandleRoleChange(Msg msg)
+    {
+        GUIManager.instance.needsPlayerUpdate = true;
+
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
+        RoleIndex roleIndex = (RoleIndex)msg.ReadInt();
+
+        networkPlayers[(int)playerIndex].roleIndex = roleIndex;
     }
 
     public void SendGridMove(Tile entryTile, Tile newRoom)
@@ -301,10 +331,33 @@ public class NetworkClient
         Send(msg);
     }
 
+    public void SendPowerUpCollected(Tile tile)
+    {
+        Msg msg = new Msg(MsgOpcode.opPowerUpCollected, 4);
+        msg.Write(tile.index);
+        Send(msg);
+    }
+
+    public void SendItemDropped(Tile tile)
+    {
+        Msg msg = new Msg(MsgOpcode.opItemDropped, 8);
+        msg.Write((int)LocalGameManager.instance.localPlayerIndex);
+        msg.Write(tile.index);
+        Send(msg);
+    }
+
     public void SendReadyChanged(bool value)
     {
         Msg msg = new Msg(MsgOpcode.opReadyChange, 4);
         msg.Write(Convert.ToInt32(value));
+        Send(msg);
+    }
+
+    public void SendRoleChanged(PlayerIndex playerIndex, RoleIndex roleIndex)
+    {
+        Msg msg = new Msg(MsgOpcode.opRoleChange, 8);
+        msg.Write((int)playerIndex);
+        msg.Write((int)roleIndex);
         Send(msg);
     }
 }

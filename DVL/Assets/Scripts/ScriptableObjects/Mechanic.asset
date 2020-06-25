@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mechanic
   m_EditorClassIdentifier: 
   roleName: Mechanic
+  roleIndex: 0
   diceModificator: 0
   fogOfWarRadius: 1
   footstepDetectionRadius: 1

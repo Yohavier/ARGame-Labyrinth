@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -28,16 +29,16 @@ public class NetworkServer
     //Send client data after connecting
     private void SetupNewPlayer(ClientReference client)
     {
-        PlayerIndex playerIndex = (PlayerIndex)gameState.playerCount;
+        PlayerIndex playerIndex = 3 - (PlayerIndex)gameState.playerCount;
         client.playerState.playerID = playerIndex;
+        client.playerState.connected = true;
+        client.playerState.ip = client.clientSocket.RemoteEndPoint.ToString().Split(':')[0];
+        client.playerState.roleIndex = RoleIndex.Standart;
+
         Msg msg = BuildPlayerSetupMessage(playerIndex);
         UnicastMessage(msg.Serialize(), client.clientSocket);
-        Msg msg2 = new Msg(MsgOpcode.opPlayerConnected, 256);
-        msg2.Write(clientList.Count);
-        for (int i = 0; i < clientList.Count; i++)
-        {
-            msg2.Write(clientList[i].clientSocket.RemoteEndPoint.ToString().Split(':')[0]);
-        }
+
+        Msg msg2 = BuildPlayerStateListMessage();
         BroadcastMessage(msg2.Serialize());
 
         gameState.playerCount++;
@@ -54,6 +55,7 @@ public class NetworkServer
                 return;
             }
         }
+        gameState.currentTurnPlayer = PlayerIndex.Player3;
         HandleChangeTurn();
         Msg boardMsg = BuildBoardSetupMessage();
         BroadcastMessage(boardMsg.Serialize());
@@ -61,19 +63,22 @@ public class NetworkServer
 
     private void SendReadyChange(ClientReference client)
     {
-        Msg msg = new Msg(MsgOpcode.opReadyChange, 8);
-        msg.Write(Convert.ToInt32(client.playerState.isReady));
+        Msg msg = new Msg(MsgOpcode.opReadyChange, 4 + sizeof(bool));
         msg.Write((int)client.playerState.playerID);
+        msg.Write(client.playerState.isReady);
         BroadcastMessage(msg.Serialize());
     }
 
     private void HandleChangeTurn()
     {
-        PlayerIndex nextTurnPlayer = gameState.currentTurnPlayer + 1;
-        if (nextTurnPlayer > PlayerIndex.Enemy || (int)nextTurnPlayer >= clientList.Count)
-            nextTurnPlayer = PlayerIndex.Player1;
-        Msg msg = BuildTurnChangeMessage(nextTurnPlayer);
-        gameState.currentTurnPlayer = nextTurnPlayer;
+        gameState.currentTurnIndex++;
+        if (gameState.currentTurnIndex >= clientList.Count)
+            gameState.currentTurnIndex = 0;
+
+        NetworkPlayerState nextTurnPlayer = clientList[gameState.currentTurnIndex].playerState;
+        PlayerIndex nextTurnPlayerIndex = nextTurnPlayer.playerID;
+        Msg msg = BuildTurnChangeMessage(nextTurnPlayerIndex);
+        gameState.currentTurnPlayer = nextTurnPlayerIndex;
         BroadcastMessage(msg.Serialize());
     }
 
@@ -83,6 +88,18 @@ public class NetworkServer
         ClientReference client = clientList.Find(x => x.clientSocket == clientSocket);
         client.playerState.isReady = value;
         SendReadyChange(client);
+    }
+
+    private void HandleRoleChange(Msg msg, Socket clientSocket)
+    {
+        PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
+        RoleIndex roleIndex = (RoleIndex)msg.ReadInt();
+        ClientReference client = clientList.Find(x => x.clientSocket == clientSocket);
+        if (client.playerState.playerID != playerIndex)
+            Debug.LogError("Server: Received role change from wrong player ID " + client.playerState.playerID + " " + playerIndex);
+        client.playerState.roleIndex = roleIndex;
+        msg.readOffset = 0;
+        BroadcastMessage(msg.Serialize());
     }
 
     //Accept connection, wait for receiving data
@@ -124,6 +141,9 @@ public class NetworkServer
                 break;
             case MsgOpcode.opReadyChange:
                 HandleReadyChange(msg, clientSocket);
+                break;
+            case MsgOpcode.opRoleChange:
+                HandleRoleChange(msg, clientSocket);
                 break;
         }
     }
@@ -168,6 +188,18 @@ public class NetworkServer
     {
         Msg msg = new Msg(MsgOpcode.opSetupPlayer, 4);
         msg.Write((int)nextPlayer);
+        return msg;
+    }
+
+    private Msg BuildPlayerStateListMessage()
+    {
+        Msg msg = new Msg(MsgOpcode.opPlayerConnected, 256);
+        msg.Write(clientList.Count);
+        for (int i = 0; i < clientList.Count; i++)
+        {
+            msg.Write(clientList[i].playerState);
+        }
+
         return msg;
     }
 
