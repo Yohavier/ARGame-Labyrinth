@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Runner
   roleIndex: 1
-  diceModificator: 1
+  diceModificator: 2
   fogOfWarRadius: 1
   footstepDetectionRadius: 1
   repairSpeed: 1
-  maxDeathTurnCounter: 0
+  maxDeathTurnCounter: 3

@@ -22,7 +22,7 @@ public class PowerUpSlot : MonoBehaviour
         if(storedPowerUp!= null)
         {
             Destroy(storedPowerUp.gameObject);
-            GetComponent<Button>().image = null;
+            GetComponent<Button>().image.sprite = null;
             GetComponent<Button>().interactable = false;
             storedPowerUp = null;
         }

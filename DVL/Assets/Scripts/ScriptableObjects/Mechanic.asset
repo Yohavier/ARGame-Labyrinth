@@ -17,5 +17,5 @@ MonoBehaviour:
   diceModificator: 0
   fogOfWarRadius: 1
   footstepDetectionRadius: 1
-  repairSpeed: 1
-  maxDeathTurnCounter: 0
+  repairSpeed: 2
+  maxDeathTurnCounter: 3

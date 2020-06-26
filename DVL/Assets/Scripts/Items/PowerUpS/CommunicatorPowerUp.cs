@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CommunicatorPowerUp : PowerUpBase  
+public class CommunicatorPowerUp : PowerUpBase
 {
-    public GameObject targetForCommunication;
-    public Player playerWhoActivated;
+    [HideInInspector] public GameObject targetForCommunication;
+    [HideInInspector] public Player playerWhoActivated;
     public override void OnUse(Player player, PowerUpSlot slot)
     {
         playerWhoActivated = player;

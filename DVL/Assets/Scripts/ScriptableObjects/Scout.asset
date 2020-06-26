@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Scout
   roleIndex: 2
-  diceModificator: -1
+  diceModificator: 1
   fogOfWarRadius: 2
   footstepDetectionRadius: 2
   repairSpeed: 0
-  maxDeathTurnCounter: 0
+  maxDeathTurnCounter: 3
