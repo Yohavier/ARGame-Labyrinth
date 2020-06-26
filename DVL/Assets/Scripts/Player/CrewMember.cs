@@ -197,6 +197,7 @@ public class CrewMember : Player
 			storedItem.layer = 8;
 			storedItem = null;
 			InformationPanel.instance.SetItemText("none");
+			RemoveAllEventListeners();
 		}
 	}
 	private void RemoveDropItemButtonListener()

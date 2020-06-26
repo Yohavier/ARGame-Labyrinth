@@ -28,7 +28,7 @@ public class LocalGameManager : MonoBehaviour
 	public static LocalGameManager instance;
 
 	//Fields for the dice
-	private int stepsLeft = 100;
+	private int stepsLeft = 0;
 
 	public int StepsLeft
 	{
@@ -50,7 +50,7 @@ public class LocalGameManager : MonoBehaviour
 	}
     private void OnEnable()
     {
-		//Eventbroker.instance.onNotifyNextTurn += NotifyNextTurn;
+		Eventbroker.instance.onNotifyNextTurn += NotifyNextTurn;
     }
 	private void OnDisable()
     {
@@ -93,16 +93,17 @@ public class LocalGameManager : MonoBehaviour
 	{
 		if (InformationPanel.instance)
 		{
+			StepsLeft = 0;
 			InformationPanel.instance.SetRollDiceButton(true);
 			InformationPanel.instance.rollDiceButton.onClick.AddListener(RollDice);
 		}
 	}
 	private void RollDice()
     {
-		//StepsLeft = Random.Range(1, 7);
+		StepsLeft = Random.Range(1, 7);
 		RemoveRollDiceButtonListener();
 
-		//if(activePlayer)
+		if(activePlayer)
 			activePlayer.GetComponent<Player>().NotifyNextTurn(true);
     }
 	private void RemoveRollDiceButtonListener()
