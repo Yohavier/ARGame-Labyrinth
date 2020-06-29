@@ -30,7 +30,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				{
 					if (LocalGameManager.instance.GetTurn())
                     {
-						if (LocalGameManager.instance.StepsLeft > 0)
+						if (LocalGameManager.instance._stepsLeft > 0)
 						{
 							RayCastOnTouch();
 							MouseRay();
@@ -102,7 +102,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 
 			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, currentSelectedTarget);
 			if(playerIndex == LocalGameManager.instance.localPlayerIndex)
-				path = p.FindPath(LocalGameManager.instance.StepsLeft);
+				path = p.FindPath(LocalGameManager.instance._stepsLeft);
             else
 				path = p.FindPath(100);
 			

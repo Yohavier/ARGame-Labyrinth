@@ -8,13 +8,13 @@ public class FindNearestGridSlot : MonoBehaviour
 	private Tile targetTile;
 	public LayerMask mask;
 
-	private void Update()
+    private void Update()
 	{
         if (LocalGameManager.instance.activePlayer)
         {
 			if(LocalGameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
             {
-				if (LocalGameManager.instance.GetTurn() && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
+				if (LocalGameManager.instance._moveTileToken && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
                 {
 					FindTileWithRays();
 				}
@@ -73,6 +73,7 @@ public class FindNearestGridSlot : MonoBehaviour
 			{
 				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
 				BoardGrid.instance.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
+				LocalGameManager.instance._moveTileToken = false;
 				targetTile = null;
 			}
 		}

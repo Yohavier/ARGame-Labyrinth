@@ -27,10 +27,23 @@ public class LocalGameManager : MonoBehaviour
 
 	public static LocalGameManager instance;
 
-	//Fields for the dice
-	private int stepsLeft = 0;
+	//can move tile
+	private bool moveTileToken;
+	public bool _moveTileToken
+    {
+        get
+        {
+			return moveTileToken;
+        }
+        set
+        {
+			moveTileToken = value;
+        }
+    }
 
-	public int StepsLeft
+	//Steps you can take
+	private int stepsLeft = 0;
+	public int _stepsLeft
 	{
 		get { return stepsLeft; }
 		set
@@ -69,11 +82,12 @@ public class LocalGameManager : MonoBehaviour
 		if (GetTurn())
         {
 			HandleRollDiceButton();
+			_moveTileToken = true;
 		}
         else
         {
 			RemoveRollDiceButtonListener();
-
+			_moveTileToken = false;
 			if (activePlayer)
 				activePlayer.GetComponent<Player>().NotifyNextTurn(false);
 		}
@@ -93,14 +107,14 @@ public class LocalGameManager : MonoBehaviour
 	{
 		if (InformationPanel.instance)
 		{
-			StepsLeft = 0;
+			_stepsLeft = 0;
 			InformationPanel.instance.SetRollDiceButton(true);
 			InformationPanel.instance.rollDiceButton.onClick.AddListener(RollDice);
 		}
 	}
 	private void RollDice()
     {
-		StepsLeft = Random.Range(1, 7);
+		_stepsLeft = Random.Range(1, 7);
 		RemoveRollDiceButtonListener();
 
 		if(activePlayer)
