@@ -38,7 +38,6 @@ public class CrewMember : Player
 		}
     }
 
-	//TODO: Synchonize Power Up Pick up with other players
 	#region HandlePowerUps
 	private void HandlePowerUps(Tile tile)
     {
@@ -47,11 +46,14 @@ public class CrewMember : Player
 			PowerUpBase powerUP = tile.GetComponentInChildren<PowerUpBase>();
 			if (powerUP)
 			{
-				NetworkClient.instance.SendPowerUpCollected(tile);
-				var freeSlot = CanCollectPowerUp();
-				if (freeSlot != null)
-				{
-					StorePowerUp(freeSlot, powerUP);
+                if (!powerUP.pickedUp)
+                {
+					NetworkClient.instance.SendPowerUpCollected(tile);
+					var freeSlot = CanCollectPowerUp();
+					if (freeSlot != null)
+					{
+						StorePowerUp(freeSlot, powerUP);
+					}
 				}
 			}
 		}
@@ -80,6 +82,7 @@ public class CrewMember : Player
 			freeSlot.GetComponent<PowerUpSlot>().DropEverythingInSlot();
         }
 
+		powerUp.pickedUp = true;
 		freeSlot.image.sprite = powerUp.powerUpImage;
 		freeSlot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
 		freeSlot.interactable = true;
@@ -240,7 +243,8 @@ public class CrewMember : Player
     {
 		deathTurnCounter = 0;
 		playerState = PlayerState.ALIVE;
-		GetComponent<MeshRenderer>().material.color = Color.white;
+		GetComponent<MeshRenderer>().material.color = Color.yellow;
+		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
 	}
     #endregion
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
+//TODO Network does not snyc with other players. Healing is only local
 public class MediPackPowerUp : PowerUpBase
 {
     public override void OnUse(Player player, PowerUpSlot slot)

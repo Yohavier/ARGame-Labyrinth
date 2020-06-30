@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//If Events are needed
 public class Eventbroker : MonoBehaviour
 {
     public static Eventbroker instance;

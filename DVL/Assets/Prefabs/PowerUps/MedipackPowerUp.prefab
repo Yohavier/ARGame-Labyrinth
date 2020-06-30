@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 114ac19804ae00f4a9f759a14297d076, type: 2}
+  - {fileID: 2100000, guid: 8f5087929f0ed80409bc9acf2bfc9b83, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,4 +93,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 1581023916314948738}
-  powerUpImage: {fileID: 0}
+  powerUpImage: {fileID: 21300000, guid: 08c5fb1b36ab87b4087e6731e16bb1eb, type: 3}

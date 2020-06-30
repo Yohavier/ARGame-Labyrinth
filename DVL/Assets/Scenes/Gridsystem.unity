@@ -4310,6 +4310,7 @@ MonoBehaviour:
   - {fileID: 1581023916314948738, guid: 3bf9c7c2490a0b142b79e3181917f204, type: 3}
   - {fileID: 1581023916314948738, guid: 7fe5fd987daab174da9f649bb6cf123d, type: 3}
   - {fileID: 3724763658437694737, guid: 18012359d0a5cb14388476fa6ccd87e8, type: 3}
+  - {fileID: 1581023916314948738, guid: ee43e57e080a3d440a301aa8ab4fdb53, type: 3}
   powerUpsPossiblePlaces: []
 --- !u!1 &1046596270
 GameObject:

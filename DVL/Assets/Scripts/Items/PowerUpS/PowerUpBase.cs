@@ -7,6 +7,7 @@ public abstract class PowerUpBase : MonoBehaviour
 {
     public GameObject powerUpPrefab;
     public Sprite powerUpImage;
+    public bool pickedUp;
 
     public abstract void OnUse(Player player, PowerUpSlot slot);
 }

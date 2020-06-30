@@ -133,7 +133,6 @@ public class InformationPanel : MonoBehaviour
         Debug.Log("Selected " + playerRoles[change.value].name);
     }
 
-    //TODO: Send to all other Players as well
     public SO_PlayerClass GetPlayerRoleStats(Player player)
     {
         playerRoleMenu.interactable = false;
