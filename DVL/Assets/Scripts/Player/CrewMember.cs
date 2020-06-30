@@ -239,10 +239,10 @@ public class CrewMember : Player
 
     #region Handle Heal Player extension
 
-	public void GetHealedByOtherPlayer()
+	public void GetHealed()
     {
-		deathTurnCounter = 0;
 		playerState = PlayerState.ALIVE;
+		deathTurnCounter = 0;
 		GetComponent<MeshRenderer>().material.color = Color.yellow;
 		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
 	}

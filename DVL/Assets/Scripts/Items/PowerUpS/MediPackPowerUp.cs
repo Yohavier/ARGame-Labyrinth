@@ -11,8 +11,7 @@ public class MediPackPowerUp : PowerUpBase
         CrewMember dyingPlayer = CanUse(player.positionTile);
         if(dyingPlayer != null)
         {
-            Debug.Log("Heal Player");
-            dyingPlayer.GetHealedByOtherPlayer();
+            dyingPlayer.GetHealed();
             NetworkClient.instance.SendPlayerHealed(dyingPlayer.playerIndex);
             slot.DropEverythingInSlot();
         }

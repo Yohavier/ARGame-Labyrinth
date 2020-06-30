@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
 
 	//Health Status of player
-	public PlayerState _playerState;
+	private PlayerState _playerState;
 	public PlayerState playerState
 	{
 		get
@@ -223,6 +223,5 @@ public class Player : MonoBehaviour
 	protected virtual void Dying() { }
 	protected virtual void Dead() { }
 	protected virtual void CheckDeathCounter() { }
-	
 	public virtual void NotifyNextTurn(bool toggle) { }
 }

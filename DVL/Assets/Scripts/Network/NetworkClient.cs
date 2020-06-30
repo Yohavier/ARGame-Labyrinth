@@ -198,8 +198,9 @@ public class NetworkClient
     private void HandlePlayerHealed(Msg msg)
     {
         PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
+        Debug.Log(playerIndex + " was healed");
         CrewMember player = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<CrewMember>();
-        player.GetHealedByOtherPlayer();
+        player.GetHealed();
     }
 
     private void HandleGeneratorRepaired(Msg msg)
@@ -312,7 +313,7 @@ public class NetworkClient
 
     public void SendPlayerHealed(PlayerIndex playerIndex)
     {
-        Msg msg = new Msg(MsgOpcode.opPlayerKilled, 4);
+        Msg msg = new Msg(MsgOpcode.opPlayerHealed, 4);
         msg.Write((int)playerIndex);
         Send(msg);
     }
