@@ -34,11 +34,12 @@ public class CrewMember : Player
 			HandleDropItem(tile);
 
 			//Check for PowerUps
-			HandlePowerUps(tile);
+			HandlePowerUpCollection(tile);
 		}
     }
 
 	#region HandlePowerUps
+	/*
 	private void HandlePowerUps(Tile tile)
     {
         if (tile)
@@ -74,7 +75,6 @@ public class CrewMember : Player
 			return null;
         }
     }
-
 	private void StorePowerUp(Button freeSlot, PowerUpBase powerUp)
     {
         if (freeSlot.GetComponent<PowerUpSlot>().storedPowerUp != null)
@@ -88,6 +88,83 @@ public class CrewMember : Player
 		freeSlot.interactable = true;
 		Destroy(powerUp.GetComponent<MeshRenderer>());
     }
+	*/
+
+	private void HandlePowerUpCollection(Tile tile)
+    {
+		ChangePowerUpSlotHandleIcon(IsPowerUpPresent(tile));
+    }
+	private PowerUpBase IsPowerUpPresent(Tile tile)
+    {
+		PowerUpBase powerUp = tile.GetComponentInChildren<PowerUpBase>();
+		if (powerUp && !powerUp.pickedUp)
+			return powerUp;
+		else
+			return null;
+    }
+	private void ChangePowerUpSlotHandleIcon(PowerUpBase powerUp)
+	{
+		InformationPanel ui = InformationPanel.instance;
+		if (powerUp != null)
+        {
+			if (ui.powerUpSlot1.GetComponent<PowerUpSlot>().storedPowerUp != null)
+            {
+				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.slotIcon1);
+				AddPickUpListener(ui.slotIcon1, ui.powerUpSlot1, powerUp);
+			}
+            else
+            {
+				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.slotIcon1);
+				AddPickUpListener(ui.slotIcon1, ui.powerUpSlot1, powerUp);
+			}
+				
+
+			if (ui.powerUpSlot2.GetComponent<PowerUpSlot>().storedPowerUp != null)
+            {
+				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.slotIcon2);
+				AddPickUpListener(ui.slotIcon2, ui.powerUpSlot2, powerUp);
+			}
+            else
+            {
+				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.slotIcon2);
+				AddPickUpListener(ui.slotIcon2, ui.powerUpSlot2, powerUp);
+			}
+		}
+        else
+        {
+			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.slotIcon1);
+			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.slotIcon2);
+			RemoveAllIconListeners();
+		}
+
+    }
+
+	private void AddPickUpListener(Button icon, Button slot, PowerUpBase powerUp)
+    {
+		icon.onClick.AddListener(() => ExchangePowerUp(slot, powerUp));
+	}
+
+	private void RemoveAllIconListeners()
+    {
+		InformationPanel.instance.slotIcon1.onClick.RemoveAllListeners();
+		InformationPanel.instance.slotIcon2.onClick.RemoveAllListeners();
+	}
+
+	private void StorePowerUp(Button slot, PowerUpBase powerUp) 
+	{
+		powerUp.pickedUp = true;
+		slot.image.sprite = powerUp.powerUpImage;
+		slot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
+		slot.interactable = true;
+		Destroy(powerUp.GetComponent<MeshRenderer>());
+		HandlePowerUpCollection(positionTile);
+		NetworkClient.instance.SendPowerUpCollected(positionTile);
+	}
+	private void ExchangePowerUp(Button slot, PowerUpBase powerUp) 
+	{
+		slot.GetComponent<PowerUpSlot>().DropEverythingInSlot();
+		StorePowerUp(slot, powerUp);
+	}
 	#endregion
 
 	#region HandleNextTurn
@@ -107,6 +184,7 @@ public class CrewMember : Player
 		RemovePickUpButtonListener();
 		RemoveDropItemButtonListener();
 		RemoveRepairGeneratorButtonListener();
+		RemoveAllIconListeners();
     }
     #endregion
 

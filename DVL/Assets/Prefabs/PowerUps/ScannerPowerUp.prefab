@@ -94,3 +94,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 1581023916314948738}
   powerUpImage: {fileID: 21300000, guid: f29971c125a70e144aa3c87395539558, type: 3}
+  pickedUp: 0
+  buffFOWRadius: 1

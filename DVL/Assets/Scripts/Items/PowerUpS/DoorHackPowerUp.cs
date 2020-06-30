@@ -14,6 +14,8 @@ public class DoorHackPowerUp : PowerUpBase
         }
     }
 
+    public override void ReverseOnDrop(Player player) { }
+
     private bool CanUse(Tile tile)
     {
         if (tile.TileContainsDoor())

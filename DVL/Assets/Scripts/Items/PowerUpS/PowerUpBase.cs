@@ -10,5 +10,8 @@ public abstract class PowerUpBase : MonoBehaviour
     public bool pickedUp;
 
     public abstract void OnUse(Player player, PowerUpSlot slot);
+
+    //TODO: Sync so everybody knows that player looses fow PowerUp or smth
+    public abstract void ReverseOnDrop(Player player);
 }
 

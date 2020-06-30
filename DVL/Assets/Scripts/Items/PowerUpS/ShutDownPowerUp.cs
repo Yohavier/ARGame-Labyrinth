@@ -14,4 +14,6 @@ public class ShutDownPowerUp : PowerUpBase
             slot.DropEverythingInSlot();
         }
     }
+
+    public override void ReverseOnDrop(Player player) { }
 }

@@ -107,10 +107,6 @@ public class FogOfWar : MonoBehaviour
 			visibleList[i].isInFOW = false;
 		}
 	}
-	private bool CheckIfIsInFogMask(GameObject toCheck)
-    {
-		return fogMask == (fogMask | (1 << toCheck.layer));
-    }
 	public List<Tile> DebugFog()
 	{
 		return BoardGrid.instance.grid;

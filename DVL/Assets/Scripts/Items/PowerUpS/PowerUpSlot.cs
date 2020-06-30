@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//TODO: Exchange Items if wanted
-//Active PowerUps: Communicator and Scanner
-//to drop, deactivate it
-
 public class PowerUpSlot : MonoBehaviour
 {
     public GameObject storedPowerUp;
@@ -21,6 +17,7 @@ public class PowerUpSlot : MonoBehaviour
     {
         if(storedPowerUp!= null)
         {
+            storedPowerUp.GetComponent<PowerUpBase>().ReverseOnDrop(LocalGameManager.instance.activePlayer.GetComponent<Player>());
             Destroy(storedPowerUp.gameObject);
             GetComponent<Button>().image.sprite = null;
             GetComponent<Button>().interactable = false;

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
+public enum PowerUpSlotIcon { None, PickUp, Exchange}
 public class InformationPanel : MonoBehaviour
 {
     public static InformationPanel instance;
@@ -137,6 +139,26 @@ public class InformationPanel : MonoBehaviour
     {
         playerRoleMenu.interactable = false;
         return selectedPlayerRole;
+    }
+    #endregion
+
+    #region PowerUpSlots
+    public Sprite NoneT, PickUpT, ExchangeT;
+    public Button slotIcon1, slotIcon2;
+    public void ChangeSlotIcon(PowerUpSlotIcon icon, Button slotIcon)
+    {
+        switch (icon)
+        {
+            case PowerUpSlotIcon.None:
+                slotIcon.image.sprite = NoneT;
+                break;
+            case PowerUpSlotIcon.PickUp:
+                slotIcon.image.sprite = PickUpT;
+                break;
+            case PowerUpSlotIcon.Exchange:
+                slotIcon.image.sprite = ExchangeT;
+                break;
+        }
     }
     #endregion
 }

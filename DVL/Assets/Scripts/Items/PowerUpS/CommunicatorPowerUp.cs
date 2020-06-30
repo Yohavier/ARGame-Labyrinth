@@ -25,7 +25,6 @@ public class CommunicatorPowerUp : PowerUpBase
         playerWhoActivated.communicatorPowerUp = null;
         Destroy(this.gameObject);
     }
-
     private GameObject GetOpenPlayer()
     {
         foreach (GameObject player in GameManager.instance.allPlayers)
@@ -40,4 +39,6 @@ public class CommunicatorPowerUp : PowerUpBase
         }
         return null;
     }
+
+    public override void ReverseOnDrop(Player player) { }
 }
