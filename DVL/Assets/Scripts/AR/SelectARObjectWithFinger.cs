@@ -1,8 +1,6 @@
 using Assets.Scripts.GameManagement;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class SelectARObjectWithFinger : MonoBehaviour
 {

@@ -39,6 +39,7 @@ public class CrewMember : Player
     }
 
 	#region HandlePowerUps
+	//TODO needs refractor
 	private void HandlePowerUpCollection(Tile tile)
     {
 		ChangePowerUpSlotHandleIcon(IsPowerUpPresent(tile));
@@ -252,8 +253,11 @@ public class CrewMember : Player
 		Generator generator = tile.GetComponentInChildren<Generator>();
 		if (generator != null)
 		{
-			InformationPanel.instance.SetRepairGeneratorButton(true);
-			InformationPanel.instance.repairGeneratorButton.onClick.AddListener(() => RepairGenerator(generator));
+            if (!generator.isFinished)
+            {
+				InformationPanel.instance.SetRepairGeneratorButton(true);
+				InformationPanel.instance.repairGeneratorButton.onClick.AddListener(() => RepairGenerator(generator));
+			}
 		}
 		else
 		{
