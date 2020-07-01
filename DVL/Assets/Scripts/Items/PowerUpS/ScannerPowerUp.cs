@@ -8,6 +8,7 @@ public class ScannerPowerUp : PowerUpBase
     public int buffFOWRadius;
     public override void OnUse(Player player, PowerUpSlot slot)
     {
+        isInUse = true;
         player.fogOfWarRadius += buffFOWRadius;
         player.GetComponent<FogOfWar>().OnChangePlayerPosition(player.positionTile);
         slot.GetComponent<Button>().interactable = false;

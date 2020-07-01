@@ -39,61 +39,23 @@ public class CrewMember : Player
     }
 
 	#region HandlePowerUps
-	/*
-	private void HandlePowerUps(Tile tile)
-    {
-        if (tile)
-        {
-			PowerUpBase powerUP = tile.GetComponentInChildren<PowerUpBase>();
-			if (powerUP)
-			{
-                if (!powerUP.pickedUp)
-                {
-					NetworkClient.instance.SendPowerUpCollected(tile);
-					var freeSlot = CanCollectPowerUp();
-					if (freeSlot != null)
-					{
-						StorePowerUp(freeSlot, powerUP);
-					}
-				}
-			}
-		}
-    }
-	private Button CanCollectPowerUp()
-    {
-		var ui = InformationPanel.instance;
-		if(ui.powerUpSlot1.GetComponent<PowerUpSlot>().storedPowerUp == null)
-        {
-			return ui.powerUpSlot1;
-        }
-		else if (ui.powerUpSlot2.GetComponent<PowerUpSlot>().storedPowerUp == null)
-        {
-			return ui.powerUpSlot2;
-		}
-		else
-        {
-			return null;
-        }
-    }
-	private void StorePowerUp(Button freeSlot, PowerUpBase powerUp)
-    {
-        if (freeSlot.GetComponent<PowerUpSlot>().storedPowerUp != null)
-        {
-			freeSlot.GetComponent<PowerUpSlot>().DropEverythingInSlot();
-        }
-
-		powerUp.pickedUp = true;
-		freeSlot.image.sprite = powerUp.powerUpImage;
-		freeSlot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
-		freeSlot.interactable = true;
-		Destroy(powerUp.GetComponent<MeshRenderer>());
-    }
-	*/
-
 	private void HandlePowerUpCollection(Tile tile)
     {
 		ChangePowerUpSlotHandleIcon(IsPowerUpPresent(tile));
+		TogglePowerUpUseButton(InformationPanel.instance.powerUpSlot1);
+		TogglePowerUpUseButton(InformationPanel.instance.powerUpSlot2);
+	}
+	private void TogglePowerUpUseButton(Button button)
+    {
+		if (button.GetComponent<PowerUpSlot>().storedPowerUp != null)
+			if(!button.GetComponent<PowerUpSlot>().storedPowerUp.GetComponent<PowerUpBase>().isInUse)
+				button.interactable = true;
     }
+	private void DisablePowerUpSlots()
+    {
+		InformationPanel.instance.powerUpSlot1.interactable = false;
+		InformationPanel.instance.powerUpSlot2.interactable = false;
+	}
 	private PowerUpBase IsPowerUpPresent(Tile tile)
     {
 		PowerUpBase powerUp = tile.GetComponentInChildren<PowerUpBase>();
@@ -116,8 +78,7 @@ public class CrewMember : Player
             {
 				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.slotIcon1);
 				AddPickUpListener(ui.slotIcon1, ui.powerUpSlot1, powerUp);
-			}
-				
+			}			
 
 			if (ui.powerUpSlot2.GetComponent<PowerUpSlot>().storedPowerUp != null)
             {
@@ -136,20 +97,16 @@ public class CrewMember : Player
 			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.slotIcon2);
 			RemoveAllIconListeners();
 		}
-
     }
-
 	private void AddPickUpListener(Button icon, Button slot, PowerUpBase powerUp)
     {
 		icon.onClick.AddListener(() => ExchangePowerUp(slot, powerUp));
 	}
-
 	private void RemoveAllIconListeners()
     {
 		InformationPanel.instance.slotIcon1.onClick.RemoveAllListeners();
 		InformationPanel.instance.slotIcon2.onClick.RemoveAllListeners();
 	}
-
 	private void StorePowerUp(Button slot, PowerUpBase powerUp) 
 	{
 		powerUp.pickedUp = true;
@@ -177,6 +134,7 @@ public class CrewMember : Player
         else
         {
 			RemoveAllEventListeners();
+			DisablePowerUpSlots();
         }
     }
 	private void RemoveAllEventListeners()

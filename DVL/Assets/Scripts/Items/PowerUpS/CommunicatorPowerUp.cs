@@ -14,6 +14,7 @@ public class CommunicatorPowerUp : PowerUpBase
 
         if (targetForCommunication)
         {
+            isInUse = true;
             player.communicatorPowerUp = this;
             slot.GetComponent<Button>().interactable = false;
         }
