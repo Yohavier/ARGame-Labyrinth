@@ -141,6 +141,7 @@ namespace Assets.Scripts.GameManagement
         void OnReadyToggleValueChanged(bool value)
         {
             NetworkClient.instance.SendReadyChanged(value);
+            AkSoundEngine.PostEvent("lobby_ready", this.gameObject);
         }
     }
 }

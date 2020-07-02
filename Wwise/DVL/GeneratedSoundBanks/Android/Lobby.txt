@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1975309479	lobby_ready			\Default Work Unit\lobby_ready	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	1047353938	click_button_04	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Android\SFX\click_button_04_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_ready\click_button_04		71972
+

@@ -23,7 +23,7 @@ public class NetworkClient
         try
         {
             connectionAttempts++;
-            clientSocket.Connect(new IPEndPoint(IPAddress.Parse(serverIP), 8080));
+            clientSocket.Connect(new IPEndPoint(IPAddress.Parse(serverIP), 3030));
         }
         catch (SocketException)
         {

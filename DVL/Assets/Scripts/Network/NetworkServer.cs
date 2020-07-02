@@ -20,7 +20,7 @@ public class NetworkServer
     public void SetupServer()
     {
         serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        serverSocket.Bind(new IPEndPoint(IPAddress.Any, 8080));
+        serverSocket.Bind(new IPEndPoint(IPAddress.Any, 3030));
         serverSocket.Listen(gameState.maxPlayerCount);
         serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
         isSetup = true;

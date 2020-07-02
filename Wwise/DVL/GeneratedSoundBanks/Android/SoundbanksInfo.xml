@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Android" BasePlatform="Android" SchemaVersion="12" SoundbankVersion="135">
+	<RootPaths>
+		<ProjectRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Android\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Android\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Android</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="290285391" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\Lobby</ObjectPath>
+			<ShortName>Lobby</ShortName>
+			<Path>Lobby.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1975309479" Name="lobby_ready" ObjectPath="\Events\Default Work Unit\lobby_ready" DurationType="OneShot" DurationMin="0.407642" DurationMax="0.407642">
+					<IncludedMemoryFiles>
+						<File Id="1047353938" Language="SFX">
+							<ShortName>click_button_04.wav</ShortName>
+							<Path>SFX\click_button_04_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>
