@@ -2,13 +2,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-DVL/[Ll]ibrary/
 DVL/[Tt]emp/
 DVL/[Oo]bj/
 /[Bb]uild/
 DVL/[Ll]ogs/
 DVL/[Mm]emoryCaptures/
-
+DVL/Library
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
@@ -64,3 +63,4 @@ crashlytics-build.properties
 * .prof
 * .wsetting
 * .validationcache
+
