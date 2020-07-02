@@ -7,7 +7,7 @@ DVL/[Oo]bj/
 /[Bb]uild/
 DVL/[Ll]ogs/
 DVL/[Mm]emoryCaptures/
-[Ll]ibrary/
+DVL/Library/
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
