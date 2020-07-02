@@ -2,13 +2,16 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+DVL/[Ll]ibrary/
 DVL/[Tt]emp/
 DVL/[Oo]bj/
-/[Bb]uild/
+DVL/[Bb]uild/
+DVL/[Bb]uilds/
 DVL/[Ll]ogs/
-DVL/[Mm]emoryCaptures/
-DVL/Library/
+DVL/[Uu]ser[Ss]ettings/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
+/[Mm]emoryCaptures/
 !/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
@@ -64,3 +67,4 @@ crashlytics-build.properties
 * .wsetting
 * .validationcache
 
+DVL/Library/ArtifactDB
