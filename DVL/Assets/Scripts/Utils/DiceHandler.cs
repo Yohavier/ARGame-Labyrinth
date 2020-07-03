@@ -35,6 +35,7 @@ public class DiceHandler : MonoBehaviour
             OnChangeDiceText(generatedNum, true);
             yield return new WaitForSeconds(0.1f);
         }
+        LocalGameManager.instance._stepsLeft = targetNum;
     }
 
     public void OnChangeDiceText(int num, bool sound)
@@ -49,8 +50,8 @@ public class DiceHandler : MonoBehaviour
     private int SetNum(int setNum)
     {
         if (setNum < 0)
-            return 6;
-        else if (setNum > 6)
+            return 9;
+        else if (setNum > 9)
             return 0;
         else
             return setNum;

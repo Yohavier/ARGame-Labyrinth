@@ -51,7 +51,6 @@ public class AkWwisePostImportCallbackSetup
 
 	private static void ScheduleMigration()
 	{
-		// TODO: Is delayCall wiped out during a script reload?
 		// If not, guard against having a delayCall from a previously loaded code being run after the new loading.
 
 		if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode || UnityEditor.EditorApplication.isCompiling)
@@ -195,8 +194,6 @@ public class AkWwisePostImportCallbackSetup
 				}
 			}
 
-			// TODO: If no scene is loaded and we are using the demo scene, automatically load it to display it.
-
 			// Populate the picker
 			AkWwiseProjectInfo.GetData(); // Load data
 			if (!string.IsNullOrEmpty(settings.WwiseProjectPath))
@@ -215,7 +212,6 @@ public class AkWwisePostImportCallbackSetup
 		UnityEditor.EditorApplication.delayCall += CheckPendingExecuteMethod;
 	}
 
-	// TODO: Put this in AkUtilities?
 	private static void ExecuteMethod(string method)
 	{
 		string className = null;

@@ -112,7 +112,6 @@ public partial class AkUtilities
 
 		// Waiting for the process to exit directly in the UI thread. Similar cases are working that way too.
 
-		// TODO: Is it better to provide a timeout avoid any issues of forever blocking the UI thread? If so, what is
 		// a relevant timeout value for SoundBank generation?
 		process.WaitForExit();
 		process.Close();

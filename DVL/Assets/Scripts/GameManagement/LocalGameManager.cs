@@ -1,8 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public enum PlayerIndex
 {
@@ -114,8 +110,7 @@ public class LocalGameManager : MonoBehaviour
 	}
 	private void RollDice()
     {
-		_stepsLeft = Random.Range(1, 7);
-		DiceHandler.instance.RollDiceAnimation(_stepsLeft);
+		DiceHandler.instance.RollDiceAnimation(Random.Range(1, 7));
 		RemoveRollDiceButtonListener();
 
 		if(activePlayer)

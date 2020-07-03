@@ -452,7 +452,6 @@ public class WwiseSetupWizard
 
 		UnityEngine.Debug.Log("WwiseUnity: Removing lock for launcher.");
 
-		// TODO: Moving one folder up is not nice at all. How to find the current project path?
 		try
 		{
 			System.IO.File.Delete(UnityEngine.Application.dataPath + "/../.WwiseLauncherLockFile");

@@ -28,7 +28,6 @@ public class NetworkClient
         catch (SocketException)
         {
             UnityEngine.Debug.LogError("Connection failed, attempt " + connectionAttempts);
-            //TODO wrong sound
         }
 
         if (clientSocket.Connected)
