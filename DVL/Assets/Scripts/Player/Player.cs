@@ -130,7 +130,6 @@ public class Player : MonoBehaviour
 		{
 			//if active player call his FOW
 			playerFOW.OnChangePlayerPosition(positionTile);
-			InformationPanel.instance.SetCoordText(positionTile.row.ToString() + " " + positionTile.column.ToString());
 		}
 		else if(LocalGameManager.instance.activePlayer != null)
 		{

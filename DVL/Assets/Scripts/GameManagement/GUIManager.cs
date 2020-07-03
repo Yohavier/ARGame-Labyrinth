@@ -100,6 +100,7 @@ namespace Assets.Scripts.GameManagement
         {
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
+            AkSoundEngine.PostEvent("lobby_join", gameObject);
         }
 
         void OnDebugButtonClicked()
@@ -141,7 +142,12 @@ namespace Assets.Scripts.GameManagement
         void OnReadyToggleValueChanged(bool value)
         {
             NetworkClient.instance.SendReadyChanged(value);
-            AkSoundEngine.PostEvent("lobby_ready", this.gameObject);
+            AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
+        }
+
+        public void OnChangeRole()
+        {
+            AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
         }
     }
 }

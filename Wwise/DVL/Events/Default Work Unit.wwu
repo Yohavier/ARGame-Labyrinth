@@ -3,17 +3,69 @@
 	<Events>
 		<WorkUnit Name="Default Work Unit" ID="{52C3052A-5C0D-4C58-9BE0-1AC5A966DB15}" PersistMode="Standalone">
 			<ChildrenList>
-				<Event Name="lobby_ready" ID="{99634B1B-5FA3-4506-A555-D8944C58734D}">
+				<Folder Name="Lobby" ID="{D79944CE-BD71-4F40-B6FB-8EB9B5B56144}" ShortID="441032647">
 					<ChildrenList>
-						<Action Name="" ID="{AA264F70-FFDF-4695-9A8A-9FFD953F93C4}" ShortID="62732557">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="click_button_04" ID="{5A4CAA6D-C5FA-4BBE-9245-E444216F8049}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
+						<Event Name="lobby_smallButton" ID="{D68A2F26-7EF4-445F-80D3-488AE3E19E76}">
+							<ChildrenList>
+								<Action Name="" ID="{D6F25041-B5FB-40E3-971D-286050E787CF}" ShortID="83321478">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UITerminal_click_01" ID="{EE408B4B-A73B-49F4-82BB-D7305D841833}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="lobby_start" ID="{D016E2A4-3C89-4CBA-833A-9C75A0600C66}">
+							<ChildrenList>
+								<Action Name="" ID="{8355ECDB-EF4A-4693-9FE8-97B02D670E7B}" ShortID="935454805">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UISFX_StartButton" ID="{94FEF5AC-A730-4703-8578-2D50A6748DBF}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="lobby_join" ID="{F030532B-1AE8-4A97-A7FE-547A7626A580}">
+							<ChildrenList>
+								<Action Name="" ID="{B71DBE08-C70D-4346-9207-DDD8A812A7BF}" ShortID="369492196">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_Button_01" ID="{E5375E52-7005-4B5A-BF0B-9C252B82922F}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
-				</Event>
+				</Folder>
+				<Folder Name="Menu" ID="{8E546BAD-7936-4095-B8FF-92E4B2D2B93E}" ShortID="426330295">
+					<ChildrenList>
+						<Event Name="roll_dice" ID="{259FDC76-C8B4-4618-A039-22729324F72C}">
+							<ChildrenList>
+								<Action Name="" ID="{4D6071B1-F84F-41AA-A929-6EA799E4FEEC}" ShortID="332092035">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="roll_dice" ID="{196BEB58-4A7C-4A60-A958-9334A8685D92}" WorkUnitID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="powerUp_pickUp" ID="{1A6401E9-A00B-4D71-B796-64A93E8C61F1}">
+							<ChildrenList>
+								<Action Name="" ID="{C27F45E2-C481-4AB8-8263-43F2C0AA6D90}" ShortID="571740483">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Weapon_BuySFX_01" ID="{2DCB5E8A-3F22-4506-8F44-7A6608A22812}" WorkUnitID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

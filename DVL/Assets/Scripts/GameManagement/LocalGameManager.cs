@@ -51,7 +51,7 @@ public class LocalGameManager : MonoBehaviour
 			if(currentTurnPlayer == localPlayerIndex)
             {
 				stepsLeft = value;
-				InformationPanel.instance.SetLeftStepsText(value.ToString());
+				DiceHandler.instance.OnChangeDiceText(stepsLeft, false);
 			}
 		}
 	}
@@ -115,6 +115,7 @@ public class LocalGameManager : MonoBehaviour
 	private void RollDice()
     {
 		_stepsLeft = Random.Range(1, 7);
+		DiceHandler.instance.RollDiceAnimation(_stepsLeft);
 		RemoveRollDiceButtonListener();
 
 		if(activePlayer)

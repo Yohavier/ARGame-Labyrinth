@@ -19,8 +19,6 @@ public class InformationPanel : MonoBehaviour
     public Button repairGeneratorButton;
     public Button dropItemButton;
     public Button rollDiceButton;
-    public Button toggleDoorsButton;
-    public Button healPlayerButton;
 
     [Header("Informations")]
     public Text player;
@@ -49,6 +47,7 @@ public class InformationPanel : MonoBehaviour
     private void ToggleMenuPanel()
     {
         MenuPanel.SetActive(!MenuPanel.activeSelf);
+        AudioCalls.PostAudio("lobby_smallButton");
     }
 
     #region HandleButtons
@@ -68,14 +67,6 @@ public class InformationPanel : MonoBehaviour
     {
         rollDiceButton.interactable = interactable;
     }
-    public void SetToggleDoorsButton(bool interactable)
-    {
-        toggleDoorsButton.interactable = interactable;
-    }
-    public void SetHealPlayerButton(bool interactable)
-    {
-        healPlayerButton.interactable = interactable;
-    }
     #endregion
 
     #region SetInformations
@@ -87,20 +78,10 @@ public class InformationPanel : MonoBehaviour
     {
         items.text = "Item: " + text;
     }
-    public void SetCoordText(string text)
-    {
-        coords.text = "Coord: " + text;
-    }
     public void SetProgressText(string text)
     {
         progress.text = "Progress: " + text;
     }
-
-    public void SetLeftStepsText(string text)
-    {
-        steps.text = "Steps Left: " + text;
-    }
-
     public void SetStateText(string text)
     {
         state.text = "State: " + text;
@@ -161,4 +142,9 @@ public class InformationPanel : MonoBehaviour
         }
     }
     #endregion
+
+    public void PlayButtonSound(string file)
+    {
+        AudioCalls.PostAudio(file);
+    }
 }

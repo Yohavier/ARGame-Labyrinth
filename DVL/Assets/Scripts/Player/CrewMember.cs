@@ -110,6 +110,7 @@ public class CrewMember : Player
 	}
 	private void StorePowerUp(Button slot, PowerUpBase powerUp) 
 	{
+		AkSoundEngine.PostEvent("powerUp_pickUp", this.gameObject);
 		powerUp.pickedUp = true;
 		slot.image.sprite = powerUp.powerUpImage;
 		slot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;

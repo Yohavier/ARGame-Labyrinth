@@ -28,6 +28,7 @@ public class NetworkClient
         catch (SocketException)
         {
             UnityEngine.Debug.LogError("Connection failed, attempt " + connectionAttempts);
+            //TODO wrong sound
         }
 
         if (clientSocket.Connected)
@@ -157,13 +158,12 @@ public class NetworkClient
 
     private void HandleBoardSetup(Msg msg)
     {
-        //InformationPanel.instance.enabled = true;
         BoardGrid.instance.seedList.Clear();
         BoardGrid.instance.seedCount = -1;
         for (int i = 0; i < 49; i++)
             BoardGrid.instance.seedList.Add(msg.ReadFloat());
 
-        BoardGrid.instance.readyToSetup = true;//.SetUpGrid();
+        BoardGrid.instance.readyToSetup = true;
         GUIManager.instance.needsMenuUpdate = true;
     }
 

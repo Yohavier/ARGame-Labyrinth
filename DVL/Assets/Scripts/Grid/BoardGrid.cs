@@ -115,6 +115,7 @@ public class BoardGrid : MonoBehaviour
 	//Set up grid and calls to spawn Players 
 	public void SetUpGrid()
 	{
+		AudioCalls.PostAudio("lobby_start");
 		List<Tile> cornerTiles = new List<Tile>();
 		for (int row = 0; row < size; row++)
 		{

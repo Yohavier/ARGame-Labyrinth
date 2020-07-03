@@ -4,6 +4,7 @@
 		<WorkUnit Name="Default Work Unit" ID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}" PersistMode="Standalone">
 			<ChildrenList>
 				<WorkUnit Name="Lobby" ID="{14DF322B-8611-46B6-80DF-536295287090}" PersistMode="Reference"/>
+				<WorkUnit Name="Menu" ID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

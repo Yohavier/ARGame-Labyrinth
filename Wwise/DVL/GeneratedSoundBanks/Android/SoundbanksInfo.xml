@@ -16,11 +16,63 @@
 			<ShortName>Lobby</ShortName>
 			<Path>Lobby.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1975309479" Name="lobby_ready" ObjectPath="\Events\Default Work Unit\lobby_ready" DurationType="OneShot" DurationMin="0.407642" DurationMax="0.407642">
+				<Event Id="2886407174" Name="lobby_join" ObjectPath="\Events\Default Work Unit\Lobby\lobby_join" DurationType="OneShot" DurationMin="0.500000" DurationMax="0.500000">
 					<IncludedMemoryFiles>
-						<File Id="1047353938" Language="SFX">
-							<ShortName>click_button_04.wav</ShortName>
-							<Path>SFX\click_button_04_10C4C929.wem</Path>
+						<File Id="649611668" Language="SFX">
+							<ShortName>UI_Button_01.wav</ShortName>
+							<Path>SFX\UI_Button_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2092420523" Name="lobby_smallButton" ObjectPath="\Events\Default Work Unit\Lobby\lobby_smallButton" DurationType="OneShot" DurationMin="0.048889" DurationMax="0.048889">
+					<IncludedMemoryFiles>
+						<File Id="997663245" Language="SFX">
+							<ShortName>UITerminal_click_01.wav</ShortName>
+							<Path>SFX\UITerminal_click_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1340413442" Name="lobby_start" ObjectPath="\Events\Default Work Unit\Lobby\lobby_start" DurationType="OneShot" DurationMin="5.000000" DurationMax="5.000000">
+					<IncludedMemoryFiles>
+						<File Id="784567956" Language="SFX">
+							<ShortName>UISFX_StartButton.wav</ShortName>
+							<Path>SFX\UISFX_StartButton_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="506812678" Name="powerUp_pickUp" ObjectPath="\Events\Default Work Unit\Menu\powerUp_pickUp" DurationType="OneShot" DurationMin="1.513152" DurationMax="1.513152">
+					<IncludedMemoryFiles>
+						<File Id="782016560" Language="SFX">
+							<ShortName>Weapon_BuySFX_01 .wav</ShortName>
+							<Path>SFX\Weapon_BuySFX_01 _10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1847000442" Name="roll_dice" ObjectPath="\Events\Default Work Unit\Menu\roll_dice" DurationType="OneShot" DurationMin="0.028445" DurationMax="0.031928">
+					<IncludedMemoryFiles>
+						<File Id="211823110" Language="SFX">
+							<ShortName>roll_dice_06.wav</ShortName>
+							<Path>SFX\roll_dice_06_10C4C929.wem</Path>
+						</File>
+						<File Id="249031571" Language="SFX">
+							<ShortName>roll_dice_01.wav</ShortName>
+							<Path>SFX\roll_dice_01_10C4C929.wem</Path>
+						</File>
+						<File Id="360531588" Language="SFX">
+							<ShortName>roll_dice_05.wav</ShortName>
+							<Path>SFX\roll_dice_05_10C4C929.wem</Path>
+						</File>
+						<File Id="665319425" Language="SFX">
+							<ShortName>roll_dice_02.wav</ShortName>
+							<Path>SFX\roll_dice_02_10C4C929.wem</Path>
+						</File>
+						<File Id="713787166" Language="SFX">
+							<ShortName>roll_dice_04.wav</ShortName>
+							<Path>SFX\roll_dice_04_10C4C929.wem</Path>
+						</File>
+						<File Id="895621980" Language="SFX">
+							<ShortName>roll_dice_03.wav</ShortName>
+							<Path>SFX\roll_dice_03_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
