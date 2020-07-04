@@ -291,6 +291,7 @@ public class Tile : MonoBehaviour
 	//sprengen mit kurzem Zeitversatz
 	//shader der das Tile auflösen lässt
 	public ParticleSystem explosion;
+	public int explosionNumber = 4;
 	private List<Vector3> FindRightCorners()
     {
 		List<Vector3> corners = new List<Vector3>();
@@ -318,9 +319,15 @@ public class Tile : MonoBehaviour
     }
 	private IEnumerator ExplosionOrder(List<Vector3> pos)
     {
-        for (int i = 0; i < pos.Count; i++)
+		Vector3 start = pos[0];
+		Vector3 end = pos[1];
+		Vector3 dir = (start - end).normalized * 0.1f;
+
+        for (int i = 0; i < explosionNumber; i++)
         {
-			var exp = Instantiate(explosion, pos[i], Quaternion.identity);
+			float factor = i / (float)(explosionNumber - 1);
+			Debug.Log(factor);
+			Instantiate(explosion, start - dir * factor, Quaternion.identity);
 			yield return new WaitForSeconds(0.2f);
 		}
 

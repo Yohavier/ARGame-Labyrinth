@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class WalkingTraces : MonoBehaviour
 {
-    public GameObject FootstepTrace;
+    public ParticleSystem FootstepTrace;
 
     public void SpawnParticlesystem(Tile tile)
     {
@@ -17,8 +17,7 @@ public class WalkingTraces : MonoBehaviour
             {
                 if (VisibilityCheck(tile))
                 {                    
-                    GameObject trace = Instantiate(FootstepTrace);
-                    trace.transform.localPosition = tile.transform.localPosition;
+                    Instantiate(FootstepTrace, transform.position, Quaternion.identity);
                 }             
             }
         }
