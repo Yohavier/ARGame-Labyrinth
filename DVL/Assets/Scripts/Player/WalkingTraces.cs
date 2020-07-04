@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class WalkingTraces : MonoBehaviour
 {
-    [SerializeField] public GameObject FootstepTrace;
+    public GameObject FootstepTrace;
 
     public void SpawnParticlesystem(Tile tile)
     {
@@ -15,7 +16,7 @@ public class WalkingTraces : MonoBehaviour
             if (LocalGameManager.instance.activePlayer != null)
             {
                 if (VisibilityCheck(tile))
-                {
+                {                    
                     GameObject trace = Instantiate(FootstepTrace);
                     trace.transform.localPosition = tile.transform.localPosition;
                 }             

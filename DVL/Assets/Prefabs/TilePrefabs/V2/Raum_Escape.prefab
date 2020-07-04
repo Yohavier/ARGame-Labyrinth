@@ -626,6 +626,8 @@ MonoBehaviour:
   ingameLeftModule: 0
   doorOpen: 1
   index: -1
+  explosion: {fileID: 4692819508810876851, guid: daf976c04b12e0d4588860bdd84efbbc,
+    type: 3}
 --- !u!114 &5261459075628519143
 MonoBehaviour:
   m_ObjectHideFlags: 0

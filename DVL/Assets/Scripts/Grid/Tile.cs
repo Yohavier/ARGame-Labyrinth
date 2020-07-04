@@ -135,11 +135,9 @@ public class Tile : MonoBehaviour
 			yield return null;
 		}
 
-		if (row < 0 || row > BoardGrid.instance.size - 1 || column < 0 || column > BoardGrid.instance.size - 1)
+		if (row < 0 || row > 6 || column < 0 || column > 6)
 		{
-			BoardGrid.instance.inMove = false;
-			BoardGrid.instance.RemoveTileFromGrid(this);
-			HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);
+			StartCoroutine(ExplosionOrder(FindRightCorners()));
 		}
 	}
 
@@ -288,4 +286,46 @@ public class Tile : MonoBehaviour
 			return false;
         }
     }
+
+	//sprengplätze mit colliderecken
+	//sprengen mit kurzem Zeitversatz
+	//shader der das Tile auflösen lässt
+	public ParticleSystem explosion;
+	private List<Vector3> FindRightCorners()
+    {
+		List<Vector3> corners = new List<Vector3>();
+		if (row < 0)
+		{
+			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z - 0.05f));
+		}
+		else if (row > 6)
+        {
+			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z - 0.05f));
+		}
+		else if(column < 0)
+        {
+			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z + 0.05f));
+		}
+		else if (column > 6)
+        {
+			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z - 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z - 0.05f));
+		}
+		return corners;
+    }
+	private IEnumerator ExplosionOrder(List<Vector3> pos)
+    {
+        for (int i = 0; i < pos.Count; i++)
+        {
+			var exp = Instantiate(explosion, pos[i], Quaternion.identity);
+			yield return new WaitForSeconds(0.2f);
+		}
+
+		BoardGrid.instance.inMove = false;
+		BoardGrid.instance.RemoveTileFromGrid(this);
+		HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);
+	}
 }

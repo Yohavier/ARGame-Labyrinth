@@ -105,7 +105,6 @@ MonoBehaviour:
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}
   isWalking: 0
-  _playerState: 0
 --- !u!114 &-1801657048653225923
 MonoBehaviour:
   m_ObjectHideFlags: 0
