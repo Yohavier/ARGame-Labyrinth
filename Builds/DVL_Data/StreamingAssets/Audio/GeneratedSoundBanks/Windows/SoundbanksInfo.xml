@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="135">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
@@ -16,11 +16,112 @@
 			<ShortName>Lobby</ShortName>
 			<Path>Lobby.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2886407174" Name="lobby_join" ObjectPath="\Events\Default Work Unit\Lobby\lobby_join" DurationType="OneShot" DurationMin="0.500000" DurationMax="0.500000">
+				<Event Id="3077118699" Name="character_footstep" ObjectPath="\Events\Default Work Unit\Character\character_footstep" DurationType="OneShot" DurationMin="0.305306" DurationMax="0.701352">
 					<IncludedMemoryFiles>
-						<File Id="649611668" Language="SFX">
-							<ShortName>UI_Button_01.wav</ShortName>
-							<Path>SFX\UI_Button_01_10C4C929.wem</Path>
+						<File Id="95399779" Language="SFX">
+							<ShortName>footstep_metalplate_boot_01.wav</ShortName>
+							<Path>SFX\footstep_metalplate_boot_01_10C4C929.wem</Path>
+						</File>
+						<File Id="163034218" Language="SFX">
+							<ShortName>footstep_bigmetalplate_shoe_lightboots_trampling_02.wav</ShortName>
+							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_02_980849A2.wem</Path>
+						</File>
+						<File Id="353200266" Language="SFX">
+							<ShortName>footstep_dirt_01.wav</ShortName>
+							<Path>SFX\footstep_dirt_01_10C4C929.wem</Path>
+						</File>
+						<File Id="522965997" Language="SFX">
+							<ShortName>footstep_dirt_04.wav</ShortName>
+							<Path>SFX\footstep_dirt_04_10C4C929.wem</Path>
+						</File>
+						<File Id="601526468" Language="SFX">
+							<ShortName>footstep_dirt_02.wav</ShortName>
+							<Path>SFX\footstep_dirt_02_10C4C929.wem</Path>
+						</File>
+						<File Id="657693872" Language="SFX">
+							<ShortName>footstep_metalplate_boot_03.wav</ShortName>
+							<Path>SFX\footstep_metalplate_boot_03_10C4C929.wem</Path>
+						</File>
+						<File Id="672019141" Language="SFX">
+							<ShortName>footstep_metalplate_boot_02.wav</ShortName>
+							<Path>SFX\footstep_metalplate_boot_02_10C4C929.wem</Path>
+						</File>
+						<File Id="740601579" Language="SFX">
+							<ShortName>footstep_dirt_03.wav</ShortName>
+							<Path>SFX\footstep_dirt_03_10C4C929.wem</Path>
+						</File>
+						<File Id="805416070" Language="SFX">
+							<ShortName>footstep_metalplate_boot_04.wav</ShortName>
+							<Path>SFX\footstep_metalplate_boot_04_10C4C929.wem</Path>
+						</File>
+						<File Id="944349959" Language="SFX">
+							<ShortName>footstep_bigmetalplate_shoe_lightboots_trampling_03.wav</ShortName>
+							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_03_A123F2C1.wem</Path>
+						</File>
+						<File Id="993263760" Language="SFX">
+							<ShortName>footstep_bigmetalplate_shoe_lightboots_trampling_01.wav</ShortName>
+							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_01_264C9805.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{1EB67CD4-2399-44AA-B323-3EBE6B6B3522}">
+							<Media>
+								<File Id="95399779"/>
+								<File Id="672019141"/>
+								<File Id="657693872"/>
+								<File Id="805416070"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{97A967CA-27DB-451A-99C9-FE48E2A76D05}">
+							<Media>
+								<File Id="353200266"/>
+								<File Id="601526468"/>
+								<File Id="740601579"/>
+								<File Id="522965997"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{EFED4A6E-835D-4131-B079-0F2901587808}">
+							<Media>
+								<File Id="993263760"/>
+								<File Id="163034218"/>
+								<File Id="944349959"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="2613980178" Name="generator_finish" ObjectPath="\Events\Default Work Unit\Items\generator_finish" DurationType="OneShot" DurationMin="2.460092" DurationMax="2.460092">
+					<IncludedMemoryFiles>
+						<File Id="841457928" Language="SFX">
+							<ShortName>Arcade Jingle Positive 12.wav</ShortName>
+							<Path>SFX\Arcade Jingle Positive 12_2FD25C10.wem</Path>
+						</File>
+						<File Id="924466256" Language="SFX">
+							<ShortName>click_gear_wrench_03.wav</ShortName>
+							<Path>SFX\click_gear_wrench_03_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1075926368" Name="generator_repair" ObjectPath="\Events\Default Work Unit\Items\generator_repair" DurationType="OneShot" DurationMin="0.721655" DurationMax="0.721655">
+					<IncludedMemoryFiles>
+						<File Id="924466256" Language="SFX">
+							<ShortName>click_gear_wrench_03.wav</ShortName>
+							<Path>SFX\click_gear_wrench_03_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2177967876" Name="item_drop" ObjectPath="\Events\Default Work Unit\Items\item_drop" DurationType="OneShot" DurationMin="1.347211" DurationMax="1.347211">
+					<IncludedMemoryFiles>
+						<File Id="956255550" Language="SFX">
+							<ShortName>Carrier_putDownChest.wav</ShortName>
+							<Path>SFX\Carrier_putDownChest_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2886407174" Name="lobby_join" ObjectPath="\Events\Default Work Unit\Lobby\lobby_join" DurationType="OneShot" DurationMin="1.356271" DurationMax="1.356271">
+					<IncludedMemoryFiles>
+						<File Id="1012598839" Language="SFX">
+							<ShortName>PremiumBeat_0013_cursor_selection_02.wav</ShortName>
+							<Path>SFX\PremiumBeat_0013_cursor_selection_02_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -32,11 +133,43 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="1340413442" Name="lobby_start" ObjectPath="\Events\Default Work Unit\Lobby\lobby_start" DurationType="OneShot" DurationMin="5.000000" DurationMax="5.000000">
+				<Event Id="1340413442" Name="lobby_start" ObjectPath="\Events\Default Work Unit\Lobby\lobby_start" DurationType="OneShot" DurationMin="0.999979" DurationMax="0.999979">
 					<IncludedMemoryFiles>
-						<File Id="784567956" Language="SFX">
-							<ShortName>UISFX_StartButton.wav</ShortName>
-							<Path>SFX\UISFX_StartButton_10C4C929.wem</Path>
+						<File Id="193528008" Language="SFX">
+							<ShortName>PremiumBeat_0013_cursor_click_11.wav</ShortName>
+							<Path>SFX\PremiumBeat_0013_cursor_click_11_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="934594543" Name="powerUp_communicator" ObjectPath="\Events\Default Work Unit\PowerUps\powerUp_communicator" DurationType="OneShot" DurationMin="1.733923" DurationMax="1.733923">
+					<IncludedMemoryFiles>
+						<File Id="321321431" Language="SFX">
+							<ShortName>designed_electricity_gramophon_01.wav</ShortName>
+							<Path>SFX\designed_electricity_gramophon_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3873244585" Name="powerUp_doorhack" ObjectPath="\Events\Default Work Unit\PowerUps\powerUp_doorhack" DurationType="OneShot" DurationMin="3.961467" DurationMax="3.961467">
+					<IncludedMemoryFiles>
+						<File Id="56275808" Language="SFX">
+							<ShortName>PremiumBeat_0046_sci_fi_readout_beep.wav</ShortName>
+							<Path>SFX\PremiumBeat_0046_sci_fi_readout_beep_C5319648.wem</Path>
+						</File>
+						<File Id="335162430" Language="SFX">
+							<ShortName>impact_p0_container_door_10.wav</ShortName>
+							<Path>SFX\impact_p0_container_door_10_10C4C929.wem</Path>
+						</File>
+						<File Id="466262912" Language="SFX">
+							<ShortName>PremiumBeat_0046_sci_fi_type_beep.wav</ShortName>
+							<Path>SFX\PremiumBeat_0046_sci_fi_type_beep_28AD0E9B.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2388944346" Name="powerUp_medipack" ObjectPath="\Events\Default Work Unit\PowerUps\powerUp_medipack" DurationType="OneShot" DurationMin="2.199002" DurationMax="2.199002">
+					<IncludedMemoryFiles>
+						<File Id="305984302" Language="SFX">
+							<ShortName>defi_downloaded.wav</ShortName>
+							<Path>SFX\defi_downloaded_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -45,6 +178,14 @@
 						<File Id="782016560" Language="SFX">
 							<ShortName>Weapon_BuySFX_01 .wav</ShortName>
 							<Path>SFX\Weapon_BuySFX_01 _10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="97193572" Name="powerUp_scanner" ObjectPath="\Events\Default Work Unit\PowerUps\powerUp_scanner" DurationType="OneShot" DurationMin="7.828959" DurationMax="7.828959">
+					<IncludedMemoryFiles>
+						<File Id="501817554" Language="SFX">
+							<ShortName>PremiumBeat_0046_sci_fi_scanner.wav</ShortName>
+							<Path>SFX\PremiumBeat_0046_sci_fi_scanner_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -76,7 +217,32 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="1367503038" Name="tile_expell" ObjectPath="\Events\Default Work Unit\Tile\tile_expell" DurationType="OneShot" DurationMin="1.003075" DurationMax="1.125913">
+					<IncludedMemoryFiles>
+						<File Id="1036483818" Language="SFX">
+							<ShortName>designed_weapon_cannon_01.wav</ShortName>
+							<Path>SFX\designed_weapon_cannon_01_443F175C.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1327556595" Name="tile_move" ObjectPath="\Events\Default Work Unit\Tile\tile_move" DurationType="OneShot" DurationMin="0.959927" DurationMax="0.959927">
+					<IncludedMemoryFiles>
+						<File Id="1039434203" Language="SFX">
+							<ShortName>metal_grind_metal_rusty_05.wav</ShortName>
+							<Path>SFX\metal_grind_metal_rusty_05_7B471E4F.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 			</IncludedEvents>
+			<SwitchGroups>
+				<SwitchGroup Id="436743010" Name="character" ObjectPath="\Switches\Default Work Unit\character">
+					<Switches>
+						<Switch Id="3579833620" Name="trace" ObjectPath="\Switches\Default Work Unit\character\trace"/>
+						<Switch Id="2299321487" Name="enemy" ObjectPath="\Switches\Default Work Unit\character\enemy"/>
+						<Switch Id="4136758402" Name="crew" ObjectPath="\Switches\Default Work Unit\character\crew"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
 		</SoundBank>
 		<SoundBank Id="1355168291" Language="SFX">
 			<ObjectPath>Init</ObjectPath>

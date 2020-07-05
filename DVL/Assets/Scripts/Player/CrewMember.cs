@@ -25,8 +25,10 @@ public class CrewMember : Player
 			base.CheckTileForOtherMods(tile);
 
 			//Check for escape capsule mod
-			HandleDropItem(tile);
-
+			HandleDropItem(tile);		
+		}
+		if(playerState != PlayerState.DEAD)
+        {
 			//Check for PowerUps
 			HandlePowerUpCollection(tile);
 		}
@@ -172,6 +174,9 @@ public class CrewMember : Player
 		if(IsLocalPlayer())
 			NetworkClient.instance.SendItemCollected(tile);
 
+		if (!tile.isInFOW)
+			AkSoundEngine.PostEvent("powerUp_pickUp", gameObject);
+
 		storedItem = item.gameObject;
 		item.isStored = true;
 		storedItem.transform.SetParent(this.transform);
@@ -197,7 +202,12 @@ public class CrewMember : Player
 				capsule.DisplayProgress();
 
 			if (IsLocalPlayer())
+            {
 				NetworkClient.instance.SendItemDropped(tile);
+			}
+
+			if(!tile.isInFOW)
+				AkSoundEngine.PostEvent("item_drop", gameObject);
 
 			storedItem.gameObject.SetActive(true);
 			storedItem.transform.SetParent(tile.transform);
@@ -211,7 +221,6 @@ public class CrewMember : Player
 	#region Handle Repair Generator extension
 	public void RepairGenerator(Generator generator)
 	{
-		AkSoundEngine.PostEvent("repair_generator", gameObject);
 		generator.RepairGenerator(repairSpeed);
 		NetworkClient.instance.SendGeneratorRepaired(repairSpeed);
 	}

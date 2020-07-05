@@ -17,8 +17,20 @@ public class SelectARObjectWithFinger : MonoBehaviour
 		instance = this;
 		arCamera = FindObjectOfType<Camera>();
 	}
+    private void OnEnable()
+    {
+		Eventbroker.instance.onNotifyNextTurn += NewTurn;
+    }
+	private void NewTurn()
+    {
+		HandlePreviousPath();
+    }
+    private void OnDisable()
+    {
+		Eventbroker.instance.onNotifyNextTurn -= NewTurn;
+    }
 
-	private void Update()
+    private void Update()
 	{
         if (LocalGameManager.instance.activePlayer)
         {
@@ -79,7 +91,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 		}
 #endif
 	}
-
 
 	public void ManagePath(Tile targetTile, PlayerIndex playerIndex)
 	{

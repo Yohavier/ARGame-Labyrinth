@@ -10,6 +10,7 @@ public class MediPackPowerUp : PowerUpBase
         CrewMember dyingPlayer = CanUse(player.positionTile);
         if(dyingPlayer != null)
         {
+            AkSoundEngine.PostEvent("powerUp_medipack", gameObject);
             dyingPlayer.GetHealed();
             NetworkClient.instance.SendPlayerHealed(dyingPlayer.playerIndex);
             slot.DropEverythingInSlot();

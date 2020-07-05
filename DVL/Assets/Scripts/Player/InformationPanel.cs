@@ -90,7 +90,8 @@ public class InformationPanel : MonoBehaviour
     public void DropdownValueChanged(Dropdown change)
     {
         selectedPlayerRole = playerRoles[change.value];
-        NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
+        if (LocalGameManager.instance != null)
+            NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
         Debug.Log("Selected " + playerRoles[change.value].name);
     }
 

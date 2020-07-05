@@ -10,7 +10,7 @@
 								<Action Name="" ID="{D6F25041-B5FB-40E3-971D-286050E787CF}" ShortID="83321478">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="UITerminal_click_01" ID="{EE408B4B-A73B-49F4-82BB-D7305D841833}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
+											<ObjectRef Name="UITerminal_click_01" ID="{EE408B4B-A73B-49F4-82BB-D7305D841833}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -21,7 +21,7 @@
 								<Action Name="" ID="{8355ECDB-EF4A-4693-9FE8-97B02D670E7B}" ShortID="935454805">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="UISFX_StartButton" ID="{94FEF5AC-A730-4703-8578-2D50A6748DBF}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
+											<ObjectRef Name="PremiumBeat_0013_cursor_click_11" ID="{85A8CE8D-FFC1-40D8-A344-ECB7B78FE9E3}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -32,7 +32,7 @@
 								<Action Name="" ID="{B71DBE08-C70D-4346-9207-DDD8A812A7BF}" ShortID="369492196">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="UI_Button_01" ID="{E5375E52-7005-4B5A-BF0B-9C252B82922F}" WorkUnitID="{14DF322B-8611-46B6-80DF-536295287090}"/>
+											<ObjectRef Name="PremiumBeat_0013_cursor_selection_02" ID="{C6A0C8DE-9372-424C-8827-B0AE4B6AF554}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -47,7 +47,7 @@
 								<Action Name="" ID="{4D6071B1-F84F-41AA-A929-6EA799E4FEEC}" ShortID="332092035">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="roll_dice" ID="{196BEB58-4A7C-4A60-A958-9334A8685D92}" WorkUnitID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}"/>
+											<ObjectRef Name="roll_dice" ID="{196BEB58-4A7C-4A60-A958-9334A8685D92}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -58,7 +58,7 @@
 								<Action Name="" ID="{C27F45E2-C481-4AB8-8263-43F2C0AA6D90}" ShortID="571740483">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Weapon_BuySFX_01" ID="{2DCB5E8A-3F22-4506-8F44-7A6608A22812}" WorkUnitID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}"/>
+											<ObjectRef Name="Weapon_BuySFX_01" ID="{2DCB5E8A-3F22-4506-8F44-7A6608A22812}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -66,25 +66,125 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
-				<Event Name="tile_expell" ID="{9DDCCF1C-46D1-4B7A-BC77-EA20D5075D81}">
-					<ChildrenList>
-						<Action Name="" ID="{F4029691-4DF5-413D-ADB3-5FE8424788C3}" ShortID="1038786018">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="tile_expell" ID="{4BFE90DC-F339-429B-A1D1-98557FB4BC8D}" WorkUnitID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
 				<Folder Name="Items" ID="{252E4B9E-687A-4395-9834-89A7CD27B630}" ShortID="944551539">
 					<ChildrenList>
-						<Event Name="repair_generator" ID="{F402C7C4-835F-4E03-B89D-6D8224EB9A08}">
+						<Event Name="generator_repair" ID="{F402C7C4-835F-4E03-B89D-6D8224EB9A08}">
 							<ChildrenList>
 								<Action Name="" ID="{EEF76D2B-079E-4E1B-85FA-B37716106AA9}" ShortID="286291616">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="click_gear_wrench_03" ID="{0EBD1CD9-AEEB-483A-80ED-E82A77CD48C9}" WorkUnitID="{ADEABB8E-382E-4756-B5EE-AE44D879A0AF}"/>
+											<ObjectRef Name="click_gear_wrench_03" ID="{0EBD1CD9-AEEB-483A-80ED-E82A77CD48C9}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="generator_finish" ID="{036EAB01-9C3C-4193-82DD-9256AEEFD0F6}">
+							<ChildrenList>
+								<Action Name="" ID="{D662BFC3-A693-4333-802A-AB450C6B22AA}" ShortID="237473660">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="generator_finished" ID="{1A705EDA-9ADF-462D-8E74-6B83F3E9CB76}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="item_drop" ID="{018E5ACE-D0B7-4213-B5A3-EAEF06DD98A5}">
+							<ChildrenList>
+								<Action Name="" ID="{19A48C3F-8D86-4CF3-99E1-F7D73E84A05B}" ShortID="181394066">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Carrier_putDownChest" ID="{67B30C30-A941-4465-BDBD-79056D6643E2}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Tile" ID="{5F14EB61-F86A-4E64-BC53-0AA295D64618}" ShortID="725201524">
+					<ChildrenList>
+						<Event Name="tile_expell" ID="{9DDCCF1C-46D1-4B7A-BC77-EA20D5075D81}">
+							<ChildrenList>
+								<Action Name="" ID="{F4029691-4DF5-413D-ADB3-5FE8424788C3}" ShortID="1038786018">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tile_expell" ID="{4BFE90DC-F339-429B-A1D1-98557FB4BC8D}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="tile_move" ID="{8595AFD3-21B1-43C3-AC30-37D6636AEB7E}">
+							<ChildrenList>
+								<Action Name="" ID="{F23163E4-418B-463B-AF38-CD92B9282D0B}" ShortID="805105498">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="metal_grind_metal_rusty_05" ID="{697D2578-3CD1-4E13-8998-989BB6334FC3}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="PowerUps" ID="{1D9E7FF8-B153-4801-BB31-CBD699AF8E74}" ShortID="975401999">
+					<ChildrenList>
+						<Event Name="powerUp_medipack" ID="{91929211-931F-4D35-AE64-D3E7F3E93AA4}">
+							<ChildrenList>
+								<Action Name="" ID="{0C7C4C3F-B04E-4A8E-90D7-580F77874415}" ShortID="361862498">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="defi_downloaded" ID="{416432E9-978A-4371-ABBA-63CD20DB2CFC}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="powerUp_scanner" ID="{556B8312-6BA0-4DA5-9D05-53A6FE2E4BCF}">
+							<ChildrenList>
+								<Action Name="" ID="{5197B648-782F-45F7-AD1B-A694A98063CF}" ShortID="42501281">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PremiumBeat_0046_sci_fi_scanner" ID="{6717A5E1-14CF-47E1-9DE4-602ECD8A9331}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="powerUp_communicator" ID="{1600F149-6AFD-4747-A64D-0992E5C8B43D}">
+							<ChildrenList>
+								<Action Name="" ID="{ACBC9874-3AFE-4B6E-9FE9-4EEE3392EF01}" ShortID="684722811">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="designed_electricity_gramophon_01" ID="{717D4BD2-CFE8-486C-96AE-53B54C64057A}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="powerUp_doorhack" ID="{0D38A267-5E89-44F1-9722-0AAFD24D34A2}">
+							<ChildrenList>
+								<Action Name="" ID="{6F6C1AD8-2E0B-449A-A673-9832FC6DE007}" ShortID="244172917">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="powerUp_doorhack" ID="{1BC59D28-6ADD-404D-999D-71683F377DC3}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Character" ID="{F91CA382-01DD-499F-8829-4B86349294C7}" ShortID="660280327">
+					<ChildrenList>
+						<Event Name="character_footstep" ID="{9C4ECE4F-162E-4F44-954B-CC70A00E6575}">
+							<ChildrenList>
+								<Action Name="" ID="{4FD0599B-6F9D-4DDF-A75C-1B5D79DBB488}" ShortID="282705689">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="character_footstep" ID="{1826974D-0458-480A-A9A3-DB1165DC2AC6}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

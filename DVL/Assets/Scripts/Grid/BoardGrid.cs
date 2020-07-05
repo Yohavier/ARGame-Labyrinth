@@ -188,6 +188,7 @@ public class BoardGrid : MonoBehaviour
 
 	private void MoveAllTile(Tile entrytile, Tile newtile)
 	{
+		AkSoundEngine.PostEvent("tile_move", gameObject);
 		bool canMoveVertical = entrytile.canMoveVertical;
 		bool canMoveHorizontal = entrytile.canMoveHorizontal;
 		int column = entrytile.column;

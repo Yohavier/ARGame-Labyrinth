@@ -8,10 +8,17 @@ public class DoorHackPowerUp : PowerUpBase
     {
         if (CanUse(player.positionTile))
         {
-            player.positionTile.ToggleDoors();
-            NetworkClient.instance.SendDoorHackUsed(player.positionTile);
-            slot.DropEverythingInSlot();
+            AkSoundEngine.PostEvent("powerUp_doorhack", gameObject);
+            StartCoroutine(DelayedAction(player, slot));
         }
+    }
+
+    public IEnumerator DelayedAction(Player player, PowerUpSlot slot)
+    {
+        yield return new WaitForSeconds(1);
+        player.positionTile.ToggleDoors();
+        NetworkClient.instance.SendDoorHackUsed(player.positionTile);
+        slot.DropEverythingInSlot();
     }
 
     public override void ReverseOnDrop(Player player) { }

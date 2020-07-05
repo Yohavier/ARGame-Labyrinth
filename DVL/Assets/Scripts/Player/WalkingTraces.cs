@@ -18,6 +18,8 @@ public class WalkingTraces : MonoBehaviour
                 if (VisibilityCheck(tile))
                 {                    
                     Instantiate(FootstepTrace, transform.position, Quaternion.identity);
+                    AkSoundEngine.SetSwitch("character", "trace", gameObject);
+                    AkSoundEngine.PostEvent("character_footstep", gameObject);
                 }             
             }
         }

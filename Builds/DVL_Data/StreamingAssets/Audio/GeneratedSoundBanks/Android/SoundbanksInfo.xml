@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Android" BasePlatform="Android" SchemaVersion="12" SoundbankVersion="135">
+	<RootPaths>
+		<ProjectRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Android\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Android</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="290285391" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\Lobby</ObjectPath>
+			<ShortName>Lobby</ShortName>
+			<Path>Lobby.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2886407174" Name="lobby_join" ObjectPath="\Events\Default Work Unit\Lobby\lobby_join" DurationType="OneShot" DurationMin="0.500000" DurationMax="0.500000">
+					<IncludedMemoryFiles>
+						<File Id="649611668" Language="SFX">
+							<ShortName>UI_Button_01.wav</ShortName>
+							<Path>SFX\UI_Button_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2092420523" Name="lobby_smallButton" ObjectPath="\Events\Default Work Unit\Lobby\lobby_smallButton" DurationType="OneShot" DurationMin="0.048889" DurationMax="0.048889">
+					<IncludedMemoryFiles>
+						<File Id="997663245" Language="SFX">
+							<ShortName>UITerminal_click_01.wav</ShortName>
+							<Path>SFX\UITerminal_click_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1340413442" Name="lobby_start" ObjectPath="\Events\Default Work Unit\Lobby\lobby_start" DurationType="OneShot" DurationMin="5.000000" DurationMax="5.000000">
+					<IncludedMemoryFiles>
+						<File Id="784567956" Language="SFX">
+							<ShortName>UISFX_StartButton.wav</ShortName>
+							<Path>SFX\UISFX_StartButton_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="506812678" Name="powerUp_pickUp" ObjectPath="\Events\Default Work Unit\Menu\powerUp_pickUp" DurationType="OneShot" DurationMin="1.513152" DurationMax="1.513152">
+					<IncludedMemoryFiles>
+						<File Id="782016560" Language="SFX">
+							<ShortName>Weapon_BuySFX_01 .wav</ShortName>
+							<Path>SFX\Weapon_BuySFX_01 _10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2181685632" Name="repair_generator" ObjectPath="\Events\Default Work Unit\Items\repair_generator" DurationType="OneShot" DurationMin="0.721655" DurationMax="0.721655">
+					<IncludedMemoryFiles>
+						<File Id="924466256" Language="SFX">
+							<ShortName>click_gear_wrench_03.wav</ShortName>
+							<Path>SFX\click_gear_wrench_03_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1847000442" Name="roll_dice" ObjectPath="\Events\Default Work Unit\Menu\roll_dice" DurationType="OneShot" DurationMin="0.028445" DurationMax="0.031928">
+					<IncludedMemoryFiles>
+						<File Id="211823110" Language="SFX">
+							<ShortName>roll_dice_06.wav</ShortName>
+							<Path>SFX\roll_dice_06_10C4C929.wem</Path>
+						</File>
+						<File Id="249031571" Language="SFX">
+							<ShortName>roll_dice_01.wav</ShortName>
+							<Path>SFX\roll_dice_01_10C4C929.wem</Path>
+						</File>
+						<File Id="360531588" Language="SFX">
+							<ShortName>roll_dice_05.wav</ShortName>
+							<Path>SFX\roll_dice_05_10C4C929.wem</Path>
+						</File>
+						<File Id="665319425" Language="SFX">
+							<ShortName>roll_dice_02.wav</ShortName>
+							<Path>SFX\roll_dice_02_10C4C929.wem</Path>
+						</File>
+						<File Id="713787166" Language="SFX">
+							<ShortName>roll_dice_04.wav</ShortName>
+							<Path>SFX\roll_dice_04_10C4C929.wem</Path>
+						</File>
+						<File Id="895621980" Language="SFX">
+							<ShortName>roll_dice_03.wav</ShortName>
+							<Path>SFX\roll_dice_03_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1367503038" Name="tile_expell" ObjectPath="\Events\Default Work Unit\tile_expell" DurationType="OneShot" DurationMin="1.003075" DurationMax="1.125913">
+					<IncludedMemoryFiles>
+						<File Id="1036483818" Language="SFX">
+							<ShortName>designed_weapon_cannon_01.wav</ShortName>
+							<Path>SFX\designed_weapon_cannon_01_797BAAF6.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

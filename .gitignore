@@ -60,7 +60,7 @@ sysinfo.txt
 crashlytics-build.properties
 
 #Wwise Gitignore
-* .cache
+DVL/Wwise/.cache/
 * .wem
 * .akd
 * .prof

@@ -136,6 +136,19 @@ public class Player : MonoBehaviour
 			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
 		}
 
+        if (!positionTile.isInFOW)
+        {
+			if(playerIndex == PlayerIndex.Enemy)
+            {
+				AkSoundEngine.SetSwitch("character", "enemy", gameObject);
+            }
+            else
+            {
+				AkSoundEngine.SetSwitch("character", "crew", gameObject);
+			}
+			AkSoundEngine.PostEvent("character_footstep", gameObject);
+        }
+
 		CreatePositionIndicatorTrace();
 	}
 
@@ -215,9 +228,7 @@ public class Player : MonoBehaviour
 		return true;
 	}
 	
-	public virtual void CheckTileForOtherMods(Tile tile) 
-	{
-	}
+	public virtual void CheckTileForOtherMods(Tile tile) {}
 	protected virtual void Dying() { }
 	protected virtual void Dead() { }
 	protected virtual void CheckDeathCounter() { }

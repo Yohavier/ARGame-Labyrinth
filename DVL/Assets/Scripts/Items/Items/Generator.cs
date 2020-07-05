@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Generator : Item
 {
-    [SerializeField] private int activationsNeeded = 0;
+    [SerializeField] public int activationsNeeded = 0;
     public int currentActivations;
     public static Generator instance;
     public bool isFinished;
@@ -27,6 +27,14 @@ public class Generator : Item
         {
             isFinished = true;
             GameManager.instance.CheckWinConditionCrew();
+            if (!position.isInFOW)
+            {
+                AkSoundEngine.PostEvent("generator_finish", gameObject);
+            }
+        }
+        else if (!position.isInFOW)
+        {
+            AkSoundEngine.PostEvent("generator_repair", gameObject);
         }
     }
             
