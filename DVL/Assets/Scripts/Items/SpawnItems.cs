@@ -39,7 +39,16 @@ public class SpawnItems : MonoBehaviour
             newItem.transform.SetParent(itemsPossiblePlaces[rand].transform);
             newItem.transform.localPosition = Vector3.zero;
             newItem.GetComponent<MeshRenderer>().enabled = false;
-
+            Generator g = newItem.GetComponent<Generator>();
+            Item it = newItem.GetComponent<Item>();
+            if (g != null)
+            {
+                g.position = itemsPossiblePlaces[rand];
+            }
+            else if (it != null) 
+            {
+                it.position = itemsPossiblePlaces[rand];
+            }
             int col = itemsPossiblePlaces[rand].column;
             int row = itemsPossiblePlaces[rand].row;
 

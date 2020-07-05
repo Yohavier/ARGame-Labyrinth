@@ -1,19 +1,23 @@
 Event	ID	Name			Wwise Object Path	Notes
 	506812678	powerUp_pickUp			\Default Work Unit\Menu\powerUp_pickUp	
 	1340413442	lobby_start			\Default Work Unit\Lobby\lobby_start	
+	1367503038	tile_expell			\Default Work Unit\tile_expell	
 	1847000442	roll_dice			\Default Work Unit\Menu\roll_dice	
 	2092420523	lobby_smallButton			\Default Work Unit\Lobby\lobby_smallButton	
+	2181685632	repair_generator			\Default Work Unit\Items\repair_generator	
 	2886407174	lobby_join			\Default Work Unit\Lobby\lobby_join	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	211823110	roll_dice_06	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_06_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_06		5380
-	249031571	roll_dice_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_01		5380
-	360531588	roll_dice_05	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_05_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_05		5380
-	649611668	UI_Button_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\UI_Button_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_join\UI_Button_01		88264
-	665319425	roll_dice_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_02_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_02		5380
-	713787166	roll_dice_04	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_04_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_04		5380
-	782016560	Weapon_BuySFX_01 	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\Weapon_BuySFX_01 _10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\powerUp_pickUp\Weapon_BuySFX_01 		266984
-	784567956	UISFX_StartButton	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\UISFX_StartButton_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_startMatch\UISFX_StartButton		882064
-	895621980	roll_dice_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_03		5380
-	997663245	UITerminal_click_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\SFX\UITerminal_click_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_smallButton\UITerminal_click_01		8688
+	211823110	roll_dice_06	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_06_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_06		5380
+	249031571	roll_dice_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_01		5380
+	360531588	roll_dice_05	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_05_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_05		5380
+	649611668	UI_Button_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\UI_Button_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_join\UI_Button_01		88264
+	665319425	roll_dice_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_02_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_02		5380
+	713787166	roll_dice_04	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_04_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_04		5380
+	782016560	Weapon_BuySFX_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\Weapon_BuySFX_01 _10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\powerUp_pickUp\Weapon_BuySFX_01		266984
+	784567956	UISFX_StartButton	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\UISFX_StartButton_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_startMatch\UISFX_StartButton		882064
+	895621980	roll_dice_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\roll_dice_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_03		5380
+	924466256	click_gear_wrench_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\click_gear_wrench_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\repair_generator\click_gear_wrench_03		127364
+	997663245	UITerminal_click_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\UITerminal_click_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_smallButton\UITerminal_click_01		8688
+	1036483818	designed_weapon_cannon_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\SFX\designed_weapon_cannon_01_797BAAF6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\tile_expell\designed_weapon_cannon_01		262132
 

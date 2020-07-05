@@ -15,17 +15,11 @@ public class InformationPanel : MonoBehaviour
 
 
     [Header("Buttons")]
-    public Button pickUpItemButton;
-    public Button repairGeneratorButton;
-    public Button dropItemButton;
     public Button rollDiceButton;
 
     [Header("Informations")]
     public Text player;
     public Text items;
-    public Text coords;
-    public Text progress;
-    public Text steps;
     public Text state;
 
     [Header("PowerUpSlots")]
@@ -51,18 +45,6 @@ public class InformationPanel : MonoBehaviour
     }
 
     #region HandleButtons
-    public void SetPickUpItemButton(bool interactable)
-    {
-        pickUpItemButton.interactable = interactable;
-    }
-    public void SetRepairGeneratorButton(bool interactable)
-    {
-        repairGeneratorButton.interactable = interactable;
-    }
-    public void SetDropItemButton(bool interactable)
-    {
-        dropItemButton.interactable = interactable;
-    }
     public void SetRollDiceButton(bool interactable)
     {
         rollDiceButton.interactable = interactable;
@@ -77,10 +59,6 @@ public class InformationPanel : MonoBehaviour
     public void SetItemText(string text)
     {
         items.text = "Item: " + text;
-    }
-    public void SetProgressText(string text)
-    {
-        progress.text = "Progress: " + text;
     }
     public void SetStateText(string text)
     {

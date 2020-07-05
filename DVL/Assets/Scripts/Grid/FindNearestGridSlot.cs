@@ -74,6 +74,7 @@ public class FindNearestGridSlot : MonoBehaviour
 				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
 				BoardGrid.instance.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
 				LocalGameManager.instance._moveTileToken = false;
+				LocalGameManager.instance.canMove = false;
 				targetTile = null;
 			}
 		}

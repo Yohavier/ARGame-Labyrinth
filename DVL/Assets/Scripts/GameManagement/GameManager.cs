@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 	public void CheckWinConditionCrew()
 	{
 		capsuleCount++;
-		InformationPanel.instance.SetProgressText(capsuleCount.ToString());
+		BoardEnvironment.instance.ActivateNextSignal(capsuleCount);
 		if (capsuleCount == 4)
 		{
 			Debug.Log("Crew wins!");

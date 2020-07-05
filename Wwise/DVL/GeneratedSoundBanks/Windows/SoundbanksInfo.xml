@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="135">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Labyrinth\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
@@ -48,6 +48,14 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="2181685632" Name="repair_generator" ObjectPath="\Events\Default Work Unit\Items\repair_generator" DurationType="OneShot" DurationMin="0.721655" DurationMax="0.721655">
+					<IncludedMemoryFiles>
+						<File Id="924466256" Language="SFX">
+							<ShortName>click_gear_wrench_03.wav</ShortName>
+							<Path>SFX\click_gear_wrench_03_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="1847000442" Name="roll_dice" ObjectPath="\Events\Default Work Unit\Menu\roll_dice" DurationType="OneShot" DurationMin="0.028445" DurationMax="0.031928">
 					<IncludedMemoryFiles>
 						<File Id="211823110" Language="SFX">
@@ -73,6 +81,14 @@
 						<File Id="895621980" Language="SFX">
 							<ShortName>roll_dice_03.wav</ShortName>
 							<Path>SFX\roll_dice_03_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1367503038" Name="tile_expell" ObjectPath="\Events\Default Work Unit\tile_expell" DurationType="OneShot" DurationMin="1.003075" DurationMax="1.125913">
+					<IncludedMemoryFiles>
+						<File Id="1036483818" Language="SFX">
+							<ShortName>designed_weapon_cannon_01.wav</ShortName>
+							<Path>SFX\designed_weapon_cannon_01_797BAAF6.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

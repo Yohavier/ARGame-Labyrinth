@@ -66,6 +66,32 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="tile_expell" ID="{9DDCCF1C-46D1-4B7A-BC77-EA20D5075D81}">
+					<ChildrenList>
+						<Action Name="" ID="{F4029691-4DF5-413D-ADB3-5FE8424788C3}" ShortID="1038786018">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tile_expell" ID="{4BFE90DC-F339-429B-A1D1-98557FB4BC8D}" WorkUnitID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Folder Name="Items" ID="{252E4B9E-687A-4395-9834-89A7CD27B630}" ShortID="944551539">
+					<ChildrenList>
+						<Event Name="repair_generator" ID="{F402C7C4-835F-4E03-B89D-6D8224EB9A08}">
+							<ChildrenList>
+								<Action Name="" ID="{EEF76D2B-079E-4E1B-85FA-B37716106AA9}" ShortID="286291616">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="click_gear_wrench_03" ID="{0EBD1CD9-AEEB-483A-80ED-E82A77CD48C9}" WorkUnitID="{ADEABB8E-382E-4756-B5EE-AE44D879A0AF}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -29,7 +29,6 @@ public class DiceHandler : MonoBehaviour
         {
             time += 0.1f;
             generatedNum = SetNum(generatedNum + 1);
-            Debug.Log(generatedNum);
             OnChangeDiceText(generatedNum, true);
             yield return new WaitForSeconds(0.1f);
         }
@@ -65,7 +64,10 @@ public class DiceHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        if(isRunning)
+        if (isRunning)
+        {
+            isRunning = false;
             LocalGameManager.instance._stepsLeft = targetNum;
+        }
     }
 }

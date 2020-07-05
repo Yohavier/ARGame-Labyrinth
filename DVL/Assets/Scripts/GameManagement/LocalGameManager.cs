@@ -37,6 +37,7 @@ public class LocalGameManager : MonoBehaviour
         }
     }
 
+	[HideInInspector] public bool canMove = true;
 	//Steps you can take
 	private int stepsLeft = 0;
 	public int _stepsLeft

@@ -117,7 +117,6 @@ public class Player : MonoBehaviour
     {
 		InformationPanel.instance.SetPlayerText(playerIndex.ToString());
 		InformationPanel.instance.SetItemText("None");
-		InformationPanel.instance.SetProgressText("0");
 	}
     #endregion
 

@@ -5,6 +5,7 @@
 			<ChildrenList>
 				<WorkUnit Name="Lobby" ID="{14DF322B-8611-46B6-80DF-536295287090}" PersistMode="Reference"/>
 				<WorkUnit Name="Menu" ID="{67C5C074-BFF8-40F5-B1B3-13EB5F646A15}" PersistMode="Reference"/>
+				<WorkUnit Name="Items" ID="{ADEABB8E-382E-4756-B5EE-AE44D879A0AF}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

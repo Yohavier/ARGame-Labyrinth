@@ -30,8 +30,11 @@ public class SelectARObjectWithFinger : MonoBehaviour
                     {
 						if (LocalGameManager.instance._stepsLeft > 0)
 						{
-							RayCastOnTouch();
-							MouseRay();
+                            if (LocalGameManager.instance.canMove)
+                            {
+								RayCastOnTouch();
+								MouseRay();
+							}
 						}
 					}
 				}

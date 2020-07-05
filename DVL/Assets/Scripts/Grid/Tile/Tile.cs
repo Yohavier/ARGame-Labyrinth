@@ -326,13 +326,14 @@ public class Tile : MonoBehaviour
         for (int i = 0; i < explosionNumber; i++)
         {
 			float factor = i / (float)(explosionNumber - 1);
-			Debug.Log(factor);
 			Instantiate(explosion, start - dir * factor, Quaternion.identity);
+			AkSoundEngine.PostEvent("tile_expell", gameObject);
 			yield return new WaitForSeconds(0.2f);
 		}
 
 		BoardGrid.instance.inMove = false;
 		BoardGrid.instance.RemoveTileFromGrid(this);
 		HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);
+		LocalGameManager.instance.canMove = true;
 	}
 }

@@ -17,7 +17,9 @@ namespace AK
         static const AkUniqueID LOBBY_SMALLBUTTON = 2092420523U;
         static const AkUniqueID LOBBY_START = 1340413442U;
         static const AkUniqueID POWERUP_PICKUP = 506812678U;
+        static const AkUniqueID REPAIR_GENERATOR = 2181685632U;
         static const AkUniqueID ROLL_DICE = 1847000442U;
+        static const AkUniqueID TILE_EXPELL = 1367503038U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS
