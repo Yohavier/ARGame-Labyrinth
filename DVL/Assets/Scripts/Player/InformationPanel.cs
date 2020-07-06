@@ -12,7 +12,7 @@ public class InformationPanel : MonoBehaviour
 
     public GameObject MenuPanel;
     public Button MenuPanelButton;
-
+    public GameObject lobbyChar;
 
     [Header("Buttons")]
     public Button rollDiceButton;
@@ -33,6 +33,7 @@ public class InformationPanel : MonoBehaviour
 
     private void Awake()
     {
+        lobbyChar = GameObject.Find("LobbyChar");
         instance = this;
         MenuPanelButton.onClick.AddListener(ToggleMenuPanel);
         SetUpDropDownMenu();
@@ -90,6 +91,7 @@ public class InformationPanel : MonoBehaviour
     public void DropdownValueChanged(Dropdown change)
     {
         selectedPlayerRole = playerRoles[change.value];
+        lobbyChar.GetComponent<LobbyCharacterSelection>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex);
         if (LocalGameManager.instance != null)
             NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
         Debug.Log("Selected " + playerRoles[change.value].name);

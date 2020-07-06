@@ -15,9 +15,12 @@ namespace Assets.Scripts.GameManagement
 {
     public class GUIManager : MonoBehaviour
     {
+        private Camera arCamera;
+
         public static GUIManager instance;
         public GameObject setupCanvas;
         public GameObject lobbyCanvas;
+        public GameObject lobbyEnvironment;
         public GameObject playerCanvas;
         public GameObject endCanvas;
         public InputField hostIPInput;
@@ -38,9 +41,13 @@ namespace Assets.Scripts.GameManagement
 
         private void Awake()
         {
+            arCamera = Camera.main;
+            arCamera.enabled = false;
+
             Eventbroker.instance.onNotifyNextTurn += OnTurnChange;
             setupCanvas = GameObject.Find("SetupCanvas");
             lobbyCanvas = GameObject.Find("LobbyCanvas");
+            lobbyEnvironment = GameObject.Find("LobbyEnvironment");
             playerCanvas = GameObject.Find("PlayerCanvas");
             endCanvas = GameObject.Find("EndCanvas");
             hostIPInput = GameObject.Find("HostIPInput").GetComponent<InputField>();
@@ -78,6 +85,7 @@ namespace Assets.Scripts.GameManagement
             if (needsMenuUpdate)
             {
                 lobbyCanvas.SetActive(false);
+                HandleLobbyEnvironment();
                 playerCanvas.SetActive(true);
                 needsMenuUpdate = false;
             }
@@ -157,6 +165,12 @@ namespace Assets.Scripts.GameManagement
         {
             endCanvas.SetActive(true);
             GetComponentInChildren<Text>().text = result;
+        }
+
+        private void HandleLobbyEnvironment()
+        {
+            arCamera.enabled = true;
+            lobbyEnvironment.SetActive(false);
         }
     }
 }

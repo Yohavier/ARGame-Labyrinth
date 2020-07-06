@@ -135,7 +135,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3869895660907245768
 MonoBehaviour:
@@ -927,7 +927,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &9221457428652807930
 MonoBehaviour:
@@ -1295,6 +1295,7 @@ MonoBehaviour:
   setupCanvas: {fileID: 0}
   lobbyCanvas: {fileID: 0}
   playerCanvas: {fileID: 0}
+  endCanvas: {fileID: 0}
   hostIPInput: {fileID: 0}
   hostButton: {fileID: 0}
   joinButton: {fileID: 0}
