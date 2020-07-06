@@ -19,6 +19,7 @@ namespace Assets.Scripts.GameManagement
         public GameObject setupCanvas;
         public GameObject lobbyCanvas;
         public GameObject playerCanvas;
+        public GameObject endCanvas;
         public InputField hostIPInput;
         public Button hostButton;
         public Button joinButton;
@@ -41,6 +42,7 @@ namespace Assets.Scripts.GameManagement
             setupCanvas = GameObject.Find("SetupCanvas");
             lobbyCanvas = GameObject.Find("LobbyCanvas");
             playerCanvas = GameObject.Find("PlayerCanvas");
+            endCanvas = GameObject.Find("EndCanvas");
             hostIPInput = GameObject.Find("HostIPInput").GetComponent<InputField>();
             hostButton = GameObject.Find("HostButton").GetComponent<Button>();
             joinButton = GameObject.Find("JoinButton").GetComponent<Button>();
@@ -68,6 +70,7 @@ namespace Assets.Scripts.GameManagement
         private void Start()
         {
             playerCanvas.SetActive(false);
+            endCanvas.SetActive(false);
         }
 
         private void Update()
@@ -148,6 +151,12 @@ namespace Assets.Scripts.GameManagement
         public void OnChangeRole()
         {
             AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
+        }
+
+        public void DisplayEndScreen(string result)
+        {
+            endCanvas.SetActive(true);
+            GetComponentInChildren<Text>().text = result;
         }
     }
 }

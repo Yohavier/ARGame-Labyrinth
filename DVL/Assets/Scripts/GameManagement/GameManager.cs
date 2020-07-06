@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.GameManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
 		BoardEnvironment.instance.ActivateNextSignal(capsuleCount);
 		if (capsuleCount == 4)
 		{
-			Debug.Log("Crew wins!");
+			GUIManager.instance.DisplayEndScreen("Crew Escaped");
 		}
 	}
 	public void CheckWinConditionMonster()
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
 		killCount++;
 		if (killCount >= 3)
 		{
-			Debug.Log("Monster wins!");
+			GUIManager.instance.DisplayEndScreen("Everybodys dead");
 		}
 	}
 }
