@@ -101,9 +101,11 @@ public class Tile : MonoBehaviour
     public int index = -1; //Identifier of tile, -1 invalid index
 
 	//Set the Data on Init or if newly pushed into the grid (Called by BoardGrid)
-	public void SetTileData(int rowNum, int colNum)
+	public void SetTileData(int rowNum, int colNum, bool hide)
 	{
-		isInFOW = true;
+		if (hide)
+			isInFOW = true;
+
 		row = rowNum;
 		column = colNum;
 		PrefabColor();
@@ -265,14 +267,20 @@ public class Tile : MonoBehaviour
 
 	private void OpenTileDoors()
     {
-		anim.clip = DoorOpenClip;
-		anim.Play();
+        if (DoorOpenClip != null)
+        {
+			anim.clip = DoorOpenClip;
+			anim.Play();
+		}
 	}
 
 	private void CloseTileDoors()
     {
-		anim.clip = DoorCloseClip;
-		anim.Play();
+		if(DoorCloseClip != null)
+        {
+			anim.clip = DoorCloseClip;
+			anim.Play();
+		}
     }
 
 	public bool TileContainsDoor()

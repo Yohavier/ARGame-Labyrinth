@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 using Assets.Scripts.GameManagement;
+using System.Diagnostics;
 
 public class BoardGrid : MonoBehaviour
 {
@@ -126,7 +127,7 @@ public class BoardGrid : MonoBehaviour
 				GameObject tile = Instantiate(randomTile, new Vector3(row * gridSpacing, 0f, column * gridSpacing), Quaternion.identity, this.transform);
 				tile.transform.localEulerAngles = new Vector3(0f, SetRandomRotationFromSeed(), 0f);
 				Tile component = tile.GetComponent<Tile>();
-				component.SetTileData(row, column);
+				component.SetTileData(row, column, true);
 				tileCount++;
 				component.index = tileCount;
 				grid.Add(component);
@@ -157,7 +158,7 @@ public class BoardGrid : MonoBehaviour
 		val.transform.localEulerAngles = new Vector3(0f, num, 0f);
 		val.transform.localPosition = entryTile.transform.localPosition - moveDir.moveDir;
 		Tile component = val.GetComponent<Tile>();
-		component.SetTileData(entryTile.row, entryTile.column);
+		component.SetTileData(entryTile.row, entryTile.column, true);
 		component.GetComponent<FindNearestGridSlot>().enabled = false;
 		grid.Add(component);
 		AdjustColAndRow(component);
@@ -293,5 +294,29 @@ public class BoardGrid : MonoBehaviour
 		}
 		return dictionary[num2];
 	}
+    #endregion
+
+    #region ShutDown
+	//Sync Tile shuffle
+	public void ShutDownGridPowerUp()
+    {
+		var numberList = Enumerable.Range(0, grid.Count).ToList();
+		print(numberList[numberList.Count - 1]);
+		for (int row = 0; row < size; row++)
+		{
+			for (int column = 0; column < size; column++)
+			{
+				int ranNum = numberList[UnityEngine.Random.Range(0, numberList.Count)];
+				grid[ranNum].transform.position = new Vector3(row * gridSpacing, 0f, column * gridSpacing);
+                grid[ranNum].transform.localEulerAngles = new Vector3(0f, SetRandomRotationFromSeed(), 0f);
+				grid[ranNum].SetTileData(row, column, false);
+				coordDic[row.ToString() + column.ToString()] = grid[ranNum];
+				grid[ranNum].ToggleDoors(false);
+				NetworkClient.instance.SendDoorHackUsed(grid[ranNum]);
+				numberList.Remove(ranNum);
+			}
+		}
+		LocalGameManager.instance.activePlayer.GetComponent<Player>().ChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
+    }
     #endregion
 }

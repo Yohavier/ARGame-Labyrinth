@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public enum PowerUpSlotIcon { None, PickUp, Exchange}
 public class InformationPanel : MonoBehaviour
 {
@@ -70,7 +68,7 @@ public class InformationPanel : MonoBehaviour
     {
         int value = SetRightNumber(change);
         selectedPlayerRole = playerRoles[value];
-        lobbyChar.GetComponent<LobbyCharacterSelection>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex);
+        lobbyChar.GetComponent<LobbyCharacterSelection>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex, change);
         if (LocalGameManager.instance != null)
             NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
         Debug.Log("Selected " + playerRoles[value].name);
@@ -90,7 +88,6 @@ public class InformationPanel : MonoBehaviour
         else
             return temp;
     }
-
     public SO_PlayerClass GetPlayerRoleStats(Player player)
     {
         //playerRoleMenu.interactable = false;

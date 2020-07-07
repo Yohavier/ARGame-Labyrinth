@@ -155,6 +155,7 @@ namespace Assets.Scripts.GameManagement
         {
             NetworkClient.instance.SendReadyChanged(value);
             AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
+            SwipeManager.instance.canSwipe = !value;
         }
 
         public void OnChangeRole()

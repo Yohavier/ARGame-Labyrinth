@@ -6,7 +6,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 {
 	public static SelectARObjectWithFinger instance;
 	private Vector2 touchPosition;
-	private Camera arCamera;
+	public Camera arCamera;
 	
 	//Lets the raycast only collide with certain things
 	public LayerMask mask;
@@ -15,7 +15,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		arCamera = FindObjectOfType<Camera>();
 	}
     private void OnEnable()
     {

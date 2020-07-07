@@ -1311,6 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40886ca63ac8227479c2957bf6ad4148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arCamera: {fileID: 894522550}
   mask:
     serializedVersion: 2
     m_Bits: 256
@@ -1776,6 +1777,7 @@ MonoBehaviour:
   - {fileID: 1581023916314948738, guid: 7fe5fd987daab174da9f649bb6cf123d, type: 3}
   - {fileID: 3724763658437694737, guid: 18012359d0a5cb14388476fa6ccd87e8, type: 3}
   - {fileID: 1581023916314948738, guid: ee43e57e080a3d440a301aa8ab4fdb53, type: 3}
+  - {fileID: 1581023916314948738, guid: a28e36a8828605b47b4c4edc003360c4, type: 3}
   powerUpsPossiblePlaces: []
 --- !u!1001 &1033570947
 PrefabInstance:
@@ -1939,7 +1941,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389068168}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39ec04d69ff087f4a866575152cac6bb, type: 3}
   m_Name: 
@@ -2030,6 +2032,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LobbyEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011856763242890673, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3011856763242890674, guid: c021460c8f6014245b9d8b37b9918ebf,
         type: 3}

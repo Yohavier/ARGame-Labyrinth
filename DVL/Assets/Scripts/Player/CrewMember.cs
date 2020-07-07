@@ -35,7 +35,6 @@ public class CrewMember : Player
     }
 
 	#region HandlePowerUps
-	//TODO needs refractor
 	private void HandlePowerUpCollection(Tile tile)
     {
 		ChangePowerUpSlotHandleIcon(IsPowerUpPresent(tile));

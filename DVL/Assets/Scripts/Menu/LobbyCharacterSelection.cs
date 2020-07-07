@@ -9,12 +9,14 @@ public class LobbyCharacterSelection : MonoBehaviour
 {
     private Color newColor;
     private Animation anim;
+    public AnimationClip[] clips;
     private void Awake()
     {
         anim = GetComponent<Animation>();
     }
-    public void OnChangeSelectedCharacter(RoleIndex newRole)
+    public void OnChangeSelectedCharacter(RoleIndex newRole, int dir)
     {
+        SetRightClip(dir);
         switch (newRole)
         {
             case RoleIndex.Juggernaut:
@@ -42,12 +44,25 @@ public class LobbyCharacterSelection : MonoBehaviour
             SwipeManager.instance.canSwipe = false;
         }
     }
-
+    private void SetRightClip(int dir)
+    {
+        switch (dir)
+        {
+            case -1:
+                anim.clip = clips[0];
+                break;
+            case 1:
+                anim.clip = clips[1];
+                break;
+            default:
+                Debug.LogError("Not a direction");
+                break;
+        }
+    }
     public void ChangeCharModel()
     {
         GetComponent<MeshRenderer>().material.color = newColor;
     }
-
     public void ChangeComplete()
     {
         SwipeManager.instance.canSwipe = true;
