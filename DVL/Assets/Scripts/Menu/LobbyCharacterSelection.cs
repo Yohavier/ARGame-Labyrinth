@@ -39,7 +39,7 @@ public class LobbyCharacterSelection : MonoBehaviour
         if (anim != null)
         {
             anim.Play();
-            InformationPanel.instance.playerRoleMenu.interactable = false;
+            SwipeManager.instance.canSwipe = false;
         }
     }
 
@@ -50,6 +50,6 @@ public class LobbyCharacterSelection : MonoBehaviour
 
     public void ChangeComplete()
     {
-        InformationPanel.instance.playerRoleMenu.interactable = true;
+        SwipeManager.instance.canSwipe = true;
     }
 }

@@ -27,7 +27,6 @@ public class InformationPanel : MonoBehaviour
     public Button powerUpSlot2;
 
     [Header("Player Role")]
-    public Dropdown playerRoleMenu;
     public List<SO_PlayerClass> playerRoles;
     public SO_PlayerClass selectedPlayerRole;
 
@@ -36,7 +35,6 @@ public class InformationPanel : MonoBehaviour
         lobbyChar = GameObject.Find("LobbyChar");
         instance = this;
         MenuPanelButton.onClick.AddListener(ToggleMenuPanel);
-        SetUpDropDownMenu();
     }
 
     private void ToggleMenuPanel()
@@ -68,38 +66,34 @@ public class InformationPanel : MonoBehaviour
     #endregion
 
     #region CharacterSelection
-    private void SetUpDropDownMenu()
+    public void DropdownValueChanged(int change)
     {
-        playerRoleMenu.ClearOptions();
-        CreateDropDownMenu();
-        playerRoleMenu.onValueChanged.AddListener(delegate {
-            DropdownValueChanged(playerRoleMenu);
-        });
-    }
-
-    private void CreateDropDownMenu()
-    {
-        foreach (SO_PlayerClass so in playerRoles)
-        {
-            var n = new Dropdown.OptionData();
-            n.text = so.name;
-            playerRoleMenu.options.Add(n);
-        }
-        DropdownValueChanged(playerRoleMenu);
-    }
-
-    public void DropdownValueChanged(Dropdown change)
-    {
-        selectedPlayerRole = playerRoles[change.value];
+        int value = SetRightNumber(change);
+        selectedPlayerRole = playerRoles[value];
         lobbyChar.GetComponent<LobbyCharacterSelection>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex);
         if (LocalGameManager.instance != null)
             NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
-        Debug.Log("Selected " + playerRoles[change.value].name);
+        Debug.Log("Selected " + playerRoles[value].name);
+    }
+
+    private int SetRightNumber(int change)
+    {
+        int current = 0;
+        if (selectedPlayerRole != null)
+            current = (int)selectedPlayerRole.roleIndex;
+
+        int temp = current + change;
+        if (temp < 0)
+            return playerRoles.Count - 1;
+        else if (temp > playerRoles.Count - 1)
+            return 0;
+        else
+            return temp;
     }
 
     public SO_PlayerClass GetPlayerRoleStats(Player player)
     {
-        playerRoleMenu.interactable = false;
+        //playerRoleMenu.interactable = false;
         return selectedPlayerRole;
     }
     #endregion

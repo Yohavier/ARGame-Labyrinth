@@ -111,6 +111,7 @@ namespace Assets.Scripts.GameManagement
         {
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
+            SwipeManager.instance.canSwipe = true;
             AkSoundEngine.PostEvent("lobby_join", gameObject);
         }
 
@@ -171,6 +172,7 @@ namespace Assets.Scripts.GameManagement
         {
             arCamera.enabled = true;
             lobbyEnvironment.SetActive(false);
+            SwipeManager.instance.canSwipe = false;
         }
     }
 }
