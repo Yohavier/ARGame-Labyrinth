@@ -192,6 +192,21 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Music" ID="{4805552E-2F5B-42D4-A1F2-8216BD386EDB}" ShortID="68080528">
+					<ChildrenList>
+						<Event Name="Music" ID="{80EFFB76-C684-4C4F-B728-D93DFF78844C}">
+							<ChildrenList>
+								<Action Name="" ID="{D4C21702-D709-4E51-BE06-A7BC4FB24C4F}" ShortID="914662469">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AllGameMusic" ID="{73DF99E9-1C65-425D-8A08-DE064783507C}" WorkUnitID="{BB226892-3161-4848-9AF5-4EFCBBECE338}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

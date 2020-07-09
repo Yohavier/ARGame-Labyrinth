@@ -14,6 +14,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2886407174	lobby_join			\Default Work Unit\Lobby\lobby_join	
 	3077118699	character_footstep			\Default Work Unit\Character\character_footstep	
 	3873244585	powerUp_doorhack			\Default Work Unit\PowerUps\powerUp_doorhack	
+	3991942870	Music			\Default Work Unit\Music\Music	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	436743010	character			\Default Work Unit\character	
@@ -23,21 +24,37 @@ Switch	ID	Name	Switch Group			Notes
 	3579833620	trace	character			
 	4136758402	crew	character			
 
+State Group	ID	Name			Wwise Object Path	Notes
+	4091656514	GameState			\Default Work Unit\GameState	
+
+State	ID	Name	State Group			Notes
+	290285391	Lobby	GameState			
+	748895195	None	GameState			
+	984691642	InGame	GameState			
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	2470328564	intensity			\Default Work Unit\intensity	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	56275808	PremiumBeat_0046_sci_fi_readout_beep	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_readout_beep_C5319648.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\PremiumBeat_0046_sci_fi_readout_beep		63068
+	11078488	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_03_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
+	56275808	PremiumBeat_0046_sci_fi_readout_beep	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_readout_beep_593FA99E.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\PremiumBeat_0046_sci_fi_readout_beep		63068
+	85594683	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_04_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
 	95399779	footstep_metalplate_boot_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_metalplate_boot_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\crew_footstep\footstep_metalplate_boot_01		60044
-	163034218	footstep_bigmetalplate_shoe_lightboots_trampling_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_bigmetalplate_shoe_lightboots_trampling_02_980849A2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\trace_footstep\footstep_bigmetalplate_shoe_lightboots_trampling_02		82900
+	116056994	game_bass_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_bass_01_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\game_bass_01		1234864
+	163034218	footstep_bigmetalplate_shoe_lightboots_trampling_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_bigmetalplate_shoe_lightboots_trampling_02_EE5A207D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\trace_footstep\footstep_bigmetalplate_shoe_lightboots_trampling_02		82900
 	193528008	PremiumBeat_0013_cursor_click_11	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0013_cursor_click_11_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_startMatch\PremiumBeat_0013_cursor_click_11		192060
 	211823110	roll_dice_06	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\roll_dice_06_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_06		5380
 	249031571	roll_dice_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\roll_dice_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_01		5380
 	305984302	defi_downloaded	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\defi_downloaded_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_medipack\defi_downloaded		387968
 	321321431	designed_electricity_gramophon_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\designed_electricity_gramophon_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_communicator\designed_electricity_gramophon_01		305928
 	335162430	impact_p0_container_door_10	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\impact_p0_container_door_10_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\impact_p0_container_door_10		266816
+	339078217	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_01_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
 	353200266	footstep_dirt_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_dirt_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\enemy_footstep\footstep_dirt_01		79724
 	360531588	roll_dice_05	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\roll_dice_05_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_05		5380
-	466262912	PremiumBeat_0046_sci_fi_type_beep	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_type_beep_28AD0E9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\PremiumBeat_0046_sci_fi_type_beep		164156
+	466262912	PremiumBeat_0046_sci_fi_type_beep	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_type_beep_8404C809.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\PremiumBeat_0046_sci_fi_type_beep		164156
 	501817554	PremiumBeat_0046_sci_fi_scanner	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_scanner_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_scanner\PremiumBeat_0046_sci_fi_scanner		1503224
 	522965997	footstep_dirt_04	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_dirt_04_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\enemy_footstep\footstep_dirt_04		71492
+	542133200	game_drum_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_drum_01_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\game_drum_01		1080516
 	601526468	footstep_dirt_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_dirt_02_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\enemy_footstep\footstep_dirt_02		73656
 	657693872	footstep_metalplate_boot_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_metalplate_boot_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\crew_footstep\footstep_metalplate_boot_03		53920
 	665319425	roll_dice_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\roll_dice_02_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_02		5380
@@ -46,14 +63,18 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	740601579	footstep_dirt_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_dirt_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\enemy_footstep\footstep_dirt_03		81208
 	782016560	Weapon_BuySFX_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\Weapon_BuySFX_01 _10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\powerUp_pickUp\Weapon_BuySFX_01		266984
 	805416070	footstep_metalplate_boot_04	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_metalplate_boot_04_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\crew_footstep\footstep_metalplate_boot_04		53920
-	841457928	Arcade Jingle Positive 12	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\Arcade Jingle Positive 12_2FD25C10.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\generator_finished\Arcade Jingle Positive 12		333924
+	807704166	lobby_layer_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\lobby_layer_01_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Lobby\lobby_mainTheme\lobby_layer_01		1764064
+	841457928	Arcade Jingle Positive 12	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\Arcade Jingle Positive 12_1BD616B3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\generator_finished\Arcade Jingle Positive 12		333924
+	857252625	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_05_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
 	895621980	roll_dice_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\roll_dice_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_03		5380
 	924466256	click_gear_wrench_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\click_gear_wrench_03_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\generator_finished\click_gear_wrench_03		127364
-	944349959	footstep_bigmetalplate_shoe_lightboots_trampling_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_bigmetalplate_shoe_lightboots_trampling_03_A123F2C1.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\trace_footstep\footstep_bigmetalplate_shoe_lightboots_trampling_03		123784
+	944349959	footstep_bigmetalplate_shoe_lightboots_trampling_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_bigmetalplate_shoe_lightboots_trampling_03_D081A775.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\trace_footstep\footstep_bigmetalplate_shoe_lightboots_trampling_03		123784
 	956255550	Carrier_putDownChest	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\Carrier_putDownChest_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\item_drop\Carrier_putDownChest		237712
-	993263760	footstep_bigmetalplate_shoe_lightboots_trampling_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_bigmetalplate_shoe_lightboots_trampling_01_264C9805.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\trace_footstep\footstep_bigmetalplate_shoe_lightboots_trampling_01		117932
+	993263760	footstep_bigmetalplate_shoe_lightboots_trampling_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_bigmetalplate_shoe_lightboots_trampling_01_C90B5A4E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\trace_footstep\footstep_bigmetalplate_shoe_lightboots_trampling_01		117932
+	996772034	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_02_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
 	997663245	UITerminal_click_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\UITerminal_click_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_smallButton\UITerminal_click_01		8688
 	1012598839	PremiumBeat_0013_cursor_selection_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0013_cursor_selection_02_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_join\PremiumBeat_0013_cursor_selection_02		260468
+	1032077889	lobby_layer_02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\lobby_layer_02_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Lobby\lobby_mainTheme\lobby_layer_02		1764064
 	1036483818	designed_weapon_cannon_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\designed_weapon_cannon_01_443F175C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tile\tile_expell\designed_weapon_cannon_01		262132
-	1039434203	metal_grind_metal_rusty_05	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\metal_grind_metal_rusty_05_7B471E4F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tile\tile_move\metal_grind_metal_rusty_05		169396
+	1039434203	metal_grind_metal_rusty_05	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\metal_grind_metal_rusty_05_3FF349D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tile\tile_move\metal_grind_metal_rusty_05		169396
 

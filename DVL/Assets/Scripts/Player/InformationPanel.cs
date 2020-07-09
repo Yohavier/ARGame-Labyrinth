@@ -38,7 +38,7 @@ public class InformationPanel : MonoBehaviour
     private void ToggleMenuPanel()
     {
         MenuPanel.SetActive(!MenuPanel.activeSelf);
-        AudioCalls.PostAudio("lobby_smallButton");
+        AudioWwiseManager.PostAudio("lobby_smallButton");
     }
 
     #region HandleButtons
@@ -117,6 +117,6 @@ public class InformationPanel : MonoBehaviour
 
     public void PlayButtonSound(string file)
     {
-        AudioCalls.PostAudio(file);
+        AudioWwiseManager.PostAudio(file);
     }
 }

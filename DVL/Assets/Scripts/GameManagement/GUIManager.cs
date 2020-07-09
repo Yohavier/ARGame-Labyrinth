@@ -113,6 +113,7 @@ namespace Assets.Scripts.GameManagement
             lobbyCanvas.SetActive(true);
             SwipeManager.instance.canSwipe = true;
             AkSoundEngine.PostEvent("lobby_join", gameObject);
+            AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);
         }
 
         void OnDebugButtonClicked()
@@ -151,11 +152,17 @@ namespace Assets.Scripts.GameManagement
             OpenLobbyMenu();
         }
 
+        private int readyCounter = 0;
         void OnReadyToggleValueChanged(bool value)
         {
+            if (value)
+                readyCounter++;
+            else
+                readyCounter--;
             NetworkClient.instance.SendReadyChanged(value);
             AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
             SwipeManager.instance.canSwipe = !value;
+            AudioWwiseManager.instance.SetMusicIntensity((MusicIntensity)readyCounter);
         }
 
         public void OnChangeRole()

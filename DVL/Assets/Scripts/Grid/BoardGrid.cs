@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Assets.Scripts.GameManagement;
 using System.Diagnostics;
+using JetBrains.Annotations;
 
 public class BoardGrid : MonoBehaviour
 {
@@ -66,6 +67,12 @@ public class BoardGrid : MonoBehaviour
 			}
 		}
 	}
+	private void OnGameStarted()
+    {
+		AudioWwiseManager.PostAudio("lobby_start");
+		AudioWwiseManager.instance.SetMusicGameState(GameState.InGame);
+		AudioWwiseManager.instance.SetMusicIntensity(0);
+	}
 
 	private void Update()
 	{
@@ -116,7 +123,7 @@ public class BoardGrid : MonoBehaviour
 	//Set up grid and calls to spawn Players 
 	public void SetUpGrid()
 	{
-		AudioCalls.PostAudio("lobby_start");
+		OnGameStarted();
 		List<Tile> cornerTiles = new List<Tile>();
 		for (int row = 0; row < size; row++)
 		{

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{4C90C4F4-B14E-4E17-B54B-B5BFA18625AA}" SchemaVersion="97">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{4C90C4F4-B14E-4E17-B54B-B5BFA18625AA}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{4C90C4F4-B14E-4E17-B54B-B5BFA18625AA}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="intensity" ID="{C6EF21F9-B324-46CA-92E6-E3FBD4A65873}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>

@@ -24,7 +24,7 @@
 						</File>
 						<File Id="163034218" Language="SFX">
 							<ShortName>footstep_bigmetalplate_shoe_lightboots_trampling_02.wav</ShortName>
-							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_02_980849A2.wem</Path>
+							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_02_EE5A207D.wem</Path>
 						</File>
 						<File Id="353200266" Language="SFX">
 							<ShortName>footstep_dirt_01.wav</ShortName>
@@ -56,11 +56,11 @@
 						</File>
 						<File Id="944349959" Language="SFX">
 							<ShortName>footstep_bigmetalplate_shoe_lightboots_trampling_03.wav</ShortName>
-							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_03_A123F2C1.wem</Path>
+							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_03_D081A775.wem</Path>
 						</File>
 						<File Id="993263760" Language="SFX">
 							<ShortName>footstep_bigmetalplate_shoe_lightboots_trampling_01.wav</ShortName>
-							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_01_264C9805.wem</Path>
+							<Path>SFX\footstep_bigmetalplate_shoe_lightboots_trampling_01_C90B5A4E.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 					<SwitchContainers>
@@ -93,7 +93,7 @@
 					<IncludedMemoryFiles>
 						<File Id="841457928" Language="SFX">
 							<ShortName>Arcade Jingle Positive 12.wav</ShortName>
-							<Path>SFX\Arcade Jingle Positive 12_2FD25C10.wem</Path>
+							<Path>SFX\Arcade Jingle Positive 12_1BD616B3.wem</Path>
 						</File>
 						<File Id="924466256" Language="SFX">
 							<ShortName>click_gear_wrench_03.wav</ShortName>
@@ -141,6 +141,65 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="3991942870" Name="Music" ObjectPath="\Events\Default Work Unit\Music\Music" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="11078488" Language="SFX">
+							<ShortName>game_lead_03.wav</ShortName>
+							<Path>SFX\game_lead_03_D79FB2B7.wem</Path>
+						</File>
+						<File Id="85594683" Language="SFX">
+							<ShortName>game_lead_04.wav</ShortName>
+							<Path>SFX\game_lead_04_D79FB2B7.wem</Path>
+						</File>
+						<File Id="116056994" Language="SFX">
+							<ShortName>game_bass_01.wav</ShortName>
+							<Path>SFX\game_bass_01_D79FB2B7.wem</Path>
+						</File>
+						<File Id="339078217" Language="SFX">
+							<ShortName>game_lead_01.wav</ShortName>
+							<Path>SFX\game_lead_01_D79FB2B7.wem</Path>
+						</File>
+						<File Id="542133200" Language="SFX">
+							<ShortName>game_drum_01.wav</ShortName>
+							<Path>SFX\game_drum_01_D79FB2B7.wem</Path>
+						</File>
+						<File Id="807704166" Language="SFX">
+							<ShortName>lobby_layer_01.wav</ShortName>
+							<Path>SFX\lobby_layer_01_D79FB2B7.wem</Path>
+						</File>
+						<File Id="857252625" Language="SFX">
+							<ShortName>game_lead_05.wav</ShortName>
+							<Path>SFX\game_lead_05_D79FB2B7.wem</Path>
+						</File>
+						<File Id="996772034" Language="SFX">
+							<ShortName>game_lead_02.wav</ShortName>
+							<Path>SFX\game_lead_02_D79FB2B7.wem</Path>
+						</File>
+						<File Id="1032077889" Language="SFX">
+							<ShortName>lobby_layer_02.wav</ShortName>
+							<Path>SFX\lobby_layer_02_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{AE24A4CC-90C7-47E0-9043-AA173BB7B9C2}">
+							<Media>
+								<File Id="807704166"/>
+								<File Id="1032077889"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{1CA3AF4B-1C34-4854-A139-CD400239C687}">
+							<Media>
+								<File Id="996772034"/>
+								<File Id="11078488"/>
+								<File Id="339078217"/>
+								<File Id="857252625"/>
+								<File Id="85594683"/>
+								<File Id="116056994"/>
+								<File Id="542133200"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
 				<Event Id="934594543" Name="powerUp_communicator" ObjectPath="\Events\Default Work Unit\PowerUps\powerUp_communicator" DurationType="OneShot" DurationMin="1.733923" DurationMax="1.733923">
 					<IncludedMemoryFiles>
 						<File Id="321321431" Language="SFX">
@@ -153,7 +212,7 @@
 					<IncludedMemoryFiles>
 						<File Id="56275808" Language="SFX">
 							<ShortName>PremiumBeat_0046_sci_fi_readout_beep.wav</ShortName>
-							<Path>SFX\PremiumBeat_0046_sci_fi_readout_beep_C5319648.wem</Path>
+							<Path>SFX\PremiumBeat_0046_sci_fi_readout_beep_593FA99E.wem</Path>
 						</File>
 						<File Id="335162430" Language="SFX">
 							<ShortName>impact_p0_container_door_10.wav</ShortName>
@@ -161,7 +220,7 @@
 						</File>
 						<File Id="466262912" Language="SFX">
 							<ShortName>PremiumBeat_0046_sci_fi_type_beep.wav</ShortName>
-							<Path>SFX\PremiumBeat_0046_sci_fi_type_beep_28AD0E9B.wem</Path>
+							<Path>SFX\PremiumBeat_0046_sci_fi_type_beep_8404C809.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -229,11 +288,23 @@
 					<IncludedMemoryFiles>
 						<File Id="1039434203" Language="SFX">
 							<ShortName>metal_grind_metal_rusty_05.wav</ShortName>
-							<Path>SFX\metal_grind_metal_rusty_05_7B471E4F.wem</Path>
+							<Path>SFX\metal_grind_metal_rusty_05_3FF349D6.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
 			</IncludedEvents>
+			<GameParameters>
+				<GameParameter Id="2470328564" Name="intensity" ObjectPath="\Game Parameters\Default Work Unit\intensity"/>
+			</GameParameters>
+			<StateGroups>
+				<StateGroup Id="4091656514" Name="GameState" ObjectPath="\States\Default Work Unit\GameState">
+					<States>
+						<State Id="748895195" Name="None" ObjectPath="\States\Default Work Unit\GameState\None"/>
+						<State Id="984691642" Name="InGame" ObjectPath="\States\Default Work Unit\GameState\InGame"/>
+						<State Id="290285391" Name="Lobby" ObjectPath="\States\Default Work Unit\GameState\Lobby"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
 			<SwitchGroups>
 				<SwitchGroup Id="436743010" Name="character" ObjectPath="\Switches\Default Work Unit\character">
 					<Switches>

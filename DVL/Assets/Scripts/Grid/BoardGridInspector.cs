@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 #if Unity_Editor
-using UnityEditor;un
+using UnityEditor;
 
 [CustomEditor(typeof(BoardGrid))]
 public class BoardGridInspector : Editor
