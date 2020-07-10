@@ -114,11 +114,13 @@ namespace Assets.Scripts.GameManagement
             SwipeManager.instance.canSwipe = true;
             AkSoundEngine.PostEvent("lobby_join", gameObject);
             AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);
+            InformationPanel.instance.OnPlayerRoleChanged(0);
         }
 
         void OnDebugButtonClicked()
         {
             isDebug = !isDebug;
+
             if (isDebug)
                 DebugConsole.instance.enabled = true;
             else

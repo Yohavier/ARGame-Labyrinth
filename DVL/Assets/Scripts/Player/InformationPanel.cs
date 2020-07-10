@@ -71,7 +71,7 @@ public class InformationPanel : MonoBehaviour
     #endregion
 
     #region CharacterSelection
-    public void DropdownValueChanged(int change)
+    public void OnPlayerRoleChanged(int change)
     {
         SetPlayerRoles(SetRightRole(change));
         lobbyChar.GetComponent<LobbyCharacter>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex, change);

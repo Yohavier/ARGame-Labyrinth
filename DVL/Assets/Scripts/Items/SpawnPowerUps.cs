@@ -5,5 +5,4 @@ using UnityEngine;
 public class SpawnPowerUps : MonoBehaviour
 {
     public GameObject[] powerUps;
-
 }

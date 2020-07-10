@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	public int footstepDetectionRadius =  0;
 	public int repairSpeed = 0;
 	public int maxDeathTurnCounter = 0;
-
+	private Animator anim;
 
 	//PowerUps
 	private CommunicatorPowerUp _communicatorPowerUp;
@@ -70,8 +70,12 @@ public class Player : MonoBehaviour
 		return playerIndex == LocalGameManager.instance.localPlayerIndex;
 	}
 
-	#region Initialization
-	public void SetUpPlayer(int count)
+    private void Start()
+    {
+		//anim = GetComponent<Animator>();
+    }
+    #region Initialization
+    public void SetUpPlayer(int count)
 	{
 		playerIndex = ChooseRightIndex(count);
 		trace = GetComponent<WalkingTraces>();
@@ -171,6 +175,7 @@ public class Player : MonoBehaviour
 	private IEnumerator Moving(List<Tile> path, float time)
 	{
 		isWalking = true;
+		//anim.SetBool("Walk Forward", true);
 		foreach(Tile tile in path)
 		{
 			if (CheckForOtherPlayers(tile))
@@ -196,6 +201,7 @@ public class Player : MonoBehaviour
 			{
 				StopAllCoroutines();
 				isWalking = false;
+				//anim.SetBool("Walk Forward", false);
 			}
 			yield return null;
 		}
@@ -203,6 +209,7 @@ public class Player : MonoBehaviour
 		if (LocalGameManager.instance.localPlayerIndex == LocalGameManager.instance.currentTurnPlayer)
 			CheckTileForOtherMods(path[path.Count - 1]);
 		isWalking = false;
+		//anim.SetBool("Walk Forward", false);
 	}
 
 	//Rotate player in move direction 
