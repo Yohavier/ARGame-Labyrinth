@@ -1995,7 +1995,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389068168}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39ec04d69ff087f4a866575152cac6bb, type: 3}
   m_Name: 
@@ -2072,6 +2072,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2744834868112422463, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744834868112422463, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: fa9d257388d1a14439852f16e59d0f0e, type: 2}
     - target: {fileID: 3011856762146651465, guid: c021460c8f6014245b9d8b37b9918ebf,
         type: 3}
       propertyPath: m_TagString
@@ -2147,6 +2157,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4364021008635289930, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: clips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364021008635289930, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: ba23272c0776afb48a2a5243ea3ba6e0, type: 2}
+    - target: {fileID: 4364021008635289930, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: fa9d257388d1a14439852f16e59d0f0e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c021460c8f6014245b9d8b37b9918ebf, type: 3}
 --- !u!1 &1701335801 stripped
