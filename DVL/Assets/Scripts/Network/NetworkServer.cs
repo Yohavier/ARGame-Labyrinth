@@ -33,7 +33,7 @@ public class NetworkServer
         client.playerState.playerID = playerIndex;
         client.playerState.connected = true;
         client.playerState.ip = client.clientSocket.RemoteEndPoint.ToString().Split(':')[0];
-        client.playerState.roleIndex = RoleIndex.Standart;
+        client.playerState.roleIndex = RoleIndex.Crew_Standart;
 
         Msg msg = BuildPlayerSetupMessage(playerIndex);
         UnicastMessage(msg.Serialize(), client.clientSocket);

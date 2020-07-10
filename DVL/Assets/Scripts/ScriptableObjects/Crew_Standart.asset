@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9c6cd9f3348dcc4a99bdefaf10b9e6b, type: 3}
-  m_Name: Scout
+  m_Name: Crew_Standart
   m_EditorClassIdentifier: 
-  roleName: Scout
-  roleIndex: 2
-  diceModificator: 1
-  fogOfWarRadius: 2
-  footstepDetectionRadius: 3
-  repairSpeed: 0
+  roleName: Standart
+  roleIndex: 3
+  diceModificator: 0
+  fogOfWarRadius: 3
+  footstepDetectionRadius: 2
+  repairSpeed: 1
   maxDeathTurnCounter: 3
