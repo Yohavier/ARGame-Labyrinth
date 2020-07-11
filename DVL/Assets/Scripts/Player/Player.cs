@@ -3,6 +3,7 @@ using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public enum PlayerState { ALIVE, DEAD, DYING}
 public class Player : MonoBehaviour
@@ -34,7 +35,19 @@ public class Player : MonoBehaviour
 	[HideInInspector] public Tile positionTile;
 	[HideInInspector] public GameObject storedItem;
 	[HideInInspector] private WalkingTraces trace;
-	[HideInInspector] public bool isWalking;
+	private bool _isWalking;
+	public bool isWalking
+    {
+        get { return _isWalking; }
+        set 
+		{
+			_isWalking = value;
+            if (anim != null)
+            {
+				anim.SetBool("Walk Forward", value);
+            }
+		}
+	}
 
 
 	//Health Status of player
@@ -72,7 +85,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-		//anim = GetComponent<Animator>();
+		anim = GetComponent<Animator>();
     }
     #region Initialization
     public void SetUpPlayer(int count)
@@ -180,12 +193,12 @@ public class Player : MonoBehaviour
 	private IEnumerator Moving(List<Tile> path, float time)
 	{
 		isWalking = true;
-		//anim.SetBool("Walk Forward", true);
+		anim.SetBool("Walk Forward", true);
 		foreach(Tile tile in path)
 		{
 			if (CheckForOtherPlayers(tile))
 			{
-				AdjustRotation(tile);
+				SmoothRotation(tile);
 				float i = 0.0f;
 				float rate = 1.0f / time;
 				while (i < 1.0f)
@@ -206,7 +219,6 @@ public class Player : MonoBehaviour
 			{
 				StopAllCoroutines();
 				isWalking = false;
-				//anim.SetBool("Walk Forward", false);
 			}
 			yield return null;
 		}
@@ -214,24 +226,81 @@ public class Player : MonoBehaviour
 		if (LocalGameManager.instance.localPlayerIndex == LocalGameManager.instance.currentTurnPlayer)
 			CheckTileForOtherMods(path[path.Count - 1]);
 		isWalking = false;
-		//anim.SetBool("Walk Forward", false);
 	}
 
 	//Rotate player in move direction 
-	private void AdjustRotation(Tile lookTarget)
+	private void SmoothRotation(Tile tile) 
 	{
-		Vector3 relativePos = lookTarget.transform.position - transform.position;
-
-		// the second argument, upwards, defaults to Vector3.up
+		Vector3 relativePos = tile.transform.position - transform.position;
 		Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-		transform.rotation = rotation;
-		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+		Quaternion finrot = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
+		StartCoroutine(Rotate(Vector3.up, CalcShortestRot(transform.eulerAngles.y, finrot.eulerAngles.y), .3f));
 	}
-    #endregion
+
+	IEnumerator Rotate(Vector3 axis, float angle, float duration = 1.0f)
+	{
+		Quaternion from = transform.rotation;
+		Quaternion to = transform.rotation;
+		to *= Quaternion.Euler(axis * angle);
+
+		float elapsed = 0.0f;
+		while (elapsed < duration)
+		{
+			transform.rotation = Quaternion.Slerp(from, to, elapsed / duration);
+			elapsed += Time.deltaTime;
+			yield return null;
+		}
+		transform.rotation = to;
+	}
+
+	float CalcShortestRot(float from, float to)
+	{
+		// If from or to is a negative, we have to recalculate them.
+		// For an example, if from = -45 then from(-45) + 360 = 315.
+		if (from < 0)
+		{
+			from += 360;
+		}
+
+		if (to < 0)
+		{
+			to += 360;
+		}
+
+		// Do not rotate if from == to.
+		if (from == to ||
+		   from == 0 && to == 360 ||
+		   from == 360 && to == 0)
+		{
+			return 0;
+		}
+
+		// Pre-calculate left and right.
+		float left = (360 - from) + to;
+		float right = from - to;
+		// If from < to, re-calculate left and right.
+		if (from < to)
+		{
+			if (to > 0)
+			{
+				left = to - from;
+				right = (360 - to) + from;
+			}
+			else
+			{
+				left = (360 - to) + from;
+				right = to - from;
+			}
+		}
+
+		// Determine the shortest direction.
+		return ((left <= right) ? left : (right * -1));
+	}
+	#endregion
 
 
-    //Check for other Players
-    public virtual bool CheckForOtherPlayers(Tile nextTile)
+	//Check for other Players
+	public virtual bool CheckForOtherPlayers(Tile nextTile)
 	{
 		if (nextTile.GetComponentInChildren<Player>() != null)
 		{

@@ -2179,25 +2179,25 @@ PrefabInstance:
       propertyPath: clips.Array.data[1]
       value: 
       objectReference: {fileID: 7400000, guid: fa9d257388d1a14439852f16e59d0f0e, type: 2}
-    - target: {fileID: 4442460595585047454, guid: c021460c8f6014245b9d8b37b9918ebf,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442460595585047454, guid: c021460c8f6014245b9d8b37b9918ebf,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442460595585047454, guid: c021460c8f6014245b9d8b37b9918ebf,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6125477278960647053, guid: c021460c8f6014245b9d8b37b9918ebf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -184.92899
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125477278960647053, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125477278960647053, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125477278960647053, guid: c021460c8f6014245b9d8b37b9918ebf,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7772790707069301402, guid: c021460c8f6014245b9d8b37b9918ebf,
         type: 3}
