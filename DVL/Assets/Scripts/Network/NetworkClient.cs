@@ -170,7 +170,8 @@ public class NetworkClient
     {
         PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
-        SelectARObjectWithFinger.instance.ManagePath(BoardGrid.instance.FindTileByIndex(targetTileindex), playerIndex);
+        int steps = msg.ReadInt();
+        SelectARObjectWithFinger.instance.ManagePath(BoardGrid.instance.FindTileByIndex(targetTileindex), playerIndex, steps);
     }
 
     private void HandleItemCollected(Msg msg)
@@ -289,9 +290,10 @@ public class NetworkClient
 
     public void SendPlayerMove(Tile targetTile)
     {
-        Msg msg = new Msg(MsgOpcode.opPlayerMove, 8);
+        Msg msg = new Msg(MsgOpcode.opPlayerMove, 16);
         msg.Write((int)LocalGameManager.instance.localPlayerIndex);
         msg.Write(targetTile.index);
+        msg.Write(LocalGameManager.instance._stepsLeft);
         Send(msg);
     }
 

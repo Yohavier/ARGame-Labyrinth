@@ -2564,6 +2564,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8e029422f220840419331b870f2fbfed,
         type: 2}
+    - target: {fileID: 9221457429742732574, guid: c597a9bb3f7346243b5c0d8869509640,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221457429953349793, guid: c597a9bb3f7346243b5c0d8869509640,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9221457430106742416, guid: c597a9bb3f7346243b5c0d8869509640,
         type: 3}
       propertyPath: m_Color.a

@@ -69,7 +69,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				if (hitObject.transform.CompareTag("Tile"))
 				{
 					NetworkClient.instance.SendPlayerMove(hitTile);
-					ManagePath(hitTile, LocalGameManager.instance.localPlayerIndex);
+					ManagePath(hitTile, LocalGameManager.instance.localPlayerIndex, LocalGameManager.instance._stepsLeft);
 				}
 			}
 		}
@@ -84,14 +84,14 @@ public class SelectARObjectWithFinger : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hit, 100, mask))
 			{
-				ManagePath(hit.transform.GetComponent<Tile>(), LocalGameManager.instance.localPlayerIndex);
+				ManagePath(hit.transform.GetComponent<Tile>(), LocalGameManager.instance.localPlayerIndex, LocalGameManager.instance._stepsLeft);
 				NetworkClient.instance.SendPlayerMove(hit.transform.GetComponent<Tile>());
 			}
 		}
 #endif
 	}
 
-	public void ManagePath(Tile targetTile, PlayerIndex playerIndex)
+	public void ManagePath(Tile targetTile, PlayerIndex playerIndex, int steps)
 	{
 		Player playerObject = GameManager.instance.allPlayers[(int)playerIndex].GetComponent<Player>();
 
@@ -112,10 +112,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				path.Clear();
 
 			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, currentSelectedTarget);
-			if(playerIndex == LocalGameManager.instance.localPlayerIndex)
-				path = p.FindPath(LocalGameManager.instance._stepsLeft);
-            else
-				path = p.FindPath(100);
+			path = p.FindPath(steps);
 			
 			//Color path red
 			if (path != null)
