@@ -78,14 +78,21 @@ public class Tile : MonoBehaviour
 	private void ToggleFOW(bool toggle)
     {
 		MeshRenderer[] tileMeshes = GetComponentsInChildren<MeshRenderer>();
+		SkinnedMeshRenderer[] sTileMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
 
 		foreach (MeshRenderer mesh in tileMeshes)
 		{
 			if (!mesh.gameObject.CompareTag("Tile"))
-				mesh.GetComponent<MeshRenderer>().enabled = !toggle;
+				mesh.enabled = !toggle;
 			else if (mesh.gameObject.CompareTag("Tile"))
 				PrefabColor(mesh);
 		}
+
+		foreach(SkinnedMeshRenderer sMesh in sTileMeshes)
+        {
+			if (!sMesh.gameObject.CompareTag("Tile"))
+				sMesh.enabled = !toggle;
+        }
 	}
 
 	public void UpdateTileFOW()

@@ -146,6 +146,7 @@ public class BoardGrid : MonoBehaviour
 			}
 		}
 		GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
+		leftOverTile.GetComponent<Tile>().isInFOW = true;
 		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
@@ -165,7 +166,7 @@ public class BoardGrid : MonoBehaviour
 		val.transform.localEulerAngles = new Vector3(0f, num, 0f);
 		val.transform.localPosition = entryTile.transform.localPosition - moveDir.moveDir;
 		Tile component = val.GetComponent<Tile>();
-		component.SetTileData(entryTile.row, entryTile.column, true);
+		component.SetTileData(entryTile.row, entryTile.column, false);
 		component.GetComponent<FindNearestGridSlot>().enabled = false;
 		grid.Add(component);
 		AdjustColAndRow(component);

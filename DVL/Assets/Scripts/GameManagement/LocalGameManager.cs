@@ -14,6 +14,7 @@ public class LocalGameManager : MonoBehaviour
 	//Determines you playerChar
 	public PlayerIndex localPlayerIndex;
 
+
 	//Player index of current turn
 	public PlayerIndex currentTurnPlayer;
 	private PlayerIndex previousTurn;

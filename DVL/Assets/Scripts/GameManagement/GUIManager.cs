@@ -111,10 +111,8 @@ namespace Assets.Scripts.GameManagement
         {
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
-            SwipeManager.instance.canSwipe = true;
             AkSoundEngine.PostEvent("lobby_join", gameObject);
             AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);
-            InformationPanel.instance.OnPlayerRoleChanged(0);
         }
 
         void OnDebugButtonClicked()

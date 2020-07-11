@@ -88,8 +88,13 @@ public class Player : MonoBehaviour
 
 		if (!IsLocalPlayer())
 		{
+			MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
+			SkinnedMeshRenderer sr = GetComponentInChildren<SkinnedMeshRenderer>();
+			if (mr != null)
+				mr.enabled = false;
+			else if (sr != null)
+				sr.enabled = false;
 
-			GetComponent<MeshRenderer>().enabled = false;
 			Destroy(GetComponent<FogOfWar>());
 		}
 		else
@@ -152,7 +157,7 @@ public class Player : MonoBehaviour
 			}
 			AkSoundEngine.PostEvent("character_footstep", gameObject);
         }
-
+			
 		CreatePositionIndicatorTrace();
 	}
 

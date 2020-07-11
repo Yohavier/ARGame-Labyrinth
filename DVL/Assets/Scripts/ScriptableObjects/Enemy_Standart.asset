@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c6cd9f3348dcc4a99bdefaf10b9e6b, type: 3}
   m_Name: Enemy_Standart
   m_EditorClassIdentifier: 
-  roleName: Standart
+  roleName: Enemy_Standart
   roleIndex: 5
   diceModificator: 0
   fogOfWarRadius: 3
