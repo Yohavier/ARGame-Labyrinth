@@ -15,6 +15,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 	public GameObject lobbyPrefab;
 	public static HandleTrackedImageLib instance;
 
+	[HideInInspector] public bool trackLobby;
+
 	private List<string> BoardTrackers = new List<string>();
 
 	private void Awake()
@@ -159,7 +161,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 			tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
 			tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
 		}
-		else if(trackedImage.referenceImage.name == "Lobby")
+		else if(trackedImage.referenceImage.name == "Lobby" && trackLobby)
         {
             if (lobbyPrefab.gameObject.activeSelf)
             {

@@ -21,6 +21,7 @@ namespace Assets.Scripts.GameManagement
         public GameObject setupCanvas;
         public GameObject lobbyCanvas;
         public GameObject lobbyEnvironment;
+        public LobbyGate lobbyGate;
         public GameObject boardEnvironment;
         public GameObject playerCanvas;
         public GameObject endCanvas;
@@ -49,6 +50,7 @@ namespace Assets.Scripts.GameManagement
             setupCanvas = GameObject.Find("SetupCanvas");
             lobbyCanvas = GameObject.Find("LobbyCanvas");
             lobbyEnvironment = GameObject.Find("LobbyEnvironment");
+            lobbyGate = lobbyEnvironment.GetComponentInChildren<LobbyGate>();
             boardEnvironment = GameObject.Find("BoardEnvironment");
             playerCanvas = GameObject.Find("PlayerCanvas");
             endCanvas = GameObject.Find("EndCanvas");
@@ -115,7 +117,7 @@ namespace Assets.Scripts.GameManagement
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
             AkSoundEngine.PostEvent("lobby_join", gameObject);
-            AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);
+            AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);         
         }
 
         void OnDebugButtonClicked()
@@ -159,9 +161,16 @@ namespace Assets.Scripts.GameManagement
         void OnReadyToggleValueChanged(bool value)
         {
             if (value)
+            {
                 readyCounter++;
+                lobbyGate.CloseGate();
+            }
             else
+            {
+                lobbyGate.OpenGate();
                 readyCounter--;
+            }
+
             NetworkClient.instance.SendReadyChanged(value);
             AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
             SwipeManager.instance.canSwipe = !value;
@@ -182,8 +191,7 @@ namespace Assets.Scripts.GameManagement
         private void HandleLobbyEnvironment()
         {
             boardEnvironment.SetActive(true);
-            //arCamera.enabled = true;
-            lobbyEnvironment.SetActive(false);
+            lobbyEnvironment.GetComponent<LobbyRocket>().StartBooster();
             SwipeManager.instance.canSwipe = false;
         }
     }

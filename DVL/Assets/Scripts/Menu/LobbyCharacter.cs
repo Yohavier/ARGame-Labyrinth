@@ -9,7 +9,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animation))]
 public class LobbyCharacter : MonoBehaviour
 {
-    public AnimationClip[] clips;
     private List<LobbySubCharacter> subChars;
     public CharInfo charInfo;
 
