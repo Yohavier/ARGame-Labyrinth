@@ -13,6 +13,7 @@ public class SO_PlayerClass : ScriptableObject
 	public int footstepDetectionRadius;
 	public int repairSpeed;
 	public int maxDeathTurnCounter;
+	[Multiline] public string roleInfoText;
 
 	public void SetPlayerStats(Player player)
     {

@@ -8,22 +8,21 @@ public class BoardEnvironment : MonoBehaviour
     private Transform board;
     public List<GameObject> signalPost = new List<GameObject>();
 
-
-    private void Awake()
-    {
+    private void OnEnable()
+    { 
         instance = this;
-    }
-
-    void Start()
-    {
-        board = BoardGrid.instance.transform;
+        if(BoardGrid.instance)
+            board = BoardGrid.instance.transform;
     }
 
     void Update()
     {
-        this.transform.position = board.position;
-        this.transform.rotation = board.rotation;
-        this.transform.localScale = board.localScale;
+        if(board != null)
+        {
+            this.transform.position = board.position;
+            this.transform.rotation = board.rotation;
+            this.transform.localScale = board.localScale;
+        }
     }
 
     public void ActivateNextSignal(int signal)

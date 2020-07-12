@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class LobbyGate : MonoBehaviour
 {
+    private void Awake()
+    {
+        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+    }
     public void StartAnimation()
     {
         GetComponent<Animation>().Play();

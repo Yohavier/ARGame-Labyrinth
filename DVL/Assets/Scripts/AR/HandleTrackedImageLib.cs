@@ -12,6 +12,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	private ARTrackedImageManager manager;
 	private GameObject boardPrefab;
 	public GameObject tilePrefabParent;
+	public GameObject lobbyPrefab;
 	public static HandleTrackedImageLib instance;
 
 	private List<string> BoardTrackers = new List<string>();
@@ -152,9 +153,21 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 	private void HandleSingleTracker(ARTrackedImage trackedImage)
     {
-		tilePrefabParent.SetActive(true);
-		tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
-		tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
+		if(trackedImage.referenceImage.name == "Tile")
+        {
+			tilePrefabParent.SetActive(true);
+			tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
+			tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
+		}
+		else if(trackedImage.referenceImage.name == "Lobby")
+        {
+            if (lobbyPrefab.gameObject.activeSelf)
+            {
+				lobbyPrefab.transform.localPosition = trackedImage.transform.localPosition;
+				lobbyPrefab.transform.localRotation = trackedImage.transform.localRotation;
+			}
+        }
+
 	}
 	#region calculate the right position and rotation
     private Vector3 GetOffset(ARTrackedImage image)

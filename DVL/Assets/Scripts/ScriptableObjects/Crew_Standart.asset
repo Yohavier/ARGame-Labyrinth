@@ -19,3 +19,9 @@ MonoBehaviour:
   footstepDetectionRadius: 2
   repairSpeed: 1
   maxDeathTurnCounter: 3
+  roleInfoText: 'Das Standart Crewmitglied.
+
+    Er kann nichts besonderes,
+
+    hat
+    aber auch keine Nachteile.'

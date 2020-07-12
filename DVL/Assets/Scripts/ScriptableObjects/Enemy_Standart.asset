@@ -19,3 +19,5 @@ MonoBehaviour:
   footstepDetectionRadius: 2
   repairSpeed: 1
   maxDeathTurnCounter: 3
+  roleInfoText: "Die Spinne wei\xDF durch ihre \nganzen F\xE4den, wo sich in \neinem
+    gr\xF6\xDFeren Umkreis \nSpieler bewegen."

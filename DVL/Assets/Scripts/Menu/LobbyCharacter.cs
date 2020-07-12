@@ -11,6 +11,7 @@ public class LobbyCharacter : MonoBehaviour
 {
     public AnimationClip[] clips;
     private List<LobbySubCharacter> subChars;
+    public CharInfo charInfo;
 
     private void Awake()
     {
@@ -21,16 +22,16 @@ public class LobbyCharacter : MonoBehaviour
     {
         for (int i = 0; i < subChars.Count; i++)
         {
-            if (subChars[i].role == newRole)
+            if (subChars[i].playerClass.roleIndex == newRole)
             {
                 subChars[i].gameObject.SetActive(true);
+                charInfo.DisplayNewInfo(subChars[i].playerClass);
             }
             else
             {
                 subChars[i].gameObject.SetActive(false);
             }
         }
-
     }
 
     public void ChangeComplete()

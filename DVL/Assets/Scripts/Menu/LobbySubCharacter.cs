@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class LobbySubCharacter : MonoBehaviour
 {
-    public RoleIndex role;
+    public SO_PlayerClass playerClass;
 }

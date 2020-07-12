@@ -21,6 +21,7 @@ namespace Assets.Scripts.GameManagement
         public GameObject setupCanvas;
         public GameObject lobbyCanvas;
         public GameObject lobbyEnvironment;
+        public GameObject boardEnvironment;
         public GameObject playerCanvas;
         public GameObject endCanvas;
         public InputField hostIPInput;
@@ -42,12 +43,13 @@ namespace Assets.Scripts.GameManagement
         private void Awake()
         {
             arCamera = Camera.main;
-            arCamera.enabled = false;
+            //arCamera.enabled = false;
 
             Eventbroker.instance.onNotifyNextTurn += OnTurnChange;
             setupCanvas = GameObject.Find("SetupCanvas");
             lobbyCanvas = GameObject.Find("LobbyCanvas");
             lobbyEnvironment = GameObject.Find("LobbyEnvironment");
+            boardEnvironment = GameObject.Find("BoardEnvironment");
             playerCanvas = GameObject.Find("PlayerCanvas");
             endCanvas = GameObject.Find("EndCanvas");
             hostIPInput = GameObject.Find("HostIPInput").GetComponent<InputField>();
@@ -109,6 +111,7 @@ namespace Assets.Scripts.GameManagement
 
         void OpenLobbyMenu()
         {
+            boardEnvironment.SetActive(false);
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
             AkSoundEngine.PostEvent("lobby_join", gameObject);
@@ -178,7 +181,8 @@ namespace Assets.Scripts.GameManagement
 
         private void HandleLobbyEnvironment()
         {
-            arCamera.enabled = true;
+            boardEnvironment.SetActive(true);
+            //arCamera.enabled = true;
             lobbyEnvironment.SetActive(false);
             SwipeManager.instance.canSwipe = false;
         }
