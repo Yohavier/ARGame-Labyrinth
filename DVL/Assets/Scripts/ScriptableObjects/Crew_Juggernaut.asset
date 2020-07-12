@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Juggernaut
   roleIndex: 4
-  diceModificator: 0
+  diceModificator: -1
   fogOfWarRadius: 2
   footstepDetectionRadius: 2
   repairSpeed: 1
   maxDeathTurnCounter: 6
+  roleInfoText: "Ein Soldat mit einem \nfunktionst\xFCchtigem\nExoskelett stirbt
+    nicht \nso schnell an den \nVerletzungen des\nAliens."

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c6cd9f3348dcc4a99bdefaf10b9e6b, type: 3}
   m_Name: Enemy_Standart
   m_EditorClassIdentifier: 
-  roleName: Enemy_Standart
+  roleName: Arachnid
   roleIndex: 5
-  diceModificator: 0
-  fogOfWarRadius: 3
-  footstepDetectionRadius: 2
-  repairSpeed: 1
-  maxDeathTurnCounter: 3
-  roleInfoText: "Die Spinne wei\xDF durch ihre \nganzen F\xE4den, wo sich in \neinem
-    gr\xF6\xDFeren Umkreis \nSpieler bewegen."
+  diceModificator: 1
+  fogOfWarRadius: 2
+  footstepDetectionRadius: 4
+  repairSpeed: 0
+  maxDeathTurnCounter: 100
+  roleInfoText: "Der Arachnid wei\xDF durch sein\nNetz, wo sich in \neinem gr\xF6\xDFeren
+    Umkreis \nSpieler bewegen."

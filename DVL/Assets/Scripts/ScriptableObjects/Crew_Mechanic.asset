@@ -16,6 +16,8 @@ MonoBehaviour:
   roleIndex: 0
   diceModificator: 0
   fogOfWarRadius: 1
-  footstepDetectionRadius: 2
+  footstepDetectionRadius: 3
   repairSpeed: 2
-  maxDeathTurnCounter: 3
+  maxDeathTurnCounter: 2
+  roleInfoText: "Der letzte Mechaniker\nauf diesem Schiff.\nSehr n\xFCtzlich um den
+    \nGenerator wieder auf \nVorderman zubringen."

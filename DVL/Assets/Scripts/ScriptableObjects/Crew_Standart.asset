@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c6cd9f3348dcc4a99bdefaf10b9e6b, type: 3}
   m_Name: Crew_Standart
   m_EditorClassIdentifier: 
-  roleName: Standart
+  roleName: Crew
   roleIndex: 3
   diceModificator: 0
-  fogOfWarRadius: 3
+  fogOfWarRadius: 1
   footstepDetectionRadius: 2
   repairSpeed: 1
   maxDeathTurnCounter: 3
-  roleInfoText: 'Das Standart Crewmitglied.
-
-    Er kann nichts besonderes,
-
-    hat
-    aber auch keine Nachteile.'
+  roleInfoText: "Ein Reisender der nur \nper Anhalter einmal \ndurch die Galaxy wollte...
+    \nUnd nun soetwas.\nEr kann nichts \nbesonderes, hat aber\nauch keine Nachteile."

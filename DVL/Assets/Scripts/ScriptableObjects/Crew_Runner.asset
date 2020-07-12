@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Runner
   roleIndex: 1
-  diceModificator: 2
+  diceModificator: 3
   fogOfWarRadius: 1
-  footstepDetectionRadius: 2
+  footstepDetectionRadius: 1
   repairSpeed: 1
   maxDeathTurnCounter: 3
+  roleInfoText: "Der Runner ist\nschnell aber hat\nkeine Ahnung wo er \neigentlich
+    reinrennt."
