@@ -20,6 +20,7 @@ namespace AK
         static const AkUniqueID LOBBY_JOIN = 2886407174U;
         static const AkUniqueID LOBBY_SMALLBUTTON = 2092420523U;
         static const AkUniqueID LOBBY_START = 1340413442U;
+        static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID POWERUP_COMMUNICATOR = 934594543U;
         static const AkUniqueID POWERUP_DOORHACK = 3873244585U;
         static const AkUniqueID POWERUP_MEDIPACK = 2388944346U;
@@ -29,6 +30,22 @@ namespace AK
         static const AkUniqueID TILE_EXPELL = 1367503038U;
         static const AkUniqueID TILE_MOVE = 1327556595U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace GAMESTATE
+        {
+            static const AkUniqueID GROUP = 4091656514U;
+
+            namespace STATE
+            {
+                static const AkUniqueID INGAME = 984691642U;
+                static const AkUniqueID LOBBY = 290285391U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace GAMESTATE
+
+    } // namespace STATES
 
     namespace SWITCHES
     {
@@ -48,6 +65,7 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID INTENSITY = 2470328564U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
         static const AkUniqueID RPM = 796049864U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;

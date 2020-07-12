@@ -1,7 +1,7 @@
 # Penumbra
 AR Boardgame
 
-# Multitracker for the board
+## Multitracker for the board
 <p float="left">
   <img width="200" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">
   <img width="200" src="DVL/Assets/ImageLibrary/BottomRight.jpeg">
@@ -9,5 +9,8 @@ AR Boardgame
   <img width="200" src="DVL/Assets/ImageLibrary/TopRight.jpeg">
 </p>
 
-# Tracker for the loose Tile
+## Tracker for the loose Tile
 <img width="200" src="DVL/Assets/ImageLibrary/Tile.jpeg">
+
+## Tracker for the Lobby
+<img width="200" src="DVL/Assets/ImageLibrary/Lobby.jpeg">

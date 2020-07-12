@@ -164,7 +164,7 @@ public class HandleTrackedImageLib : MonoBehaviour
             if (lobbyPrefab.gameObject.activeSelf)
             {
 				lobbyPrefab.transform.localPosition = trackedImage.transform.localPosition;
-				lobbyPrefab.transform.localRotation = trackedImage.transform.localRotation;
+				lobbyPrefab.transform.localEulerAngles = GetRotation(trackedImage);
 			}
         }
 
