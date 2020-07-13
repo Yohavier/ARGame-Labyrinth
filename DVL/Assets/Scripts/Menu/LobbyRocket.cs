@@ -31,7 +31,7 @@ public class LobbyRocket : MonoBehaviour
         {
             a += t;
 
-            transform.position -= rocketBlaster.transform.right * a * 0.01f;
+            transform.position += rocketBlaster.transform.up * a * 0.01f;
             t += Time.deltaTime * 0.01f;
             distance = Vector3.Distance(Camera.main.transform.position, transform.position);
             if(distance > 50)
