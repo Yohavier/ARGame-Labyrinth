@@ -17,7 +17,7 @@ public class LobbyCharacter : MonoBehaviour
         subChars = GetComponentsInChildren<LobbySubCharacter>().ToList();
     }
 
-    public void OnChangeSelectedCharacter(RoleIndex newRole, int dir)
+    public void OnChangeSelectedCharacter(RoleIndex newRole)
     {
         for (int i = 0; i < subChars.Count; i++)
         {

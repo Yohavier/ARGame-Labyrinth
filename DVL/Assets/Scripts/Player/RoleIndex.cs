@@ -14,6 +14,7 @@ namespace Assets.Scripts.Player
         Crew_Scout = 2,
         Crew_Standart = 3,
         Crew_Juggernaut = 4,
-        Enemy_Standart = 5
+        Enemy_Arachnide = 5,
+        Enemy_Scorpion = 6
     }
 }

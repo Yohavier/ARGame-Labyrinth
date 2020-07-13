@@ -2064,8 +2064,8 @@ MonoBehaviour:
   playerIndex: 0
   playerRole: {fileID: 11400000, guid: f2dd63b58a41f184b9518be05679db5e, type: 2}
   diceModificator: 0
-  fogOfWarRadius: 2
-  footstepDetectionRadius: 1
+  fogOfWarRadius: 0
+  footstepDetectionRadius: 0
   repairSpeed: 0
   maxDeathTurnCounter: 0
   playerFOW: {fileID: 0}

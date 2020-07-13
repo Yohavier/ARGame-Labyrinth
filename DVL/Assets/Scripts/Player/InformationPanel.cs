@@ -74,7 +74,7 @@ public class InformationPanel : MonoBehaviour
     public void OnPlayerRoleChanged(int change)
     {
         SetPlayerRoles(SetRightRole(change));
-        lobbyChar.GetComponent<LobbyCharacter>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex, change);
+        lobbyChar.GetComponent<LobbyCharacter>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex);
         if (LocalGameManager.instance != null)
             NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
         Debug.Log("Selected " + selectedPlayerRole.name);
