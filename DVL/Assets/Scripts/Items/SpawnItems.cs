@@ -72,6 +72,7 @@ public class SpawnItems : MonoBehaviour
         }
     }
 
+    //TODO Array error on placements (sometimes)
     private void StartPlacingPowerUpsWithSeed()
     {
         for(int i = 0; i < powerUps.Count; i++)

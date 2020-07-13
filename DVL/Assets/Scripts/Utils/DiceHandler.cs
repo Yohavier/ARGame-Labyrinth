@@ -14,7 +14,6 @@ public class DiceHandler : MonoBehaviour
 
     public Text prevNum, Num, nextNum;
 
-    //TODO Bugged while it is running and menu is toggled
     public void RollDiceAnimation(int num)
     {
         targetNum = num + LocalGameManager.instance.activePlayer.GetComponent<Player>().diceModificator;
