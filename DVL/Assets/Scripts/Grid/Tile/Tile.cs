@@ -302,34 +302,37 @@ public class Tile : MonoBehaviour
         }
     }
 
-	//sprengplätze mit colliderecken
-	//sprengen mit kurzem Zeitversatz
-	//shader der das Tile auflösen lässt
 	public ParticleSystem explosion;
 	public int explosionNumber = 4;
 	private List<Vector3> FindRightCorners()
     {
 		List<Vector3> corners = new List<Vector3>();
+		Vector3 impulseNormal = Vector3.zero;
 		if (row < 0)
 		{
+			impulseNormal = -BoardGrid.instance.transform.right;
 			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z + 0.05f));
 			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z - 0.05f));
 		}
 		else if (row > 6)
-        {
+		{
+			impulseNormal = BoardGrid.instance.transform.right;
 			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z + 0.05f));
 			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z - 0.05f));
 		}
 		else if(column < 0)
         {
+			impulseNormal = -BoardGrid.instance.transform.forward;
 			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z + 0.05f));
 			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z + 0.05f));
 		}
 		else if (column > 6)
         {
+			impulseNormal = BoardGrid.instance.transform.forward;
 			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z - 0.05f));
 			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z - 0.05f));
 		}
+		corners.Add(impulseNormal);
 		return corners;
     }
 	private IEnumerator ExplosionOrder(List<Vector3> pos)
@@ -345,10 +348,45 @@ public class Tile : MonoBehaviour
 			AkSoundEngine.PostEvent("tile_expell", gameObject);
 			yield return new WaitForSeconds(0.2f);
 		}
+		StartCoroutine(SimulateExplosionTilePhysics(pos[2]));
+	}
+	private IEnumerator SimulateExplosionTilePhysics(Vector3 impulseNormal)
+    {
+		float time = 0;
+		float randomImpulsSpeed = UnityEngine.Random.Range(0.1f, 0.15f);
+		Vector3 randomRotation = new Vector3(UnityEngine.Random.Range(5f, 20f), UnityEngine.Random.Range(5f, 20f), UnityEngine.Random.Range(5f, 20f));
 
+		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < meshes.Length; i++)
+        {
+			Debug.Log(i);
+			StartCoroutine(FadeTo(meshes[i], 0.0f, 2f));
+        }
+
+        while (time < 2)
+        {
+			time += Time.deltaTime;
+			transform.position += impulseNormal * randomImpulsSpeed * Time.deltaTime;
+			transform.Rotate(randomRotation * Time.deltaTime, Space.Self);
+			yield return null;
+		}
+		
 		BoardGrid.instance.inMove = false;
 		BoardGrid.instance.RemoveTileFromGrid(this);
 		HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);
 		LocalGameManager.instance.canMove = true;
+		PrefabColor();
+	}
+
+	//TODO CreateShader with property to render tiles invisible
+	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
+	{
+		float alpha = tilePart.material.color.a;
+		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+		{
+			Color newColor = new Color(tilePart.material.color.r, tilePart.material.color.g, tilePart.material.color.b, Mathf.Lerp(alpha, aValue, t));
+			tilePart.material.color = newColor;
+			yield return null;
+		}
 	}
 }

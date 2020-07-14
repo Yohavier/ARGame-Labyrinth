@@ -34,7 +34,7 @@ public class LocalGameManager : MonoBehaviour
         }
         set
         {
-			moveTileToken = value;
+			moveTileToken = true;
         }
     }
 
