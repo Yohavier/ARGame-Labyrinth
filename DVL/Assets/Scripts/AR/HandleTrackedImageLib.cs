@@ -2,6 +2,7 @@ using Assets.Scripts.GameManagement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
@@ -14,6 +15,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	public GameObject tilePrefabParent;
 	public GameObject lobbyPrefab;
 	public static HandleTrackedImageLib instance;
+	public LayerMask trackingCheckMask;
 
 	[HideInInspector] public bool trackLobby;
 
@@ -99,8 +101,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 			}
 			else
 			{
-				if (trackedImage.trackingState == TrackingState.Tracking)
-                {
+                if (isTrackable(trackedImage)) 
+				{ 
 					HandleSingleTracker(trackedImage);
                 }				
 			}
@@ -124,7 +126,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 				mesh.material.color = Color.white;
 			}
 		}
-
 
 		tilePrefabParent.SetActive(false);
 
@@ -152,7 +153,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 		boardPrefab.transform.localPosition = trackedImage.transform.localPosition - GetOffset(trackedImage);
 		boardPrefab.transform.localEulerAngles = GetRotation(trackedImage);
 	}
-
 	private void HandleSingleTracker(ARTrackedImage trackedImage)
     {
 		if(trackedImage.referenceImage.name == "Tile")
@@ -188,7 +188,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 				return Vector3.zero;
 		}
     }
-
 	private Vector3 GetRotation(ARTrackedImage image)
     {
 		Vector3 gy = GyroModifyCamera().eulerAngles;
@@ -204,4 +203,32 @@ public class HandleTrackedImageLib : MonoBehaviour
 		return new Quaternion(q.x, q.y, -q.z, -q.w);
 	}
 	#endregion
+
+
+	//TODO disable meshrenderer if in way
+	public Camera ar;
+    private bool isTrackable(ARTrackedImage image)
+    {
+		if(image.trackingState == TrackingState.Tracking)
+        {
+			RaycastHit hit;
+			Vector3 dir = (image.transform.position - ar.transform.position).normalized;
+			float distance = (image.transform.position - ar.transform.position).magnitude;
+			MeshRenderer[] mesh = tilePrefabParent.GetComponentsInChildren<MeshRenderer>();
+			if (Physics.Raycast(ar.transform.position, dir, out hit, distance, trackingCheckMask))
+			{
+				foreach(MeshRenderer m in mesh)
+                {
+					m.material.color = Color.red;
+                }
+				return false;
+			}
+			foreach (MeshRenderer m in mesh)
+			{
+				m.material.color = Color.white;
+			}
+			return true;
+		}
+		return false;
+    }
 }
