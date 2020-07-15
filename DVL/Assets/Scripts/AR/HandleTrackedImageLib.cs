@@ -206,26 +206,27 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 
 	//TODO disable meshrenderer if in way
-	public Camera ar;
     private bool isTrackable(ARTrackedImage image)
     {
 		if(image.trackingState == TrackingState.Tracking)
         {
 			RaycastHit hit;
-			Vector3 dir = (image.transform.position - ar.transform.position).normalized;
-			float distance = (image.transform.position - ar.transform.position).magnitude;
+			Vector3 dir = (image.transform.position - Camera.main.transform.position).normalized;
+			float distance = (image.transform.position - Camera.main.transform.position).magnitude;
 			MeshRenderer[] mesh = tilePrefabParent.GetComponentsInChildren<MeshRenderer>();
-			if (Physics.Raycast(ar.transform.position, dir, out hit, distance, trackingCheckMask))
+			if (Physics.Raycast(Camera.main.transform.position, dir, out hit, distance, trackingCheckMask))
 			{
 				foreach(MeshRenderer m in mesh)
                 {
 					m.material.color = Color.red;
+					tilePrefabParent.SetActive(false);
                 }
 				return false;
 			}
 			foreach (MeshRenderer m in mesh)
 			{
 				m.material.color = Color.white;
+				tilePrefabParent.SetActive(true);
 			}
 			return true;
 		}
