@@ -62,11 +62,11 @@ public class InformationPanel : MonoBehaviour
     }
     public void SetItemText(string text)
     {
-        items.text = "Item: " + text;
+        items.text = text;
     }
     public void SetStateText(string text)
     {
-        state.text = "State: " + text;
+        state.text = text;
     }
     #endregion
 

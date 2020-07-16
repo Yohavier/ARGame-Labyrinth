@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GameManagement;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,7 @@ public class DiceHandler : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         LocalGameManager.instance._stepsLeft = num;
+        GUIManager.instance.diceObject.SetActive(false);
         isRunning = false;
     }
 

@@ -52,7 +52,7 @@ public class NetworkServer
             if (!clientList[i].playerState.isReady)
             {
                 Debug.LogWarning("Not all Players ready");
-                return;
+                //return;
             }
         }
         gameState.currentTurnPlayer = PlayerIndex.Player3;

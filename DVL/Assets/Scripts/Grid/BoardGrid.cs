@@ -151,6 +151,7 @@ public class BoardGrid : MonoBehaviour
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
 		GetComponent<SpawnItems>().SetItemOnGrid();
+		LightManager.instance.SetupLights(); //TODO: Merge
 	}
 	#endregion
 

@@ -25,6 +25,7 @@ namespace Assets.Scripts.GameManagement
         public GameObject boardEnvironment;
         public GameObject playerCanvas;
         public GameObject endCanvas;
+        public GameObject diceObject;
         public InputField hostIPInput;
         public Button hostButton;
         public Button joinButton;
@@ -33,8 +34,9 @@ namespace Assets.Scripts.GameManagement
         public Button debugButton;
         public Toggle readyToggle;
         public Text[] playerLabels = new Text[4];
+        public Text stepsLeftLabel;
 
-        string serverIP = "192.168.0.206";
+        string serverIP = "192.168.194.169";
         public bool isServer = false;
         public bool isDebug = false;
 
@@ -65,6 +67,8 @@ namespace Assets.Scripts.GameManagement
             playerLabels[1] = GameObject.Find("Player2Label").GetComponent<Text>();
             playerLabels[2] = GameObject.Find("Player3Label").GetComponent<Text>();
             playerLabels[3] = GameObject.Find("Player4Label").GetComponent<Text>();
+            diceObject = GameObject.Find("Dice");
+            stepsLeftLabel = GameObject.Find("StepsLeftLabel").GetComponent<Text>();
 
             hostButton.onClick.AddListener(() => OnHostButtonClick());
             joinButton.onClick.AddListener(() => OnJoinButtonClick());
@@ -74,8 +78,11 @@ namespace Assets.Scripts.GameManagement
             readyToggle.onValueChanged.AddListener((value) => OnReadyToggleValueChanged(value));
             hostIPInput.text = serverIP;
             lobbyCanvas.SetActive(false);
+            lobbyEnvironment.SetActive(false);
+            boardEnvironment.SetActive(false);
             instance = this;
             isDebug = false;
+            diceObject.SetActive(false);
         }
 
         private void Start()
@@ -116,6 +123,7 @@ namespace Assets.Scripts.GameManagement
             boardEnvironment.SetActive(false);
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
+            lobbyEnvironment.SetActive(true);
             AkSoundEngine.PostEvent("lobby_join", gameObject);
             AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);         
         }

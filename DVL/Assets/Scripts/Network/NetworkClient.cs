@@ -127,6 +127,16 @@ public class NetworkClient
         PlayerIndex currentTurnPlayer = (PlayerIndex)msg.ReadInt();
         //GUIManager.instance.nextTurnButton.interactable = currentTurnPlayer == LocalGameManager.instance.localPlayerIndex;
         LocalGameManager.instance.currentTurnPlayer = currentTurnPlayer;
+
+        try
+        {
+            InformationPanel.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
+        }
+
+        catch (Exception ex)
+        {
+
+        }
     }
     private void HandleSetupPlayer(Msg msg)
     {

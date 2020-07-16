@@ -93,6 +93,14 @@ public class Tile : MonoBehaviour
 			if (!sMesh.gameObject.CompareTag("Tile"))
 				sMesh.enabled = !toggle;
         }
+
+		Light[] lights = GetComponentsInChildren<Light>();
+
+		foreach (Light light in lights)
+		{
+			light.enabled = !toggle;
+			light.gameObject.GetComponent<DynamicLight>().enabled = !toggle;
+		}
 	}
 
 	public void UpdateTileFOW()

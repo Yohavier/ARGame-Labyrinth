@@ -1,3 +1,4 @@
+using Assets.Scripts.GameManagement;
 using UnityEngine;
 
 public enum PlayerIndex
@@ -49,6 +50,7 @@ public class LocalGameManager : MonoBehaviour
 			if(currentTurnPlayer == localPlayerIndex)
             {
 				stepsLeft = value;
+				GUIManager.instance.stepsLeftLabel.text = stepsLeft.ToString();
 				DiceHandler.instance.OnChangeDiceText(stepsLeft, false);
 			}
 		}
@@ -112,6 +114,7 @@ public class LocalGameManager : MonoBehaviour
 	}
 	private void RollDice()
     {
+		GUIManager.instance.diceObject.SetActive(true);
 		DiceHandler.instance.RollDiceAnimation(Random.Range(1, 7));
 		RemoveRollDiceButtonListener();
 
