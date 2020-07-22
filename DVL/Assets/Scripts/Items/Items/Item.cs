@@ -44,7 +44,6 @@ public class Item: MonoBehaviour
     {
         if (LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile == position)
         {
-            //TODO For Mobile
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);
@@ -66,18 +65,11 @@ public class Item: MonoBehaviour
     public void ToggleGeneratorCanvas()
     {
         interactionCanvas.gameObject.SetActive(!interactionCanvas.gameObject.activeSelf);
-        if (interactionCanvas.gameObject.activeSelf)
-        {
-            interactionCanvas.GetComponentInChildren<Button>().onClick.AddListener(() => SendInteraction());
-        }
-        else
-        {
-            interactionCanvas.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
-        }
     }
 
     public virtual void SendInteraction()
     {
+        Debug.Log("press");
         if (!alreadyRepairedThisTurn)
         {
             CrewMember player = LocalGameManager.instance.activePlayer.GetComponent<CrewMember>();

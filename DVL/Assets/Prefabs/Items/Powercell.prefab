@@ -408,8 +408,8 @@ GameObject:
   - component: {fileID: 4335291786055566125}
   - component: {fileID: 5269857092967063747}
   - component: {fileID: 540146135546387557}
-  - component: {fileID: 3723123279874394027}
   - component: {fileID: 8790451605201695519}
+  - component: {fileID: 7413856804812019226}
   m_Layer: 11
   m_Name: Powercell
   m_TagString: Untagged
@@ -439,7 +439,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8117746027487259920}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -3449341702955303124, guid: 5a15e42c2cacfd74ba8f4e6c2a8f159a, type: 3}
 --- !u!23 &540146135546387557
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -1294284738371021749, guid: 5a15e42c2cacfd74ba8f4e6c2a8f159a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -479,20 +479,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3723123279874394027
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8117746027487259920}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &8790451605201695519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,3 +500,16 @@ MonoBehaviour:
     m_Bits: 2048
   position: {fileID: 0}
   alreadyRepairedThisTurn: 0
+--- !u!65 &7413856804812019226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8117746027487259920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
