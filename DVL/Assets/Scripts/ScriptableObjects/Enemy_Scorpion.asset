@@ -14,9 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Scorpion
   roleIndex: 6
-  diceModificator: 1
+  diceModificator: 3
   fogOfWarRadius: 1
   footstepDetectionRadius: 1
   repairSpeed: 0
   maxDeathTurnCounter: 100
-  roleInfoText: 
+  roleInfoText: 'Das Scorpion ist schnell.
+
+    Allerdings kommt es nicht
+
+    gut
+    auf dem Schiffswrack
+
+    zurecht.'
