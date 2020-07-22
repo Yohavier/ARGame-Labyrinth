@@ -12,7 +12,7 @@ public class NetworkServer
     public static NetworkServer instance = new NetworkServer();
     public ServerGameState gameState = new ServerGameState();
     public bool isSetup = false;
-    private List<ClientReference> clientList = new List<ClientReference>();
+    public List<ClientReference> clientList = new List<ClientReference>();
     private Socket serverSocket;
     private byte[] buffer = new byte[1024];
 

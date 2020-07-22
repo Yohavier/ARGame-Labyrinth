@@ -106,13 +106,29 @@ namespace Assets.Scripts.GameManagement
                 for (int i = 0; i < 4; i++)
                 {
                     playerLabels[i].text = "Player" + (i + 1) + ": " + NetworkClient.instance.networkPlayers[i].ip + " " + (NetworkClient.instance.networkPlayers[i].isReady ? "✓" : "") + Environment.NewLine
-                    + "Role: " + NetworkClient.instance.networkPlayers[i].roleIndex;
+                    + "Role: " + NetworkClient.instance.networkPlayers[i].roleIndex;      
                 }
 
                 needsPlayerUpdate = false;
+                if (startMatchButton != null)
+                    CheckIfEveryoneIsReady();
             }
         }
-
+        private void CheckIfEveryoneIsReady()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if(NetworkClient.instance.networkPlayers[i].ip != "")
+                {
+                    if (!NetworkClient.instance.networkPlayers[i].isReady)
+                    {
+                        startMatchButton.interactable = false;
+                        return;
+                    }
+                } 
+            }
+            startMatchButton.interactable = true;
+        }
         void OnTurnChange()
         {
             nextTurnButton.interactable = LocalGameManager.instance.GetTurn();
@@ -124,6 +140,7 @@ namespace Assets.Scripts.GameManagement
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
             lobbyEnvironment.SetActive(true);
+            startMatchButton.interactable = false;
             AkSoundEngine.PostEvent("lobby_join", gameObject);
             AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);         
         }
@@ -160,9 +177,9 @@ namespace Assets.Scripts.GameManagement
 
         void OnJoinButtonClick()
         {
-            NetworkClient.instance.Connect(hostIPInput.text);
-            startMatchButton.enabled = false;
+            NetworkClient.instance.Connect(hostIPInput.text);          
             OpenLobbyMenu();
+            Destroy(startMatchButton.gameObject);
         }
 
         private int readyCounter = 0;
@@ -178,7 +195,6 @@ namespace Assets.Scripts.GameManagement
                 lobbyGate.OpenGate();
                 readyCounter--;
             }
-
             NetworkClient.instance.SendReadyChanged(value);
             AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
             SwipeManager.instance.canSwipe = !value;
