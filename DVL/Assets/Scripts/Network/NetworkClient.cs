@@ -98,6 +98,9 @@ public class NetworkClient
             case MsgOpcode.opDoorHackUsed:
                 HandleDoorHackUsed(msg);
                 break;
+            case MsgOpcode.opShutDownUsed:
+                HandleShutdownUsed(msg);
+                break;
             case MsgOpcode.opPowerUpCollected:
                 HandlePowerUpCollected(msg);
                 break;
@@ -226,6 +229,12 @@ public class NetworkClient
         tile.ToggleDoors();
     }
 
+    private void HandleShutdownUsed(Msg msg)
+    {
+        int seed = msg.ReadInt();
+        BoardGrid.instance.ShutDownGridFromSeed(seed);
+    }
+
     private void HandlePowerUpCollected(Msg msg)
     {
         int tileIndex = msg.ReadInt();
@@ -340,6 +349,13 @@ public class NetworkClient
     {
         Msg msg = new Msg(MsgOpcode.opDoorHackUsed, 4);
         msg.Write(targetTile.index);
+        Send(msg);
+    }
+
+    public void SendShutDownUsed(int seed)
+    {
+        Msg msg = new Msg(MsgOpcode.opShutDownUsed, 4);
+        msg.Write(seed);
         Send(msg);
     }
 

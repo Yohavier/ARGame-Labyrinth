@@ -29,8 +29,8 @@ MonoBehaviour:
       m_GuidLow: 4902988180004101085
       m_GuidHigh: 10926466448279279755
     m_SerializedTextureGuid:
-      m_GuidLow: 11521525153528711871
-      m_GuidHigh: 3443391477534217835
+      m_GuidLow: 2063956351434291993
+      m_GuidHigh: 12276931180108155993
     m_Size: {x: 0.1, y: 0.1}
     m_SpecifySize: 1
     m_Name: Tile
@@ -49,8 +49,8 @@ MonoBehaviour:
       m_GuidLow: 4673139085535678087
       m_GuidHigh: 13170125430391503527
     m_SerializedTextureGuid:
-      m_GuidLow: 2063956351434291993
-      m_GuidHigh: 12276931180108155993
+      m_GuidLow: 8436524822910781258
+      m_GuidHigh: 16279671883245012650
     m_Size: {x: 0.1, y: 0.1}
     m_SpecifySize: 1
     m_Name: TopLeft

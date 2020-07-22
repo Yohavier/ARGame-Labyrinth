@@ -44,6 +44,7 @@ public class Item: MonoBehaviour
     {
         if (LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile == position)
         {
+            //TODO For Mobile
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);

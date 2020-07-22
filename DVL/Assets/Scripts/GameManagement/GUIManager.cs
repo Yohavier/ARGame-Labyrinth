@@ -36,7 +36,7 @@ namespace Assets.Scripts.GameManagement
         public Text[] playerLabels = new Text[4];
         public Text stepsLeftLabel;
 
-        string serverIP = "192.168.194.169";
+        string serverIP = "192.168.0.206";
         public bool isServer = false;
         public bool isDebug = false;
 

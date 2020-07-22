@@ -309,6 +309,15 @@ public class BoardGrid : MonoBehaviour
 	//Sync Tile shuffle
 	public void ShutDownGridPowerUp()
     {
+		int seed = UnityEngine.Random.Range(0, 256);
+		NetworkClient.instance.SendShutDownUsed(seed);
+		ShutDownGridFromSeed(seed);
+    }
+
+	public void ShutDownGridFromSeed(int seed)
+    {
+		seedCount = 0;
+		UnityEngine.Random.InitState(seed);
 		var numberList = Enumerable.Range(0, grid.Count).ToList();
 		print(numberList[numberList.Count - 1]);
 		for (int row = 0; row < size; row++)
@@ -316,16 +325,21 @@ public class BoardGrid : MonoBehaviour
 			for (int column = 0; column < size; column++)
 			{
 				int ranNum = numberList[UnityEngine.Random.Range(0, numberList.Count)];
-				grid[ranNum].transform.position = new Vector3(row * gridSpacing, 0f, column * gridSpacing);
-                grid[ranNum].transform.localEulerAngles = new Vector3(0f, SetRandomRotationFromSeed(), 0f);
-				grid[ranNum].SetTileData(row, column, false);
-				coordDic[row.ToString() + column.ToString()] = grid[ranNum];
-				grid[ranNum].ToggleDoors(false);
-				NetworkClient.instance.SendDoorHackUsed(grid[ranNum]);
+				UpdateShutDownGrid(ranNum, row, column);
 				numberList.Remove(ranNum);
 			}
 		}
 		LocalGameManager.instance.activePlayer.GetComponent<Player>().ChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
-    }
+	}
+
+	public void UpdateShutDownGrid(int index, int row, int column)
+    {
+		grid[index].transform.position = new Vector3(row * gridSpacing, 0f, column * gridSpacing);
+		grid[index].transform.localEulerAngles = new Vector3(0f, SetRandomRotationFromSeed(), 0f);
+		grid[index].SetTileData(row, column, false);
+		coordDic[row.ToString() + column.ToString()] = grid[index];
+		grid[index].ToggleDoors(false);
+		seedCount++;
+	}
     #endregion
 }

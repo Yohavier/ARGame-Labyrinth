@@ -385,7 +385,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2514698625332791878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8790451605201695519}
+        m_MethodName: SendInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8117746027487259920
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +508,9 @@ MonoBehaviour:
   itemName: Powercell
   isStored: 0
   interactionCanvas: {fileID: 3829281513135200240}
+  arCamera: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 2048
   position: {fileID: 0}
+  alreadyRepairedThisTurn: 0
