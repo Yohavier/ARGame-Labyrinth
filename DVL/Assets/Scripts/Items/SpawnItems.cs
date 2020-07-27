@@ -60,8 +60,7 @@ public class SpawnItems : MonoBehaviour
                 row.ToString() + (col + 1).ToString(),
                 (row - 1).ToString() + col.ToString(),
                 (row + 1).ToString() + col.ToString(),
-                (row + 1).ToString() + (col + 1).ToString(),
-                (row - 1).ToString() + (col - 1).ToString()
+                (row + 1).ToString() + (col + 1).ToString()
                 );
 
             foreach (string key in dicKeys)

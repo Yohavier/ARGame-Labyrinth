@@ -23,9 +23,10 @@ public class FindNearestGridSlot : MonoBehaviour
 	}
 
 	//get the tile that will be pushed away by inserting a new Tile
+	int hitCounter = 0;
 	private void FindTileWithRays()
 	{
-		int hitCounter = 0;
+		hitCounter = 0;
 
 		hitCounter += SendRay(transform.TransformDirection(Vector3.forward));
 		hitCounter += SendRay(-transform.TransformDirection(Vector3.forward));
@@ -52,9 +53,19 @@ public class FindNearestGridSlot : MonoBehaviour
 	private int SendRay(Vector3 rayDirection)
 	{
 		RaycastHit Hit;
-		if (Physics.Raycast(transform.position, rayDirection, out Hit, distance, mask))
+		Vector3 offPos;
+		if (targetTile != null)
 		{
-			Debug.DrawRay(transform.position, rayDirection * Hit.distance, Color.red);
+			offPos = (transform.position - targetTile.transform.position).normalized * 0.03f;
+		}
+		else
+		{
+			offPos = Vector3.zero;
+		}
+
+		if (Physics.Raycast(transform.position + offPos, rayDirection, out Hit, distance, mask))
+		{
+			Debug.DrawRay(transform.position + offPos, rayDirection * Hit.distance, Color.red);
 			target = Hit.collider.gameObject;
 			return 1;
 		}

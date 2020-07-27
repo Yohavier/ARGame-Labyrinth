@@ -367,7 +367,6 @@ public class Tile : MonoBehaviour
 		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < meshes.Length; i++)
         {
-			Debug.Log(i);
 			StartCoroutine(FadeTo(meshes[i], 0.0f, 2f));
         }
 
