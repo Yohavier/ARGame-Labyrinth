@@ -28,5 +28,6 @@ public class BoardEnvironment : MonoBehaviour
     public void ActivateNextSignal(int signal)
     {
         signalPost[signal - 1].GetComponent<MeshRenderer>().material.color = Color.green;
+        signalPost[signal - 1].GetComponentInChildren<ParticleSystem>().Play();
     }
 }
