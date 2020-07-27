@@ -16,7 +16,7 @@
 	- [Board-Marker](#board-Marker)
 	- [Lobby-Marker](#lobby-Marker)
 	- [Tile-Marker](#tile-Marker)
--[Items&Power-Ups(#items&Power-Ups)
+-[Items&Power-Ups](#items&Power-Ups)
 	- [Items](#items)
 		- [Terminal](#terminal)
 	- [Power-Ups](#power-Ups)
