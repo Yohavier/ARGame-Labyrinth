@@ -53,8 +53,7 @@ MonoBehaviour:
   inMove: 0
   tileCount: 0
   size: 0
-  randomRoations: 
+  randomRoations: 000000005a000000b40000000e010000
   grid: []
   trackedTile: {fileID: 0}
   lastTrackedTile: {fileID: 0}
-  fog: {fileID: 7662999583797218981, guid: 7982ad04656bf84448b6067fe9500228, type: 3}
