@@ -1,5 +1,40 @@
 # Penumbra
-AR Boardgame
+
+**Content**
+- [Spielregeln](#spielregeln)
+	- [Allgemeine-Regeln](#allgemeine-Regeln)
+	- [Alienregeln](#alienzusatzregeln)
+	- [Crewregeln](#crewregeln)
+- [Menu](#menu)
+	- [Join](#join)
+	- [Lobby](#lobby)
+	- [HUD](#hUD)
+- [AR-Marker](#aR-Marker)
+	- [Board-Marker](#board-Marker)
+	- [Lobby-Marker](#lobby-Marker)
+	- [Tile-Marker](#tile-Marker)
+
+
+## Spielregeln
+
+### Spielregeln
+### Alienregeln
+### Crewregeln
+
+
+## Menu
+
+### Join
+### Lobby
+### HUD
+
+
+## AR-Marker
+
+### Board-Marker
+### Lobby-Marker
+### Tile-Marker
+
 
 ## Multitracker for the board
 <p float="left">
@@ -14,3 +49,6 @@ AR Boardgame
 
 ## Tracker for the Lobby
 <img width="200" src="DVL/Assets/ImageLibrary/Lobby.jpeg">
+
+
+
