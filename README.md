@@ -53,14 +53,15 @@ Das Alien hat keine weiteren Möglichkeiten, außer das es automatisch Spieler t
 #### Alien-Klassen
 ##### Arachnide
 Hat eine sehr hohe Sichtweite.
-
+<img width="100" src="Images/Arachnide.PNG">
 ##### Scorpion
 Ist sehr schnell.
-<img width="100" src="Images/Scorpion.png">
+<img width="100" src="Images/Scorpion.PNG">
+
 ### Crewregeln
 Ein Crewmitglied kann jederzeit, während seinem Zug ein PowerUp verwenden oder Item einsammeln. Mehr dazu in [Items](#items) und [Power-Ups](#power-Ups).
 Zudem ist es nicht möglich für ein Crewmitglied einen Raum zu durchqueren, in dem bereits ein Spieler ist. 
-<img width="100" src="Images/Arachnide.png">
+
 
 #### Crew-Klassen
 ##### Standart
