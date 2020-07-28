@@ -55,7 +55,8 @@ Das Alien hat keine weiteren Möglichkeiten, außer das es automatisch Spieler t
 Hat eine sehr hohe Sichtweite.
 
 <img width="100" src="Images/Arachnide.PNG">
-##### Scorpion
+
+##### Skorpion
 Ist sehr schnell.
 
 <img width="100" src="Images/Scorpion.PNG">
