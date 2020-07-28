@@ -51,17 +51,26 @@ auch nicht für seinen nächsten Zug aufbewahren.
 Das Alien hat keine weiteren Möglichkeiten, außer das es automatisch Spieler töten, wenn diese sich im gleichen Raum befinden.
 
 #### Alien-Klassen
+##### Arachnide
+Hat eine sehr hohe Sichtweite.
+##### Scorpion
+Ist sehr schnell.
 
 ### Crewregeln
-Ein Crewmitglied kann jederzeit, während seinem Zug ein PowerUp verwenden oder Item einsammeln. Mehr dazu in [Items&PowerUps(#items&PowerUps).
+Ein Crewmitglied kann jederzeit, während seinem Zug ein PowerUp verwenden oder Item einsammeln. Mehr dazu in [Items(#items) und [Power-Ups]{#power-Ups}.
 Zudem ist es nicht möglich für ein Crewmitglied einen Raum zu durchqueren, in dem bereits ein Spieler ist. 
 
 #### Crew-Klassen
 ##### Standart
+Hat keinen Buff, allerdings auch keinen Debuff.
 ##### Juggernaut
+Stirbt nicht so schnell und kann länger geheilt werden.
 ##### Scout
+Hat eine große Sichtweite, ist aber nicht schnell.
 ##### Runner
+Ist schnell, hat dafür aber eine geringe Sichtweite
 ##### Mechaniker
+Kann den Terminal schneller Reparieren, ist allerdings etwas langsamer.
 
 ## Menu
 
