@@ -16,15 +16,14 @@
 	- [Board-Marker](#board-Marker)
 	- [Lobby-Marker](#lobby-Marker)
 	- [Tile-Marker](#tile-Marker)
--[Items&Power-Ups](#items&Power-Ups)
-	- [Items](#items)
-		- [Terminal](#terminal)
-	- [Power-Ups](#power-Ups)
-		- [Funkgerät](#funkgerät)
-		- [Medipack](#medipack)
-		- [Türhack](#türhack)
-		- [Scanner](#scanner)
-		- [Shutdown](#shutdown)
+-[Items](#items)
+	- [Terminal](#terminal)
+-[Power-Ups](#power-Ups)
+	- [Funkgerät](#funkgerät)
+	- [Medipack](#medipack)
+	- [Türhack](#türhack)
+	- [Scanner](#scanner)
+	- [Shutdown](#shutdown)
 
 ## Ablauf
 Es gibt Insgesamt 4 Spieler. 1 Alien und eine Crew von Insgesamt 3 Mitgliedern.
@@ -79,7 +78,7 @@ Jeder von den vieren setzt das Spielbrett an die korrekte position.
 <p float="left">
   <img width="100" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">
   <img width="100" src="DVL/Assets/ImageLibrary/BottomRight.jpeg">
-  <img width="100" src="DVL/Assets/ImageLibrary/TopLeft.jpeg">
+  <img width="100" src="DVL/Assets/ImageLibrary/Top.png">
   <img width="100" src="DVL/Assets/ImageLibrary/TopRight.jpeg">
 </p>
 
@@ -93,16 +92,18 @@ spawnen kann. Dieser wird nach der Characterselection nicht mehr benötigt.
 Der Marker trackt das Raum-Tile, welches rausgeschoben wurde und die Spieler einmal in ihrem Zug
 wieder ins Brett schieben können.
 
-<img width="100" src="DVL/Assets/ImageLibrary/Tile.jpeg">
+<img width="100" src="DVL/Assets/ImageLibrary/TopLeft.jpeg">
 
 
-## Items&Power-Ups
+## Items
 Gleichzeitig kann ein Crewmitglied 2 PowerUps und 1 Item im Inventar haben. 
-### Items
+
 Um Items aufzusammeln, muss man sich im gleichen Feld befinden und auf dieses klicken. Dann geht eine kleine UI auf, auf welcher weiter Anweisungen stehen.
 #### Terminal
 Der Terminal ist ein spezielles Item und erfordert mehrere Runden um fertig konfiguriert zu werden.
-### Power-Ups
+
+
+## Power-Ups
 Power Ups kann man mithilfe des HUD einsammeln. Wenn man die Möglichkeit hat eins aufzusammeln/auszutauschen, wird dies im HUD sichtbar.
 #### Funkgerät
 Zeigt die Sicht eines zufälligen anderen verbündeten Spielers an und hält für 8 Runden.
@@ -114,6 +115,5 @@ Gibt die Möglichkeit einen anderen Spieler der im State: Dying ist zu heilen.
 Erweitert die Sichtweite des Spielers um +1 für 8 Runden.
 #### Shutdown
 Schließt alle Türen und mischt das Spielfeld einmal neu.
-
 
 
