@@ -110,7 +110,12 @@ public class CrewMember : Player
 		slot.image.sprite = powerUp.powerUpImage;
 		slot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
 		slot.interactable = true;
-		Destroy(powerUp.GetComponent<MeshRenderer>());
+
+		MeshRenderer[] meshes = powerUp.GetComponentsInChildren<MeshRenderer>();
+		foreach(MeshRenderer mesh in meshes)
+        {
+			Destroy(mesh);
+        }
 		HandlePowerUpCollection(positionTile);
 		NetworkClient.instance.SendPowerUpCollected(positionTile);
 	}

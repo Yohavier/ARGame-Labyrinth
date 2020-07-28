@@ -39,7 +39,13 @@ public class SpawnItems : MonoBehaviour
             GameObject newItem = Instantiate(items[i]);
             newItem.transform.SetParent(itemsPossiblePlaces[rand].transform);
             newItem.transform.localPosition = Vector3.zero;
-            newItem.GetComponent<MeshRenderer>().enabled = false;
+
+            MeshRenderer[] meshes = newItem.GetComponentsInChildren<MeshRenderer>();
+            foreach(MeshRenderer mesh in meshes)
+            {
+                mesh.enabled = false;
+            }
+
             Generator g = newItem.GetComponent<Generator>();
             Item it = newItem.GetComponent<Item>();
             if (g != null)

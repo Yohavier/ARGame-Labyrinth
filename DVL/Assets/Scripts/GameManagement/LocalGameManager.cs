@@ -14,7 +14,7 @@ public class LocalGameManager : MonoBehaviour
 {
 	//Determines you playerChar
 	public PlayerIndex localPlayerIndex;
-
+	public bool isDebugingSolo = false;
 
 	//Player index of current turn
 	public PlayerIndex currentTurnPlayer;
@@ -35,7 +35,10 @@ public class LocalGameManager : MonoBehaviour
         }
         set
         {
-			moveTileToken = value;
+			if (isDebugingSolo)
+				moveTileToken = true;
+			else
+				moveTileToken = value;
         }
     }
 
@@ -49,7 +52,10 @@ public class LocalGameManager : MonoBehaviour
 		{ 
 			if(currentTurnPlayer == localPlayerIndex)
             {
-				stepsLeft = value;
+				if (isDebugingSolo)
+					stepsLeft = 10;
+				else
+					stepsLeft = value;
 				GUIManager.instance.stepsLeftLabel.text = stepsLeft.ToString();
 				DiceHandler.instance.OnChangeDiceText(stepsLeft, false);
 			}
