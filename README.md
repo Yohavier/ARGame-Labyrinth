@@ -7,7 +7,9 @@
 - [Spielregeln](#spielregeln)
 	- [Allgemeine-Regeln](#allgemeine-Regeln)
 	- [Alienregeln](#alienzusatzregeln)
+		- [Alien-Klassen](#alien-Klassen)
 	- [Crewregeln](#crewregeln)
+		- [Crew-Klassen](#crew-Klassen)
 - [Menu](#menu)
 	- [Join](#join)
 	- [Lobby](#lobby)
@@ -16,9 +18,9 @@
 	- [Board-Marker](#board-Marker)
 	- [Lobby-Marker](#lobby-Marker)
 	- [Tile-Marker](#tile-Marker)
--[Items](#items)
+- [Items](#items)
 	- [Terminal](#terminal)
--[Power-Ups](#power-Ups)
+- [Power-Ups](#power-Ups)
 	- [Funkgerät](#funkgerät)
 	- [Medipack](#medipack)
 	- [Türhack](#türhack)
@@ -47,9 +49,19 @@ auch nicht für seinen nächsten Zug aufbewahren.
 		
 ### Alienregeln
 Das Alien hat keine weiteren Möglichkeiten, außer das es automatisch Spieler töten, wenn diese sich im gleichen Raum befinden.
+
+#### Alien-Klassen
+
 ### Crewregeln
 Ein Crewmitglied kann jederzeit, während seinem Zug ein PowerUp verwenden oder Item einsammeln. Mehr dazu in [Items&PowerUps(#items&PowerUps).
 Zudem ist es nicht möglich für ein Crewmitglied einen Raum zu durchqueren, in dem bereits ein Spieler ist. 
+
+#### Crew-Klassen
+##### Standart
+##### Juggernaut
+##### Scout
+##### Runner
+##### Mechaniker
 
 ## Menu
 
