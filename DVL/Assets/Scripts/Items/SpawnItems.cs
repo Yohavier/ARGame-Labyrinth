@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -68,10 +69,9 @@ public class SpawnItems : MonoBehaviour
                 HandlePlacesList(key);
             }
             dicKeys.Clear();
-        }
+        } 
     }
 
-    //TODO Array error on placements (sometimes)
     private void StartPlacingPowerUpsWithSeed()
     {
         for(int i = 0; i < powerUps.Count; i++)
@@ -80,7 +80,10 @@ public class SpawnItems : MonoBehaviour
             GameObject newPowerUp = Instantiate(powerUps[i]);
             newPowerUp.transform.SetParent(powerUpsPossiblePlaces[rand].transform);
             newPowerUp.transform.localPosition = Vector3.zero;
-            newPowerUp.GetComponent<MeshRenderer>().enabled = false;
+            List<MeshRenderer> powerUpMeshList = new List<MeshRenderer>();
+            powerUpMeshList = newPowerUp.GetComponentsInChildren<MeshRenderer>().ToList();
+            foreach (MeshRenderer mesh in powerUpMeshList)
+                mesh.enabled = false;
 
             powerUpsPossiblePlaces.RemoveAt(rand);
         }

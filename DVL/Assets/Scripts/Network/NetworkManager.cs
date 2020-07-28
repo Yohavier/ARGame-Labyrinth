@@ -22,7 +22,6 @@ class NetworkManager : MonoBehaviour
         serverIP = "192.168.194.169";
     }
 
-    //TODO: Nicer GUI
     private void OnGUI()
     {
         GUILayout.Label("Player ID: " + LocalGameManager.instance.localPlayerIndex);

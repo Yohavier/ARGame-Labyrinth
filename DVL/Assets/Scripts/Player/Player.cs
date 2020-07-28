@@ -101,12 +101,12 @@ public class Player : MonoBehaviour
 
 		if (!IsLocalPlayer())
 		{
-			MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
-			SkinnedMeshRenderer sr = GetComponentInChildren<SkinnedMeshRenderer>();
-			if (mr != null)
-				mr.enabled = false;
-			else if (sr != null)
-				sr.enabled = false;
+			SkinnedMeshRenderer[] sr = GetComponentsInChildren<SkinnedMeshRenderer>();
+			if (sr.Length > 0)
+            {
+				foreach (SkinnedMeshRenderer skinned in sr)
+					skinned.enabled = false;
+            }
 
 			Destroy(GetComponent<FogOfWar>());
 		}

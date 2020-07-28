@@ -205,7 +205,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 	#endregion
 
 
-	//TODO disable meshrenderer if in way
     private bool isTrackable(ARTrackedImage image)
     {
 		if(image.trackingState == TrackingState.Tracking)
