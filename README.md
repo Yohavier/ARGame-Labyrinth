@@ -75,6 +75,7 @@ Im HUD wird folgendes angezeigt:
 ### Board-Marker
 Diese Marker dienen dazu das Spielbrett zu tracken. Dafür ist allerdings nur einer nötig.
 Jeder von den vieren setzt das Spielbrett an die korrekte position.
+
 <p float="left">
   <img width="100" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">
   <img width="100" src="DVL/Assets/ImageLibrary/BottomRight.jpeg">
@@ -85,11 +86,13 @@ Jeder von den vieren setzt das Spielbrett an die korrekte position.
 ### Lobby-Marker
 Dieser Marker wird nur einmal zu beginn benötigt, damit jeder Spieler sich eine Lobby an seinen Platz
 spawnen kann. Dieser wird nach der Characterselection nicht mehr benötigt.
+
 <img width="100" src="DVL/Assets/ImageLibrary/Lobby.jpeg">
 
 ### Tile-Marker
 Der Marker trackt das Raum-Tile, welches rausgeschoben wurde und die Spieler einmal in ihrem Zug
 wieder ins Brett schieben können.
+
 <img width="100" src="DVL/Assets/ImageLibrary/Tile.jpeg">
 
 
