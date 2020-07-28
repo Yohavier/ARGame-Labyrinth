@@ -53,9 +53,11 @@ Das Alien hat keine weiteren Möglichkeiten, außer das es automatisch Spieler t
 #### Alien-Klassen
 ##### Arachnide
 Hat eine sehr hohe Sichtweite.
+
 <img width="100" src="Images/Arachnide.PNG">
 ##### Scorpion
 Ist sehr schnell.
+
 <img width="100" src="Images/Scorpion.PNG">
 
 ### Crewregeln
