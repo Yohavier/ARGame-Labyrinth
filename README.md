@@ -27,10 +27,14 @@
 		- [Shutdown](#shutdown)
 
 ## Ablauf
-
+Es gibt Insgesamt 4 Spieler. 1 Alien und eine Crew von Insgesamt 3 Mitgliedern.
 ### Sieg-Alien
+Damit das Alien gewinnt, muss es nur alle Crewmitglieder töten, bevor die Rettungskapseln
+von der Crew repariert wurden.
 ### Sieg-Crew
-
+Die Crew gewinnt, wenn sie es schaffen alle nötigen Items auf dem Schiff zu sammeln und diese
+zur Rettungskapsel zu bringen, sowie den Terminal zu aktivieren. Die Crew gewinnt auch, wenn nur
+einer überlebt. 
 
 ## Spielregeln
 
@@ -51,23 +55,42 @@ Zudem ist es nicht möglich für ein Crewmitglied einen Raum zu durchqueren, in 
 ## Menu
 
 ### Join
+Hier muss man die IP-Adresse des Host eingeben um sich zu verbinden. Der Host ist immer das Alien.
 ### Lobby
+Um die Characterauswahl durchführen zu können, muss man den [Lobby-Marker](#lobby-Marker) tracken und durch den "Select"-Button
+die Luke des Raumschiffs öffnen. Dann kann man durch swipen sich einen Character aussuchen.
+Wenn man fertig ist muss man auf "Ready" klicken. Wenn alle "Ready" sind, kann der Host das Spiel starten.
 ### HUD
+Im HUD wird folgendes angezeigt:
+- welcher Spieler dran ist
+- wie viele Schritte man noch tätigen kann
+- welches Item man im Inventar hat
+- welche Power-Ups und interaktionsmöglichkeiten man hat
+- der Button zum würfeln
+- wie der Gesundheitszustand des Spielers ist
+- ein Pfeil um seinen Zug zu beenden
 
 
 ## AR-Marker
-
 ### Board-Marker
+Diese Marker dienen dazu das Spielbrett zu tracken. Dafür ist allerdings nur einer nötig.
+Jeder von den vieren setzt das Spielbrett an die korrekte position.
 <p float="left">
-  <img width="200" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">
-  <img width="200" src="DVL/Assets/ImageLibrary/BottomRight.jpeg">
-  <img width="200" src="DVL/Assets/ImageLibrary/TopLeft.jpeg">
-  <img width="200" src="DVL/Assets/ImageLibrary/TopRight.jpeg">
+  <img width="100" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">
+  <img width="100" src="DVL/Assets/ImageLibrary/BottomRight.jpeg">
+  <img width="100" src="DVL/Assets/ImageLibrary/TopLeft.jpeg">
+  <img width="100" src="DVL/Assets/ImageLibrary/TopRight.jpeg">
 </p>
+
 ### Lobby-Marker
-<img width="200" src="DVL/Assets/ImageLibrary/Lobby.jpeg">
+Dieser Marker wird nur einmal zu beginn benötigt, damit jeder Spieler sich eine Lobby an seinen Platz
+spawnen kann. Dieser wird nach der Characterselection nicht mehr benötigt.
+<img width="100" src="DVL/Assets/ImageLibrary/Lobby.jpeg">
+
 ### Tile-Marker
-<img width="200" src="DVL/Assets/ImageLibrary/Tile.jpeg">
+Der Marker trackt das Raum-Tile, welches rausgeschoben wurde und die Spieler einmal in ihrem Zug
+wieder ins Brett schieben können.
+<img width="100" src="DVL/Assets/ImageLibrary/Tile.jpeg">
 
 
 ## Items&Power-Ups
