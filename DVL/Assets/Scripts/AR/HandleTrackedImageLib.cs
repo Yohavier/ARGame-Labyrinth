@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-
+using System.Collections;
 public class HandleTrackedImageLib : MonoBehaviour
 {
 	private ARTrackedImageManager manager;
@@ -20,7 +20,11 @@ public class HandleTrackedImageLib : MonoBehaviour
 	[HideInInspector] public bool trackLobby;
 
 	private List<string> BoardTrackers = new List<string>();
-
+	private bool lockBoard = false;
+	public void LockBoard()
+    {
+		lockBoard = !lockBoard;
+    }
 	private void Awake()
 	{
 		instance = this;
@@ -83,7 +87,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 	}
 
 	//Update function for the Image Tracker to get the right pos/rot
-
 	private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
 	{
 		foreach (var trackedImage in eventArgs.added)
@@ -96,8 +99,13 @@ public class HandleTrackedImageLib : MonoBehaviour
 		{
 			if (BoardTrackers.Contains(trackedImage.referenceImage.name))
 			{
-				if(trackedImage.trackingState == TrackingState.Tracking)
-					multiTrackList.Add(trackedImage);
+				if(lockBoard == false)
+                {
+					if (trackedImage.trackingState == TrackingState.Tracking)
+					{
+						multiTrackList.Add(trackedImage);
+					}
+				}
 			}
 			else
 			{
