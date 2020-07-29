@@ -8,8 +8,6 @@ public class FindNearestGridSlot : MonoBehaviour
 	private Tile targetTile;
 	public LayerMask mask;
 
-	public Vector3 prevPos;
-
     private void FixedUpdate()
 	{
         if (LocalGameManager.instance.activePlayer)
@@ -22,7 +20,6 @@ public class FindNearestGridSlot : MonoBehaviour
 				}
 			}
 		}
-		prevPos = this.transform.position;
 	}
 
 	//get the tile that will be pushed away by inserting a new Tile
@@ -81,10 +78,6 @@ public class FindNearestGridSlot : MonoBehaviour
 	//call and push room into grid
 	private void CallGridToPushRoom()
 	{
-		if (this.transform.position == prevPos)
-        {
-			return;
-        }
 		if (targetTile != null)
 		{
 			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))

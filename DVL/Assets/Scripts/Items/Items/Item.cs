@@ -8,6 +8,7 @@ public class Item: MonoBehaviour
 {
     public string itemName;
     public bool isStored;
+    public Vector3 placementVector;
 
     public Canvas interactionCanvas;
     public Camera arCamera;

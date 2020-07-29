@@ -9,6 +9,7 @@ public abstract class PowerUpBase : MonoBehaviour
     public Sprite powerUpImage;
     public bool pickedUp;
     public bool isInUse;
+    public Vector3 placementVector;
 
     public abstract void OnUse(Player player, PowerUpSlot slot);
 

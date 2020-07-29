@@ -38,7 +38,7 @@ public class SpawnItems : MonoBehaviour
             int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * itemsPossiblePlaces.Count - 1));
             GameObject newItem = Instantiate(items[i]);
             newItem.transform.SetParent(itemsPossiblePlaces[rand].transform);
-            newItem.transform.localPosition = Vector3.zero;
+            newItem.transform.localPosition = newItem.GetComponent<Item>().placementVector;
 
             MeshRenderer[] meshes = newItem.GetComponentsInChildren<MeshRenderer>();
             foreach(MeshRenderer mesh in meshes)
@@ -66,8 +66,7 @@ public class SpawnItems : MonoBehaviour
                 row.ToString() + (col - 1).ToString(),
                 row.ToString() + (col + 1).ToString(),
                 (row - 1).ToString() + col.ToString(),
-                (row + 1).ToString() + col.ToString(),
-                (row + 1).ToString() + (col + 1).ToString()
+                (row + 1).ToString() + col.ToString()
                 );
 
             foreach (string key in dicKeys)
@@ -85,7 +84,7 @@ public class SpawnItems : MonoBehaviour
             int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * powerUpsPossiblePlaces.Count - 1));
             GameObject newPowerUp = Instantiate(powerUps[i]);
             newPowerUp.transform.SetParent(powerUpsPossiblePlaces[rand].transform);
-            newPowerUp.transform.localPosition = Vector3.zero;
+            newPowerUp.transform.localPosition = newPowerUp.GetComponent<PowerUpBase>().placementVector;
             List<MeshRenderer> powerUpMeshList = new List<MeshRenderer>();
             powerUpMeshList = newPowerUp.GetComponentsInChildren<MeshRenderer>().ToList();
             foreach (MeshRenderer mesh in powerUpMeshList)

@@ -38,6 +38,10 @@ public class Tile : MonoBehaviour
 	[HideInInspector] public TileDirectionModule ingameRightModule;
 	[HideInInspector] public TileDirectionModule ingameLeftModule;
 
+	//Explosion Settings
+	public ParticleSystem explosion;
+	public int explosionNumber = 4;
+
 	public bool CheckModulation(TileDirectionModule modulation)
     {
         switch (modulation)
@@ -310,8 +314,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-	public ParticleSystem explosion;
-	public int explosionNumber = 4;
+
 	private List<Vector3> FindRightCorners()
     {
 		List<Vector3> corners = new List<Vector3>();
@@ -356,6 +359,9 @@ public class Tile : MonoBehaviour
 			AkSoundEngine.PostEvent("tile_expell", gameObject);
 			yield return new WaitForSeconds(0.2f);
 		}
+		LocalGameManager.instance.canMove = true;
+		BoardGrid.instance.RemoveTileFromGrid(this);
+		BoardGrid.instance.inMove = false;
 		StartCoroutine(SimulateExplosionTilePhysics(pos[2]));
 	}
 	private IEnumerator SimulateExplosionTilePhysics(Vector3 impulseNormal)
@@ -377,14 +383,9 @@ public class Tile : MonoBehaviour
 			transform.Rotate(randomRotation * Time.deltaTime, Space.Self);
 			yield return null;
 		}
-		
-		BoardGrid.instance.inMove = false;
-		BoardGrid.instance.RemoveTileFromGrid(this);
-		HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);
-		LocalGameManager.instance.canMove = true;
+		HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);	
 		PrefabColor();
 	}
-
 	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
 	{
 		float alpha = tilePart.material.color.a;
@@ -395,4 +396,41 @@ public class Tile : MonoBehaviour
 			yield return null;
 		}
 	}
+
+	public void TileHandleShutDown(Vector3 newPosition, Vector3 newRot)
+    {
+		StartCoroutine(FlyToNewPos(newPosition, newRot));
+    }
+	private IEnumerator FlyToNewPos(Vector3 newPosition, Vector3 newRot)
+    {
+		float customTimer = 0;
+		Vector3 dir;
+
+		dir = (new Vector3(newPosition.x + UnityEngine.Random.Range(-3, 3), newPosition.y + 100, newPosition.z + UnityEngine.Random.Range(-3, 3)) - transform.position).normalized;
+		yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 2f));
+
+        while (customTimer < 2)
+        {
+			customTimer += Time.deltaTime;
+			transform.position += dir * Time.deltaTime ;
+			yield return null;
+        }
+
+		customTimer = 0;
+		dir = (newPosition - transform.position).normalized;
+
+		while(customTimer < 2)
+        {
+			customTimer += Time.deltaTime;
+			transform.position += dir * Time.deltaTime;
+			if (transform.localEulerAngles != newRot)
+				transform.localEulerAngles += newRot * Time.deltaTime;
+			yield return null;
+        }
+
+		transform.position = newPosition;
+		transform.localEulerAngles = newRot;
+		UpdateTileMoveOptions();
+		yield return null;
+    }
 }

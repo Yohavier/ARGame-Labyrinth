@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PowerUpSlot : MonoBehaviour
 {
     public GameObject storedPowerUp;
+    public Button powerUpIcon;
 
     public void UsePowerUp()
     {
@@ -19,8 +20,8 @@ public class PowerUpSlot : MonoBehaviour
         {
             storedPowerUp.GetComponent<PowerUpBase>().ReverseOnDrop(LocalGameManager.instance.activePlayer.GetComponent<Player>());
             Destroy(storedPowerUp.gameObject);
-            GetComponent<Button>().image.sprite = null;
-            GetComponent<Button>().interactable = false;
+            powerUpIcon.image.sprite = null;
+            powerUpIcon.interactable = false;
             storedPowerUp = null;
         }
     }

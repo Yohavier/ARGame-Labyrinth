@@ -43,8 +43,8 @@ public class CrewMember : Player
 	}
 	private void TogglePowerUpUseButton(Button button)
     {
-		if (button.GetComponent<PowerUpSlot>().storedPowerUp != null)
-			if(!button.GetComponent<PowerUpSlot>().storedPowerUp.GetComponent<PowerUpBase>().isInUse)
+		if (button.transform.parent.GetComponent<PowerUpSlot>().storedPowerUp != null)
+			if(!button.transform.parent.GetComponent<PowerUpSlot>().storedPowerUp.GetComponent<PowerUpBase>().isInUse)
 				button.interactable = true;
     }
 	private void DisablePowerUpSlots()
@@ -65,7 +65,7 @@ public class CrewMember : Player
 		InformationPanel ui = InformationPanel.instance;
 		if (powerUp != null)
         {
-			if (ui.powerUpSlot1.GetComponent<PowerUpSlot>().storedPowerUp != null)
+			if (ui.powerUpSlot1.transform.parent.GetComponent<PowerUpSlot>().storedPowerUp != null)
             {
 				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.slotIcon1);
 				AddPickUpListener(ui.slotIcon1, ui.powerUpSlot1, powerUp);
@@ -76,7 +76,7 @@ public class CrewMember : Player
 				AddPickUpListener(ui.slotIcon1, ui.powerUpSlot1, powerUp);
 			}			
 
-			if (ui.powerUpSlot2.GetComponent<PowerUpSlot>().storedPowerUp != null)
+			if (ui.powerUpSlot2.transform.parent.GetComponent<PowerUpSlot>().storedPowerUp != null)
             {
 				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.slotIcon2);
 				AddPickUpListener(ui.slotIcon2, ui.powerUpSlot2, powerUp);
@@ -107,9 +107,9 @@ public class CrewMember : Player
 	{
 		AkSoundEngine.PostEvent("powerUp_pickUp", this.gameObject);
 		powerUp.pickedUp = true;
-		slot.image.sprite = powerUp.powerUpImage;
-		slot.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
-		slot.interactable = true;
+		slot.transform.parent.GetComponent<PowerUpSlot>().powerUpIcon.image.sprite = powerUp.powerUpImage;
+		slot.transform.parent.GetComponent<PowerUpSlot>().storedPowerUp = powerUp.powerUpPrefab;
+		slot.transform.parent.GetComponent<PowerUpSlot>().powerUpIcon.interactable = true;
 
 		MeshRenderer[] meshes = powerUp.GetComponentsInChildren<MeshRenderer>();
 		foreach(MeshRenderer mesh in meshes)
@@ -121,7 +121,7 @@ public class CrewMember : Player
 	}
 	private void ExchangePowerUp(Button slot, PowerUpBase powerUp) 
 	{
-		slot.GetComponent<PowerUpSlot>().DropEverythingInSlot();
+		slot.transform.parent.GetComponent<PowerUpSlot>().DropEverythingInSlot();
 		StorePowerUp(slot, powerUp);
 	}
 	#endregion

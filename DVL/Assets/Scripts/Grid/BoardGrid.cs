@@ -334,8 +334,7 @@ public class BoardGrid : MonoBehaviour
 
 	public void UpdateShutDownGrid(int index, int row, int column)
     {
-		grid[index].transform.position = new Vector3(row * gridSpacing, 0f, column * gridSpacing);
-		grid[index].transform.localEulerAngles = new Vector3(0f, SetRandomRotationFromSeed(), 0f);
+		grid[index].GetComponent<Tile>().TileHandleShutDown(new Vector3(row * gridSpacing, 0f, column * gridSpacing), new Vector3(0f, SetRandomRotationFromSeed(), 0f));
 		grid[index].SetTileData(row, column, false);
 		coordDic[row.ToString() + column.ToString()] = grid[index];
 		grid[index].ToggleDoors(false);
