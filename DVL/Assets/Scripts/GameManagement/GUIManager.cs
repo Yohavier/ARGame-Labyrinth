@@ -111,8 +111,7 @@ namespace Assets.Scripts.GameManagement
 
                 needsPlayerUpdate = false;
                 if (startMatchButton != null)
-                    startMatchButton.interactable = true;
-                //CheckIfEveryoneIsReady();
+                    CheckIfEveryoneIsReady();
             }
         }
         private void CheckIfEveryoneIsReady()

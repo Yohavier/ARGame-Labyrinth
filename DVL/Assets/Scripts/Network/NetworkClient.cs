@@ -321,12 +321,8 @@ public class NetworkClient
 
         PlayerIndex nextID = connectedIndices.Find(x => x == LocalGameManager.instance.currentTurnPlayer + 1);
         if (nextID <= PlayerIndex.Player1)
-        {
-            Debug.Log("blaa");
             nextID = connectedIndices[0];
-        }
 
-        //GUIManager.instance.nextTurnButton.interactable = currentTurnPlayer == LocalGameManager.instance.localPlayerIndex;
         LocalGameManager.instance.currentTurnPlayer = nextID;
 
         try
