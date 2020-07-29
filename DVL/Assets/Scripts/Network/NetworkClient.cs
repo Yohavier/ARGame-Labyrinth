@@ -301,9 +301,45 @@ public class NetworkClient
         Send(msg);
     }
 
-    public void SendTurnChange()
+    /*public void SendTurnChange()
     {
         Msg msg = new Msg(MsgOpcode.opTurnChange, 0);
+        Send(msg);
+    }*/
+
+    public void SendTurnChange()
+    {
+        Msg msg = new Msg(MsgOpcode.opTurnChange, 4);
+        List<PlayerIndex> connectedIndices = new List<PlayerIndex>();
+        for (int i = 0; i < 4; i++)
+        {
+            if (networkPlayers[i].playerID != PlayerIndex.Invalid && networkPlayers[i].connected)
+            {
+                connectedIndices.Add(networkPlayers[i].playerID);
+            }
+        }
+
+        PlayerIndex nextID = connectedIndices.Find(x => x == LocalGameManager.instance.currentTurnPlayer + 1);
+        if (nextID <= PlayerIndex.Player1)
+        {
+            Debug.Log("blaa");
+            nextID = connectedIndices[0];
+        }
+
+        //GUIManager.instance.nextTurnButton.interactable = currentTurnPlayer == LocalGameManager.instance.localPlayerIndex;
+        LocalGameManager.instance.currentTurnPlayer = nextID;
+
+        try
+        {
+            InformationPanel.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
+        }
+
+        catch (Exception ex)
+        {
+
+        }
+
+        msg.Write((int)nextID);
         Send(msg);
     }
 

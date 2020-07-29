@@ -36,7 +36,7 @@ namespace Assets.Scripts.GameManagement
         public Text[] playerLabels = new Text[4];
         public Text stepsLeftLabel;
 
-        string serverIP = "192.168.0.206";
+        string serverIP = "192.168.194.169";
         public bool isServer = false;
         public bool isDebug = false;
 
@@ -111,7 +111,8 @@ namespace Assets.Scripts.GameManagement
 
                 needsPlayerUpdate = false;
                 if (startMatchButton != null)
-                    CheckIfEveryoneIsReady();
+                    startMatchButton.interactable = true;
+                //CheckIfEveryoneIsReady();
             }
         }
         private void CheckIfEveryoneIsReady()

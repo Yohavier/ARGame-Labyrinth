@@ -136,9 +136,6 @@ public class NetworkServer
 
         switch (msg.opcode)
         {
-            case MsgOpcode.opTurnChange:
-                HandleChangeTurn();
-                break;
             case MsgOpcode.opReadyChange:
                 HandleReadyChange(msg, clientSocket);
                 break;
