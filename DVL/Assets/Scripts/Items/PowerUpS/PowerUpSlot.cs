@@ -5,7 +5,26 @@ using UnityEngine.UI;
 
 public class PowerUpSlot : MonoBehaviour
 {
-    public GameObject storedPowerUp;
+    public GameObject _storedPowerUp;
+    public GameObject storedPowerUp
+    {
+        get
+        {
+            return _storedPowerUp;
+        }
+        set
+        {
+            _storedPowerUp = value;
+            if(_storedPowerUp == null) 
+            {
+                powerUpIcon.image.color = new Color(1, 1, 1, 0);
+            }
+            else
+            {
+                powerUpIcon.image.color = new Color(1, 1, 1, 1);
+            }
+        }
+    }
     public Button powerUpIcon;
     public Button powerUpHandleIcon;
 

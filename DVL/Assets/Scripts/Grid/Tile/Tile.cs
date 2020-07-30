@@ -238,7 +238,7 @@ public class Tile : MonoBehaviour
 			foreach(MeshRenderer mesh in meshes)
 			{
 				if(mesh.CompareTag("Tile"))
-					mesh.material.color = Color.black;
+					mesh.material.color = new Color(0.3f, 0.3f, 0.3f); 
 			}
 		}
 		else
@@ -250,12 +250,11 @@ public class Tile : MonoBehaviour
 			}
 		}
 	}
-
 	public void PrefabColor(MeshRenderer mesh)
-	{
+	{ 
 		if (isInFOW && !GUIManager.instance.isDebug)
 		{
-			mesh.material.color = Color.black;
+			mesh.material.color = new Color(0.3f, 0.3f, 0.3f);
 		}
 		else
 		{
@@ -396,7 +395,6 @@ public class Tile : MonoBehaviour
 			yield return null;
 		}
 	}
-
 	public void TileHandleShutDown(Vector3 newPosition, Vector3 newRot)
     {
 		StartCoroutine(FlyToNewPos(newPosition, newRot));

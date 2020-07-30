@@ -21,6 +21,19 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 	private List<string> BoardTrackers = new List<string>();
 	private bool lockBoard = false;
+	private bool activeLooseTile;
+	private bool _activeLooseTile
+    {
+        get { return activeLooseTile; }
+        set 
+		{ 
+			activeLooseTile = value;
+            if (!activeLooseTile)
+            {
+				tilePrefabParent.SetActive(false);
+			}
+		}
+    }
 	public void LockBoard()
     {
 		lockBoard = !lockBoard;
@@ -134,8 +147,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 				mesh.material.color = Color.white;
 			}
 		}
-
-		tilePrefabParent.SetActive(false);
+		_activeLooseTile = false;
 
 		droppedOutPrefab.transform.SetParent(tilePrefabParent.transform);
 		droppedOutPrefab.transform.localPosition = Vector3.zero;
@@ -150,7 +162,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 	//Reactivates the Prefab after time 
 	private void ToggleBackOn()
 	{
-		tilePrefabParent.SetActive(true);
+		_activeLooseTile = true;
+		//tilePrefabParent.SetActive(true);
 	}
 	private void HandleMultiTracker(ARTrackedImage trackedImage)
     {
@@ -165,9 +178,12 @@ public class HandleTrackedImageLib : MonoBehaviour
     {
 		if(trackedImage.referenceImage.name == "Tile")
         {
-			tilePrefabParent.SetActive(true);
-			tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
-			tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
+            if (activeLooseTile)
+            {
+				tilePrefabParent.SetActive(true);
+				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
+				tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
+			}
 		}
 		else if(trackedImage.referenceImage.name == "Lobby" && trackLobby)
         {
