@@ -406,29 +406,29 @@ public class Tile : MonoBehaviour
 		float customTimer = 0;
 		Vector3 dir;
 
-		dir = (new Vector3(newPosition.x + UnityEngine.Random.Range(-3, 3), newPosition.y + 100, newPosition.z + UnityEngine.Random.Range(-3, 3)) - transform.position).normalized;
+		dir = (new Vector3(newPosition.x + UnityEngine.Random.Range(-3, 3), newPosition.y + 100, newPosition.z + UnityEngine.Random.Range(-3, 3)) - transform.localPosition).normalized;
 		yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 2f));
 
         while (customTimer < 2)
         {
 			customTimer += Time.deltaTime;
-			transform.position += dir * Time.deltaTime ;
+			transform.localPosition += dir * Time.deltaTime ;
 			yield return null;
         }
 
 		customTimer = 0;
-		dir = (newPosition - transform.position).normalized;
+		dir = (newPosition - transform.localPosition).normalized;
 
 		while(customTimer < 2)
         {
 			customTimer += Time.deltaTime;
-			transform.position += dir * Time.deltaTime;
+			transform.localPosition += dir * Time.deltaTime;
 			if (transform.localEulerAngles != newRot)
 				transform.localEulerAngles += newRot * Time.deltaTime;
 			yield return null;
         }
 
-		transform.position = newPosition;
+		transform.localPosition = newPosition;
 		transform.localEulerAngles = newRot;
 		UpdateTileMoveOptions();
 		yield return null;

@@ -34,6 +34,7 @@ public class CrewMember : Player
 		}
     }
 
+	//TODO Rework PowerUp Handling
 	#region HandlePowerUps
 	private void HandlePowerUpCollection(Tile tile)
     {
@@ -49,8 +50,8 @@ public class CrewMember : Player
     }
 	private void DisablePowerUpSlots()
     {
-		InformationPanel.instance.powerUpSlot1.interactable = false;
-		InformationPanel.instance.powerUpSlot2.interactable = false;
+		InformationPanel.instance.powerUpSlot1.transform.parent.GetComponent<Button>().interactable = false;
+		InformationPanel.instance.powerUpSlot2.transform.parent.GetComponent<Button>().interactable = false;
 	}
 	private PowerUpBase IsPowerUpPresent(Tile tile)
     {
