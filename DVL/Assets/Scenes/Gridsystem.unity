@@ -1451,7 +1451,7 @@ GameObject:
   - component: {fileID: 97702880}
   - component: {fileID: 97702879}
   m_Layer: 5
-  m_Name: SlotIconButton1
+  m_Name: SlotHandleIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1761,7 +1761,6 @@ GameObject:
   - component: {fileID: 143626206}
   - component: {fileID: 143626210}
   - component: {fileID: 143626209}
-  - component: {fileID: 143626208}
   - component: {fileID: 143626207}
   m_Layer: 5
   m_Name: PowerUpSlot2
@@ -1805,60 +1804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storedPowerUp: {fileID: 0}
   powerUpIcon: {fileID: 454761723}
---- !u!114 &143626208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143626205}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 0, g: 0.8000001, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.32872015, g: 0.73744196, b: 0.8396226, a: 1}
-    m_PressedColor: {r: 0, g: 0.5647059, b: 0.7058824, a: 1}
-    m_SelectedColor: {r: 0, g: 0.8000001, b: 1, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 143626209}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 143626207}
-        m_MethodName: UsePowerUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  powerUpHandleIcon: {fileID: 1442710725}
 --- !u!114 &143626209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2097,7 +2043,7 @@ GameObject:
   - component: {fileID: 200758983}
   - component: {fileID: 200758982}
   m_Layer: 5
-  m_Name: PowerUseIcon
+  m_Name: SlotUseIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2194,7 +2140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 068c750b406a44d49a58892f9c92c49f, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3060,7 +3006,7 @@ GameObject:
   - component: {fileID: 454761724}
   - component: {fileID: 454761723}
   m_Layer: 5
-  m_Name: PowerUseIcon
+  m_Name: SlotUseIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3157,7 +3103,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 068c750b406a44d49a58892f9c92c49f, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4009,8 +3955,8 @@ MonoBehaviour:
   player: {fileID: 328734751}
   items: {fileID: 1132612718}
   state: {fileID: 1962921813}
-  powerUpSlot1: {fileID: 97702879}
-  powerUpSlot2: {fileID: 1442710725}
+  powerUpSlot1: {fileID: 1911800659}
+  powerUpSlot2: {fileID: 143626207}
   playerRoles:
   - {fileID: 11400000, guid: 16a66955f40421e41b219f3241a15589, type: 2}
   - {fileID: 11400000, guid: cdc297f9ba19fd24f936f8258d9bc59a, type: 2}
@@ -4032,8 +3978,6 @@ MonoBehaviour:
   NoneT: {fileID: 21300000, guid: 068c750b406a44d49a58892f9c92c49f, type: 3}
   PickUpT: {fileID: 21300000, guid: 2623b38f7be7ecf4c8265bf33a1d7022, type: 3}
   ExchangeT: {fileID: 21300000, guid: 44104aa97dfedf140afce1535efa6c94, type: 3}
-  slotIcon1: {fileID: 97702879}
-  slotIcon2: {fileID: 1442710725}
 --- !u!222 &811204672
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6299,7 +6243,7 @@ GameObject:
   - component: {fileID: 1442710726}
   - component: {fileID: 1442710725}
   m_Layer: 5
-  m_Name: SlotIconButton2
+  m_Name: SlotHandleIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7790,7 +7734,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 360, y: 760}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -8342,7 +8286,6 @@ GameObject:
   - component: {fileID: 1911800658}
   - component: {fileID: 1911800662}
   - component: {fileID: 1911800661}
-  - component: {fileID: 1911800660}
   - component: {fileID: 1911800659}
   m_Layer: 5
   m_Name: PowerUpSlot1
@@ -8386,60 +8329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storedPowerUp: {fileID: 0}
   powerUpIcon: {fileID: 200758982}
---- !u!114 &1911800660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911800657}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 0, g: 0.8000001, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.32872015, g: 0.73744196, b: 0.8396226, a: 1}
-    m_PressedColor: {r: 0, g: 0.5647059, b: 0.7058824, a: 1}
-    m_SelectedColor: {r: 0, g: 0.8000001, b: 1, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1911800661}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1911800659}
-        m_MethodName: UsePowerUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  powerUpHandleIcon: {fileID: 97702879}
 --- !u!114 &1911800661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8622,7 +8512,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 360, y: 760}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -9222,7 +9112,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 360, y: 760}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

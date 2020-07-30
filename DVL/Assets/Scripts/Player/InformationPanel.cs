@@ -22,8 +22,8 @@ public class InformationPanel : MonoBehaviour
     public Text state;
 
     [Header("PowerUpSlots")]
-    public Button powerUpSlot1;
-    public Button powerUpSlot2;
+    public PowerUpSlot powerUpSlot1;
+    public PowerUpSlot powerUpSlot2;
 
     [Header("Player Role")]
     public List<SO_PlayerClass> playerRoles;
@@ -123,7 +123,6 @@ public class InformationPanel : MonoBehaviour
 
     #region PowerUpSlots
     public Sprite NoneT, PickUpT, ExchangeT;
-    public Button slotIcon1, slotIcon2;
     public void ChangeSlotIcon(PowerUpSlotIcon icon, Button slotIcon)
     {
         switch (icon)

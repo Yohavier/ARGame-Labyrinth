@@ -7,6 +7,7 @@ public class PowerUpSlot : MonoBehaviour
 {
     public GameObject storedPowerUp;
     public Button powerUpIcon;
+    public Button powerUpHandleIcon;
 
     public void UsePowerUp()
     {
