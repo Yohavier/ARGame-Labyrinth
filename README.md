@@ -100,7 +100,8 @@ Im HUD wird folgendes angezeigt:
 ## AR-Marker
 ### Board-Marker
 Diese Marker dienen dazu das Spielbrett zu tracken. Dafür ist allerdings nur einer nötig.
-Jeder von den vieren setzt das Spielbrett an die korrekte position.
+Jeder von den vieren setzt das Spielbrett an die korrekte position. Für eine stabilere Position, kann man den Boardmarker einmal tracken und anschließend
+die ToggleBox "Lock Board" aktivieren. Damit wird das Board an der Position gefixt.
 
 <p float="left">
   <img width="100" src="DVL/Assets/ImageLibrary/BottomLeft.jpeg">

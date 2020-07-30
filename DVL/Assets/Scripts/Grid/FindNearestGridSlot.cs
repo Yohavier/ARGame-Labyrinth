@@ -3,7 +3,7 @@ using UnityEngine.SocialPlatforms;
 
 public class FindNearestGridSlot : MonoBehaviour
 {
-	public float distance = 0.1f;
+	public float distance = 0.15f;
 	private GameObject target;
 	private Tile targetTile;
 	public LayerMask mask;
