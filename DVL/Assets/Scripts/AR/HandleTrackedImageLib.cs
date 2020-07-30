@@ -46,7 +46,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	{
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
 		manager = GetComponent<ARTrackedImageManager>();
 		manager.trackedImagesChanged += OnTrackedImagesChanged;
 		SetUpBoardTracker();
@@ -178,7 +178,7 @@ public class HandleTrackedImageLib : MonoBehaviour
     {
 		if(trackedImage.referenceImage.name == "Tile")
         {
-            if (activeLooseTile)
+            if (_activeLooseTile)
             {
 				tilePrefabParent.SetActive(true);
 				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
