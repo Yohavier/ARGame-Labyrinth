@@ -1957,6 +1957,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   trackLobby: 0
+  planePrefab: {fileID: 5319725210909662312, guid: 75fc77db3499a7a4eaac11580c08e8b3,
+    type: 3}
 --- !u!114 &199011448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2025,6 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40886ca63ac8227479c2957bf6ad4148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerType: 0
   arCamera: {fileID: 894522550}
   mask:
     serializedVersion: 2
@@ -8030,7 +8033,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 360, y: 760}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -8808,7 +8811,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 360, y: 760}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -9408,7 +9411,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 360, y: 760}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

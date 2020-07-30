@@ -2,8 +2,11 @@ using Assets.Scripts.GameManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ControllerType { Mobile_Haptik, Mobile_Virtual, PC }
 public class SelectARObjectWithFinger : MonoBehaviour
 {
+	public ControllerType controllerType;
+
 	public static SelectARObjectWithFinger instance;
 	private Vector2 touchPosition;
 	public Camera arCamera;
@@ -12,9 +15,14 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	public LayerMask mask;
 	private Tile currentSelectedTarget;
 	public List<Tile> path;
+
+
+	private bool mobileHaptikTileControl = false;
+
 	private void Awake()
 	{
 		instance = this;
+		ChooseController();
 	}
     private void OnEnable()
     {
@@ -29,7 +37,20 @@ public class SelectARObjectWithFinger : MonoBehaviour
 		Eventbroker.instance.onNotifyNextTurn -= NewTurn;
     }
 
-    private void Update()
+
+	private void ChooseController()
+	{
+#if UNITY_EDITOR || UNITY_STANDALONE
+		controllerType = ControllerType.PC;
+#elif UNITY_IOS || UNITY_ANDROID
+		if (mobileHaptikTileControl)
+			controllerType = ControllerType.Mobile_Haptik;
+		else
+			controllerType = ControllerType.Mobile_Virtual;
+#endif
+	}
+
+	private void FixedUpdate()
 	{
         if (LocalGameManager.instance.activePlayer)
         {
@@ -43,8 +64,18 @@ public class SelectARObjectWithFinger : MonoBehaviour
 						{
                             if (LocalGameManager.instance.canMove)
                             {
-								RayCastOnTouch();
-								MouseRay();
+								if(controllerType == ControllerType.Mobile_Haptik)
+                                {
+									RayCastOnTouch();
+								}	
+								else if ( controllerType == ControllerType.Mobile_Virtual)
+                                {
+
+                                }
+								else if(controllerType == ControllerType.PC)
+								{
+									MouseRay();
+								}						
 							}
 						}
 					}

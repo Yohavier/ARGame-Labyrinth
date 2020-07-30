@@ -10,6 +10,7 @@ using UnityEngine.XR.ARSubsystems;
 using System.Collections;
 public class HandleTrackedImageLib : MonoBehaviour
 {
+	private ControllerType cT;
 	private ARTrackedImageManager manager;
 	private GameObject boardPrefab;
 	public GameObject tilePrefabParent;
@@ -21,7 +22,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 	private List<string> BoardTrackers = new List<string>();
 	private bool lockBoard = false;
-	private bool activeLooseTile;
+	private bool activeLooseTile = true;
 	private bool _activeLooseTile
     {
         get { return activeLooseTile; }
@@ -45,39 +46,52 @@ public class HandleTrackedImageLib : MonoBehaviour
 	private void Start()
 	{
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
-
-#if UNITY_ANDROID || UNITY_IOS
-		manager = GetComponent<ARTrackedImageManager>();
-		manager.trackedImagesChanged += OnTrackedImagesChanged;
-		SetUpBoardTracker();
-#endif
-
-#if UNITY_STANDALONE || UNITY_EDITOR
-		PCSetUP();
-#endif
+		cT = SelectARObjectWithFinger.instance.controllerType;
+		Debug.Log(cT);
+		if(cT == ControllerType.PC)
+        {
+			VirtualControlSetup();
+		}
+		else if (cT == ControllerType.Mobile_Virtual)
+        {
+			manager = GetComponent<ARTrackedImageManager>();
+			manager.trackedImagesChanged += OnTrackedImagesChanged;
+			VirtualControlSetup();
+			SetUpBoardTracker();
+		}
+		else if(cT == ControllerType.Mobile_Haptik)
+        {
+			manager = GetComponent<ARTrackedImageManager>();
+			manager.trackedImagesChanged += OnTrackedImagesChanged;
+			SetUpBoardTracker();
+		}
 	}
 
 	//Set Up a plane for PC play
-	private void PCSetUP()
+	public GameObject planePrefab;
+	private void VirtualControlSetup()
     {
-		GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+		GameObject plane = Instantiate(planePrefab);
+		plane.transform.SetParent(GUIManager.instance.boardEnvironment.transform);
 		plane.transform.position = new Vector3(0, 0, 0);
 		plane.transform.rotation = Quaternion.identity;
-		plane.transform.localScale = new Vector3(10, 10, 10);
-		plane.GetComponent<MeshRenderer>().enabled = false;
 		plane.name = "DebugPlane";
-		plane.layer = 9;
 	}
 
     private void Update()
     {
-#if UNITY_STANDALONE || UNITY_EDITOR
-		MouseController();
-#endif
+		if(cT == ControllerType.PC)
+        {
+			PCController();
+		}
+		else if(cT== ControllerType.Mobile_Virtual)
+        {
+			VirtualController();
+        }
 	}
 
 	//Cast a ray to handle the tilePrefabParent with mouse
-	private void MouseController()
+	private void PCController()
     {
 		if (Input.GetKey(KeyCode.LeftShift))
 		{
@@ -91,8 +105,68 @@ public class HandleTrackedImageLib : MonoBehaviour
 				}	
 			}
 		}
+
+        if (Input.GetKey(KeyCode.A))
+        {
+			tilePrefabParent.transform.localEulerAngles += new Vector3(0, 90, 0) * Time.deltaTime;
+        }
+		else if (Input.GetKey(KeyCode.D))
+        {
+			tilePrefabParent.transform.localEulerAngles += new Vector3(0, -90, 0) * Time.deltaTime;
+		}
 	}
 
+	private Vector2 touchPosition;
+	private bool isTouching;
+
+	private void VirtualController()
+    {
+		if (Input.touchCount > 0)
+		{
+			if(Input.touchCount == 2)
+            {
+				HandleTouchRotation(Input.GetTouch(1));
+				return;
+            }
+			Touch touch = Input.GetTouch(0);
+			touchPosition = touch.position;
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+
+			if (touch.phase == TouchPhase.Began)
+            {
+				isTouching = true;
+			}
+			else if (touch.phase == TouchPhase.Ended)
+            {
+				isTouching = false;
+			}
+
+			if (isTouching && Physics.Raycast(ray.origin, ray.direction, out hit, 2, 1 << 9))
+			{
+				if (hit.transform.name == "DebugPlane")
+				{
+					tilePrefabParent.transform.position = hit.point;
+				}
+			}
+		}
+	}
+
+	private Vector2 prevTouch;
+	private float deltaPos;
+	private void HandleTouchRotation(Touch touch)
+    {
+		if (touch.phase == TouchPhase.Began)
+        {
+			prevTouch = touch.position;
+		}
+
+		deltaPos = prevTouch.x - touch.position.x;
+
+		tilePrefabParent.transform.localEulerAngles += new Vector3(0, deltaPos * 4, 0) * Time.deltaTime;
+
+		prevTouch = touch.position;
+    }
 	//Includes all Multitrackernames to List
     private void SetUpBoardTracker()
     {
@@ -147,7 +221,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 				mesh.material.color = Color.white;
 			}
 		}
-		_activeLooseTile = false;
+		//_activeLooseTile = false;
+		tilePrefabParent.SetActive(true);
 
 		droppedOutPrefab.transform.SetParent(tilePrefabParent.transform);
 		droppedOutPrefab.transform.localPosition = Vector3.zero;
@@ -162,8 +237,8 @@ public class HandleTrackedImageLib : MonoBehaviour
 	//Reactivates the Prefab after time 
 	private void ToggleBackOn()
 	{
-		_activeLooseTile = true;
-		//tilePrefabParent.SetActive(true);
+		//_activeLooseTile = true;
+		tilePrefabParent.SetActive(true);
 	}
 	private void HandleMultiTracker(ARTrackedImage trackedImage)
     {
@@ -178,7 +253,7 @@ public class HandleTrackedImageLib : MonoBehaviour
     {
 		if(trackedImage.referenceImage.name == "Tile")
         {
-            if (_activeLooseTile)
+            if (_activeLooseTile && cT != ControllerType.Mobile_Virtual)
             {
 				tilePrefabParent.SetActive(true);
 				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
