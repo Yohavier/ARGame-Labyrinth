@@ -8,11 +8,35 @@ public class BoardEnvironment : MonoBehaviour
     private Transform board;
     public List<GameObject> signalPost = new List<GameObject>();
 
-    private void OnEnable()
+    public LobbyRocket[] rockets;
+    public GameObject gameEnv;
+
+
+    private void Start()
     { 
         instance = this;
-        if(BoardGrid.instance)
-            board = BoardGrid.instance.transform;
+        Eventbroker.instance.onChangeGameState += ChangeEnv;
+        board = BoardGrid.instance.transform;
+    }
+    private void OnDisable()
+    {
+        Eventbroker.instance.onChangeGameState -= ChangeEnv;
+    }
+
+    private void ChangeEnv(GameFlowState state)
+    {
+        if (state == GameFlowState.LOBBY)
+        {
+            foreach(LobbyRocket rocket in rockets)
+            {
+                rocket.gameObject.SetActive(true);
+                rocket.SetUpRocket(state);
+            }
+        }
+        else if(state == GameFlowState.GAME)
+        {
+            gameEnv.SetActive(true);
+        }
     }
 
     void Update()

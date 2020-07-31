@@ -20,9 +20,6 @@ namespace Assets.Scripts.GameManagement
         public static GUIManager instance;
         public GameObject setupCanvas;
         public GameObject lobbyCanvas;
-        public GameObject lobbyEnvironment;
-        public LobbyGate lobbyGate;
-        public GameObject boardEnvironment;
         public GameObject playerCanvas;
         public GameObject endCanvas;
         public GameObject diceObject;
@@ -51,9 +48,6 @@ namespace Assets.Scripts.GameManagement
             Eventbroker.instance.onNotifyNextTurn += OnTurnChange;
             setupCanvas = GameObject.Find("SetupCanvas");
             lobbyCanvas = GameObject.Find("LobbyCanvas");
-            lobbyEnvironment = GameObject.Find("LobbyEnvironment");
-            lobbyGate = lobbyEnvironment.GetComponentInChildren<LobbyGate>();
-            boardEnvironment = GameObject.Find("BoardEnvironment");
             playerCanvas = GameObject.Find("PlayerCanvas");
             endCanvas = GameObject.Find("EndCanvas");
             hostIPInput = GameObject.Find("HostIPInput").GetComponent<InputField>();
@@ -78,8 +72,6 @@ namespace Assets.Scripts.GameManagement
             readyToggle.onValueChanged.AddListener((value) => OnReadyToggleValueChanged(value));
             hostIPInput.text = serverIP;
             lobbyCanvas.SetActive(false);
-            lobbyEnvironment.SetActive(false);
-            boardEnvironment.SetActive(false);
             instance = this;
             isDebug = false;
             diceObject.SetActive(false);
@@ -89,6 +81,7 @@ namespace Assets.Scripts.GameManagement
         {
             playerCanvas.SetActive(false);
             endCanvas.SetActive(false);
+            Eventbroker.instance.ChangeGameState(GameFlowState.JOIN);
         }
 
         private void Update()
@@ -136,13 +129,12 @@ namespace Assets.Scripts.GameManagement
 
         void OpenLobbyMenu()
         {
-            boardEnvironment.SetActive(false);
             setupCanvas.SetActive(false);
             lobbyCanvas.SetActive(true);
-            lobbyEnvironment.SetActive(true);
             startMatchButton.interactable = false;
             AkSoundEngine.PostEvent("lobby_join", gameObject);
-            AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);         
+            AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);
+            Eventbroker.instance.ChangeGameState(GameFlowState.LOBBY);
         }
 
         void OnDebugButtonClicked()
@@ -188,11 +180,11 @@ namespace Assets.Scripts.GameManagement
             if (value)
             {
                 readyCounter++;
-                lobbyGate.CloseGate();
+                Eventbroker.instance.ToggleGate(false);
             }
             else
             {
-                lobbyGate.OpenGate();
+                Eventbroker.instance.ToggleGate(true);
                 readyCounter--;
             }
             NetworkClient.instance.SendReadyChanged(value);
@@ -214,8 +206,6 @@ namespace Assets.Scripts.GameManagement
 
         private void HandleLobbyEnvironment()
         {
-            boardEnvironment.SetActive(true);
-            lobbyEnvironment.GetComponent<LobbyRocket>().StartBooster();
             SwipeManager.instance.canSwipe = false;
         }
     }

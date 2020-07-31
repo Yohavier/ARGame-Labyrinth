@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ public class LobbyCharacter : MonoBehaviour
         subChars = GetComponentsInChildren<LobbySubCharacter>().ToList();
     }
 
-    public void OnChangeSelectedCharacter(RoleIndex newRole)
+    public void ChangeSelectedCharacter(RoleIndex newRole)
     {
         for (int i = 0; i < subChars.Count; i++)
         {

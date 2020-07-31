@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,6 @@ public class InformationPanel : MonoBehaviour
 
     public GameObject MenuPanel;
     public Button MenuPanelButton;
-    public GameObject lobbyChar;
 
     [Header("Buttons")]
     public Button rollDiceButton;
@@ -37,7 +37,6 @@ public class InformationPanel : MonoBehaviour
 
     private void Awake()
     {
-        lobbyChar = GameObject.Find("LobbyCharacter");
         instance = this;
         MenuPanelButton.onClick.AddListener(ToggleMenuPanel);
     }
@@ -74,7 +73,7 @@ public class InformationPanel : MonoBehaviour
     public void OnPlayerRoleChanged(int change)
     {
         SetPlayerRoles(SetRightRole(change));
-        lobbyChar.GetComponent<LobbyCharacter>().OnChangeSelectedCharacter(selectedPlayerRole.roleIndex);
+        Eventbroker.instance.ChangeCharacter(selectedPlayerRole.roleIndex);
         if (LocalGameManager.instance != null)
             NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
         Debug.Log("Selected " + selectedPlayerRole.name);
@@ -143,5 +142,11 @@ public class InformationPanel : MonoBehaviour
     public void PlayButtonSound(string file)
     {
         AudioWwiseManager.PostAudio(file);
+    }
+
+    public GameObject helpInformation;
+    public void ToggleHelpInformationPanel()
+    {
+        helpInformation.SetActive(!helpInformation.activeSelf);
     }
 }

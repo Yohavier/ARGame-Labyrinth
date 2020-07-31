@@ -7,15 +7,43 @@ using UnityEngine.XR.ARFoundation;
 public class LobbyRocket : MonoBehaviour
 {
     public ParticleSystem rocketBlaster;
-    private void Start()
+    public PlayerIndex index;
+
+    private void OnDisable()
     {
-        HandleTrackedImageLib.instance.trackLobby = true;
+        StopAllCoroutines();
+        Eventbroker.instance.onChangeGameState -= SetUpRocket;
+        Eventbroker.instance.onChangeGameState -= StartBooster;
+        Eventbroker.instance.onChangeCharacter -= GetComponentInChildren<LobbyCharacter>().ChangeSelectedCharacter;
+        Eventbroker.instance.onToggleGate -= GetComponentInChildren<LobbyGate>().OnToggleGate;
     }
-    public void StartBooster()
+
+
+    public void SetUpRocket(GameFlowState state)
     {
-        HandleTrackedImageLib.instance.trackLobby = false;
-        rocketBlaster.Play();
-        StartCoroutine(Boost());
+        Eventbroker.instance.onChangeGameState += StartBooster;
+        if (state == GameFlowState.LOBBY)
+        {
+            if(index == LocalGameManager.instance.localPlayerIndex)
+            {
+                Eventbroker.instance.onChangeCharacter += GetComponentInChildren<LobbyCharacter>().ChangeSelectedCharacter;
+                Eventbroker.instance.onToggleGate += GetComponentInChildren<LobbyGate>().OnToggleGate;
+            }
+            else
+            {
+                var gate = GetComponentInChildren<LobbyGate>();
+                gate.GetComponentInChildren<Canvas>().gameObject.SetActive(false);         
+            }
+        }
+    }
+    public void StartBooster(GameFlowState state)
+    {
+        if(state == GameFlowState.GAME)
+        {
+            rocketBlaster.Play();
+            StartCoroutine(Boost());
+        }
+
     }
     private IEnumerator Boost()
     {
@@ -34,7 +62,7 @@ public class LobbyRocket : MonoBehaviour
             transform.position += rocketBlaster.transform.up * a * 0.01f;
             t += Time.deltaTime * 0.01f;
             distance = Vector3.Distance(Camera.main.transform.position, transform.position);
-            if(distance > 50)
+            if (distance > 50)
             {
                 loop = false;
             }

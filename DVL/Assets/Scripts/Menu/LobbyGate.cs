@@ -15,21 +15,24 @@ public class LobbyGate : MonoBehaviour
         anim = GetComponent<Animation>();
         GetComponentInChildren<Canvas>().worldCamera = Camera.main;
     }
+
     public void InitCharSelection()
     {
-        OpenGate();
+        Eventbroker.instance.ToggleGate(true);
         InformationPanel.instance.OnPlayerRoleChanged(0);
         HandleButton();
     }
 
-    public void OpenGate()
+    public void OnToggleGate(bool toggle)
     {
-        anim.clip = openGate;
-        anim.Play();
-    }
-    public void CloseGate()
-    {
-        anim.clip = closeGate;
+        if (toggle)
+        {
+            anim.clip = openGate;
+        }
+        else
+        {
+            anim.clip = closeGate;
+        }
         anim.Play();
     }
 

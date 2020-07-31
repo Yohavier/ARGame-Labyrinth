@@ -70,7 +70,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 								}	
 								else if ( controllerType == ControllerType.Mobile_Virtual)
                                 {
-
+									RayCastOnTouch();
                                 }
 								else if(controllerType == ControllerType.PC)
 								{

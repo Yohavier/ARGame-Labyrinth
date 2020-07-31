@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.GameManagement;
 
+public enum GameFlowState {JOIN, LOBBY, GAME, END }
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
-
 	private int capsuleCount;
 	private int killCount;
 	public List<GameObject> allPlayers = new List<GameObject>();

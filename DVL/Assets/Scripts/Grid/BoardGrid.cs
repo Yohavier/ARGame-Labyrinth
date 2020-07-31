@@ -72,6 +72,7 @@ public class BoardGrid : MonoBehaviour
 		AudioWwiseManager.PostAudio("lobby_start");
 		AudioWwiseManager.instance.SetMusicGameState(GameState.InGame);
 		AudioWwiseManager.instance.SetMusicIntensity(0);
+		Eventbroker.instance.ChangeGameState(GameFlowState.GAME);
 	}
 
 	private void Update()

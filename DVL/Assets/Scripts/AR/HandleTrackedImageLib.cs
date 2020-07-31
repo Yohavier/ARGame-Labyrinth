@@ -14,11 +14,9 @@ public class HandleTrackedImageLib : MonoBehaviour
 	private ARTrackedImageManager manager;
 	private GameObject boardPrefab;
 	public GameObject tilePrefabParent;
-	public GameObject lobbyPrefab;
 	public static HandleTrackedImageLib instance;
 	public LayerMask trackingCheckMask;
-
-	[HideInInspector] public bool trackLobby;
+	public GameObject boardEnv;
 
 	private List<string> BoardTrackers = new List<string>();
 	private bool lockBoard = false;
@@ -48,6 +46,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
 		cT = SelectARObjectWithFinger.instance.controllerType;
 		Debug.Log(cT);
+		SetUpBoardTracker();
 		if(cT == ControllerType.PC)
         {
 			VirtualControlSetup();
@@ -57,13 +56,11 @@ public class HandleTrackedImageLib : MonoBehaviour
 			manager = GetComponent<ARTrackedImageManager>();
 			manager.trackedImagesChanged += OnTrackedImagesChanged;
 			VirtualControlSetup();
-			SetUpBoardTracker();
 		}
 		else if(cT == ControllerType.Mobile_Haptik)
         {
 			manager = GetComponent<ARTrackedImageManager>();
 			manager.trackedImagesChanged += OnTrackedImagesChanged;
-			SetUpBoardTracker();
 		}
 	}
 
@@ -72,7 +69,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 	private void VirtualControlSetup()
     {
 		GameObject plane = Instantiate(planePrefab);
-		plane.transform.SetParent(GUIManager.instance.boardEnvironment.transform);
+		plane.transform.SetParent(boardEnv.transform);
 		plane.transform.position = new Vector3(0, 0, 0);
 		plane.transform.rotation = Quaternion.identity;
 		plane.name = "DebugPlane";
@@ -118,7 +115,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 	private Vector2 touchPosition;
 	private bool isTouching;
-
+	private float tapTimer;
 	private void VirtualController()
     {
 		if (Input.touchCount > 0)
@@ -136,6 +133,7 @@ public class HandleTrackedImageLib : MonoBehaviour
 			if (touch.phase == TouchPhase.Began)
             {
 				isTouching = true;
+				tapTimer = 0;
 			}
 			else if (touch.phase == TouchPhase.Ended)
             {
@@ -144,9 +142,13 @@ public class HandleTrackedImageLib : MonoBehaviour
 
 			if (isTouching && Physics.Raycast(ray.origin, ray.direction, out hit, 2, 1 << 9))
 			{
-				if (hit.transform.name == "DebugPlane")
-				{
-					tilePrefabParent.transform.position = hit.point;
+				tapTimer += Time.deltaTime;
+                if (tapTimer > 0.2f)
+                {
+					if (hit.transform.name == "DebugPlane")
+					{
+						tilePrefabParent.transform.position = hit.point;
+					}
 				}
 			}
 		}
@@ -260,15 +262,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 				tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
 			}
 		}
-		else if(trackedImage.referenceImage.name == "Lobby" && trackLobby)
-        {
-            if (lobbyPrefab.gameObject.activeSelf)
-            {
-				lobbyPrefab.transform.localPosition = trackedImage.transform.localPosition;
-				lobbyPrefab.transform.localEulerAngles = GetRotation(trackedImage);
-			}
-        }
-
 	}
 	#region calculate the right position and rotation
     private Vector3 GetOffset(ARTrackedImage image)
