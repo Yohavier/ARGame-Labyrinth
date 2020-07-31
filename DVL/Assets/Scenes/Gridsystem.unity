@@ -1953,12 +1953,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143626205}
   m_CullTransparentMesh: 0
---- !u!1 &144269306 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5076500778412105044, guid: e184a882295f7324096c0f073ee93c47,
-    type: 3}
-  m_PrefabInstance: {fileID: 1033570947}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &162195833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2054,6 @@ GameObject:
   - component: {fileID: 199011449}
   - component: {fileID: 199011451}
   - component: {fileID: 199011447}
-  - component: {fileID: 199011452}
   - component: {fileID: 199011448}
   m_Layer: 0
   m_Name: AR Session Origin
@@ -2081,13 +2074,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca264778d71f2744a97ca6bcf8f383d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerType: 0
+  environment: {fileID: 1010691297}
+  planePrefab: {fileID: 5319725210909662312, guid: 75fc77db3499a7a4eaac11580c08e8b3,
+    type: 3}
+  boardPrefab: {fileID: 1032333667}
   tilePrefabParent: {fileID: 496959604}
   trackingCheckMask:
     serializedVersion: 2
     m_Bits: 4096
-  boardEnv: {fileID: 144269306}
-  planePrefab: {fileID: 5319725210909662312, guid: 75fc77db3499a7a4eaac11580c08e8b3,
-    type: 3}
+  path: []
 --- !u!114 &199011448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,24 +2140,6 @@ MonoBehaviour:
     type: 2}
   m_MaxNumberOfMovingImages: 2
   m_TrackedImagePrefab: {fileID: 0}
---- !u!114 &199011452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199011446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40886ca63ac8227479c2957bf6ad4148, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerType: 0
-  arCamera: {fileID: 894522550}
-  mask:
-    serializedVersion: 2
-    m_Bits: 256
-  path: []
 --- !u!1 &200758980
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,7 +4683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &866123496
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5317,6 +5295,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970287510}
   m_CullTransparentMesh: 0
+--- !u!1 &1010691297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1125534706504142795, guid: e184a882295f7324096c0f073ee93c47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1033570947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1027931230
 GameObject:
   m_ObjectHideFlags: 0
@@ -12243,7 +12227,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 199011452}
+      - m_Target: {fileID: 199011447}
         m_MethodName: MobileHaptikTileControl
         m_Mode: 1
         m_Arguments:

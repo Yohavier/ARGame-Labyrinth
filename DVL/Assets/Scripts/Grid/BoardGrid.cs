@@ -12,7 +12,7 @@ public class BoardGrid : MonoBehaviour
 	public static BoardGrid instance;
 
 	public GameObject trackingManager;
-	public HandleTrackedImageLib trackingInstance;
+	public Controller trackingInstance;
 	public Dictionary<string, Tile> coordDic = new Dictionary<string, Tile>();
 	//Prefab Lists of Tiles
 	public List<GameObject> allPossibleMovingTiles = new List<GameObject>();
@@ -44,7 +44,7 @@ public class BoardGrid : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		trackingInstance = trackingManager.GetComponent<HandleTrackedImageLib>();
+		trackingInstance = trackingManager.GetComponent<Controller>();
 	}
 	private void Start()
 	{
@@ -148,7 +148,7 @@ public class BoardGrid : MonoBehaviour
 		}
 		GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
 		leftOverTile.GetComponent<Tile>().isInFOW = true;
-		trackingManager.GetComponent<HandleTrackedImageLib>().ChangeTrackedPrefab(leftOverTile);
+		trackingManager.GetComponent<Controller>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
 		GetComponent<SpawnItems>().SetItemOnGrid();

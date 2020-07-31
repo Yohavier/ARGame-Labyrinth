@@ -11,7 +11,6 @@ using Button = UnityEngine.UI.Button;
 using Toggle = UnityEngine.UI.Toggle;
 
 public enum PowerUpSlotIcon { None, PickUp, Exchange }
-
 public class GUIManager : MonoBehaviour
 {
     public static GUIManager instance;

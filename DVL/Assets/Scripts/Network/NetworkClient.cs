@@ -183,7 +183,7 @@ public class NetworkClient
         PlayerIndex playerIndex = (PlayerIndex)msg.ReadInt();
         int targetTileindex = msg.ReadInt();
         int steps = msg.ReadInt();
-        SelectARObjectWithFinger.instance.ManagePath(BoardGrid.instance.FindTileByIndex(targetTileindex), playerIndex, steps);
+        Controller.instance.ManagePath(BoardGrid.instance.FindTileByIndex(targetTileindex), playerIndex, steps);
     }
 
     private void HandleItemCollected(Msg msg)

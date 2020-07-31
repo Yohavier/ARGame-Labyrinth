@@ -381,7 +381,7 @@ public class Tile : MonoBehaviour
 			transform.Rotate(randomRotation * Time.deltaTime, Space.Self);
 			yield return null;
 		}
-		HandleTrackedImageLib.instance.ChangeTrackedPrefab(this.gameObject);	
+		Controller.instance.ChangeTrackedPrefab(this.gameObject);	
 		PrefabColor();
 	}
 	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
