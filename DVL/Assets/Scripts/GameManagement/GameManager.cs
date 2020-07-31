@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.GameManagement;
 
 public enum GameFlowState {JOIN, LOBBY, GAME, END }
 public class GameManager : MonoBehaviour

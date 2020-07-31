@@ -12,10 +12,13 @@ public class BoardEnvironment : MonoBehaviour
     public GameObject gameEnv;
 
 
-    private void Start()
+    private void Awake()
     { 
         instance = this;
-        Eventbroker.instance.onChangeGameState += ChangeEnv;
+        Eventbroker.instance.onChangeGameState += ChangeEnv;  
+    }
+    private void Start()
+    {
         board = BoardGrid.instance.transform;
     }
     private void OnDisable()
@@ -27,15 +30,21 @@ public class BoardEnvironment : MonoBehaviour
     {
         if (state == GameFlowState.LOBBY)
         {
-            foreach(LobbyRocket rocket in rockets)
-            {
-                rocket.gameObject.SetActive(true);
-                rocket.SetUpRocket(state);
-            }
+            StartCoroutine(DelayedEnvChange(state));
         }
         else if(state == GameFlowState.GAME)
         {
             gameEnv.SetActive(true);
+        }
+    }
+
+    private IEnumerator DelayedEnvChange(GameFlowState state)
+    {
+        yield return new WaitForEndOfFrame();
+        foreach (LobbyRocket rocket in rockets)
+        {
+            rocket.gameObject.SetActive(true);
+            rocket.SetUpRocket(state);
         }
     }
 

@@ -9,29 +9,31 @@ public class LobbyRocket : MonoBehaviour
     public ParticleSystem rocketBlaster;
     public PlayerIndex index;
 
+    private LobbyGate gate;
+    private LobbyCharacter character;
     private void OnDisable()
     {
         StopAllCoroutines();
         Eventbroker.instance.onChangeGameState -= SetUpRocket;
         Eventbroker.instance.onChangeGameState -= StartBooster;
-        Eventbroker.instance.onChangeCharacter -= GetComponentInChildren<LobbyCharacter>().ChangeSelectedCharacter;
-        Eventbroker.instance.onToggleGate -= GetComponentInChildren<LobbyGate>().OnToggleGate;
+        Eventbroker.instance.onChangeCharacter -= character.ChangeSelectedCharacter;
+        Eventbroker.instance.onToggleGate -= gate.OnToggleGate;
     }
-
 
     public void SetUpRocket(GameFlowState state)
     {
+        gate = GetComponentInChildren<LobbyGate>();
+        character = GetComponentInChildren<LobbyCharacter>();
         Eventbroker.instance.onChangeGameState += StartBooster;
         if (state == GameFlowState.LOBBY)
         {
             if(index == LocalGameManager.instance.localPlayerIndex)
             {
-                Eventbroker.instance.onChangeCharacter += GetComponentInChildren<LobbyCharacter>().ChangeSelectedCharacter;
-                Eventbroker.instance.onToggleGate += GetComponentInChildren<LobbyGate>().OnToggleGate;
+                Eventbroker.instance.onChangeCharacter += character.ChangeSelectedCharacter;
+                Eventbroker.instance.onToggleGate += gate.OnToggleGate;
             }
             else
             {
-                var gate = GetComponentInChildren<LobbyGate>();
                 gate.GetComponentInChildren<Canvas>().gameObject.SetActive(false);         
             }
         }

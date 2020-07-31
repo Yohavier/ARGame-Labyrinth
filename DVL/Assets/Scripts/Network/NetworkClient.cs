@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.GameManagement;
-using Assets.Scripts.Player;
+﻿using Assets.Scripts.Player;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -133,7 +132,7 @@ public class NetworkClient
 
         try
         {
-            InformationPanel.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
+            GUIManager.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
         }
 
         catch (Exception ex)
@@ -327,7 +326,7 @@ public class NetworkClient
 
         try
         {
-            InformationPanel.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
+            GUIManager.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
         }
 
         catch (Exception ex)

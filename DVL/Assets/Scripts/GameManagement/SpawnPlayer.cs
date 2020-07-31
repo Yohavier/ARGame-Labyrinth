@@ -17,7 +17,7 @@ public class SpawnPlayer : MonoBehaviour
 			playerCount++;
 			if (NetworkClient.instance.networkPlayers[playerCount - 1].roleIndex > RoleIndex.Invalid) 
 			{
-				role = InformationPanel.instance.playerRoles[(int)NetworkClient.instance.networkPlayers[playerCount - 1].roleIndex];
+				role = GUIManager.instance.playerRoles[(int)NetworkClient.instance.networkPlayers[playerCount - 1].roleIndex];
 				foreach(GameObject playerRole in PlayerRoles)
                 {
 					if(playerRole.GetComponent<Player>().playerRole.roleIndex == role.roleIndex)

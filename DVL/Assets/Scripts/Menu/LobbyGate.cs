@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.GameManagement;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +18,7 @@ public class LobbyGate : MonoBehaviour
     public void InitCharSelection()
     {
         Eventbroker.instance.ToggleGate(true);
-        InformationPanel.instance.OnPlayerRoleChanged(0);
+        GUIManager.instance.OnPlayerRoleChanged(0);
         HandleButton();
     }
 

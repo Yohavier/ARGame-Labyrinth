@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Threading;
-using Assets.Scripts.GameManagement;
 using System.Collections.Generic;
 
 public enum TileDirectionModule { NONE, WALL, DOOR, WINDOW}

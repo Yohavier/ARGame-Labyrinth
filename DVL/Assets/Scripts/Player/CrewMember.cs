@@ -39,8 +39,8 @@ public class CrewMember : Player
 	private void HandlePowerUpCollection(Tile tile)
     {
 		ChangePowerUpSlotHandleIcon(IsPowerUpPresent(tile));
-		TogglePowerUpUseButton(InformationPanel.instance.powerUpSlot1);
-		TogglePowerUpUseButton(InformationPanel.instance.powerUpSlot2);
+		TogglePowerUpUseButton(GUIManager.instance.slot1);
+		TogglePowerUpUseButton(GUIManager.instance.slot2);
 	}
 	private void TogglePowerUpUseButton(PowerUpSlot slot)
     {
@@ -50,8 +50,8 @@ public class CrewMember : Player
     }
 	private void DisablePowerUpSlots()
     {
-		InformationPanel.instance.powerUpSlot1.powerUpIcon.interactable = false;
-		InformationPanel.instance.powerUpSlot2.powerUpIcon.interactable = false;
+		GUIManager.instance.slot1.powerUpIcon.interactable = false;
+		GUIManager.instance.slot2.powerUpIcon.interactable = false;
 	}
 	private PowerUpBase IsPowerUpPresent(Tile tile)
     {
@@ -63,35 +63,35 @@ public class CrewMember : Player
     }
 	private void ChangePowerUpSlotHandleIcon(PowerUpBase powerUp)
 	{
-		InformationPanel ui = InformationPanel.instance;
+		GUIManager ui = GUIManager.instance;
 		if (powerUp != null)
         {
-			if (ui.powerUpSlot1.storedPowerUp != null)
+			if (ui.slot1.storedPowerUp != null)
             {
-				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.powerUpSlot1.powerUpHandleIcon);
-				AddPickUpListener(ui.powerUpSlot1.powerUpHandleIcon, ui.powerUpSlot1, powerUp);
+				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.slot1.powerUpHandleIcon);
+				AddPickUpListener(ui.slot1.powerUpHandleIcon, ui.slot1, powerUp);
 			}
             else
             {
-				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.powerUpSlot1.powerUpHandleIcon);
-				AddPickUpListener(ui.powerUpSlot1.powerUpHandleIcon, ui.powerUpSlot1, powerUp);
+				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.slot1.powerUpHandleIcon);
+				AddPickUpListener(ui.slot1.powerUpHandleIcon, ui.slot1, powerUp);
 			}			
 
-			if (ui.powerUpSlot2.storedPowerUp != null)
+			if (ui.slot2.storedPowerUp != null)
             {
-				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.powerUpSlot2.powerUpHandleIcon);
-				AddPickUpListener(ui.powerUpSlot2.powerUpHandleIcon, ui.powerUpSlot2, powerUp);
+				ui.ChangeSlotIcon(PowerUpSlotIcon.Exchange, ui.slot2.powerUpHandleIcon);
+				AddPickUpListener(ui.slot2.powerUpHandleIcon, ui.slot2, powerUp);
 			}
             else
             {
-				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.powerUpSlot2.powerUpHandleIcon);
-				AddPickUpListener(ui.powerUpSlot2.powerUpHandleIcon, ui.powerUpSlot2, powerUp);
+				ui.ChangeSlotIcon(PowerUpSlotIcon.PickUp, ui.slot2.powerUpHandleIcon);
+				AddPickUpListener(ui.slot2.powerUpHandleIcon, ui.slot2, powerUp);
 			}
 		}
         else
         {
-			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.powerUpSlot1.powerUpHandleIcon);
-			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.powerUpSlot2.powerUpHandleIcon);
+			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.slot1.powerUpHandleIcon);
+			ui.ChangeSlotIcon(PowerUpSlotIcon.None, ui.slot2.powerUpHandleIcon);
 			RemoveAllIconListeners();
 		}
     }
@@ -101,8 +101,8 @@ public class CrewMember : Player
 	}
 	private void RemoveAllIconListeners()
     {
-		InformationPanel.instance.powerUpSlot1.powerUpHandleIcon.onClick.RemoveAllListeners();
-		InformationPanel.instance.powerUpSlot2.powerUpHandleIcon.onClick.RemoveAllListeners();
+		GUIManager.instance.slot1.powerUpHandleIcon.onClick.RemoveAllListeners();
+		GUIManager.instance.slot2.powerUpHandleIcon.onClick.RemoveAllListeners();
 	}
 	private void StorePowerUp(PowerUpSlot slot, PowerUpBase powerUp) 
 	{
@@ -185,7 +185,7 @@ public class CrewMember : Player
 		storedItem = item.gameObject;
 		item.isStored = true;
 		storedItem.transform.SetParent(this.transform);
-		InformationPanel.instance.SetItemText(item.itemName);
+		GUIManager.instance.SetItemText(item.itemName);
 		storedItem.gameObject.SetActive(false);
 	}
     #endregion
@@ -218,7 +218,7 @@ public class CrewMember : Player
 			storedItem.transform.SetParent(tile.transform);
 			storedItem.layer = 8;
 			storedItem = null;
-			InformationPanel.instance.SetItemText("none");
+			GUIManager.instance.SetItemText("none");
 		}
 	}
 	#endregion

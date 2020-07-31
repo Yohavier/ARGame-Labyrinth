@@ -1,4 +1,3 @@
-using Assets.Scripts.GameManagement;
 using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
 
 			if (IsLocalPlayer())
 			{
-				InformationPanel.instance.SetStateText(_playerState.ToString());
+				GUIManager.instance.SetStateText(_playerState.ToString());
 			}
 
 			if (_playerState == PlayerState.DYING)
@@ -95,7 +94,7 @@ public class Player : MonoBehaviour
 
 		if (NetworkClient.instance.networkPlayers[count - 1].roleIndex > RoleIndex.Invalid)
 		{
-			playerRole = InformationPanel.instance.playerRoles[(int)NetworkClient.instance.networkPlayers[count - 1].roleIndex];
+			playerRole = GUIManager.instance.playerRoles[(int)NetworkClient.instance.networkPlayers[count - 1].roleIndex];
 			playerRole.SetPlayerStats(this);
 		}
 
@@ -137,7 +136,7 @@ public class Player : MonoBehaviour
 	}
 	private void SetInformations()
     {
-		InformationPanel.instance.SetItemText("None");
+		GUIManager.instance.SetItemText("None");
 	}
     #endregion
 

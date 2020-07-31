@@ -73,11 +73,11 @@ public class SwipeManager : MonoBehaviour
                 if (x < 0)
                 {
                     swipeLeft = true;
-                    InformationPanel.instance.OnPlayerRoleChanged(-1);
+                    GUIManager.instance.OnPlayerRoleChanged(-1);
                 }
                 else
                 {
-                    InformationPanel.instance.OnPlayerRoleChanged(1);
+                    GUIManager.instance.OnPlayerRoleChanged(1);
                     swipeRight = true;
                 }
             }

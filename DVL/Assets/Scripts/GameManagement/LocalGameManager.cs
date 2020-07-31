@@ -1,4 +1,3 @@
-using Assets.Scripts.GameManagement;
 using UnityEngine;
 
 public enum PlayerIndex
@@ -111,11 +110,11 @@ public class LocalGameManager : MonoBehaviour
     #region Handle Roll Dice extension
     private void HandleRollDiceButton()
 	{
-		if (InformationPanel.instance)
+		if (GUIManager.instance)
 		{
 			_stepsLeft = 0;
-			InformationPanel.instance.SetRollDiceButton(true);
-			InformationPanel.instance.rollDiceButton.onClick.AddListener(RollDice);
+			GUIManager.instance.SetRollDiceButton(true);
+			GUIManager.instance.rollDiceButton.onClick.AddListener(RollDice);
 		}
 	}
 	private void RollDice()
@@ -129,10 +128,10 @@ public class LocalGameManager : MonoBehaviour
     }
 	private void RemoveRollDiceButtonListener()
     {
-        if (InformationPanel.instance)
+        if (GUIManager.instance)
 		{
-			InformationPanel.instance.SetRollDiceButton(false);
-			InformationPanel.instance.rollDiceButton.onClick.RemoveAllListeners();
+			GUIManager.instance.SetRollDiceButton(false);
+			GUIManager.instance.rollDiceButton.onClick.RemoveAllListeners();
 		}
 	}
     #endregion

@@ -5,55 +5,51 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Collections;
-using Assets.Scripts.GameManagement;
 
-namespace Assets.Scripts.Utils
+public class DebugConsole : MonoBehaviour
 {
-    public class DebugConsole : MonoBehaviour
+    public static DebugConsole instance;
+    List<string> log = new List<string>();
+    float lastLogTime = 0;
+
+    private void Awake()
     {
-        public static DebugConsole instance;
-        List<string> log = new List<string>();
-        float lastLogTime = 0;
+        instance = this;
+    }
 
-        private void Awake()
+    private void Start()
+    {
+        enabled = GUIManager.instance.isDebug;
+    }
+
+    void OnEnable()
+    {
+        Application.logMessageReceivedThreaded += HandleLog;
+    }
+
+    void OnDisable()
+    {
+        Application.logMessageReceivedThreaded -= HandleLog;
+    }
+
+    void HandleLog(string logString, string stackTrace, LogType type)
+    {
+        log.Add(logString);
+        lastLogTime = 0;
+    }
+
+    private void OnGUI()
+    {
+        lastLogTime += Time.deltaTime;
+        if (lastLogTime >= 3)
+            log.Clear();
+
+        if (log.Count == 0)
+            return;
+
+        for (int i = 0; i < log.Count; i++)
         {
-            instance = this;
-        }
-
-        private void Start()
-        {
-            enabled = GUIManager.instance.isDebug;
-        }
-
-        void OnEnable()
-        {
-            Application.logMessageReceivedThreaded += HandleLog;
-        }
-
-        void OnDisable()
-        {
-            Application.logMessageReceivedThreaded -= HandleLog;
-        }
-
-        void HandleLog(string logString, string stackTrace, LogType type)
-        {
-            log.Add(logString);
-            lastLogTime = 0;
-        }
-
-        private void OnGUI()
-        {
-            lastLogTime += Time.deltaTime;
-            if (lastLogTime >= 3)
-                log.Clear();
-
-            if (log.Count == 0)
-                return;
-
-            for (int i = 0; i < log.Count; i++)
-            {
-                GUILayout.Label(log[i]);
-            }
+            GUILayout.Label(log[i]);
         }
     }
 }

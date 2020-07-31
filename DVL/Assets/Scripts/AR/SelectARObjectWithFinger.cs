@@ -1,4 +1,3 @@
-using Assets.Scripts.GameManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +15,14 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	private Tile currentSelectedTarget;
 	public List<Tile> path;
 
-
-	private bool mobileHaptikTileControl = false;
+	private bool mobileHaptikControl = false;
+	public void MobileHaptikTileControl()
+    {
+		mobileHaptikControl = !mobileHaptikControl;
+		ChooseController();
+		if (!mobileHaptikControl)
+			HandleTrackedImageLib.instance.tilePrefabParent.transform.rotation = Quaternion.identity;
+    }
 
 	private void Awake()
 	{
@@ -43,7 +48,7 @@ public class SelectARObjectWithFinger : MonoBehaviour
 #if UNITY_EDITOR || UNITY_STANDALONE
 		controllerType = ControllerType.PC;
 #elif UNITY_IOS || UNITY_ANDROID
-		if (mobileHaptikTileControl)
+		if (mobileHaptikControl)
 			controllerType = ControllerType.Mobile_Haptik;
 		else
 			controllerType = ControllerType.Mobile_Virtual;
@@ -107,7 +112,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 	}
 	private void MouseRay()
 	{
-#if UNITY_EDITOR || UNITY_STANDALONE
 		if (Input.GetMouseButtonDown(0))
 		{
 			Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);
@@ -119,7 +123,6 @@ public class SelectARObjectWithFinger : MonoBehaviour
 				NetworkClient.instance.SendPlayerMove(hit.transform.GetComponent<Tile>());
 			}
 		}
-#endif
 	}
 
 	public void ManagePath(Tile targetTile, PlayerIndex playerIndex, int steps)

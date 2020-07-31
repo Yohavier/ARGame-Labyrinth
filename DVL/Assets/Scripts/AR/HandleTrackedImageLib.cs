@@ -1,4 +1,3 @@
-using Assets.Scripts.GameManagement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +9,6 @@ using UnityEngine.XR.ARSubsystems;
 using System.Collections;
 public class HandleTrackedImageLib : MonoBehaviour
 {
-	private ControllerType cT;
 	private ARTrackedImageManager manager;
 	private GameObject boardPrefab;
 	public GameObject tilePrefabParent;
@@ -44,23 +42,16 @@ public class HandleTrackedImageLib : MonoBehaviour
 	private void Start()
 	{
 		boardPrefab = FindObjectOfType<BoardGrid>().gameObject;
-		cT = SelectARObjectWithFinger.instance.controllerType;
-		Debug.Log(cT);
+		VirtualControlSetup();
 		SetUpBoardTracker();
-		if(cT == ControllerType.PC)
+		if(SelectARObjectWithFinger.instance.controllerType == ControllerType.PC)
         {
 			VirtualControlSetup();
 		}
-		else if (cT == ControllerType.Mobile_Virtual)
+		else
         {
 			manager = GetComponent<ARTrackedImageManager>();
-			manager.trackedImagesChanged += OnTrackedImagesChanged;
-			VirtualControlSetup();
-		}
-		else if(cT == ControllerType.Mobile_Haptik)
-        {
-			manager = GetComponent<ARTrackedImageManager>();
-			manager.trackedImagesChanged += OnTrackedImagesChanged;
+			manager.trackedImagesChanged += OnTrackedImagesChanged;	
 		}
 	}
 
@@ -77,11 +68,11 @@ public class HandleTrackedImageLib : MonoBehaviour
 
     private void Update()
     {
-		if(cT == ControllerType.PC)
+		if(SelectARObjectWithFinger.instance.controllerType == ControllerType.PC)
         {
 			PCController();
 		}
-		else if(cT== ControllerType.Mobile_Virtual)
+		else if(SelectARObjectWithFinger.instance.controllerType == ControllerType.Mobile_Virtual)
         {
 			VirtualController();
         }
@@ -244,7 +235,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 	}
 	private void HandleMultiTracker(ARTrackedImage trackedImage)
     {
-		boardPrefab.SetActive(true);
 		if (trackedImage.trackingState != TrackingState.Tracking)
 			return;
 
@@ -255,7 +245,7 @@ public class HandleTrackedImageLib : MonoBehaviour
     {
 		if(trackedImage.referenceImage.name == "Tile")
         {
-            if (_activeLooseTile && cT != ControllerType.Mobile_Virtual)
+            if (_activeLooseTile && SelectARObjectWithFinger.instance.controllerType != ControllerType.Mobile_Virtual)
             {
 				tilePrefabParent.SetActive(true);
 				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
@@ -295,8 +285,6 @@ public class HandleTrackedImageLib : MonoBehaviour
 		return new Quaternion(q.x, q.y, -q.z, -q.w);
 	}
 	#endregion
-
-
     private bool isTrackable(ARTrackedImage image)
     {
 		if(image.trackingState == TrackingState.Tracking)
