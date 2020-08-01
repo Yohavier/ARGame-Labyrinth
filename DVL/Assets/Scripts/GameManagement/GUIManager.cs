@@ -80,6 +80,10 @@ public class GUIManager : MonoBehaviour
         instance = this;
         isDebug = false;
         diceObject.SetActive(false);
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        controllerToggle.interactable = false;
+#endif
     }
 
     private void Start()

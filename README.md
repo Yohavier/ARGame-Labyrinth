@@ -10,6 +10,7 @@
 		- [Alien-Klassen](#alien-Klassen)
 	- [Crewregeln](#crewregeln)
 		- [Crew-Klassen](#crew-Klassen)
+- [Settings](#settings)
 - [Menu](#menu)
 	- [Join](#join)
 	- [Lobby](#lobby)
@@ -78,14 +79,26 @@ Ist schnell, hat dafür aber eine geringe Sichtweite
 ##### Mechaniker
 Kann den Terminal schneller Reparieren, ist allerdings etwas langsamer.
 
+## Settings
+Die Auswahl zwischen PC und Mobile funktioniert automatisch. Möchte man im Mobilen Build zwischen Haptischen Controller und einem
+virtuellen Controller wechseln, muss man dort in Settings gehen und den Haken dafür setzen.
+Im Settings Menu findet man zudem noch den Debug Modus und ein Hilfe Panel. Aktiviert man die Hilfe wird die UI erklärt.
+### PC-Build
+Die Steuerung bei der Wegfindung, erfolgt mit der Maus. Möchte man den losen Raum bewegen, so muss man shift gedrückt haben und der Raum 
+heftet sich an die Position des Cursors. Zum rotieren kann man die Tasten "A" und "D" benutzen.
+### Mobile-Build
+In den Settings kann man zwischen einer haptischen und virtuellen Steuerung wählen. Haptisch wäre, dass der Raum mit dem Tile Marker
+aus [Tile-Marker](#tile-Marker) getrackt wird. Im virtuellen Modus, kann man diesen Raum auf dem Handy-Display verschieben und drehen.
+
 ## Menu
 
 ### Join
 Hier muss man die IP-Adresse des Host eingeben um sich zu verbinden. Der Host ist immer das Alien.
 ### Lobby
-Um die Characterauswahl durchführen zu können, muss man den [Lobby-Marker](#lobby-Marker) tracken und durch den "Select"-Button
-die Luke des Raumschiffs öffnen. Dann kann man durch swipen sich einen Character aussuchen.
-Wenn man fertig ist muss man auf "Ready" klicken. Wenn alle "Ready" sind, kann der Host das Spiel starten.
+Um die Characterauswahl durchführen zu können, muss man seine Ecke vom Board finden und den zugehörigen Boardmarker
+tracken(siehe [Board-Marker](#Board-Marker)). Dort sollte dann ein Raumschiff mit einem "Select" Knopf auftauchen.
+Drückt man diesen kann man durch swipen mit der Charakterauswahl beginnen.
+Ist man fertig muss man auf "Ready" klicken. Wenn alle "Ready" sind, kann der Host das Spiel starten.
 ### HUD
 Im HUD wird folgendes angezeigt:
 - welcher Spieler dran ist
@@ -109,12 +122,6 @@ die ToggleBox "Lock Board" aktivieren. Damit wird das Board an der Position gefi
   <img width="100" src="DVL/Assets/ImageLibrary/Top.png">
   <img width="100" src="DVL/Assets/ImageLibrary/TopRight.jpeg">
 </p>
-
-### Lobby-Marker
-Dieser Marker wird nur einmal zu beginn benötigt, damit jeder Spieler sich eine Lobby an seinen Platz
-spawnen kann. Dieser wird nach der Characterselection nicht mehr benötigt.
-
-<img width="100" src="DVL/Assets/ImageLibrary/Lobby.jpeg">
 
 ### Tile-Marker
 Der Marker trackt das Raum-Tile, welches rausgeschoben wurde und die Spieler einmal in ihrem Zug
