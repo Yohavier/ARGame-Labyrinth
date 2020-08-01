@@ -26,19 +26,19 @@ public class BoardEnvironment : MonoBehaviour
         Eventbroker.instance.onChangeGameState -= ChangeEnv;
     }
 
-    private void ChangeEnv(GameFlowState state)
+    private void ChangeEnv(GameState state)
     {
-        if (state == GameFlowState.LOBBY)
+        if (state == GameState.LOBBY)
         {
             StartCoroutine(DelayedEnvChange(state));
         }
-        else if(state == GameFlowState.GAME)
+        else if(state == GameState.GAME)
         {
             gameEnv.SetActive(true);
         }
     }
 
-    private IEnumerator DelayedEnvChange(GameFlowState state)
+    private IEnumerator DelayedEnvChange(GameState state)
     {
         yield return new WaitForEndOfFrame();
         foreach (LobbyRocket rocket in rockets)

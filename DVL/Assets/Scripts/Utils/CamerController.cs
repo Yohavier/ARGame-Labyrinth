@@ -25,12 +25,12 @@ public class CamerController : MonoBehaviour
             Eventbroker.instance.onChangeGameState += PCHandleCamera;
         }
     }
-    private void PCHandleCamera(GameFlowState state)
+    private void PCHandleCamera(GameState state)
     {
-        if (state == GameFlowState.LOBBY)
+        if (state == GameState.LOBBY)
         {
             Transform target = null;
-            switch(LocalGameManager.instance.localPlayerIndex)
+            switch(GameManager.instance.localPlayerIndex)
             {
                 case PlayerIndex.Player1:
                     target = lobbyPlayer1;
@@ -50,7 +50,7 @@ public class CamerController : MonoBehaviour
             }
             StartCoroutine(CameraRide(target));
         }      
-        else if (state == GameFlowState.GAME)
+        else if (state == GameState.GAME)
             StartCoroutine(CameraRide(gameView));
     }
     private IEnumerator CameraRide(Transform targetPos)

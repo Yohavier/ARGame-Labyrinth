@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
 	public bool IsLocalPlayer()
 	{
-		return playerIndex == LocalGameManager.instance.localPlayerIndex;
+		return playerIndex == GameManager.instance.localPlayerIndex;
 	}
 
     private void Start()
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			LocalGameManager.instance.activePlayer = gameObject;
+			GameManager.instance.activePlayer = gameObject;
 			playerState = PlayerState.ALIVE;
 			playerFOW = GetComponent<FogOfWar>();
 			SetInformations();
@@ -150,10 +150,10 @@ public class Player : MonoBehaviour
 			//if active player call his FOW
 			playerFOW.OnChangePlayerPosition(positionTile);
 		}
-		else if(LocalGameManager.instance.activePlayer != null)
+		else if(GameManager.instance.activePlayer != null)
 		{
 			//if not active Player, call active players FOW
-			LocalGameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
+			GameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
 		}
 
         if (!positionTile.isInFOW)
@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
 				transform.localPosition = Vector3.zero;
 				ChangePlayerPosition(tile);
 				tile.UpdateTileFOW();
-				LocalGameManager.instance._stepsLeft--;
+				GameManager.instance._stepsLeft--;
 			}
 			else
 			{
@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
 			yield return null;
 		}
 
-		if (LocalGameManager.instance.localPlayerIndex == LocalGameManager.instance.currentTurnPlayer)
+		if (GameManager.instance.localPlayerIndex == GameManager.instance.currentTurnPlayer)
 			CheckTileForOtherMods(path[path.Count - 1]);
 		isWalking = false;
 	}

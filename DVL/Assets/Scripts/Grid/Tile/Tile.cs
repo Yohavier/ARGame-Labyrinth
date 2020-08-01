@@ -269,7 +269,7 @@ public class Tile : MonoBehaviour
 		else
 			CloseTileDoors();
 
-		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
     }
 	public void ToggleDoors(bool toggle)
     {
@@ -279,7 +279,7 @@ public class Tile : MonoBehaviour
 		else
 			CloseTileDoors();
 
-		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
 	}
 
 	private void OpenTileDoors()
@@ -357,7 +357,7 @@ public class Tile : MonoBehaviour
 			AkSoundEngine.PostEvent("tile_expell", gameObject);
 			yield return new WaitForSeconds(0.2f);
 		}
-		LocalGameManager.instance.canMove = true;
+		GameManager.instance.canMove = true;
 		BoardGrid.instance.RemoveTileFromGrid(this);
 		BoardGrid.instance.inMove = false;
 		StartCoroutine(SimulateExplosionTilePhysics(pos[2]));

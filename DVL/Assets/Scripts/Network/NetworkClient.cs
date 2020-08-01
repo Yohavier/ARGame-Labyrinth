@@ -128,11 +128,11 @@ public class NetworkClient
     {
         PlayerIndex currentTurnPlayer = (PlayerIndex)msg.ReadInt();
         //GUIManager.instance.nextTurnButton.interactable = currentTurnPlayer == LocalGameManager.instance.localPlayerIndex;
-        LocalGameManager.instance.currentTurnPlayer = currentTurnPlayer;
+        GameManager.instance.currentTurnPlayer = currentTurnPlayer;
 
         try
         {
-            GUIManager.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
+            GUIManager.instance.SetPlayerText(GameManager.instance.currentTurnPlayer == GameManager.instance.localPlayerIndex ? "You" : GameManager.instance.currentTurnPlayer.ToString());
         }
 
         catch (Exception ex)
@@ -143,7 +143,7 @@ public class NetworkClient
     private void HandleSetupPlayer(Msg msg)
     {
         PlayerIndex playerID = (PlayerIndex)msg.ReadInt();
-        LocalGameManager.instance.localPlayerIndex = playerID;
+        GameManager.instance.localPlayerIndex = playerID;
     }
     private void HandleTileMove(Msg msg)
     {
@@ -318,15 +318,15 @@ public class NetworkClient
             }
         }
 
-        PlayerIndex nextID = connectedIndices.Find(x => x == LocalGameManager.instance.currentTurnPlayer + 1);
+        PlayerIndex nextID = connectedIndices.Find(x => x == GameManager.instance.currentTurnPlayer + 1);
         if (nextID <= PlayerIndex.Player1)
             nextID = connectedIndices[0];
 
-        LocalGameManager.instance.currentTurnPlayer = nextID;
+        GameManager.instance.currentTurnPlayer = nextID;
 
         try
         {
-            GUIManager.instance.SetPlayerText(LocalGameManager.instance.currentTurnPlayer == LocalGameManager.instance.localPlayerIndex ? "You" : LocalGameManager.instance.currentTurnPlayer.ToString());
+            GUIManager.instance.SetPlayerText(GameManager.instance.currentTurnPlayer == GameManager.instance.localPlayerIndex ? "You" : GameManager.instance.currentTurnPlayer.ToString());
         }
 
         catch (Exception ex)
@@ -341,16 +341,16 @@ public class NetworkClient
     public void SendPlayerMove(Tile targetTile)
     {
         Msg msg = new Msg(MsgOpcode.opPlayerMove, 16);
-        msg.Write((int)LocalGameManager.instance.localPlayerIndex);
+        msg.Write((int)GameManager.instance.localPlayerIndex);
         msg.Write(targetTile.index);
-        msg.Write(LocalGameManager.instance._stepsLeft);
+        msg.Write(GameManager.instance._stepsLeft);
         Send(msg);
     }
 
     public void SendItemCollected(Tile itemTile)
     {
         Msg msg = new Msg(MsgOpcode.opItemCollected, 8);
-        msg.Write((int)LocalGameManager.instance.localPlayerIndex);
+        msg.Write((int)GameManager.instance.localPlayerIndex);
         msg.Write(itemTile.index);
         Send(msg);
     }
@@ -400,7 +400,7 @@ public class NetworkClient
     public void SendItemDropped(Tile tile)
     {
         Msg msg = new Msg(MsgOpcode.opItemDropped, 8);
-        msg.Write((int)LocalGameManager.instance.localPlayerIndex);
+        msg.Write((int)GameManager.instance.localPlayerIndex);
         msg.Write(tile.index);
         Send(msg);
     }

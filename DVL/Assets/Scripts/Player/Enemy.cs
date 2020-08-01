@@ -11,7 +11,7 @@ public class Enemy : Player
 
 		if (crewMembers != null)
         {
-            if (LocalGameManager.instance.GetTurn())
+            if (GameManager.instance.GetTurn())
             {
                 foreach (CrewMember crew in crewMembers)
                 {

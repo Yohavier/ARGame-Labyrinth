@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { None, Lobby, InGame}
 public enum MusicIntensity { Low = 0, Medium = 1, High = 2}
 public class AudioWwiseManager : MonoBehaviour
 {
@@ -11,27 +10,33 @@ public class AudioWwiseManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        SetMusicGameState(GameState.None);
     }
-
+    private void OnEnable()
+    {
+        Eventbroker.instance.onChangeGameState += SetGameState;
+    }
+    private void OnDisable()
+    {
+        
+    }
     public static void PostAudio(string file)
     {
         AkSoundEngine.PostEvent(file, instance.gameObject);
     }
 
     #region Music Management
-    public void SetMusicGameState(GameState gamestate)
+    public void SetGameState(GameState state)
     {
-        switch (gamestate)
+        switch (state)
         {
-            case GameState.Lobby:
+            case GameState.JOIN:
+                AkSoundEngine.SetState("GameState", "None");
+                break;
+            case GameState.LOBBY:
                 AkSoundEngine.SetState("GameState", "Lobby");
                 break;
-            case GameState.InGame:
+            case GameState.GAME:
                 AkSoundEngine.SetState("GameState", "InGame");
-                break;
-            case GameState.None:
-                AkSoundEngine.SetState("GameState", "None");
                 break;
         }
     }

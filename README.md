@@ -11,6 +11,9 @@
 	- [Crewregeln](#crewregeln)
 		- [Crew-Klassen](#crew-Klassen)
 - [Settings](#settings)
+	- [Debug](#debug)
+	- [PC-Build](#pC-Build)
+	- [Mobile-Build](#mobile-Build)
 - [Menu](#menu)
 	- [Join](#join)
 	- [Lobby](#lobby)
@@ -83,6 +86,9 @@ Kann den Terminal schneller Reparieren, ist allerdings etwas langsamer.
 Die Auswahl zwischen PC und Mobile funktioniert automatisch. Möchte man im Mobilen Build zwischen Haptischen Controller und einem
 virtuellen Controller wechseln, muss man dort in Settings gehen und den Haken dafür setzen.
 Im Settings Menu findet man zudem noch den Debug Modus und ein Hilfe Panel. Aktiviert man die Hilfe wird die UI erklärt.
+### Debug
+Es gibt zwei verschiedene Debug varianten. Einmal den Debug-Modus mit welchem man unendlich viel laufen und Räume ins Grid schieben kann ("Debug Movement")
+und den visuellen Debug ("Debug Vision").
 ### PC-Build
 Die Steuerung bei der Wegfindung, erfolgt mit der Maus. Möchte man den losen Raum bewegen, so muss man shift gedrückt haben und der Raum 
 heftet sich an die Position des Cursors. Zum rotieren kann man die Tasten "A" und "D" benutzen.

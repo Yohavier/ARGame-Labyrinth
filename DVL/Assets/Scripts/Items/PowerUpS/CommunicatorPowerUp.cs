@@ -33,7 +33,7 @@ public class CommunicatorPowerUp : PowerUpBase
         {
             if (player.GetComponent<CrewMember>())
             {
-                if (player != LocalGameManager.instance.activePlayer)
+                if (player != GameManager.instance.activePlayer)
                 {
                     return player;
                 }

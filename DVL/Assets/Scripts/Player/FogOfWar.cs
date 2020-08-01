@@ -13,7 +13,7 @@ public class FogOfWar : MonoBehaviour
 		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
 		{
-			neighbours = DetectDirectNeighbours.DetectTileRadius(newPosition, LocalGameManager.instance.activePlayer.GetComponent<Player>().fogOfWarRadius, true);
+			neighbours = DetectDirectNeighbours.DetectTileRadius(newPosition, GameManager.instance.activePlayer.GetComponent<Player>().fogOfWarRadius, true);
 		}
 		else
 		{

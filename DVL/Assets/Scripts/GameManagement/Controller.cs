@@ -9,7 +9,6 @@ public class Controller : MonoBehaviour
 	public static Controller instance;
 	[Header("Controller")]
 	public ControllerType controllerType = ControllerType.None;
-	private bool mobileHaptikControl = false;
 	public CamerController cameraController;
 
 	[Header("Environment")]
@@ -72,7 +71,7 @@ public class Controller : MonoBehaviour
 			manager = GetComponent<ARTrackedImageManager>();
 			manager.trackedImagesChanged += OnTrackedImagesChanged;
 		}
-		ChooseController();
+		ChooseController(false);
 		cameraController.SetUp();
 	}
 	private void Update()
@@ -106,19 +105,18 @@ public class Controller : MonoBehaviour
     #endregion
 
     #region Choose Controller
-    public void MobileHaptikTileControl()
+    public void MobileHaptikTileControl(bool value)
 	{
-		mobileHaptikControl = !mobileHaptikControl;
-		ChooseController();
-		if (!mobileHaptikControl)
+		ChooseController(value);
+		if (!value)
 			Controller.instance.tilePrefabParent.transform.rotation = Quaternion.identity;
 	}
-	private void ChooseController()
+	private void ChooseController(bool value)
 	{
 #if UNITY_EDITOR || UNITY_STANDALONE
 		controllerType = ControllerType.PC;
 #elif UNITY_IOS || UNITY_ANDROID
-		if (mobileHaptikControl)
+		if (value)
 			controllerType = ControllerType.Mobile_Haptik;
 		else
 			controllerType = ControllerType.Mobile_Virtual;
@@ -208,7 +206,7 @@ public class Controller : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hit, 100, 1 << 8))
 			{
-				ManagePath(hit.transform.GetComponent<Tile>(), LocalGameManager.instance.localPlayerIndex, LocalGameManager.instance._stepsLeft);
+				ManagePath(hit.transform.GetComponent<Tile>(), GameManager.instance.localPlayerIndex, GameManager.instance._stepsLeft);
 				NetworkClient.instance.SendPlayerMove(hit.transform.GetComponent<Tile>());
 			}
 		}
@@ -228,7 +226,7 @@ public class Controller : MonoBehaviour
 				if (hitTile.transform.CompareTag("Tile"))
 				{
 					NetworkClient.instance.SendPlayerMove(tile);
-					ManagePath(tile, LocalGameManager.instance.localPlayerIndex, LocalGameManager.instance._stepsLeft);
+					ManagePath(tile, GameManager.instance.localPlayerIndex, GameManager.instance._stepsLeft);
 				}
 			}
 		}
@@ -246,17 +244,17 @@ public class Controller : MonoBehaviour
 	}
 	private bool CanControl()
 	{
-		if (LocalGameManager.instance.activePlayer)
+		if (GameManager.instance.activePlayer)
 		{
-			if (LocalGameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
+			if (GameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
 			{
-				if (!LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
+				if (!GameManager.instance.activePlayer.GetComponent<Player>().isWalking)
 				{
-					if (LocalGameManager.instance.GetTurn())
+					if (GameManager.instance.GetTurn())
 					{
-						if (LocalGameManager.instance._stepsLeft > 0)
+						if (GameManager.instance._stepsLeft > 0)
 						{
-							if (LocalGameManager.instance.canMove)
+							if (GameManager.instance.canMove)
 							{
 								return true;
 							}
@@ -301,7 +299,7 @@ public class Controller : MonoBehaviour
 			//Color path red
 			if (path != null)
 			{
-				if (GUIManager.instance.isDebug || playerObject.gameObject == LocalGameManager.instance.activePlayer.gameObject)
+				if (GUIManager.instance.isDebug || playerObject.gameObject == GameManager.instance.activePlayer.gameObject)
 				{
 					foreach (Tile t in path)
 					{

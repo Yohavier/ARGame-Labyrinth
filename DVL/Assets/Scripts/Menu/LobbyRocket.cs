@@ -20,14 +20,14 @@ public class LobbyRocket : MonoBehaviour
         Eventbroker.instance.onToggleGate -= gate.OnToggleGate;
     }
 
-    public void SetUpRocket(GameFlowState state)
+    public void SetUpRocket(GameState state)
     {
         gate = GetComponentInChildren<LobbyGate>();
         character = GetComponentInChildren<LobbyCharacter>();
         Eventbroker.instance.onChangeGameState += StartBooster;
-        if (state == GameFlowState.LOBBY)
+        if (state == GameState.LOBBY)
         {
-            if(index == LocalGameManager.instance.localPlayerIndex)
+            if(index == GameManager.instance.localPlayerIndex)
             {
                 Eventbroker.instance.onChangeCharacter += character.ChangeSelectedCharacter;
                 Eventbroker.instance.onToggleGate += gate.OnToggleGate;
@@ -38,9 +38,9 @@ public class LobbyRocket : MonoBehaviour
             }
         }
     }
-    public void StartBooster(GameFlowState state)
+    public void StartBooster(GameState state)
     {
-        if(state == GameFlowState.GAME)
+        if(state == GameState.GAME)
         {
             rocketBlaster.Play();
             StartCoroutine(Boost());

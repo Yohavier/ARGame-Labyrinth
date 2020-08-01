@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
+#if UNITY_EDITOR
 using UnityEditor;
 
 [CustomEditor(typeof(AudioWwiseManager))]
@@ -25,4 +25,5 @@ public class AudioWwiseManagerInspector : Editor
             myAudioWwiseManger.SetMusicIntensity(MusicIntensity.High);
         }
     }
-}*/
+}
+#endif

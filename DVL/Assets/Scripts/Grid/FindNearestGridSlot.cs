@@ -10,11 +10,11 @@ public class FindNearestGridSlot : MonoBehaviour
 
     private void FixedUpdate()
 	{
-        if (LocalGameManager.instance.activePlayer)
+        if (GameManager.instance.activePlayer)
         {
-			if(LocalGameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
+			if(GameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
             {
-				if (LocalGameManager.instance._moveTileToken && !LocalGameManager.instance.activePlayer.GetComponent<Player>().isWalking)
+				if (GameManager.instance._moveTileToken && !GameManager.instance.activePlayer.GetComponent<Player>().isWalking)
                 {
 					FindTileWithRays();
 				}
@@ -84,8 +84,8 @@ public class FindNearestGridSlot : MonoBehaviour
 			{
 				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
 				BoardGrid.instance.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
-				LocalGameManager.instance._moveTileToken = false;
-				LocalGameManager.instance.canMove = false;
+				GameManager.instance._moveTileToken = false;
+				GameManager.instance.canMove = false;
 				targetTile = null;
 			}
 		}

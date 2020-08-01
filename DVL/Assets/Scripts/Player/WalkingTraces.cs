@@ -13,7 +13,7 @@ public class WalkingTraces : MonoBehaviour
     {
         if (tile != null)
         {
-            if (LocalGameManager.instance.activePlayer != null)
+            if (GameManager.instance.activePlayer != null)
             {
                 if (VisibilityCheck(tile))
                 {                    
@@ -30,7 +30,7 @@ public class WalkingTraces : MonoBehaviour
         if (!tile.isInFOW || !BoardGrid.instance.grid.Contains(tile))
             return false;
 
-        if (DetectDirectNeighbours.DetectTileRadius(tile,LocalGameManager.instance.activePlayer.GetComponent<Player>().footstepDetectionRadius, false).Contains(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile))
+        if (DetectDirectNeighbours.DetectTileRadius(tile,GameManager.instance.activePlayer.GetComponent<Player>().footstepDetectionRadius, false).Contains(GameManager.instance.activePlayer.GetComponent<Player>().positionTile))
             return true;
         else
             return false;

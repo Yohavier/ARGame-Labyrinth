@@ -22,8 +22,8 @@ public class Eventbroker : MonoBehaviour
         }
     }
 
-    public event Action<GameFlowState> onChangeGameState;
-    public void ChangeGameState(GameFlowState state)
+    public event Action<GameState> onChangeGameState;
+    public void ChangeGameState(GameState state)
     {
         if (onChangeGameState != null)
         {

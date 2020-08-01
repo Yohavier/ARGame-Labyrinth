@@ -31,14 +31,14 @@ public class PowerUpSlot : MonoBehaviour
     public void UsePowerUp()
     {
         if (storedPowerUp != null) 
-            storedPowerUp.GetComponent<PowerUpBase>().OnUse(LocalGameManager.instance.activePlayer.GetComponent<Player>(), this);
+            storedPowerUp.GetComponent<PowerUpBase>().OnUse(GameManager.instance.activePlayer.GetComponent<Player>(), this);
     }
 
     public void DropEverythingInSlot()
     {
         if(storedPowerUp!= null)
         {
-            storedPowerUp.GetComponent<PowerUpBase>().ReverseOnDrop(LocalGameManager.instance.activePlayer.GetComponent<Player>());
+            storedPowerUp.GetComponent<PowerUpBase>().ReverseOnDrop(GameManager.instance.activePlayer.GetComponent<Player>());
             Destroy(storedPowerUp.gameObject);
             powerUpIcon.image.sprite = null;
             powerUpIcon.interactable = false;

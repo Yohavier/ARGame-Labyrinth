@@ -24,8 +24,8 @@ class NetworkManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUILayout.Label("Player ID: " + LocalGameManager.instance.localPlayerIndex);
-        GUILayout.Label("Player Turn ID: " + LocalGameManager.instance.currentTurnPlayer);
+        GUILayout.Label("Player ID: " + GameManager.instance.localPlayerIndex);
+        GUILayout.Label("Player Turn ID: " + GameManager.instance.currentTurnPlayer);
 
         serverIP = GUILayout.TextField(serverIP, 15);
 
@@ -52,7 +52,7 @@ class NetworkManager : MonoBehaviour
             }
         }
 
-        if (LocalGameManager.instance.GetTurn())
+        if (GameManager.instance.GetTurn())
         {
             if (GUILayout.Button("Next Turn"))
             {

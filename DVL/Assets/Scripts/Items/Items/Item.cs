@@ -26,7 +26,7 @@ public class Item: MonoBehaviour
     }
     private void NewTurn()
     {
-        if (LocalGameManager.instance.GetTurn())
+        if (GameManager.instance.GetTurn())
             alreadyRepairedThisTurn = false;
         else
             alreadyRepairedThisTurn = true;
@@ -43,7 +43,7 @@ public class Item: MonoBehaviour
     }
     private void Update()
     {
-        if (LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile == position)
+        if (GameManager.instance.activePlayer.GetComponent<Player>().positionTile == position)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -73,7 +73,7 @@ public class Item: MonoBehaviour
         Debug.Log("press");
         if (!alreadyRepairedThisTurn)
         {
-            CrewMember player = LocalGameManager.instance.activePlayer.GetComponent<CrewMember>();
+            CrewMember player = GameManager.instance.activePlayer.GetComponent<CrewMember>();
             if (player != null)
             {
                 player.PickUpItem(this, position);

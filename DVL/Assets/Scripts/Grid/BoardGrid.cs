@@ -69,9 +69,8 @@ public class BoardGrid : MonoBehaviour
 	private void OnGameStarted()
     {
 		AudioWwiseManager.PostAudio("lobby_start");
-		AudioWwiseManager.instance.SetMusicGameState(GameState.InGame);
 		AudioWwiseManager.instance.SetMusicIntensity(0);
-		Eventbroker.instance.ChangeGameState(GameFlowState.GAME);
+		Eventbroker.instance.ChangeGameState(GameState.GAME);
 	}
 
 	private void Update()
@@ -250,7 +249,7 @@ public class BoardGrid : MonoBehaviour
 		lastTrackedTile.index = removedTile.index;
 		grid.Remove(removedTile);
 		UpdateDic();
-		LocalGameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
+		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);
 	}
 
 	private GridMovement GetMoveDir(Tile moveTile)
@@ -330,7 +329,7 @@ public class BoardGrid : MonoBehaviour
 				numberList.Remove(ranNum);
 			}
 		}
-		LocalGameManager.instance.activePlayer.GetComponent<Player>().ChangePlayerPosition(LocalGameManager.instance.activePlayer.GetComponent<Player>().positionTile);
+		GameManager.instance.activePlayer.GetComponent<Player>().ChangePlayerPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);
 	}
 
 	public void UpdateShutDownGrid(int index, int row, int column)

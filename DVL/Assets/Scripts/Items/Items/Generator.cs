@@ -42,7 +42,7 @@ public class Generator : Item
     {
         if (!alreadyRepairedThisTurn)
         {
-            CrewMember player = LocalGameManager.instance.activePlayer.GetComponent<CrewMember>();
+            CrewMember player = GameManager.instance.activePlayer.GetComponent<CrewMember>();
             if (player != null)
             {
                 player.RepairGenerator(this);

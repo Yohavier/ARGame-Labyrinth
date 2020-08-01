@@ -16,7 +16,7 @@ public class DiceHandler : MonoBehaviour
 
     public void RollDiceAnimation(int num)
     {
-        targetNum = num + LocalGameManager.instance.activePlayer.GetComponent<Player>().diceModificator;
+        targetNum = num + GameManager.instance.activePlayer.GetComponent<Player>().diceModificator;
         StartCoroutine(DiceAnimation(targetNum));
     }
     public IEnumerator DiceAnimation(int num)
@@ -38,7 +38,7 @@ public class DiceHandler : MonoBehaviour
             OnChangeDiceText(generatedNum, true);
             yield return new WaitForSeconds(0.1f);
         }
-        LocalGameManager.instance._stepsLeft = num;
+        GameManager.instance._stepsLeft = num;
         GUIManager.instance.diceObject.SetActive(false);
         isRunning = false;
     }
@@ -67,7 +67,7 @@ public class DiceHandler : MonoBehaviour
         if (isRunning)
         {
             isRunning = false;
-            LocalGameManager.instance._stepsLeft = targetNum;
+            GameManager.instance._stepsLeft = targetNum;
         }
     }
 }

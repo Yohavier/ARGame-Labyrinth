@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
-using Toggle = UnityEngine.UI.Toggle;
 
 public enum PowerUpSlotIcon { None, PickUp, Exchange }
 public class GUIManager : MonoBehaviour
@@ -28,7 +25,7 @@ public class GUIManager : MonoBehaviour
     public InputField hostIPInput;
     string serverIP = "192.168.0.206";
     public bool isServer = false;
-    public bool isDebug = false;
+    
 
     [Header("Lobby Panel")]
     public Button startMatchButton;
@@ -36,6 +33,7 @@ public class GUIManager : MonoBehaviour
     [HideInInspector] public bool needsMenuUpdate = false;
     [HideInInspector] public bool needsPlayerUpdate = false;
     [HideInInspector] public Text[] playerLabels = new Text[4];
+    private int readyCounter = 0;
 
     [Header("Game Panel")]
     public Button rollDiceButton;
@@ -57,9 +55,12 @@ public class GUIManager : MonoBehaviour
 
     [Header("Settings Panel")]
     public Button settingsButton;
-    public Toggle debugToggle;
+    public Toggle debugVisionToggle;
+    public Toggle debugMovementToggle;
     public Toggle controllerToggle;
+    public Toggle toggleHelpUI;
     public GameObject[] helpUI;
+    [HideInInspector] public bool isDebug = false;
 
     private void Awake()
     {
@@ -75,6 +76,12 @@ public class GUIManager : MonoBehaviour
         nextTurnButton.onClick.AddListener(() => OnNextTurnButtonClick());
         readyToggle.onValueChanged.AddListener((value) => OnReadyToggleValueChanged(value));
         settingsButton.onClick.AddListener(() => ToggleSettingsPanel());
+
+        debugVisionToggle.onValueChanged.AddListener((value) => ToggleDebugVisionMode(value));
+        debugMovementToggle.onValueChanged.AddListener((value) => ToggleDebugMoveMode(value));
+        controllerToggle.onValueChanged.AddListener((value) => ToggleController(value));
+        toggleHelpUI.onValueChanged.AddListener((value) => ToggleHelpInfo(value));
+
         hostIPInput.text = serverIP;
         lobbyCanvas.SetActive(false);
         instance = this;
@@ -90,7 +97,7 @@ public class GUIManager : MonoBehaviour
     {
         playerCanvas.SetActive(false);
         endCanvas.SetActive(false);
-        Eventbroker.instance.ChangeGameState(GameFlowState.JOIN);
+        Eventbroker.instance.ChangeGameState(GameState.JOIN);
     }
 
     private void Update()
@@ -133,7 +140,7 @@ public class GUIManager : MonoBehaviour
     }
     void OnTurnChange()
     {
-        nextTurnButton.interactable = LocalGameManager.instance.GetTurn();
+        nextTurnButton.interactable = GameManager.instance.GetTurn();
     }
 
     void OpenLobbyMenu()
@@ -142,22 +149,36 @@ public class GUIManager : MonoBehaviour
         lobbyCanvas.SetActive(true);
         startMatchButton.interactable = false;
         AkSoundEngine.PostEvent("lobby_join", gameObject);
-        AudioWwiseManager.instance.SetMusicGameState(GameState.Lobby);
-        Eventbroker.instance.ChangeGameState(GameFlowState.LOBBY);
+        Eventbroker.instance.ChangeGameState(GameState.LOBBY);
     }
 
-    public void ToggleDebugMode(bool value)
+    #region Debug Toggles
+    public void ToggleDebugVisionMode(bool value)
     {
         isDebug = value;
         DebugConsole.instance.enabled = value;
     }
-
+    public void ToggleDebugMoveMode(bool value)
+    {
+        GameManager.instance.isDebugingMovement = value;
+    }
+    public void ToggleController(bool value)
+    {
+        Controller.instance.MobileHaptikTileControl(value);
+    }
+    public void ToggleHelpInfo(bool value)
+    {
+        foreach (GameObject help in helpUI)
+            help.SetActive(value);
+    }
+    #endregion
     void OnNextTurnButtonClick()
     {
-        if (LocalGameManager.instance.GetTurn())
+        if (GameManager.instance.GetTurn())
             NetworkClient.instance.SendTurnChange();
     }
 
+    #region Join Methods
     void OnStartMatchButtonClick()
     {
         if (isServer)
@@ -178,8 +199,8 @@ public class GUIManager : MonoBehaviour
         OpenLobbyMenu();
         Destroy(startMatchButton.gameObject);
     }
+    #endregion
 
-    private int readyCounter = 0;
     void OnReadyToggleValueChanged(bool value)
     {
         if (value)
@@ -255,11 +276,6 @@ public class GUIManager : MonoBehaviour
     {
         settingsCanvas.SetActive(!settingsCanvas.activeSelf);
     }
-    public void ToggleHelpInfo(bool value)
-    {
-        foreach (GameObject help in helpUI)
-            help.SetActive(value);
-    }
     #endregion
 
     #region CharacterSelection
@@ -267,19 +283,19 @@ public class GUIManager : MonoBehaviour
     {
         SetPlayerRoles(SetRightRole(change));
         Eventbroker.instance.ChangeCharacter(selectedPlayerRole.roleIndex);
-        if (LocalGameManager.instance != null)
-            NetworkClient.instance.SendRoleChanged(LocalGameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
+        if (GameManager.instance != null)
+            NetworkClient.instance.SendRoleChanged(GameManager.instance.localPlayerIndex, selectedPlayerRole.roleIndex);
     }
 
     private SO_PlayerClass SetRightRole(int change)
     {
         SO_PlayerClass newRole = null;
-        if (LocalGameManager.instance.localPlayerIndex != PlayerIndex.Invalid && LocalGameManager.instance.localPlayerIndex != PlayerIndex.Enemy)
+        if (GameManager.instance.localPlayerIndex != PlayerIndex.Invalid && GameManager.instance.localPlayerIndex != PlayerIndex.Enemy)
         {
             crewIndex = SetIndex(change, crewList, crewIndex);
             newRole = crewList[crewIndex];
         }
-        else if (LocalGameManager.instance.localPlayerIndex == PlayerIndex.Enemy)
+        else if (GameManager.instance.localPlayerIndex == PlayerIndex.Enemy)
         {
             enemyIndex = SetIndex(change, enemyList, enemyIndex);
             newRole = enemyList[enemyIndex];
