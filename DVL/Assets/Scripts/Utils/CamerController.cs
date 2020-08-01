@@ -58,11 +58,24 @@ public class CamerController : MonoBehaviour
     {
         var pos1 = transform.position;
         var pos2 = targetPos.position;
-
+        Vector3 to = targetPos.localEulerAngles;
+        bool rotating = true;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             transform.position = Vector3.Lerp(pos1, pos2, t / duration);
-            transform.rotation = targetPos.rotation;
+
+            if (rotating)
+            {
+                if (Vector3.Distance(transform.eulerAngles, to) > 0.01f)
+                {
+                    transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, to, t/duration);
+                }
+                else
+                {
+                    transform.eulerAngles = to;
+                    rotating = false;
+                }
+            }
             yield return null;
         }
         transform.position = pos2;

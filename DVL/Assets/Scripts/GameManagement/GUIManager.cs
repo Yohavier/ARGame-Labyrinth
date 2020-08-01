@@ -253,6 +253,7 @@ public class GUIManager : MonoBehaviour
 
     public void ToggleHelpInformationPanel()
     {
+        Debug.Log("f");
         settingsCanvas.SetActive(!settingsCanvas.activeSelf);
     }
     #endregion
