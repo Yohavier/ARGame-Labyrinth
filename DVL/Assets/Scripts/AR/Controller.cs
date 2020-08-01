@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using System.Collections;
 
 public enum ControllerType {None, Mobile_Haptik, Mobile_Virtual, PC }
 public class Controller : MonoBehaviour
@@ -34,6 +29,7 @@ public class Controller : MonoBehaviour
 	private Tile currentSelectedTarget;
 	
 	[Header("Mobile Input")]
+	public LayerMask virtualLayerMask;
 	private Vector2 touchPosition;
 	private bool isTouching;
 	private float tapTimer;
@@ -79,7 +75,7 @@ public class Controller : MonoBehaviour
 		ChooseController();
 		cameraController.SetUp();
 	}
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (controllerType == ControllerType.PC)
 		{
@@ -91,9 +87,6 @@ public class Controller : MonoBehaviour
 		else if (controllerType == ControllerType.Mobile_Virtual)
 		{
 			VirtualController();
-
-			if (CanControl())
-				MobileTileSelectionController();
 		}
 		else if(controllerType == ControllerType.Mobile_Haptik)
         {
@@ -169,6 +162,7 @@ public class Controller : MonoBehaviour
 				HandleTouchRotation(Input.GetTouch(1));
 				return;
 			}
+
 			Touch touch = Input.GetTouch(0);
 			touchPosition = touch.position;
 			RaycastHit hit;
@@ -184,14 +178,22 @@ public class Controller : MonoBehaviour
 				isTouching = false;
 			}
 
-			if (isTouching && Physics.Raycast(ray.origin, ray.direction, out hit, 2, 1 << 9))
+			if(touch.phase == TouchPhase.Began)
+            {
+				MobileTileSelectionController();
+            }
+
+			if (isTouching)
 			{
 				tapTimer += Time.deltaTime;
 				if (tapTimer > 0.2f)
 				{
-					if (hit.transform.name == "DebugPlane")
+					if (Physics.Raycast(ray.origin, ray.direction, out hit, 2, 1 << 9))
 					{
-						tilePrefabParent.transform.position = hit.point;
+						if (hit.transform.name == "DebugPlane")
+						{
+							tilePrefabParent.transform.position = hit.point;
+						}
 					}
 				}
 			}
@@ -217,16 +219,16 @@ public class Controller : MonoBehaviour
 		{
 			Touch touch = Input.GetTouch(0);
 			touchPosition = touch.position;
-			RaycastHit hitObject;
+			RaycastHit hitTile;
 			Ray ray = Camera.main.ScreenPointToRay(touchPosition);
 
-			if (touch.phase == TouchPhase.Began && Physics.Raycast(ray, out hitObject, 1 << 8))
+			if (touch.phase == TouchPhase.Began && Physics.Raycast(ray, out hitTile, 1 << 8))
 			{
-				Tile hitTile = hitObject.transform.GetComponent<Tile>();
-				if (hitObject.transform.CompareTag("Tile"))
+				Tile tile = hitTile.transform.GetComponent<Tile>();
+				if (hitTile.transform.CompareTag("Tile"))
 				{
-					NetworkClient.instance.SendPlayerMove(hitTile);
-					ManagePath(hitTile, LocalGameManager.instance.localPlayerIndex, LocalGameManager.instance._stepsLeft);
+					NetworkClient.instance.SendPlayerMove(tile);
+					ManagePath(tile, LocalGameManager.instance.localPlayerIndex, LocalGameManager.instance._stepsLeft);
 				}
 			}
 		}
@@ -445,7 +447,6 @@ public class Controller : MonoBehaviour
 				mesh.material.color = Color.white;
 			}
 		}
-		//_activeLooseTile = false;
 		tilePrefabParent.SetActive(true);
 
 		droppedOutPrefab.transform.SetParent(tilePrefabParent.transform);
@@ -454,12 +455,11 @@ public class Controller : MonoBehaviour
 
 		droppedOutPrefab.GetComponent<FindNearestGridSlot>().enabled = true;
 		BoardGrid.instance.trackedTile = droppedOutPrefab.GetComponent<Tile>();
-
+		tilePrefabParent.SetActive(false);
 		Invoke("ToggleBackOn", 2);
 	}
 	private void ToggleBackOn()
 	{
-		//_activeLooseTile = true;
 		tilePrefabParent.SetActive(true);
 	}
 	public void LockBoard()

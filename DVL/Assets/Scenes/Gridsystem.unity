@@ -2353,6 +2353,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   path: []
+  virtualLayerMask:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!114 &199011448
 MonoBehaviour:
   m_ObjectHideFlags: 0

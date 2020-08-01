@@ -228,11 +228,11 @@ MonoBehaviour:
   ingameBackwardModule: 0
   ingameRightModule: 0
   ingameLeftModule: 0
-  doorOpen: 1
-  index: -1
   explosion: {fileID: 4692819508810876851, guid: daf976c04b12e0d4588860bdd84efbbc,
     type: 3}
   explosionNumber: 4
+  doorOpen: 1
+  index: -1
 --- !u!114 &7330108409265875092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,8 +260,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 10, y: 7, z: 10}
+  m_Center: {x: 0, y: 3.3, z: 0}
 --- !u!1 &1371995323612783498
 GameObject:
   m_ObjectHideFlags: 0
