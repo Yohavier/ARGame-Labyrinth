@@ -57,8 +57,9 @@ public class GUIManager : MonoBehaviour
 
     [Header("Settings Panel")]
     public Button settingsButton;
-    public Button debugButton;
+    public Toggle debugToggle;
     public Toggle controllerToggle;
+    public GameObject[] helpUI;
 
     private void Awake()
     {
@@ -72,9 +73,8 @@ public class GUIManager : MonoBehaviour
         joinButton.onClick.AddListener(() => OnJoinButtonClick());
         startMatchButton.onClick.AddListener(() => OnStartMatchButtonClick());
         nextTurnButton.onClick.AddListener(() => OnNextTurnButtonClick());
-        debugButton.onClick.AddListener(() => OnDebugButtonClicked());
         readyToggle.onValueChanged.AddListener((value) => OnReadyToggleValueChanged(value));
-        settingsButton.onClick.AddListener(() => ToggleHelpInformationPanel());
+        settingsButton.onClick.AddListener(() => ToggleSettingsPanel());
         hostIPInput.text = serverIP;
         lobbyCanvas.SetActive(false);
         instance = this;
@@ -142,14 +142,10 @@ public class GUIManager : MonoBehaviour
         Eventbroker.instance.ChangeGameState(GameFlowState.LOBBY);
     }
 
-    void OnDebugButtonClicked()
+    public void ToggleDebugMode(bool value)
     {
-        isDebug = !isDebug;
-
-        if (isDebug)
-            DebugConsole.instance.enabled = true;
-        else
-            DebugConsole.instance.enabled = false;
+        isDebug = value;
+        DebugConsole.instance.enabled = value;
     }
 
     void OnNextTurnButtonClick()
@@ -251,10 +247,14 @@ public class GUIManager : MonoBehaviour
         }
     }
 
-    public void ToggleHelpInformationPanel()
+    public void ToggleSettingsPanel()
     {
-        Debug.Log("f");
         settingsCanvas.SetActive(!settingsCanvas.activeSelf);
+    }
+    public void ToggleHelpInfo(bool value)
+    {
+        foreach (GameObject help in helpUI)
+            help.SetActive(value);
     }
     #endregion
 
