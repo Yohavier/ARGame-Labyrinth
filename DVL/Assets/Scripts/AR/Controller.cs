@@ -15,6 +15,7 @@ public class Controller : MonoBehaviour
 	[Header("Controller")]
 	public ControllerType controllerType = ControllerType.None;
 	private bool mobileHaptikControl = false;
+	public CamerController cameraController;
 
 	[Header("Environment")]
 	public GameObject environment;
@@ -76,6 +77,7 @@ public class Controller : MonoBehaviour
 			manager.trackedImagesChanged += OnTrackedImagesChanged;
 		}
 		ChooseController();
+		cameraController.SetUp();
 	}
 	private void FixedUpdate()
 	{
