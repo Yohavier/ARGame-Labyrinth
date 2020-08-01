@@ -5,6 +5,7 @@ using UnityEngine;
 public class CamerController : MonoBehaviour
 {
     [Header("Camera Positions")]
+    public float camerRideDuration = 2;
     public Transform gameView;
     public Transform lobbyPlayer1;
     public Transform lobbyPlayer2;
@@ -52,22 +53,21 @@ public class CamerController : MonoBehaviour
         else if (state == GameFlowState.GAME)
             StartCoroutine(CameraRide(gameView));
     }
-    float duration = 4;
     private IEnumerator CameraRide(Transform targetPos)
     {
         var pos1 = transform.position;
         var pos2 = targetPos.position;
         Vector3 to = targetPos.localEulerAngles;
         bool rotating = true;
-        for (float t = 0f; t < duration; t += Time.deltaTime)
+        for (float t = 0f; t < camerRideDuration; t += Time.deltaTime)
         {
-            transform.position = Vector3.Lerp(pos1, pos2, t / duration);
+            transform.position = Vector3.Lerp(pos1, pos2, t / camerRideDuration);
 
             if (rotating)
             {
                 if (Vector3.Distance(transform.eulerAngles, to) > 0.01f)
                 {
-                    transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, to, t/duration);
+                    transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, to, t/camerRideDuration);
                 }
                 else
                 {

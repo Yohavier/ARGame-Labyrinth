@@ -49,7 +49,7 @@ public class LobbyRocket : MonoBehaviour
     }
     private IEnumerator Boost()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(1f,3f));
         float a;
         float t;
         float distance;
