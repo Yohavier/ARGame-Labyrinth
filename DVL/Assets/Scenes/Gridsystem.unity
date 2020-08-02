@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffb650b6351b914696d04dd25f75132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPlayerIndex: 0
+  localPlayerIndex: -1
   activePlayer: {fileID: 0}
   canMove: 1
   currentTurnPlayer: 0

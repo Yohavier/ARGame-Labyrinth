@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance;
 
 	[Header("Character")]
-	public PlayerIndex localPlayerIndex;
+	public PlayerIndex localPlayerIndex = PlayerIndex.Invalid;
 	public GameObject activePlayer;
 	private PlayerIndex previousTurn;
 

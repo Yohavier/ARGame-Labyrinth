@@ -15,15 +15,19 @@ public class CamerController : MonoBehaviour
     #region Unity Methods
     private void OnDisable()
     {
-        Eventbroker.instance.onChangeGameState -= PCHandleCamera;
+        Eventbroker.instance.onChangeGameState -= OnGameStateChange;
     }
     #endregion
     public void SetUp()
     {
         if (Controller.instance.controllerType == ControllerType.PC)
         {
-            Eventbroker.instance.onChangeGameState += PCHandleCamera;
+            Eventbroker.instance.onChangeGameState += OnGameStateChange;
         }
+    }
+    private void OnGameStateChange(GameState state)
+    {
+        StartCoroutine(DelayedCommand(state));
     }
     private void PCHandleCamera(GameState state)
     {
@@ -49,10 +53,16 @@ public class CamerController : MonoBehaviour
                     Debug.LogError("Lobby Camera Error");
                     break;
             }
-            StartCoroutine(CameraRide(target));
+            if(target != null)
+                StartCoroutine(CameraRide(target));
         }      
         else if (state == GameState.GAME)
             StartCoroutine(CameraRide(gameView));
+    }
+    private IEnumerator DelayedCommand(GameState state)
+    {
+        yield return new WaitForEndOfFrame();
+        PCHandleCamera(state);
     }
     private IEnumerator CameraRide(Transform targetPos)
     {
