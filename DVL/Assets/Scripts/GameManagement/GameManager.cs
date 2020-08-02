@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 	private int capsuleCount;
 	private int killCount;
 	public List<GameObject> allPlayers = new List<GameObject>();
-
+	public GameObject MoveTokenIndicator;
 	#region Getter Setter
 	private bool moveTileToken;
 	public bool _moveTileToken
@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
         {
 			if (isDebugingMovement)
 				moveTileToken = true;
-			else
+            else
 				moveTileToken = value;
+
+			MoveTokenIndicator.SetActive(value);
         }
     }
 

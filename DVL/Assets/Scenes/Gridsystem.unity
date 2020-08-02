@@ -2862,6 +2862,7 @@ MonoBehaviour:
   currentTurnPlayer: 0
   isDebugingMovement: 0
   allPlayers: []
+  MoveTokenIndicator: {fileID: 1044511228}
 --- !u!1 &266829079
 GameObject:
   m_ObjectHideFlags: 0
@@ -7734,6 +7735,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4620719178117429468, guid: e184a882295f7324096c0f073ee93c47,
+        type: 3}
+      propertyPath: m_Name
+      value: TileMoveIndicator
+      objectReference: {fileID: 0}
     - target: {fileID: 5076500778412105044, guid: e184a882295f7324096c0f073ee93c47,
         type: 3}
       propertyPath: m_IsActive
@@ -8602,6 +8608,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042394905}
   m_CullTransparentMesh: 0
+--- !u!1 &1044511228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4620719178117429468, guid: e184a882295f7324096c0f073ee93c47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1033570947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1046238310
 GameObject:
   m_ObjectHideFlags: 0
