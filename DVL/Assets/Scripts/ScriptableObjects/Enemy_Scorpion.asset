@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleName: Scorpion
   roleIndex: 6
-  diceModificator: 3
+  diceModificator: 2
   fogOfWarRadius: 1
   footstepDetectionRadius: 1
   repairSpeed: 0
