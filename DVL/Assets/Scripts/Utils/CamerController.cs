@@ -29,6 +29,7 @@ public class CamerController : MonoBehaviour
     {
         if (state == GameState.LOBBY)
         {
+            Debug.Log(GameManager.instance.localPlayerIndex);
             Transform target = null;
             switch(GameManager.instance.localPlayerIndex)
             {
