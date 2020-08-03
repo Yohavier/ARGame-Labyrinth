@@ -1,6 +1,8 @@
 Event	ID	Name			Wwise Object Path	Notes
 	97193572	powerUp_scanner			\Default Work Unit\PowerUps\powerUp_scanner	
+	192017233	gate_close			\Default Work Unit\Lobby\gate_close	
 	506812678	powerUp_pickUp			\Default Work Unit\Menu\powerUp_pickUp	
+	879922986	lobby_rocket			\Default Work Unit\Lobby\lobby_rocket	
 	934594543	powerUp_communicator			\Default Work Unit\PowerUps\powerUp_communicator	
 	1075926368	generator_repair			\Default Work Unit\Items\generator_repair	
 	1327556595	tile_move			\Default Work Unit\Tile\tile_move	
@@ -10,9 +12,11 @@ Event	ID	Name			Wwise Object Path	Notes
 	2092420523	lobby_smallButton			\Default Work Unit\Lobby\lobby_smallButton	
 	2177967876	item_drop			\Default Work Unit\Items\item_drop	
 	2388944346	powerUp_medipack			\Default Work Unit\PowerUps\powerUp_medipack	
+	2602462504	powerUp_shutdown			\Default Work Unit\PowerUps\powerUp_shutdown	
 	2613980178	generator_finish			\Default Work Unit\Items\generator_finish	
 	2886407174	lobby_join			\Default Work Unit\Lobby\lobby_join	
 	3077118699	character_footstep			\Default Work Unit\Character\character_footstep	
+	3328279379	gate_open			\Default Work Unit\Lobby\gate_open	
 	3873244585	powerUp_doorhack			\Default Work Unit\PowerUps\powerUp_doorhack	
 	3991942870	Music			\Default Work Unit\Music\Music	
 
@@ -36,6 +40,7 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	2470328564	intensity			\Default Work Unit\intensity	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	10210857	designed_futuristic_ship_enigne_booster_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\designed_futuristic_ship_enigne_booster_01_C196E905.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\lobby_rocket\lobby_rocket\designed_futuristic_ship_enigne_booster_01		860060
 	11078488	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_03_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
 	56275808	PremiumBeat_0046_sci_fi_readout_beep	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_readout_beep_593FA99E.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\PremiumBeat_0046_sci_fi_readout_beep		63068
 	85594683	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_04_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
@@ -51,6 +56,8 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	339078217	GameLead	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\game_lead_01_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\AllGameMusic\Game\Lead\GameLead		1234864
 	353200266	footstep_dirt_01	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_dirt_01_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\enemy_footstep\footstep_dirt_01		79724
 	360531588	roll_dice_05	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\roll_dice_05_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\roll_dice\roll_dice_05		5380
+	410631430	Classic Alarm 02	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\Classic Alarm 02_A011F508.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_shutdown\Classic Alarm 02		537822
+	436697353	metal_grind_metal_rusty_03	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\metal_grind_metal_rusty_03_FE9DF12F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Lobby\gate\metal_grind_metal_rusty_03		105508
 	466262912	PremiumBeat_0046_sci_fi_type_beep	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_type_beep_8404C809.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_doorhack\PremiumBeat_0046_sci_fi_type_beep		164156
 	501817554	PremiumBeat_0046_sci_fi_scanner	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\PremiumBeat_0046_sci_fi_scanner_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\PowerUps\powerUp_scanner\PremiumBeat_0046_sci_fi_scanner		1503224
 	522965997	footstep_dirt_04	C:\Users\Jonas\Documents\Uni\HSDMasterMedieninformatik\ARBoardgame\Labyrinth\Wwise\DVL\.cache\Android\SFX\footstep_dirt_04_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Character\character_footstep\enemy_footstep\footstep_dirt_04		71492

@@ -41,6 +41,7 @@ public class LobbyRocket : MonoBehaviour
     {
         if(state == GameState.GAME)
         {
+            AkSoundEngine.PostEvent("lobby_rocket", gameObject);
             rocketBlaster.Play();
             StartCoroutine(Boost());
         }

@@ -37,6 +37,7 @@ public class GUIManager : MonoBehaviour
     [HideInInspector] public bool isReady;
 
     [Header("Game Panel")]
+    public Toggle boardLock;
     public Button rollDiceButton;
     public Button nextTurnButton;
     public GameObject diceObject;
@@ -78,6 +79,7 @@ public class GUIManager : MonoBehaviour
         readyToggle.onValueChanged.AddListener((value) => OnReadyToggleValueChanged(value));
         settingsButton.onClick.AddListener(() => ToggleSettingsPanel());
 
+        boardLock.onValueChanged.AddListener((value) => onLockBoardToggle(value));
         debugVisionToggle.onValueChanged.AddListener((value) => ToggleDebugVisionMode(value));
         debugMovementToggle.onValueChanged.AddListener((value) => ToggleDebugMoveMode(value));
         controllerToggle.onValueChanged.AddListener((value) => ToggleController(value));
@@ -108,6 +110,7 @@ public class GUIManager : MonoBehaviour
             lobbyCanvas.SetActive(false);
             playerCanvas.SetActive(true);
             needsMenuUpdate = false;
+            SetMonsterUI();
         }
 
         if (needsPlayerUpdate)
@@ -156,18 +159,22 @@ public class GUIManager : MonoBehaviour
     public void ToggleDebugVisionMode(bool value)
     {
         isDebug = value;
+        AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
         DebugConsole.instance.enabled = value;
     }
     public void ToggleDebugMoveMode(bool value)
     {
+        AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
         GameManager.instance.isDebugingMovement = value;
     }
     public void ToggleController(bool value)
     {
         Controller.instance.MobileHaptikTileControl(value);
+        AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
     }
     public void ToggleHelpInfo(bool value)
     {
+        AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
         foreach (GameObject help in helpUI)
             help.SetActive(value);
     }
@@ -175,7 +182,10 @@ public class GUIManager : MonoBehaviour
     void OnNextTurnButtonClick()
     {
         if (GameManager.instance.GetTurn())
+        {
+            AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
             NetworkClient.instance.SendTurnChange();
+        }       
     }
 
     #region Join Methods
@@ -234,7 +244,11 @@ public class GUIManager : MonoBehaviour
     {
         rollDiceButton.interactable = interactable;
     }
-
+    public void onLockBoardToggle(bool value)
+    {
+        AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
+        Controller.instance.LockBoard();
+    }
     public void SetPlayerText(string text)
     {
         playerText.text = text;
@@ -268,6 +282,7 @@ public class GUIManager : MonoBehaviour
 
     public void ToggleSettingsPanel()
     {
+        AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
         settingsCanvas.SetActive(!settingsCanvas.activeSelf);
     }
     #endregion
@@ -328,5 +343,15 @@ public class GUIManager : MonoBehaviour
         AudioWwiseManager.PostAudio(file);
     }
     #endregion
+    
+    private void SetMonsterUI()
+    {
+        if(GameManager.instance.localPlayerIndex == PlayerIndex.Enemy)
+        {
+            slot1.gameObject.SetActive(false);
+            slot2.gameObject.SetActive(false);
+            itemText.transform.parent.gameObject.SetActive(false);
+        }
+    }
 }
 

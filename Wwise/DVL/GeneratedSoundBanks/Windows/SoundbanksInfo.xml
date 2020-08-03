@@ -89,6 +89,22 @@
 						</SwitchContainer>
 					</SwitchContainers>
 				</Event>
+				<Event Id="192017233" Name="gate_close" ObjectPath="\Events\Default Work Unit\Lobby\gate_close" DurationType="OneShot" DurationMin="0.597749" DurationMax="0.597749">
+					<IncludedMemoryFiles>
+						<File Id="436697353" Language="SFX">
+							<ShortName>metal_grind_metal_rusty_03.wav</ShortName>
+							<Path>SFX\metal_grind_metal_rusty_03_FE9DF12F.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3328279379" Name="gate_open" ObjectPath="\Events\Default Work Unit\Lobby\gate_open" DurationType="OneShot" DurationMin="0.597749" DurationMax="0.597749">
+					<IncludedMemoryFiles>
+						<File Id="436697353" Language="SFX">
+							<ShortName>metal_grind_metal_rusty_03.wav</ShortName>
+							<Path>SFX\metal_grind_metal_rusty_03_FE9DF12F.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="2613980178" Name="generator_finish" ObjectPath="\Events\Default Work Unit\Items\generator_finish" DurationType="OneShot" DurationMin="2.460092" DurationMax="2.460092">
 					<IncludedMemoryFiles>
 						<File Id="841457928" Language="SFX">
@@ -122,6 +138,14 @@
 						<File Id="1012598839" Language="SFX">
 							<ShortName>PremiumBeat_0013_cursor_selection_02.wav</ShortName>
 							<Path>SFX\PremiumBeat_0013_cursor_selection_02_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="879922986" Name="lobby_rocket" ObjectPath="\Events\Default Work Unit\Lobby\lobby_rocket" DurationType="OneShot" DurationMin="4.875260" DurationMax="4.875260">
+					<IncludedMemoryFiles>
+						<File Id="10210857" Language="SFX">
+							<ShortName>designed_futuristic_ship_enigne_booster_01.wav</ShortName>
+							<Path>SFX\designed_futuristic_ship_enigne_booster_01_C196E905.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -245,6 +269,14 @@
 						<File Id="501817554" Language="SFX">
 							<ShortName>PremiumBeat_0046_sci_fi_scanner.wav</ShortName>
 							<Path>SFX\PremiumBeat_0046_sci_fi_scanner_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2602462504" Name="powerUp_shutdown" ObjectPath="\Events\Default Work Unit\PowerUps\powerUp_shutdown" DurationType="OneShot" DurationMin="6.097029" DurationMax="6.097029">
+					<IncludedMemoryFiles>
+						<File Id="410631430" Language="SFX">
+							<ShortName>Classic Alarm 02.wav</ShortName>
+							<Path>SFX\Classic Alarm 02_A011F508.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

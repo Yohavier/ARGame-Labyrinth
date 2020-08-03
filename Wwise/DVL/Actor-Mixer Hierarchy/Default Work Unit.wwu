@@ -137,6 +137,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<Sound Name="defi_downloaded" ID="{416432E9-978A-4371-ABBA-63CD20DB2CFC}" ShortID="564906048">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
@@ -215,6 +222,9 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="designed_electricity_gramophon_01" ID="{450A7E37-8FE8-41E6-A4AB-C5C93170CA78}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>designed_electricity_gramophon_01.wav</AudioFile>
 											<MediaIDList>
@@ -324,6 +334,45 @@
 								<ItemRef Name="impact_p0_container_door_10" ID="{DDD30E73-7F72-48BC-B70A-858353099522}"/>
 							</Playlist>
 						</RandomSequenceContainer>
+						<ActorMixer Name="powerUp_shutdown" ID="{981C3117-95A3-4546-8F05-A32B9848D552}" ShortID="274082925">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Classic Alarm 02" ID="{6A06A5E6-0D7B-4A5E-B391-41C5797EDFD9}" ShortID="997466584">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Classic Alarm 02" ID="{8B13106B-7D5F-419C-A549-4A3875B8EFA7}">
+											<PropertyList>
+												<Property Name="LoopBegin" Type="Real64" Value="0"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="6.0970289253913"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Classic Alarm 02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="410631430"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Classic Alarm 02" ID="{8B13106B-7D5F-419C-A549-4A3875B8EFA7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Menu" ID="{30941F2E-C859-4E4E-B554-C48B76232F8F}" ShortID="711857830">
@@ -639,6 +688,105 @@
 										<ActiveSource Name="PremiumBeat_0013_cursor_selection_02" ID="{98C7AB6A-409E-42EC-8DBF-339BF83E5E90}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+						<ActorMixer Name="gate" ID="{C24CC3F8-AF28-40FC-B124-98755838DD67}" ShortID="114843236">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="metal_grind_metal_rusty_03" ID="{9FE91AAA-BB89-47BC-8E0D-CF7210363D85}" ShortID="799773565">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="metal_grind_metal_rusty_03" ID="{57D1D70F-B635-49D5-AF78-F1FE25012B0D}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.597748868829008"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>metal_grind_metal_rusty_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="436697353"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="metal_grind_metal_rusty_03" ID="{57D1D70F-B635-49D5-AF78-F1FE25012B0D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+						<ActorMixer Name="lobby_rocket" ID="{4991B563-7E16-4DDB-ACF6-0FF22F0FBD39}" ShortID="847544794">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="lobby_rocket" ID="{FF8187AF-179F-4593-BA6C-4C991CEAF566}" ShortID="618005836">
+									<PropertyList>
+										<Property Name="PlayMechanismInfiniteOrNumberOfLoops" Type="int16" Value="0"/>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2"/>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="designed_futuristic_ship_enigne_booster_01" ID="{5E6D9656-1164-4BD8-9702-EA7AB03BA76F}" ShortID="660553480">
+											<PropertyList>
+												<Property Name="IsLoopingInfinite" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="designed_futuristic_ship_enigne_booster_01" ID="{A5C629E5-EEB9-4096-BFFA-52FE72371619}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="4.87526038233355"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>designed_futuristic_ship_enigne_booster_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="10210857"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="designed_futuristic_ship_enigne_booster_01" ID="{A5C629E5-EEB9-4096-BFFA-52FE72371619}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>

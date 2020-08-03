@@ -26,10 +26,12 @@ public class LobbyGate : MonoBehaviour
     {
         if (toggle)
         {
+            AkSoundEngine.PostEvent("gate_open", gameObject);
             anim.clip = openGate;
         }
         else
         {
+            AkSoundEngine.PostEvent("gate_close", gameObject);
             anim.clip = closeGate;
         }
         anim.Play();

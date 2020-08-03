@@ -38,6 +38,39 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="gate_open" ID="{D611EAE2-55C1-447E-BE5A-97EC5B5F0897}">
+							<ChildrenList>
+								<Action Name="" ID="{714E8349-968A-46D3-9079-677A677C0F16}" ShortID="217819699">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="metal_grind_metal_rusty_03" ID="{9FE91AAA-BB89-47BC-8E0D-CF7210363D85}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="gate_close" ID="{F27A0F43-4991-4741-B47F-5A4F0D608B7E}">
+							<ChildrenList>
+								<Action Name="" ID="{D2079F29-D33D-4AEE-8C23-027E4AB4EBE3}" ShortID="74406128">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="metal_grind_metal_rusty_03" ID="{9FE91AAA-BB89-47BC-8E0D-CF7210363D85}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="lobby_rocket" ID="{A9DD3338-D04F-4B72-94FF-BCD68BBBC537}">
+							<ChildrenList>
+								<Action Name="" ID="{89F2DE78-7C15-4C31-901B-85089DAFEA25}" ShortID="377402961">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="designed_futuristic_ship_enigne_booster_01" ID="{5E6D9656-1164-4BD8-9702-EA7AB03BA76F}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Menu" ID="{8E546BAD-7936-4095-B8FF-92E4B2D2B93E}" ShortID="426330295">
@@ -170,6 +203,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="powerUp_doorhack" ID="{1BC59D28-6ADD-404D-999D-71683F377DC3}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="powerUp_shutdown" ID="{35271667-5EED-47EA-9523-1D0EDCD45969}">
+							<ChildrenList>
+								<Action Name="" ID="{F7E165F2-A598-442F-A2DF-CB49EB0C6007}" ShortID="1060473785">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Classic Alarm 02" ID="{6A06A5E6-0D7B-4A5E-B391-41C5797EDFD9}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

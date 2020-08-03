@@ -316,6 +316,7 @@ public class BoardGrid : MonoBehaviour
 
 	public void ShutDownGridFromSeed(int seed)
     {
+		AkSoundEngine.PostEvent("powerUp_shutdown", gameObject);
 		seedCount = 0;
 		UnityEngine.Random.InitState(seed);
 		var numberList = Enumerable.Range(0, grid.Count).ToList();

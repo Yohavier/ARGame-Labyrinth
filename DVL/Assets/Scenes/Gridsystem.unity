@@ -11929,18 +11929,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 199011447}
-        m_MethodName: LockBoard
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!1 &1381622729
 GameObject:
@@ -13642,6 +13631,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isReady: 0
+  boardLock: {fileID: 1380619839}
   rollDiceButton: {fileID: 52711739}
   nextTurnButton: {fileID: 2020917109}
   diceObject: {fileID: 914648308}

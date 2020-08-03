@@ -14,10 +14,13 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID CHARACTER_FOOTSTEP = 3077118699U;
+        static const AkUniqueID GATE_CLOSE = 192017233U;
+        static const AkUniqueID GATE_OPEN = 3328279379U;
         static const AkUniqueID GENERATOR_FINISH = 2613980178U;
         static const AkUniqueID GENERATOR_REPAIR = 1075926368U;
         static const AkUniqueID ITEM_DROP = 2177967876U;
         static const AkUniqueID LOBBY_JOIN = 2886407174U;
+        static const AkUniqueID LOBBY_ROCKET = 879922986U;
         static const AkUniqueID LOBBY_SMALLBUTTON = 2092420523U;
         static const AkUniqueID LOBBY_START = 1340413442U;
         static const AkUniqueID MUSIC = 3991942870U;
@@ -26,6 +29,7 @@ namespace AK
         static const AkUniqueID POWERUP_MEDIPACK = 2388944346U;
         static const AkUniqueID POWERUP_PICKUP = 506812678U;
         static const AkUniqueID POWERUP_SCANNER = 97193572U;
+        static const AkUniqueID POWERUP_SHUTDOWN = 2602462504U;
         static const AkUniqueID ROLL_DICE = 1847000442U;
         static const AkUniqueID TILE_EXPELL = 1367503038U;
         static const AkUniqueID TILE_MOVE = 1327556595U;
