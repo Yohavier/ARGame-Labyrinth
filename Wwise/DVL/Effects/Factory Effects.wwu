@@ -1452,7 +1452,7 @@
 										<Property Name="PreDelay" Type="Real32" Value="125"/>
 										<Property Name="Quality" Type="int32" Value="12"/>
 										<Property Name="RoomShape" Type="Real32" Value="0"/>
-										<Property Name="RoomSize" Type="Real32" Value="71"/>
+										<Property Name="RoomSize" Type="Real32" Value="19"/>
 										<Property Name="StereoWidth" Type="Real32" Value="140"/>
 									</PropertyList>
 								</Effect>

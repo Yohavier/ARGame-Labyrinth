@@ -40,16 +40,16 @@ public class LobbyRocket : MonoBehaviour
     public void StartBooster(GameState state)
     {
         if(state == GameState.GAME)
-        {
-            AkSoundEngine.PostEvent("lobby_rocket", gameObject);
-            rocketBlaster.Play();
+        {         
             StartCoroutine(Boost());
         }
 
     }
     private IEnumerator Boost()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(1f,3f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(1f,6f));
+        AkSoundEngine.PostEvent("lobby_rocket", gameObject);
+        rocketBlaster.Play();
         float a;
         float t;
         float distance;

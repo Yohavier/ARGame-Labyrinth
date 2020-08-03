@@ -65,7 +65,7 @@
 								<Action Name="" ID="{89F2DE78-7C15-4C31-901B-85089DAFEA25}" ShortID="377402961">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="designed_futuristic_ship_enigne_booster_01" ID="{5E6D9656-1164-4BD8-9702-EA7AB03BA76F}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
+											<ObjectRef Name="lobby_rocket" ID="{5510AA9C-5682-4C8B-AD7A-505107DD50C1}" WorkUnitID="{6C4784D9-AB9D-4361-87C3-1C823ECFD396}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

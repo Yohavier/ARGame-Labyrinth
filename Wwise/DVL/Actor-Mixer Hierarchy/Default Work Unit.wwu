@@ -570,7 +570,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="Weapon_BuySFX_01 " ID="{A2E5CB8E-2F0C-4980-987E-257541516E5B}">
+										<AudioFileSource Name="Weapon_BuySFX_01" ID="{A2E5CB8E-2F0C-4980-987E-257541516E5B}">
 											<Language>SFX</Language>
 											<AudioFile>Weapon_BuySFX_01 .wav</AudioFile>
 											<MediaIDList>
@@ -579,7 +579,7 @@
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="Weapon_BuySFX_01 " ID="{A2E5CB8E-2F0C-4980-987E-257541516E5B}" Platform="Linked"/>
+										<ActiveSource Name="Weapon_BuySFX_01" ID="{A2E5CB8E-2F0C-4980-987E-257541516E5B}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -745,20 +745,14 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="lobby_rocket" ID="{FF8187AF-179F-4593-BA6C-4C991CEAF566}" ShortID="618005836">
+								<Sound Name="lobby_rocket" ID="{5510AA9C-5682-4C8B-AD7A-505107DD50C1}" ShortID="127423525">
 									<PropertyList>
-										<Property Name="PlayMechanismInfiniteOrNumberOfLoops" Type="int16" Value="0"/>
-										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2"/>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-12</Value>
-											</ValueList>
-										</Property>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Rocket" ID="{FB5E6CE5-F8C9-42B1-A333-E164BBF8B50E}" WorkUnitID="{7B3EDF52-2221-4B41-823B-9D2067E092F0}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
 										</Reference>
@@ -767,38 +761,18 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="designed_futuristic_ship_enigne_booster_01" ID="{5E6D9656-1164-4BD8-9702-EA7AB03BA76F}" ShortID="660553480">
-											<PropertyList>
-												<Property Name="IsLoopingInfinite" Type="bool" Value="False"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{AFE19057-7C14-4FBD-95EE-2A1A4B5B9471}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="designed_futuristic_ship_enigne_booster_01" ID="{A5C629E5-EEB9-4096-BFFA-52FE72371619}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimEnd" Type="Real64" Value="4.87526038233355"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>designed_futuristic_ship_enigne_booster_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="10210857"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="designed_futuristic_ship_enigne_booster_01" ID="{A5C629E5-EEB9-4096-BFFA-52FE72371619}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										<AudioFileSource Name="lobby_rocket" ID="{F420905F-C247-4F14-BB24-CA51E5FB799D}">
+											<Language>SFX</Language>
+											<AudioFile>lobby_rocket.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="754364789"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
-								</RandomSequenceContainer>
+									<ActiveSourceList>
+										<ActiveSource Name="lobby_rocket" ID="{F420905F-C247-4F14-BB24-CA51E5FB799D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>
@@ -957,6 +931,9 @@
 								</Reference>
 								<Reference Name="DefaultSwitchOrState">
 									<ObjectRef Name="crew" ID="{1EB67CD4-2399-44AA-B323-3EBE6B6B3522}" WorkUnitID="{720B6DAD-7FB1-4B9F-820D-BA2A0F2E3FD6}"/>
+								</Reference>
+								<Reference Name="Effect0" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+									<ObjectRef Name="Plate_Medium" ID="{33384D0C-6ACB-4E3D-AC82-73AAB3AE1CA5}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{54B87154-45E0-40C0-A897-BC25BFE20C8A}"/>
