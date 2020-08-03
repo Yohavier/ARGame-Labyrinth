@@ -30,8 +30,6 @@ public class Eventbroker : MonoBehaviour
             onChangeGameState(state);
         }
     }
-
-
     #region CharacterSelection
     public event Action<RoleIndex> onChangeCharacter;
     public void ChangeCharacter(RoleIndex index)

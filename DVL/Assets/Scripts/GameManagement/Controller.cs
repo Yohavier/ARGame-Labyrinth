@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -34,6 +35,9 @@ public class Controller : MonoBehaviour
 	private float tapTimer;
 	private Vector2 prevTouch;
 	private float deltaPos;
+
+	private bool characterSelection = false;
+	private bool canSwipe = false;
 
 	#region Getter Setter
 	private bool activeLooseTile = true;
@@ -76,6 +80,16 @@ public class Controller : MonoBehaviour
 	}
 	private void Update()
 	{
+        if (characterSelection)
+        {
+            if (!GUIManager.instance.readyToggle.isOn)
+            {
+				if(Input.GetMouseButton(0) || Input.touches.Length > 0)
+					HandleSwipe();
+            }
+			return;
+        }
+
 		if (controllerType == ControllerType.PC)
 		{
 			PCController();
@@ -97,10 +111,12 @@ public class Controller : MonoBehaviour
 	private void OnEnable()
     {
 		Eventbroker.instance.onNotifyNextTurn += NewTurn;
+		Eventbroker.instance.onChangeGameState += ChangeGameState;
 	}
     private void OnDisable()
     {
 		Eventbroker.instance.onNotifyNextTurn -= NewTurn;
+		Eventbroker.instance.onChangeGameState -= ChangeGameState;
 	}
     #endregion
 
@@ -270,6 +286,17 @@ public class Controller : MonoBehaviour
 	private void NewTurn()
 	{
 		HandlePreviousPath();
+	}
+	private void ChangeGameState(GameState gameState)
+	{
+		if (gameState == GameState.LOBBY)
+		{
+			characterSelection = true;
+		}
+		else
+		{
+			characterSelection = false;
+		}
 	}
 
 	#region MovementPath
@@ -498,5 +525,64 @@ public class Controller : MonoBehaviour
 		return new Quaternion(q.x, q.y, -q.z, -q.w);
 	}
 	#endregion
+
+	#region Handle Swipe
+	Vector2 swipeDelta;
+	Vector2 startSwipe;
+
+	private void HandleSwipe()
+    {
+		swipeDelta = Vector2.zero;
+		SetStart(false);
+        if (canSwipe)
+        {
+			if (swipeDelta.magnitude > 100)
+			{
+				//Which direction?
+				float x = swipeDelta.x;
+				float y = swipeDelta.y;
+				if (Mathf.Abs(x) > Mathf.Abs(y))
+				{
+					//Left or Right
+					if (x < 0)
+					{
+						canSwipe = false;
+						GUIManager.instance.OnPlayerRoleChanged(-1);
+					}
+					else
+					{
+						canSwipe = false;
+						GUIManager.instance.OnPlayerRoleChanged(1);
+					}
+				}
+				SetStart(true);
+			}
+		}
+	}
+	private void SetStart(bool forceReset)
+    {
+#if UNITY_STANDALONE || UNITY_EDITOR
+		if (Input.GetMouseButtonDown(0) || forceReset)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+				canSwipe = true;
+            }
+			startSwipe = Input.mousePosition;
+		}
+		swipeDelta = (Vector2)Input.mousePosition - startSwipe;
+#elif UNITY_ANDROID || UNITY_IOS
+		if(Input.GetTouch(0).phase == TouchPhase.Began || forceReset)	
+		{
+			if(Input.GetTouch(0).phase == TouchPhase.Began)
+			{
+				canSwipe = true;
+			}
+			startSwipe = Input.touches[0].position;	
+		}
+		swipeDelta = Input.touches[0].position - startSwipe;
+#endif
+	}
+	#endregion
 }
-    
+

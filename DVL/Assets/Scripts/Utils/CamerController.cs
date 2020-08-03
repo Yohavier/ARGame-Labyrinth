@@ -61,7 +61,7 @@ public class CamerController : MonoBehaviour
     }
     private IEnumerator DelayedCommand(GameState state)
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
         PCHandleCamera(state);
     }
     private IEnumerator CameraRide(Transform targetPos)

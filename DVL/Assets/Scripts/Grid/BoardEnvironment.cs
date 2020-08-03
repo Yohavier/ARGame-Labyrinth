@@ -40,7 +40,7 @@ public class BoardEnvironment : MonoBehaviour
 
     private IEnumerator DelayedEnvChange(GameState state)
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(.5f);
         foreach (LobbyRocket rocket in rockets)
         {
             rocket.gameObject.SetActive(true);

@@ -14,7 +14,6 @@ public class LobbyRocket : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        Eventbroker.instance.onChangeGameState -= SetUpRocket;
         Eventbroker.instance.onChangeGameState -= StartBooster;
         Eventbroker.instance.onChangeCharacter -= character.ChangeSelectedCharacter;
         Eventbroker.instance.onToggleGate -= gate.OnToggleGate;

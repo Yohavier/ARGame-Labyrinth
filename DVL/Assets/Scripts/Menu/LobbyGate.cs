@@ -38,7 +38,6 @@ public class LobbyGate : MonoBehaviour
     private void HandleButton()
     {
         GetComponentInChildren<Button>().gameObject.SetActive(false);
-        SwipeManager.instance.canSwipe = true;
         GUIManager.instance.readyToggle.interactable = true;
     }
 }

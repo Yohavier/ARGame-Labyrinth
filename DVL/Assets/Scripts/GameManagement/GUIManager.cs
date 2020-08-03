@@ -34,6 +34,7 @@ public class GUIManager : MonoBehaviour
     [HideInInspector] public bool needsPlayerUpdate = false;
     [HideInInspector] public Text[] playerLabels = new Text[4];
     private int readyCounter = 0;
+    [HideInInspector] public bool isReady;
 
     [Header("Game Panel")]
     public Button rollDiceButton;
@@ -105,7 +106,6 @@ public class GUIManager : MonoBehaviour
         if (needsMenuUpdate)
         {
             lobbyCanvas.SetActive(false);
-            HandleLobbyEnvironment();
             playerCanvas.SetActive(true);
             needsMenuUpdate = false;
         }
@@ -215,7 +215,6 @@ public class GUIManager : MonoBehaviour
         }
         NetworkClient.instance.SendReadyChanged(value);
         AkSoundEngine.PostEvent("lobby_smallButton", gameObject);
-        SwipeManager.instance.canSwipe = !value;
         AudioWwiseManager.instance.SetMusicIntensity((MusicIntensity)readyCounter);
     }
 
@@ -228,11 +227,6 @@ public class GUIManager : MonoBehaviour
     {
         endCanvas.SetActive(true);
         endCanvas.GetComponentInChildren<Text>().text = result;
-    }
-
-    private void HandleLobbyEnvironment()
-    {
-        SwipeManager.instance.canSwipe = false;
     }
 
     #region Game UI Functionality

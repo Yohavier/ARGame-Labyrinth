@@ -31,9 +31,4 @@ public class LobbyCharacter : MonoBehaviour
             }
         }
     }
-
-    public void ChangeComplete()
-    {
-        SwipeManager.instance.canSwipe = true;
-    }
 }

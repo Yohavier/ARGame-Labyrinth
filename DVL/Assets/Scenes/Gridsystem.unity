@@ -12093,19 +12093,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383566111}
   m_CullTransparentMesh: 0
---- !u!114 &1389068169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729347015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ec04d69ff087f4a866575152cac6bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canSwipe: 0
 --- !u!4 &1429238096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4852301068857106, guid: f4428f3876530af48a50daf8fe3efdef,
@@ -13617,7 +13604,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1729347017}
   - component: {fileID: 1729347016}
-  - component: {fileID: 1389068169}
   m_Layer: 0
   m_Name: GUIManager
   m_TagString: Untagged
@@ -13655,6 +13641,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isReady: 0
   rollDiceButton: {fileID: 52711739}
   nextTurnButton: {fileID: 2020917109}
   diceObject: {fileID: 914648308}
