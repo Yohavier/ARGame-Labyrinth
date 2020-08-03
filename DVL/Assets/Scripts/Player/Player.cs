@@ -148,12 +148,12 @@ public class Player : MonoBehaviour
 		if (playerFOW != null)
 		{
 			//if active player call his FOW
-			playerFOW.OnChangePlayerPosition(positionTile);
+			playerFOW.OnChangeFoWPosition(positionTile);
 		}
 		else if(GameManager.instance.activePlayer != null)
 		{
 			//if not active Player, call active players FOW
-			GameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangePlayerPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
+			GameManager.instance.activePlayer.GetComponent<Player>().playerFOW.OnChangeFoWPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);	
 		}
 
         if (!positionTile.isInFOW)

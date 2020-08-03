@@ -269,7 +269,7 @@ public class Tile : MonoBehaviour
 		else
 			CloseTileDoors();
 
-		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangeFoWPosition(this);
     }
 	public void ToggleDoors(bool toggle)
     {
@@ -279,7 +279,7 @@ public class Tile : MonoBehaviour
 		else
 			CloseTileDoors();
 
-		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(this);
+		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangeFoWPosition(this);
 	}
 
 	private void OpenTileDoors()

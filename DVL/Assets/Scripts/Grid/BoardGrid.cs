@@ -1,11 +1,7 @@
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Linq;
-using System.Diagnostics;
-using JetBrains.Annotations;
 
 public class BoardGrid : MonoBehaviour
 {
@@ -249,7 +245,7 @@ public class BoardGrid : MonoBehaviour
 		lastTrackedTile.index = removedTile.index;
 		grid.Remove(removedTile);
 		UpdateDic();
-		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangePlayerPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);
+		GameManager.instance.activePlayer.GetComponent<FogOfWar>().OnChangeFoWPosition(GameManager.instance.activePlayer.GetComponent<Player>().positionTile);
 	}
 
 	private GridMovement GetMoveDir(Tile moveTile)

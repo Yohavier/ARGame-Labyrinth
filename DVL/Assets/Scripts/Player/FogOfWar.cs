@@ -8,7 +8,7 @@ public class FogOfWar : MonoBehaviour
 	public List<Tile> finalFogPath = new List<Tile>();
 
 	//call if player moves, to update fog of war
-	public void OnChangePlayerPosition(Tile newPosition)
+	public void OnChangeFoWPosition(Tile newPosition)
     {
 		List<Tile> neighbours = new List<Tile>();
 		if (BoardGrid.instance.grid.Contains(newPosition))
