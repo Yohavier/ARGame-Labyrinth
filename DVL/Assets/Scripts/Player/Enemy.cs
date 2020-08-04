@@ -17,7 +17,7 @@ public class Enemy : Player
                 {
                     if (crew.playerState == PlayerState.ALIVE)
                     {
-                        KillPlayer(crew);
+                        StartCoroutine(InitKillPlayer(crew));
                     }
                 }
             }
@@ -27,7 +27,22 @@ public class Enemy : Player
 
 	public void KillPlayer(CrewMember crewMember)
 	{
-        NetworkClient.instance.SendPlayerKilled(crewMember.playerIndex);
+        NetworkClient.instance.SendPlayerKilled(crewMember.playerIndex); 
 		crewMember.playerState = PlayerState.DYING;
 	}
+
+    private IEnumerator InitKillPlayer(CrewMember crew)
+    {
+        while (Vector3.Distance(crew.transform.position, transform.position) > 0.05f) 
+        {
+            yield return null;
+        }
+
+        pauseMovement = true;
+        anim.SetTrigger("attack");
+        yield return new WaitForSeconds(1f);
+        pauseMovement = false;
+        anim.SetBool("walk", true);
+        KillPlayer(crew);
+    }
 }

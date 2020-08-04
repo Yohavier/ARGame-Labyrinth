@@ -16,7 +16,9 @@ public class Player : MonoBehaviour
 	public int footstepDetectionRadius =  0;
 	public int repairSpeed = 0;
 	public int maxDeathTurnCounter = 0;
-	private Animator anim;
+	public Animator anim;
+
+	public bool pauseMovement;
 
 	//PowerUps
 	private CommunicatorPowerUp _communicatorPowerUp;
@@ -201,10 +203,13 @@ public class Player : MonoBehaviour
 				float rate = 1.0f / time;
 				while (i < 1.0f)
 				{
-					i += Time.deltaTime * rate;
-					var movementVector = Vector3.Lerp(new Vector3(positionTile.transform.position.x, transform.position.y, positionTile.transform.position.z),
-													  new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z), i);
-					transform.position = movementVector;				
+                    if (!pauseMovement)
+                    {
+						i += Time.deltaTime * rate;
+						var movementVector = Vector3.Lerp(new Vector3(positionTile.transform.position.x, transform.position.y, positionTile.transform.position.z),
+														  new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z), i);
+						transform.position = movementVector;
+					}
 					yield return null;
 				}
 				transform.SetParent(tile.transform);
