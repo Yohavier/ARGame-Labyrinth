@@ -146,7 +146,7 @@ public class BoardGrid : MonoBehaviour
 		trackingManager.GetComponent<Controller>().ChangeTrackedPrefab(leftOverTile);
 		RemoveTileFromList(allPossibleMovingTiles[0]);
 		GetComponent<SpawnPlayer>().SpawnPlayersInCorner(cornerTiles);
-		GetComponent<SpawnItems>().SetItemOnGrid();
+		GetComponent<SpawnObjectsOnGrid>().SetItemOnGrid();
 		LightManager.instance.SetupLights(); //TODO: Merge
 	}
 	#endregion

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class SpawnItems : MonoBehaviour
+public class SpawnObjectsOnGrid : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
     public List<Tile> itemsPossiblePlaces = new List<Tile>();
@@ -31,8 +31,6 @@ public class SpawnItems : MonoBehaviour
     }
     private void StartPlacingItemsWithSeed()
     {
-        List<string> dicKeys = new List<string>();
-
         for (int i = 0; i < items.Count; i++)
         {
             int rand = Convert.ToInt32(Math.Max(0, BoardGrid.instance.seedList[i] * itemsPossiblePlaces.Count - 1));
@@ -60,20 +58,6 @@ public class SpawnItems : MonoBehaviour
             int row = itemsPossiblePlaces[rand].row;
 
             powerUpsPossiblePlaces.Remove(itemsPossiblePlaces[rand]);
-
-            dicKeys.AddMany(
-                row.ToString() + col.ToString(),
-                row.ToString() + (col - 1).ToString(),
-                row.ToString() + (col + 1).ToString(),
-                (row - 1).ToString() + col.ToString(),
-                (row + 1).ToString() + col.ToString()
-                );
-
-            foreach (string key in dicKeys)
-            {
-                HandlePlacesList(key);
-            }
-            dicKeys.Clear();
         } 
     }
 
@@ -91,16 +75,6 @@ public class SpawnItems : MonoBehaviour
                 mesh.enabled = false;
 
             powerUpsPossiblePlaces.RemoveAt(rand);
-        }
-    }
-
-    private void HandlePlacesList(string key)
-    {
-        if (BoardGrid.instance.coordDic.ContainsKey(key))
-        {
-            Tile n = BoardGrid.instance.coordDic[key];
-            if (itemsPossiblePlaces.Contains(n))
-                itemsPossiblePlaces.Remove(n);
         }
     }
 }
