@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c6cd9f3348dcc4a99bdefaf10b9e6b, type: 3}
   m_Name: Crew_Juggernaut
   m_EditorClassIdentifier: 
-  roleName: Juggernaut
+  roleName: Soldat
   roleIndex: 4
   diceModificator: 0
   fogOfWarRadius: 2
   footstepDetectionRadius: 2
   repairSpeed: 1
   maxDeathTurnCounter: 6
-  roleInfoText: "Ein Soldat mit einem \nfunktionst\xFCchtigem\nExoskelett stirbt
-    nicht \nso schnell an den \nVerletzungen des\nAliens."
+  roleInfoText: 'Ein Soldat aus den Kolonien.
+
+    Dieser stirbt nicht so schnell
+
+    an
+    erlittenen Verletzungen.'

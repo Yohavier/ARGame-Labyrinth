@@ -19,5 +19,9 @@ MonoBehaviour:
   footstepDetectionRadius: 3
   repairSpeed: 1
   maxDeathTurnCounter: 3
-  roleInfoText: "Der Scout kann einen\ngro\xDFen Bereich des Schiffes\n\xDCberwachen
-    und helfen die \nSpieler zu lenken."
+  roleInfoText: 'Der Scout sieht viel
+
+    und kann seine Crew
+
+    vor Gefahren
+    warnen.'

@@ -19,5 +19,5 @@ MonoBehaviour:
   footstepDetectionRadius: 3
   repairSpeed: 2
   maxDeathTurnCounter: 2
-  roleInfoText: "Der letzte Mechaniker\nauf diesem Schiff.\nSehr n\xFCtzlich um den
+  roleInfoText: "Der letzte Mechaniker\nauf diesem Schiff.\nSehr hilfreich um den
     \nGenerator wieder auf \nVorderman zubringen."

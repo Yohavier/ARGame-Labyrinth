@@ -9,6 +9,9 @@ public class ScannerPowerUp : PowerUpBase
 
     public override void OnUse(Player player, PowerUpSlot slot)
     {
+        if (isInUse)
+            return;
+
         AkSoundEngine.PostEvent("powerUp_scanner", gameObject);
         isInUse = true;
         player.fogOfWarRadius += buffFOWRadius;

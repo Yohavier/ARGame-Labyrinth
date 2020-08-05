@@ -19,5 +19,8 @@ MonoBehaviour:
   footstepDetectionRadius: 3
   repairSpeed: 0
   maxDeathTurnCounter: 100
-  roleInfoText: "Der Arachnid wei\xDF durch sein\nNetz, wo sich in \neinem gr\xF6\xDFeren
-    Umkreis \nSpieler bewegen."
+  roleInfoText: 'Der Arachnid weiss durch sein
+
+    Netz, wo sich
+
+    Spieler bewegen.'
