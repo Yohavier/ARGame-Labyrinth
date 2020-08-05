@@ -4,21 +4,8 @@ using UnityEngine;
 //A* pathfinding, always chooses shortest path
 public class Pathfinding 
 {
-	private List<Tile> grid;
-	private Tile start;
-	private Tile target;
-
-	public Pathfinding(List<Tile> boardGrid, Tile c_start, Tile c_target)
+	public static List<Tile> FindPath(int stepsLeft, Tile a_start, Tile a_target)
 	{
-		grid = boardGrid;
-		start = c_start;
-		target = c_target;
-	}
-
-	public List<Tile> FindPath(int stepsLeft)
-	{
-		Tile a_start = start;
-		Tile a_target = target;
 		List<Tile> list = new List<Tile>();
 		HashSet<Tile> hashSet = new HashSet<Tile>();
 		list.Add(a_start);
@@ -61,7 +48,7 @@ public class Pathfinding
 		return null;
 	}
 
-	private List<Tile> GetFinalPath(Tile start, Tile target, int steps)
+	private static List<Tile> GetFinalPath(Tile start, Tile target, int steps)
 	{
 		List<Tile> list = new List<Tile>();
 		Tile tile = target;
@@ -79,7 +66,7 @@ public class Pathfinding
 		return list;
 	}
 
-	private int GetManhattenDistance(Tile current, Tile neighbour)
+	private static int GetManhattenDistance(Tile current, Tile neighbour)
 	{
 		if(current != null && neighbour != null)
 		{

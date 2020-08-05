@@ -46,7 +46,7 @@ MonoBehaviour:
   trackingManager: {fileID: 0}
   trackingInstance: {fileID: 0}
   allPossibleMovingTiles:
-  - {fileID: 8863377977654506450, guid: 98726e10322afbb4d8bdc98102a87899, type: 3}
+  - {fileID: 1310620923150064488, guid: 5d13d935abc28eb458aa8fe769ad8b19, type: 3}
   - {fileID: 2174048024688563418, guid: 7a64c485fc103514a9404fa5eccf5d97, type: 3}
   - {fileID: 2174048024688563418, guid: 7a64c485fc103514a9404fa5eccf5d97, type: 3}
   - {fileID: 2174048024688563418, guid: 7a64c485fc103514a9404fa5eccf5d97, type: 3}

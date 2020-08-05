@@ -320,8 +320,7 @@ public class Controller : MonoBehaviour
 			if (path != null)
 				path.Clear();
 
-			Pathfinding p = new Pathfinding(BoardGrid.instance.grid, playerObject.positionTile, currentSelectedTarget);
-			path = p.FindPath(steps);
+			path = Pathfinding.FindPath(steps, playerObject.positionTile, currentSelectedTarget);
 
 			//Color path red
 			if (path != null)

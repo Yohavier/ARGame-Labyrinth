@@ -3,14 +3,6 @@ using System.Linq;
 
 public class DetectDirectNeighbours
 {
-    private List<Tile> neighbours = new List<Tile>();
-    private Dictionary<string, Tile> dic;
-
-    public DetectDirectNeighbours()
-    {
-        dic = BoardGrid.instance.coordDic;
-    }
-
     public static List<Tile> DetectSingleRadiusTile(Tile tile)
     {
         if (tile == null)
