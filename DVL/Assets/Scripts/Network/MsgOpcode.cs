@@ -17,15 +17,13 @@ public enum MsgOpcode //ID for Message Header
     opPowerUpCollected = 9,
     opItemDropped = 10,
     opShutDownUsed = 11,
+    opTurnChange = 12,
 
     //100-200 Server handles message, updates and sends reply to all clients
     opReadyChange = 101,
     opPlayerConnected = 102,
     opRoleChange = 103,
-    opTurnChange = 104,
-    opConnectionLost = 105,
 
     //>=200 Server sends reply to one client
     opSetupPlayer = 200,
-    opPing = 201,
 }

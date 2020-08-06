@@ -23,7 +23,7 @@ public class GUIManager : MonoBehaviour
     public Button hostButton;
     public Button joinButton;
     public InputField hostIPInput;
-    string serverIP = "192.168.194.169";
+    string serverIP = "192.168.0.206";
     public bool isServer = false;
     
 

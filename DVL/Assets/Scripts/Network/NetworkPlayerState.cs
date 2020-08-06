@@ -13,7 +13,6 @@ public class NetworkPlayerState
     public bool isReady;
     public bool connected;
     public string ip = "";
-    public float lastPingTime = 0f;
 
     public NetworkPlayerState(PlayerIndex _playerID, RoleIndex _roleIndex, bool _isReady, bool _connected, string _ip)
     {
