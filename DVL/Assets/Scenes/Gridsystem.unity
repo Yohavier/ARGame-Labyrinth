@@ -2592,7 +2592,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 256120826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7424adff8f487ce4d9c0c4bca628f80f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ffb650b6351b914696d04dd25f75132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   localPlayerIndex: -1
@@ -2601,7 +2601,7 @@ MonoBehaviour:
   currentTurnPlayer: 0
   isDebugingMovement: 0
   allPlayers: []
-  MoveTokenIndicator: {fileID: 0}
+  MoveTokenIndicator: {fileID: 1963634225}
 --- !u!1 &266829079
 GameObject:
   m_ObjectHideFlags: 0
@@ -7478,6 +7478,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TileMoveIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620719178117429468, guid: e184a882295f7324096c0f073ee93c47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5076500778412105044, guid: e184a882295f7324096c0f073ee93c47,
         type: 3}
@@ -15039,6 +15044,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962921811}
   m_CullTransparentMesh: 0
+--- !u!1 &1963634225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4620719178117429468, guid: e184a882295f7324096c0f073ee93c47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1033570947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1965719700
 GameObject:
   m_ObjectHideFlags: 0
