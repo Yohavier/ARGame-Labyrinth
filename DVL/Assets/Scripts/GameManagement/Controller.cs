@@ -260,7 +260,7 @@ public class Controller : MonoBehaviour
 	}
 	private bool CanControl()
 	{
-		if (GameManager.instance.activePlayer)
+		if (GameManager.instance.activePlayer != null)
 		{
 			if (GameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
 			{
