@@ -35,14 +35,16 @@ public class DebugConsole : MonoBehaviour
     void HandleLog(string logString, string stackTrace, LogType type)
     {
         log.Add(logString);
-        lastLogTime = 0;
     }
 
     private void OnGUI()
     {
         lastLogTime += Time.deltaTime;
-        if (lastLogTime >= 3)
+        if (lastLogTime >= 8f)
+        {
+            lastLogTime = 0f;
             log.Clear();
+        }
 
         if (log.Count == 0)
             return;

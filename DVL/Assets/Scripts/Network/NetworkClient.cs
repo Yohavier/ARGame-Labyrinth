@@ -8,14 +8,41 @@ using System.Net.Sockets;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class NetworkClient
+public class NetworkClient : MonoBehaviour
 {
-    public static NetworkClient instance = new NetworkClient();
+    public static NetworkClient instance; //= new NetworkClient();
     private Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
     private byte[] buffer = new byte[1024];
     private int connectionAttempts = 0;
     public bool isSetup = false;
-    public NetworkPlayerState[] networkPlayers = { new NetworkPlayerState(), new NetworkPlayerState(), new NetworkPlayerState(), new NetworkPlayerState() };
+    public List<NetworkPlayerState> networkPlayers = new List<NetworkPlayerState>() { new NetworkPlayerState(), new NetworkPlayerState(), new NetworkPlayerState(), new NetworkPlayerState() };
+    private const float pingFrequency = 1f;
+    public float currentPing = 0f;
+    private float pingStartTime = 0f;
+    private float nextPingDeltaTime = 0f;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Update()
+    {
+        if (!isSetup)
+            return;
+
+        if (nextPingDeltaTime >= pingFrequency)
+        {
+            nextPingDeltaTime = 0f;
+            SendPing();
+        }
+
+        else
+        {
+            nextPingDeltaTime += Time.deltaTime;
+        }
+
+    }
 
     public void Connect(string serverIP)
     {
@@ -67,7 +94,8 @@ public class NetworkClient
 
     private void HandleMessage(Msg msg)
     {
-        Debug.Log("Client: Received " + msg.opcode);
+        if (GUIManager.instance.isDebug)
+            Debug.Log("Client: Received " + msg.opcode);
         switch (msg.opcode)
         {
             case MsgOpcode.opTileMove:
@@ -120,6 +148,12 @@ public class NetworkClient
                 break;
             case MsgOpcode.opSetupPlayer:
                 HandleSetupPlayer(msg);
+                break;
+            case MsgOpcode.opPing:
+                HandlePing(msg);
+                break;
+            case MsgOpcode.opConnectionLost:
+                HandleConnectionLost(msg);
                 break;
         }
     }
@@ -284,6 +318,21 @@ public class NetworkClient
         networkPlayers[(int)playerIndex].roleIndex = roleIndex;
     }
 
+    private void HandlePing(Msg msg)
+    {
+        currentPing = Time.time - pingStartTime;
+        Debug.Log("Ping: " + currentPing * 1000.0f + "ms");
+    }
+
+    private void HandleConnectionLost(Msg msg)
+    {
+        PlayerIndex playerID = (PlayerIndex)msg.ReadInt();
+        NetworkPlayerState playerState = networkPlayers.Find(x => x.playerID == playerID);
+        playerState.connected = false;
+        if (GameManager.instance.currentTurnPlayer == playerID)
+            UpdateNextTurnPlayer();
+    }
+
     public void SendGridMove(Tile entryTile, Tile newRoom)
     {
         Msg msg = new Msg(MsgOpcode.opGridMove, 8);
@@ -306,9 +355,8 @@ public class NetworkClient
         Send(msg);
     }*/
 
-    public void SendTurnChange()
+    public PlayerIndex UpdateNextTurnPlayer()
     {
-        Msg msg = new Msg(MsgOpcode.opTurnChange, 4);
         List<PlayerIndex> connectedIndices = new List<PlayerIndex>();
         for (int i = 0; i < 4; i++)
         {
@@ -333,6 +381,14 @@ public class NetworkClient
         {
 
         }
+
+        return nextID;
+    }
+
+    public void SendTurnChange()
+    {
+        Msg msg = new Msg(MsgOpcode.opTurnChange, 4);
+        PlayerIndex nextID = UpdateNextTurnPlayer();
 
         msg.Write((int)nextID);
         Send(msg);
@@ -417,6 +473,14 @@ public class NetworkClient
         Msg msg = new Msg(MsgOpcode.opRoleChange, 8);
         msg.Write((int)playerIndex);
         msg.Write((int)roleIndex);
+        Send(msg);
+    }
+
+    public void SendPing()
+    {
+        pingStartTime = Time.time;
+        Msg msg = new Msg(MsgOpcode.opPing, 4);
+        msg.Write(currentPing);
         Send(msg);
     }
 }
