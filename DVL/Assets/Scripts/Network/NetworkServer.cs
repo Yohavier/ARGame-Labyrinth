@@ -7,14 +7,38 @@ using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 
-public class NetworkServer
+public class NetworkServer : MonoBehaviour
 {
-    public static NetworkServer instance = new NetworkServer();
+    public static NetworkServer instance; //= new NetworkServer();
     public ServerGameState gameState = new ServerGameState();
     public bool isSetup = false;
     public List<ClientReference> clientList = new List<ClientReference>();
     private Socket serverSocket;
     private byte[] buffer = new byte[1024];
+    private const float timeoutLimit = 5f;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Update()
+    {
+        if (!isSetup)
+            return;
+
+        for (int i = 0; i < clientList.Count; i++)
+        {
+            if (!clientList[i].playerState.connected || clientList[i].playerState.lastPingTime <= 0f)
+                continue;
+
+            float deltaTime = Time.time - clientList[i].playerState.lastPingTime;
+            if (deltaTime >= timeoutLimit)
+            {
+                HandleConnectionLost(i);
+            }
+        }
+    }
 
     //Initialize Server Socket, begin waiting for connections
     public void SetupServer()
@@ -69,6 +93,15 @@ public class NetworkServer
         BroadcastMessage(msg.Serialize());
     }
 
+    private void HandleConnectionLost(int index)
+    {
+        Debug.LogWarning(clientList[index].playerState.playerID + " lost connection!");
+        clientList[index].playerState.connected = false;
+        Msg msg = new Msg(MsgOpcode.opConnectionLost, 4);
+        msg.Write((int)clientList[index].playerState.playerID);
+        BroadcastMessage(msg.Serialize());
+    }
+
     private void HandleChangeTurn()
     {
         gameState.currentTurnIndex++;
@@ -80,6 +113,13 @@ public class NetworkServer
         Msg msg = BuildTurnChangeMessage(nextTurnPlayerIndex);
         gameState.currentTurnPlayer = nextTurnPlayerIndex;
         BroadcastMessage(msg.Serialize());
+    }
+
+    private void HandleTurnChange(Msg msg, Socket clientSocket)
+    {
+        gameState.currentTurnPlayer = (PlayerIndex)msg.ReadInt();
+        msg.readOffset = 0;
+        BroadcastMessageExclusive(msg.Serialize(), clientSocket);
     }
 
     private void HandleReadyChange(Msg msg, Socket clientSocket)
@@ -100,6 +140,14 @@ public class NetworkServer
         client.playerState.roleIndex = roleIndex;
         msg.readOffset = 0;
         BroadcastMessage(msg.Serialize());
+    }
+
+    private void HandlePing(Msg msg, Socket clientSocket)
+    {
+        Msg msg2 = new Msg(MsgOpcode.opPing, 0);
+        ClientReference client = clientList.Find(x => x.clientSocket == clientSocket);
+        client.playerState.lastPingTime = Time.time;
+        UnicastMessage(msg2.Serialize(), clientSocket);
     }
 
     //Accept connection, wait for receiving data
@@ -127,7 +175,8 @@ public class NetworkServer
 
     private void HandleMessage(Msg msg, Socket clientSocket)
     {
-        Debug.Log("Server: Received " + msg.opcode);
+        if (GUIManager.instance.isDebug)
+            Debug.Log("Server: Received " + msg.opcode);
         if ((int)msg.opcode < 100) //Reflect received data to all other clients
         {
             BroadcastMessageExclusive(msg.Serialize(), clientSocket);
@@ -141,6 +190,12 @@ public class NetworkServer
                 break;
             case MsgOpcode.opRoleChange:
                 HandleRoleChange(msg, clientSocket);
+                break;
+            case MsgOpcode.opTurnChange:
+                HandleTurnChange(msg, clientSocket);
+                break;
+            case MsgOpcode.opPing:
+                HandlePing(msg, clientSocket);
                 break;
         }
     }
@@ -163,6 +218,9 @@ public class NetworkServer
     {
         for (int i = 0; i < clientList.Count; i++)
         {
+            if (!clientList[i].playerState.connected)
+                continue;
+
             clientList[i].clientSocket.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), clientList[i].clientSocket);
         }
         Thread.Sleep(100);
@@ -173,7 +231,7 @@ public class NetworkServer
     {
         for (int i = 0; i < clientList.Count; i++)
         {
-            if (clientList[i].clientSocket == exclude)
+            if (!clientList[i].playerState.connected || clientList[i].clientSocket == exclude)
                 continue;
 
             clientList[i].clientSocket.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), clientList[i].clientSocket);
