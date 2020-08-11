@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 	public Animator anim;
 
 	public bool pauseMovement;
+	public bool stopMovement;
 
 	//PowerUps
 	private CommunicatorPowerUp _communicatorPowerUp;
@@ -170,7 +171,7 @@ public class Player : MonoBehaviour
 			}
 			AkSoundEngine.PostEvent("character_footstep", gameObject);
         }
-			
+		CheckNewSurrounding(positionTile);
 		CreatePositionIndicatorTrace();
 	}
 
@@ -196,7 +197,7 @@ public class Player : MonoBehaviour
 		anim.SetBool("Walk Forward", true);
 		foreach(Tile tile in path)
 		{
-			if (CheckForOtherPlayers(tile))
+			if (CheckForOtherPlayers(tile) && !stopMovement)
 			{
 				SmoothRotation(tile);
 				float i = 0.0f;
@@ -222,6 +223,7 @@ public class Player : MonoBehaviour
 			{
 				StopAllCoroutines();
 				isWalking = false;
+				stopMovement = false;
 			}
 			yield return null;
 		}
@@ -317,4 +319,5 @@ public class Player : MonoBehaviour
 	protected virtual void Dead() { }
 	protected virtual void CheckDeathCounter() { }
 	public virtual void NotifyNextTurn(bool toggle) { }
+	protected virtual void CheckNewSurrounding(Tile tile) { }
 }

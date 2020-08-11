@@ -2068,6 +2068,11 @@ MonoBehaviour:
   footstepDetectionRadius: 0
   repairSpeed: 0
   maxDeathTurnCounter: 0
+  anim: {fileID: 0}
+  exceptionMark: {fileID: 8859110022462793304, guid: 57742ad15d4e409419f7236b17b5b898,
+    type: 3}
+  pauseMovement: 0
+  stopMovement: 0
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}

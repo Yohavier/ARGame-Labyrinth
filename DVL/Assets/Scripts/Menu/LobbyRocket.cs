@@ -11,6 +11,7 @@ public class LobbyRocket : MonoBehaviour
 
     private LobbyGate gate;
     private LobbyCharacter character;
+    public GameObject mark;
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -30,6 +31,7 @@ public class LobbyRocket : MonoBehaviour
             {
                 Eventbroker.instance.onChangeCharacter += character.ChangeSelectedCharacter;
                 Eventbroker.instance.onToggleGate += gate.OnToggleGate;
+                mark.SetActive(true);
             }
             else
             {
@@ -47,6 +49,7 @@ public class LobbyRocket : MonoBehaviour
     }
     private IEnumerator Boost()
     {
+        mark.SetActive(false);
         yield return new WaitForSeconds(UnityEngine.Random.Range(1f,6f));
         AkSoundEngine.PostEvent("lobby_rocket", gameObject);
         rocketBlaster.Play();

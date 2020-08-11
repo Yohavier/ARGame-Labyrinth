@@ -26,6 +26,7 @@ public class NetworkClient : MonoBehaviour
         instance = this;
     }
 
+    /*
     private void Update()
     {
         if (!isSetup)
@@ -42,7 +43,7 @@ public class NetworkClient : MonoBehaviour
             nextPingDeltaTime += Time.deltaTime;
         }
 
-    }
+    }*/
 
     public void Connect(string serverIP)
     {

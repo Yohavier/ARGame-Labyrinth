@@ -21,7 +21,7 @@ public class NetworkServer : MonoBehaviour
     {
         instance = this;
     }
-
+    /*
     private void Update()
     {
         if (!isSetup)
@@ -39,7 +39,7 @@ public class NetworkServer : MonoBehaviour
             }
         }
     }
-
+    */
     //Initialize Server Socket, begin waiting for connections
     public void SetupServer()
     {
