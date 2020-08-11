@@ -91,13 +91,12 @@ GameObject:
   - component: {fileID: 9134234502159243449}
   - component: {fileID: 5312246400380219558}
   - component: {fileID: 8836548669766555900}
-  - component: {fileID: 6801350358119589215}
   m_Layer: 8
   m_Name: Raum_T
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2475423450288765186
 Transform:
@@ -107,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441470033962519313}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 445.8146, y: 531.6286, z: -452.01605}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 2618031053279348182}
@@ -118,7 +117,6 @@ Transform:
   - {fileID: 5856871838657475836}
   - {fileID: 8525964889974362473}
   - {fileID: 8281653314508208503}
-  - {fileID: 5509399903925691622}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,142 +184,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 7, z: 10}
   m_Center: {x: 0, y: 3.3, z: 0}
---- !u!114 &6801350358119589215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441470033962519313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8219d586c6cbacd45bb9b8b10f4aa96b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RendererInfo:
-  - renderer: {fileID: 1818365618641721306}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.028627139, y: 0.028627139, z: 0.02885147, w: 0}
-  - renderer: {fileID: 8967683657144108216}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.031958684, y: 0.031958684, z: 0.04703354, w: 0.653672}
-  - renderer: {fileID: 3940556010118480817}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.17995872, y: 0.17995872, z: 0.007543672, w: 0.36691916}
-  - renderer: {fileID: 23811013128590451}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.41823274, y: 0.41823274, z: 0.40861443, w: 0.00014431954}
-  - renderer: {fileID: 3660676923874948638}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.1733999, y: 0.1733999, z: 0.24997982, w: -0.040144414}
-  - renderer: {fileID: 4270129558904815240}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.1733999, y: 0.1733999, z: 0.68747985, w: -0.040144414}
-  - renderer: {fileID: 8540453881123482687}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.1733999, y: 0.1733999, z: 0.74997985, w: -0.13127156}
-  m_Lightmaps:
-  - {fileID: 2800000, guid: 123f757b7eeff28439e88573338a6eaf, type: 3}
-  m_LightmapsDir:
-  - {fileID: 2800000, guid: 7a200094390eb3f4db942091292d4cd9, type: 3}
-  m_ShadowMasks:
-  - {fileID: 0}
-  m_LightInfo:
-  - light: {fileID: 768528029133538746}
-    lightmapBaketype: 2
-    mixedLightingMode: 2
---- !u!1 &1633514069623353331
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5509399903925691622}
-  - component: {fileID: 768528029133538746}
-  m_Layer: 0
-  m_Name: Area Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5509399903925691622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633514069623353331}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.57, y: 9.52, z: -0.56}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children: []
-  m_Father: {fileID: 2475423450288765186}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!108 &768528029133538746
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633514069623353331}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 3
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 2
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 0.1, y: 0.1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!1 &3814902068233157083
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +200,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7167545690262999854
 Transform:
@@ -417,7 +279,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8525964889974362473
 Transform:
@@ -496,7 +358,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5856871838657475836
 Transform:
@@ -575,7 +437,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4131983567012367792
 Transform:
@@ -654,7 +516,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1438947677955556270
 Transform:
@@ -733,7 +595,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2618031053279348182
 Transform:
@@ -812,7 +674,7 @@ GameObject:
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8281653314508208503
 Transform:
