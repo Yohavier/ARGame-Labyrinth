@@ -68,6 +68,8 @@ public class Enemy : Player
 
         pauseMovement = true;
         anim.SetTrigger("attack");
+        yield return new WaitForSeconds(.7f);
+        crew.anim.SetTrigger("dead");
         yield return new WaitForSeconds(1f);
         pauseMovement = false;
         anim.SetBool("walk", true);

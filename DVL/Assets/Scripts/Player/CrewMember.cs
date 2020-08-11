@@ -236,6 +236,7 @@ public class CrewMember : Player
 	public void GetHealed()
     {
 		playerState = PlayerState.ALIVE;
+		anim.SetTrigger("heal");
 		deathTurnCounter = 0;
 		GetComponent<MeshRenderer>().material.color = Color.yellow;
 		Eventbroker.instance.onNotifyNextTurn -= CheckDeathCounter;
