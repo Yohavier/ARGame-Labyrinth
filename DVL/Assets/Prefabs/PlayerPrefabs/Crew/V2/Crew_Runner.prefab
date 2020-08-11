@@ -671,7 +671,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51bfce3ec4e09394b8f9eab50b80ed9b, type: 2}
+  - {fileID: 2100000, guid: 5202e075a8cd82741ba4b934503eefd7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -781,6 +781,9 @@ MonoBehaviour:
   footstepDetectionRadius: 1
   repairSpeed: 0
   maxDeathTurnCounter: 3
+  anim: {fileID: 0}
+  pauseMovement: 0
+  stopMovement: 0
   playerFOW: {fileID: 0}
   positionTile: {fileID: 0}
   storedItem: {fileID: 0}
@@ -894,7 +897,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 200307af8df883541a948c4c40d24978, type: 2}
+  - {fileID: 2100000, guid: 79af3efbfce638a47aa7c6af012d7f16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
