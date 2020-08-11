@@ -156,6 +156,7 @@ public class BoardGrid : MonoBehaviour
 	public void InsertNewRoomPushing(Tile entryTile, Tile newRoom)
 	{
 		inMove = true;
+		MakeSureEverythingIsActive(newRoom);
 		GridMovement moveDir = GetMoveDir(entryTile);
 		GameObject val = newRoom.gameObject;
 		int num = SetNewRoomRotation(newRoom);
@@ -171,6 +172,16 @@ public class BoardGrid : MonoBehaviour
 		lastTrackedTile = component;
 		grid.OrderBy(x => x.index);
 	}
+
+	private void MakeSureEverythingIsActive(Tile tile)
+    {
+		tile.GetComponent<BoxCollider>().enabled = true;
+		MeshRenderer[] meshes = tile.GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < meshes.Length; i++)
+        {
+			meshes[i].enabled = true;
+        }
+    }
 
 	private void AdjustColAndRow(Tile newTile)
 	{

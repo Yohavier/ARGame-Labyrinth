@@ -18,6 +18,10 @@ public class FindNearestGridSlot : MonoBehaviour
                 {
 					FindTileWithRays();
 				}
+                else
+                {
+					HandleMesh(false);
+                }
 			}
 		}
 	}
@@ -43,12 +47,28 @@ public class FindNearestGridSlot : MonoBehaviour
 			break;
 		}
 
-		if (hitCounter == 0)
+		if (hitCounter == 4)
 		{
-			targetTile = null;
+			HandleMesh(false);
 		}
+		else
+		{
+			HandleMesh(true);
+			if(hitCounter == 0)
+				targetTile = null;
+		}
+		
 	}
 
+	private void HandleMesh(bool state)
+    {
+		GetComponentInChildren<BoxCollider>().enabled = state;
+		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < meshes.Length; i++)
+        {
+			meshes[i].enabled = state;
+        }
+    }
 	//Create a raycast root is this gameObject
 	private int SendRay(Vector3 rayDirection)
 	{

@@ -6943,6 +6943,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1198587426, guid: e184a882295f7324096c0f073ee93c47, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198587426, guid: e184a882295f7324096c0f073ee93c47, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1125534706504142793, guid: e184a882295f7324096c0f073ee93c47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7002,6 +7010,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BoardEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063108175927373000, guid: e184a882295f7324096c0f073ee93c47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e184a882295f7324096c0f073ee93c47, type: 3}
