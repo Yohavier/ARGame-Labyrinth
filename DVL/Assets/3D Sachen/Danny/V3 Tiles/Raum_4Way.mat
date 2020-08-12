@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Raum_4Way
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 75dfe5cbb57b354489b68fd8a72fc714, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa095e947fced5047b3a2c9d1b1315ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -74,7 +74,7 @@ Material:
     - _Fold: 1
     - _GlitchIntensity: 0
     - _GlitchSpeed: 1
-    - _GlossMapScale: 0
+    - _GlossMapScale: 0.342
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GlowSpeed: 1
