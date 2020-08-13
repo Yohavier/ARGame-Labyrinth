@@ -53,7 +53,7 @@ public class NetworkServer : MonoBehaviour
     //Send client data after connecting
     private void SetupNewPlayer(ClientReference client)
     {
-        PlayerIndex playerIndex = 2 - (PlayerIndex)gameState.playerCount;
+        PlayerIndex playerIndex = 3 - (PlayerIndex)gameState.playerCount;
         client.playerState.playerID = playerIndex;
         client.playerState.connected = true;
         client.playerState.ip = client.clientSocket.RemoteEndPoint.ToString().Split(':')[0];

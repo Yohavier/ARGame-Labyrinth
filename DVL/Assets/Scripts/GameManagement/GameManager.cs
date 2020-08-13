@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
 	#region Handle Win Conditions
 	public void KillPlayer(Player player)
 	{
-		player.playerState = PlayerState.DYING;
+		FindObjectOfType<Enemy>().ExternalKill(player.GetComponent<CrewMember>());
 	}
 
 	public void CheckWinConditionCrew()

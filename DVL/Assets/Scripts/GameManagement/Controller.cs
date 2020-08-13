@@ -215,7 +215,7 @@ public class Controller : MonoBehaviour
 	}
 	private void PCTileSelectionController()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !GameManager.instance.activePlayer.GetComponent<Player>().isWalking)
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -229,7 +229,7 @@ public class Controller : MonoBehaviour
 	}
 	private void MobileTileSelectionController()
 	{
-		if (Input.touchCount > 0)
+		if (Input.touchCount > 0 && !GameManager.instance.activePlayer.GetComponent<Player>().isWalking)
 		{
 			Touch touch = Input.GetTouch(0);
 			touchPosition = touch.position;

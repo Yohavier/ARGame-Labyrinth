@@ -20,6 +20,7 @@ public class Enemy : Player
                 {
                     if (crew.playerState == PlayerState.ALIVE)
                     {
+                        NetworkClient.instance.SendPlayerKilled(crew.playerIndex);
                         StartCoroutine(InitKillPlayer(crew));
                     }
                 }
@@ -54,12 +55,14 @@ public class Enemy : Player
     }
 
     public void KillPlayer(CrewMember crewMember)
-	{
-        NetworkClient.instance.SendPlayerKilled(crewMember.playerIndex); 
+	{    
 		crewMember.playerState = PlayerState.DYING;
 	}
-
-    private IEnumerator InitKillPlayer(CrewMember crew)
+    public void ExternalKill(CrewMember crew)
+    {
+        StartCoroutine(InitKillPlayer(crew));
+    }
+    public IEnumerator InitKillPlayer(CrewMember crew)
     {
         while (Vector3.Distance(crew.transform.position, transform.position) > 0.05f) 
         {
