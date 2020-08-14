@@ -12,7 +12,7 @@ public class FindNearestGridSlot : MonoBehaviour
 	{
         if (GameManager.instance.activePlayer)
         {
-			if(GameManager.instance.activePlayer.GetComponent<Player>().playerState == PlayerState.ALIVE)
+			if(GameManager.instance.activePlayer.GetComponent<Player>().playerState != PlayerState.DYING)
             {
 				if (GameManager.instance._moveTileToken && !GameManager.instance.activePlayer.GetComponent<Player>().isWalking)
                 {
