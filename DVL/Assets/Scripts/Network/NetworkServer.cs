@@ -21,25 +21,27 @@ public class NetworkServer : MonoBehaviour
     {
         instance = this;
     }
-    /*
-    private void Update()
+    /*private void Update()
     {
         if (!isSetup)
             return;
 
-        for (int i = 0; i < clientList.Count; i++)
+        if (GameManager.instance.currentTurnPlayer != PlayerIndex.Invalid)
         {
-            if (!clientList[i].playerState.connected || clientList[i].playerState.lastPingTime <= 0f)
-                continue;
-
-            float deltaTime = Time.time - clientList[i].playerState.lastPingTime;
-            if (deltaTime >= timeoutLimit)
+            for (int i = 0; i < clientList.Count; i++)
             {
-                HandleConnectionLost(i);
+                if (!clientList[i].playerState.connected || clientList[i].playerState.lastPingTime <= 0f)
+                    continue;
+
+                float deltaTime = Time.time - clientList[i].playerState.lastPingTime;
+                if (deltaTime >= timeoutLimit)
+                {
+                    HandleConnectionLost(i);
+                }
             }
         }
-    }
-    */
+    }*/
+
     //Initialize Server Socket, begin waiting for connections
     public void SetupServer()
     {

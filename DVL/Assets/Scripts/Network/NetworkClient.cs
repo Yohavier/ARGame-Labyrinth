@@ -20,30 +20,48 @@ public class NetworkClient : MonoBehaviour
     public float currentPing = 0f;
     private float pingStartTime = 0f;
     private float nextPingDeltaTime = 0f;
+    private bool debugThreadSafe = true;
+    private Queue<Msg> msgCue = new Queue<Msg>();
 
     private void Awake()
     {
         instance = this;
     }
 
-    /*
+    
     private void Update()
     {
         if (!isSetup)
             return;
 
-        if (nextPingDeltaTime >= pingFrequency)
+        if (debugThreadSafe)
         {
-            nextPingDeltaTime = 0f;
-            SendPing();
+            lock (msgCue)
+            {
+                if (msgCue.Count > 0)
+                {
+                    Msg msg = msgCue.Peek();
+                    HandleMessage(msg);
+                    msgCue.Dequeue();
+                }
+            }
         }
 
-        else
+        /*if (GameManager.instance.currentTurnPlayer != PlayerIndex.Invalid)
         {
-            nextPingDeltaTime += Time.deltaTime;
-        }
+            if (nextPingDeltaTime >= pingFrequency)
+            {
+                nextPingDeltaTime = 0f;
+                SendPing();
+            }
 
-    }*/
+            else
+            {
+                nextPingDeltaTime += Time.deltaTime;
+            }
+        }*/
+
+    }
 
     public void Connect(string serverIP)
     {
@@ -89,7 +107,18 @@ public class NetworkClient : MonoBehaviour
         byte[] data = new byte[numBytes];
         Buffer.BlockCopy(buffer, 0, data, 0, numBytes);
         Msg msg = new Msg(data);
-        HandleMessage(msg);
+
+        if (debugThreadSafe)
+        {
+            lock(msgCue)
+            {
+                msgCue.Enqueue(msg);
+            }
+        }
+
+        else
+            HandleMessage(msg);
+
         clientSocket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
     }
 

@@ -359,7 +359,10 @@ public class Tile : MonoBehaviour
 		}
 		GameManager.instance.canMove = true;
 		BoardGrid.instance.RemoveTileFromGrid(this);
-		BoardGrid.instance.inMove = false;
+		Tile newTile = BoardGrid.instance.grid.Find(x => x.index == 0);
+		if (newTile)
+			newTile.index = index;
+
 		StartCoroutine(SimulateExplosionTilePhysics(pos[2]));
 	}
 	private IEnumerator SimulateExplosionTilePhysics(Vector3 impulseNormal)
@@ -381,7 +384,8 @@ public class Tile : MonoBehaviour
 			transform.Rotate(randomRotation * Time.deltaTime, Space.Self);
 			yield return null;
 		}
-		Controller.instance.ChangeTrackedPrefab(this.gameObject);	
+		Controller.instance.ChangeTrackedPrefab(this.gameObject);
+		BoardGrid.instance.inMove = false;
 		PrefabColor();
 	}
 	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
