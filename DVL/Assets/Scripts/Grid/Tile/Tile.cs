@@ -59,7 +59,7 @@ public class Tile : MonoBehaviour
 			default:
 				Debug.LogError("Invalid Movement on Tile " + gameObject.name);
 				return false;
-        }			
+        }
     }
 
 	public bool doorOpen = true;
@@ -185,7 +185,7 @@ public class Tile : MonoBehaviour
 			canMoveHorizontal = true;
 		}
 
-		
+
 		if (row == 0 || column == 0 || column == BoardGrid.instance.size - 1 || row == BoardGrid.instance.size - 1)
 		{
 			edgePiece = true;
@@ -233,11 +233,11 @@ public class Tile : MonoBehaviour
 	{
 		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
 		if (isInFOW && !GUIManager.instance.isDebug)
-		{			
+		{
 			foreach(MeshRenderer mesh in meshes)
 			{
 				if(mesh.CompareTag("Tile"))
-					mesh.material.color = new Color(0.3f, 0.3f, 0.3f); 
+					mesh.material.color = new Color(0.3f, 0.3f, 0.3f);
 			}
 		}
 		else
@@ -250,7 +250,7 @@ public class Tile : MonoBehaviour
 		}
 	}
 	public void PrefabColor(MeshRenderer mesh)
-	{ 
+	{
 		if (isInFOW && !GUIManager.instance.isDebug)
 		{
 			mesh.material.color = new Color(0.3f, 0.3f, 0.3f);
@@ -362,7 +362,10 @@ public class Tile : MonoBehaviour
 		}
 		GameManager.instance.canMove = true;
 		BoardGrid.instance.RemoveTileFromGrid(this);
-		BoardGrid.instance.inMove = false;
+		Tile newTile = BoardGrid.instance.grid.Find(x => x.index == 0);
+		if (newTile)
+			newTile.index = index;
+
 		StartCoroutine(SimulateExplosionTilePhysics(pos[2]));
 	}
 	private IEnumerator SimulateExplosionTilePhysics(Vector3 impulseNormal)
@@ -385,7 +388,7 @@ public class Tile : MonoBehaviour
 			yield return null;
 		}
 		UpdateTileFOW();
-		Controller.instance.ChangeTrackedPrefab(this.gameObject);		
+		Controller.instance.ChangeTrackedPrefab(this.gameObject);
 	}
 	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
 	{
