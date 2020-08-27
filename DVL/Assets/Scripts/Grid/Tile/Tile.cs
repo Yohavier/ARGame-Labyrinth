@@ -389,7 +389,8 @@ public class Tile : MonoBehaviour
 		}
 		UpdateTileFOW();
 		Controller.instance.ChangeTrackedPrefab(this.gameObject);
-	}
+        BoardGrid.instance.inMove = false;
+    }
 	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
 	{
 		float alpha = tilePart.material.color.a;
