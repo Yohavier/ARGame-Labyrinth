@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
 	[HideInInspector] public TileDirectionModule ingameLeftModule;
 
 	//Explosion Settings
-	public ParticleSystem explosion;
+	public ParticleSystem explosionPrefab;
 	public int explosionNumber = 4;
 
 	public bool CheckModulation(TileDirectionModule modulation)
@@ -320,26 +320,26 @@ public class Tile : MonoBehaviour
 		if (row < 0)
 		{
 			impulseNormal = -BoardGrid.instance.transform.right;
-			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z + 0.05f));
-			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z - 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, transform.position.y + 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, transform.position.y + 0.07f, transform.position.z - 0.05f));
 		}
 		else if (row > 6)
 		{
 			impulseNormal = BoardGrid.instance.transform.right;
-			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z + 0.05f));
-			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z - 0.05f));
+			corners.Add(new Vector3(transform.position.x - 0.05f, transform.position.y + 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x - 0.05f, transform.position.y + 0.07f, transform.position.z - 0.05f));
 		}
 		else if(column < 0)
         {
 			impulseNormal = -BoardGrid.instance.transform.forward;
-			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z + 0.05f));
-			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x - 0.05f, transform.position.y + 0.07f, transform.position.z + 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, transform.position.y + 0.07f, transform.position.z + 0.05f));
 		}
 		else if (column > 6)
         {
 			impulseNormal = BoardGrid.instance.transform.forward;
-			corners.Add(new Vector3(transform.position.x - 0.05f, 0.07f, transform.position.z - 0.05f));
-			corners.Add(new Vector3(transform.position.x + 0.05f, 0.07f, transform.position.z - 0.05f));
+			corners.Add(new Vector3(transform.position.x - 0.05f, transform.position.y + 0.07f, transform.position.z - 0.05f));
+			corners.Add(new Vector3(transform.position.x + 0.05f, transform.position.y + 0.07f, transform.position.z - 0.05f));
 		}
 		corners.Add(impulseNormal);
 		return corners;
@@ -347,13 +347,16 @@ public class Tile : MonoBehaviour
 	private IEnumerator ExplosionOrder(List<Vector3> pos)
     {
 		Vector3 start = pos[0];
+		Debug.Log(start);
 		Vector3 end = pos[1];
 		Vector3 dir = (start - end).normalized * 0.1f;
 
         for (int i = 0; i < explosionNumber; i++)
         {
 			float factor = i / (float)(explosionNumber - 1);
-			Instantiate(explosion, start - dir * factor, Quaternion.identity);
+			var explosion = Instantiate(explosionPrefab);
+			explosion.transform.position = start - dir * factor;
+
 			AkSoundEngine.PostEvent("tile_expell", gameObject);
 			yield return new WaitForSeconds(0.2f);
 		}
@@ -377,12 +380,12 @@ public class Tile : MonoBehaviour
         while (time < 2)
         {
 			time += Time.deltaTime;
-			transform.position += impulseNormal * randomImpulsSpeed * Time.deltaTime;
+			transform.localPosition += impulseNormal * randomImpulsSpeed * Time.deltaTime;
 			transform.Rotate(randomRotation * Time.deltaTime, Space.Self);
 			yield return null;
 		}
-		Controller.instance.ChangeTrackedPrefab(this.gameObject);	
-		PrefabColor();
+		UpdateTileFOW();
+		Controller.instance.ChangeTrackedPrefab(this.gameObject);		
 	}
 	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
 	{

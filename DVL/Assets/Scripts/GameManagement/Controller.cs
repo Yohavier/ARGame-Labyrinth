@@ -160,11 +160,11 @@ public class Controller : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.A))
 		{
-			tilePrefabParent.transform.localEulerAngles += new Vector3(0, 90, 0) * Time.deltaTime;
+			tilePrefabParent.transform.GetChild(0).transform.localEulerAngles += new Vector3(0, 90, 0) * Time.deltaTime;
 		}
 		else if (Input.GetKey(KeyCode.D))
 		{
-			tilePrefabParent.transform.localEulerAngles += new Vector3(0, -90, 0) * Time.deltaTime;
+			tilePrefabParent.transform.GetChild(0).transform.localEulerAngles += new Vector3(0, -90, 0) * Time.deltaTime;
 		}
 	}
 	private void VirtualController()
@@ -255,7 +255,7 @@ public class Controller : MonoBehaviour
 		}
 
 		deltaPos = prevTouch.x - touch.position.x;
-		tilePrefabParent.transform.localEulerAngles += new Vector3(0, deltaPos * 4, 0) * Time.deltaTime;
+		tilePrefabParent.transform.GetChild(0).transform.localEulerAngles += new Vector3(0, deltaPos * 4, 0) * Time.deltaTime;
 		prevTouch = touch.position;
 	}
 	private bool CanControl()
@@ -395,11 +395,12 @@ public class Controller : MonoBehaviour
             if (_activeLooseTile && controllerType != ControllerType.Mobile_Virtual)
             {
 				tilePrefabParent.SetActive(true);
-				tilePrefabParent.transform.localPosition = trackedImage.transform.localPosition;
-				tilePrefabParent.transform.localRotation = trackedImage.transform.localRotation;
+				tilePrefabParent.transform.GetChild(0).transform.localPosition = trackedImage.transform.localPosition;
+				tilePrefabParent.transform.GetChild(0).transform.localRotation = trackedImage.transform.localRotation;
 			}
 		}
 	}
+	/*
 	private bool isTrackable(ARTrackedImage image)
 	{
 		if (image.trackingState == TrackingState.Tracking)
@@ -425,7 +426,7 @@ public class Controller : MonoBehaviour
 			return true;
 		}
 		return false;
-	}
+	}*/
 	private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
 	{
 		foreach (var trackedImage in eventArgs.added)
@@ -448,7 +449,7 @@ public class Controller : MonoBehaviour
 			}
 			else
 			{
-				if (isTrackable(trackedImage))
+				if (true)
 				{
 					HandleSingleTracker(trackedImage);
 				}
@@ -460,6 +461,7 @@ public class Controller : MonoBehaviour
 	}
 	public void ChangeTrackedPrefab(GameObject droppedOutPrefab)
 	{
+		
 		if (GUIManager.instance.isDebug)
 		{
 			droppedOutPrefab.GetComponent<Tile>().isInFOW = false;
@@ -471,8 +473,6 @@ public class Controller : MonoBehaviour
 				mesh.material.color = Color.white;
 			}
 		}
-		tilePrefabParent.SetActive(true);
-
 		droppedOutPrefab.transform.SetParent(tilePrefabParent.transform);
 		droppedOutPrefab.transform.localPosition = Vector3.zero;
 		droppedOutPrefab.transform.localRotation = Quaternion.identity;
@@ -482,6 +482,8 @@ public class Controller : MonoBehaviour
 		tilePrefabParent.SetActive(false);
 		Invoke("ToggleBackOn", 2);
 	}
+
+
 	private void ToggleBackOn()
 	{
 		tilePrefabParent.SetActive(true);

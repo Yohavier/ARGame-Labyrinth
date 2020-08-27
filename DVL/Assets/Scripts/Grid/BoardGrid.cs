@@ -170,6 +170,7 @@ public class BoardGrid : MonoBehaviour
 		AdjustColAndRow(component);
 		MoveAllTile(entryTile, component);
 		lastTrackedTile = component;
+		newRoom.UpdateTileFOW();
 		grid.OrderBy(x => x.index);
 	}
 
@@ -294,7 +295,7 @@ public class BoardGrid : MonoBehaviour
 	private int SetNewRoomRotation(Tile newRoom)
 	{
 		Dictionary<float, int> dictionary = new Dictionary<float, int>();
-		float num = Mathf.Abs(newRoom.transform.parent.transform.localEulerAngles.y - this.transform.localEulerAngles.y);
+		float num = Mathf.Abs(newRoom.transform.localEulerAngles.y - this.transform.localEulerAngles.y);
 		dictionary.Add(Mathf.Abs(num - 0f), 0);
 		dictionary.Add(Mathf.Abs(num - 90f), 90);
 		dictionary.Add(Mathf.Abs(num - 180f), 180);

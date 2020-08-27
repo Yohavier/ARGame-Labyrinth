@@ -64,11 +64,37 @@ public class FindNearestGridSlot : MonoBehaviour
     {
 		GetComponentInChildren<BoxCollider>().enabled = state;
 		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+		SkinnedMeshRenderer[] sMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
         for (int i = 0; i < meshes.Length; i++)
         {
-			meshes[i].enabled = state;
+			if(GetComponent<Tile>().isInFOW)
+            {
+                if (meshes[i].CompareTag("Tile"))
+                {
+					meshes[i].enabled = state;
+				}
+            }
+            else
+            {
+				meshes[i].enabled = state;
+			}				
         }
-    }
+
+		for (int i = 0; i < sMeshes.Length; i++)
+		{
+			if (GetComponent<Tile>().isInFOW)
+			{
+				if (sMeshes[i].CompareTag("Tile"))
+				{
+					sMeshes[i].enabled = state;
+				}
+			}
+			else
+			{
+				sMeshes[i].enabled = state;
+			}
+		}
+	}
 	//Create a raycast root is this gameObject
 	private int SendRay(Vector3 rayDirection)
 	{

@@ -24,7 +24,6 @@ public class FogOfWar : MonoBehaviour
 		if (GetComponent<Player>().communicatorPowerUp)
 			neighbours.AddRange(GetCommunicatorTile(GetComponent<Player>().communicatorPowerUp));
 
-
 		
 		List<Tile> tempNonVis = new List<Tile>();
 		List<Tile> tempNewVis = new List<Tile>();
