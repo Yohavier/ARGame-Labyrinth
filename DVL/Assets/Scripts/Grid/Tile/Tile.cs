@@ -186,7 +186,7 @@ public class Tile : MonoBehaviour
 		}
 
 
-		if (row == 0 || column == 0 || column == BoardGrid.instance.size - 1 || row == BoardGrid.instance.size - 1)
+		if (row == 0 || column == 0 || column == VR_Grid.instance.size - 1 || row == VR_Grid.instance.size - 1)
 		{
 			edgePiece = true;
 		}
@@ -232,7 +232,7 @@ public class Tile : MonoBehaviour
 	public void PrefabColor()
 	{
 		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-		if (isInFOW && !GUIManager.instance.isDebug)
+		if (isInFOW)
 		{
 			foreach(MeshRenderer mesh in meshes)
 			{
@@ -251,7 +251,7 @@ public class Tile : MonoBehaviour
 	}
 	public void PrefabColor(MeshRenderer mesh)
 	{
-		if (isInFOW && !GUIManager.instance.isDebug)
+		if (isInFOW)
 		{
 			mesh.material.color = new Color(0.3f, 0.3f, 0.3f);
 		}
