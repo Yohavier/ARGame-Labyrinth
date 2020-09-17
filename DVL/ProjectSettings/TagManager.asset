@@ -22,7 +22,7 @@ TagManager:
   - NotAffectedByFOW
   - WorldCanvasInteractable
   - TrackingCheck
-  - 
+  - NonVis
   - 
   - 
   - 

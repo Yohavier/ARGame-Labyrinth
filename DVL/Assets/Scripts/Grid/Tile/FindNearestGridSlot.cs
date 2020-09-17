@@ -5,25 +5,12 @@ public class FindNearestGridSlot : MonoBehaviour
 {
 	public float distance = 0.15f;
 	private GameObject target;
-	private Tile targetTile;
+	private VR_Tile targetTile;
 	public LayerMask mask;
 
     private void FixedUpdate()
 	{
-        if (GameManager.instance.activePlayer)
-        {
-			if(GameManager.instance.activePlayer.GetComponent<Player>().playerState != PlayerState.DYING)
-            {
-				if (GameManager.instance._moveTileToken && !GameManager.instance.activePlayer.GetComponent<Player>().isWalking)
-                {
-					FindTileWithRays();
-				}
-                else
-                {
-					HandleMesh(false);
-                }
-			}
-		}
+		FindTileWithRays();
 	}
 
 	//get the tile that will be pushed away by inserting a new Tile
@@ -40,7 +27,7 @@ public class FindNearestGridSlot : MonoBehaviour
 		switch (hitCounter)
 		{
 		case 1:
-			targetTile = target.GetComponent<Tile>();
+			targetTile = target.GetComponent<VR_Tile>();
 			return;
 		case 3:
 			CallGridToPushRoom();
@@ -67,32 +54,12 @@ public class FindNearestGridSlot : MonoBehaviour
 		SkinnedMeshRenderer[] sMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
         for (int i = 0; i < meshes.Length; i++)
         {
-			if(GetComponent<Tile>().isInFOW)
-            {
-                if (meshes[i].CompareTag("Tile"))
-                {
-					meshes[i].enabled = state;
-				}
-            }
-            else
-            {
-				meshes[i].enabled = state;
-			}				
+			meshes[i].enabled = state;			
         }
 
 		for (int i = 0; i < sMeshes.Length; i++)
 		{
-			if (GetComponent<Tile>().isInFOW)
-			{
-				if (sMeshes[i].CompareTag("Tile"))
-				{
-					sMeshes[i].enabled = state;
-				}
-			}
-			else
-			{
-				sMeshes[i].enabled = state;
-			}
+			sMeshes[i].enabled = state;
 		}
 	}
 	//Create a raycast root is this gameObject
@@ -128,10 +95,7 @@ public class FindNearestGridSlot : MonoBehaviour
 		{
 			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
 			{
-				NetworkClient.instance.SendGridMove(targetTile, GetComponent<Tile>());
-				BoardGrid.instance.InsertNewRoomPushing(targetTile, GetComponent<Tile>());
-				GameManager.instance._moveTileToken = false;
-				GameManager.instance.canMove = false;
+				VR_Grid.instance.InsertNewRoomPushing(targetTile, GetComponent<VR_Tile>());
 				targetTile = null;
 			}
 		}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1009487190274338653}
   - component: {fileID: 3840789273596493076}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: VR_Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
