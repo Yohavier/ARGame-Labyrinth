@@ -186,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 2174048024688563418}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.275, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.1, y: 0.4, z: 0.1}
   m_Children:
   - {fileID: 8029269570905379101}
   - {fileID: 6023141602116085477}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664e1297005149a4bac06dcaefbf48e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 2
+  distance: 1
   mask:
     serializedVersion: 2
     m_Bits: 256
@@ -265,6 +265,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4692819508810876851, guid: daf976c04b12e0d4588860bdd84efbbc,
     type: 3}
   explosionNumber: 4
+  playerPos: {fileID: 0}
   doorOpen: 1
   index: -1
 --- !u!1 &2287240361663822588
@@ -501,6 +502,7 @@ GameObject:
   - component: {fileID: 2639899927417159807}
   - component: {fileID: 940704991093489301}
   - component: {fileID: 7935216356603137608}
+  - component: {fileID: 6486317263874627563}
   m_Layer: 8
   m_Name: polySurface20
   m_TagString: Tile
@@ -569,6 +571,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6486317263874627563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799464603379384802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.000002, y: 3.5527137e-15, z: 9.999999}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6268029469203923521
 GameObject:
   m_ObjectHideFlags: 0

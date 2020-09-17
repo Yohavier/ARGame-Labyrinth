@@ -50,17 +50,22 @@ public class VR_Controller : MonoBehaviour
 
 	private void Start()
 	{
+        tileCam = GetComponent<Camera>();
 		VirtualControlSetup();
 		controllerType = ControllerType.PC;
 	}
 	private void Update()
 	{
-			PCController();
+	    PCController();
 	}
-	#endregion
+    private void FixedUpdate()
+    {
+        tileCam.fieldOfView = 60;
+    }
+    #endregion
 
-	#region Controller
-	private void PCController()
+    #region Controller
+    private void PCController()
 	{
 		if (Input.GetKey(KeyCode.LeftShift))
 		{

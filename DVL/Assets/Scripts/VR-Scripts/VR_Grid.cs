@@ -32,9 +32,9 @@ public class VR_Grid : MonoBehaviour
                 enemyScript.StopOnGridMove();
         }
     }
-
+    public GameObject Item;
     public GameObject enemy;
-    private VR_Enemy enemyScript;
+    public VR_Enemy enemyScript;
     public VR_Tile trackedTile;
     public VR_Tile lastTrackedTile;
     private void Awake()
@@ -43,7 +43,7 @@ public class VR_Grid : MonoBehaviour
     }
     private void Start()
     {
-        gridSpacing = 2.5f;
+        gridSpacing = 1f;
         SetUpGrid();
     }
     public void SetUpGrid()
@@ -75,6 +75,7 @@ public class VR_Grid : MonoBehaviour
         GameObject leftOverTile = Instantiate(allPossibleMovingTiles[0]);
         VR_Controller.instance.ChangeTrackedPrefab(leftOverTile);
         RemoveTileFromList(allPossibleMovingTiles[0]);
+        SpawnItems();
     }
     private void RemoveTileFromList(GameObject tile)
     {
@@ -262,5 +263,20 @@ public class VR_Grid : MonoBehaviour
             }
         }
         return dictionary[num2];
+    }
+    private void SpawnItems()
+    {
+        List<int> rand = new List<int>();
+        while (rand.Count < 4)
+        {
+            int randNum = Random.Range(0, grid.Count);
+            if (!rand.Contains(randNum))
+            {
+                rand.Add(randNum);
+                var k = Instantiate(Item);
+                k.transform.SetParent(grid[randNum].transform);
+                k.transform.localPosition = new Vector3(0, 1, 0);
+            }
+        }
     }
 }

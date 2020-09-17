@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7330108409265875092}
   - component: {fileID: 2829229178802849944}
   - component: {fileID: -6641713780959471580}
+  - component: {fileID: 808272368135705681}
   m_Layer: 8
   m_Name: VR_Raum_Escape
   m_TagString: Tile
@@ -59,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 1310620923150064488}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.364, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.1, y: 0.4, z: 0.1}
   m_Children:
   - {fileID: 3213134567474364516}
   - {fileID: 2029052919779958455}
@@ -89,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664e1297005149a4bac06dcaefbf48e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 2
+  distance: 1
   mask:
     serializedVersion: 2
     m_Bits: 256
@@ -139,8 +140,22 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4692819508810876851, guid: daf976c04b12e0d4588860bdd84efbbc,
     type: 3}
   explosionNumber: 4
+  playerPos: {fileID: 0}
   doorOpen: 1
   index: -1
+--- !u!114 &808272368135705681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310620923150064488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4692587ae9c29b4fafac1814e170b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counter: 0
 --- !u!1 &1530235462146613899
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +469,7 @@ GameObject:
   - component: {fileID: 7990642067651143865}
   - component: {fileID: 567287968816250701}
   - component: {fileID: 7437613823867844172}
+  - component: {fileID: 7990993476897055669}
   m_Layer: 8
   m_Name: polySurface9
   m_TagString: Tile
@@ -522,6 +538,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7990993476897055669
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874431424133360376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.000002, y: 3.5527137e-15, z: 9.999999}
+  m_Center: {x: -0.0000009536743, y: 1.7763568e-15, z: -0.00000047683716}
 --- !u!1 &4085391347180427405
 GameObject:
   m_ObjectHideFlags: 0

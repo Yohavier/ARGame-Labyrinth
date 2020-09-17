@@ -14,7 +14,7 @@ public class VR_Tile : MonoBehaviour
 	public AnimationClip DoorOpenClip;
 	public AnimationClip DoorCloseClip;
 
-	[HideInInspector] public bool edgePiece;
+	public bool edgePiece;
 	[HideInInspector] public bool canMoveHorizontal;
 	[HideInInspector] public bool canMoveVertical;
 
@@ -192,7 +192,10 @@ public class VR_Tile : MonoBehaviour
 			OpenTileDoors();
 		else
 			CloseTileDoors();
-	}
+
+        VR_Grid.instance.enemyScript.StopOnGridMove();
+        VR_Grid.instance.enemyScript.StartMovement();
+    }
 
 	private void OpenTileDoors()
 	{
@@ -211,7 +214,6 @@ public class VR_Tile : MonoBehaviour
 			anim.Play();
 		}
 	}
-
 	public bool TileContainsDoor()
 	{
 		if (ingameForwardModule == TileDirectionModule.DOOR || ingameBackwardModule == TileDirectionModule.DOOR || ingameLeftModule == TileDirectionModule.DOOR || ingameRightModule == TileDirectionModule.DOOR)
@@ -223,8 +225,6 @@ public class VR_Tile : MonoBehaviour
 			return false;
 		}
 	}
-
-
 	private List<Vector3> FindRightCorners()
 	{
 		List<Vector3> corners = new List<Vector3>();
@@ -317,7 +317,7 @@ public class VR_Tile : MonoBehaviour
 		VR_Controller.instance.ChangeTrackedPrefab(this.gameObject);
 		VR_Grid.instance._inMove = false;
 	}
-	IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
+	private IEnumerator FadeTo(MeshRenderer tilePart, float aValue, float aTime)
 	{
 		float alpha = tilePart.material.color.a;
 		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)

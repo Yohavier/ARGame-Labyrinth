@@ -5,7 +5,7 @@ public class FindNearestGridSlot : MonoBehaviour
 {
 	public float distance = 0.15f;
 	private GameObject target;
-	private VR_Tile targetTile;
+	public VR_Tile targetTile;
 	public LayerMask mask;
 
     private void FixedUpdate()
@@ -26,12 +26,12 @@ public class FindNearestGridSlot : MonoBehaviour
 
 		switch (hitCounter)
 		{
-		case 1:
-			targetTile = target.GetComponent<VR_Tile>();
-			return;
-		case 3:
-			CallGridToPushRoom();
-			break;
+		    case 1:
+			    targetTile = target.GetComponent<VR_Tile>();
+			    return;
+		    case 3:
+			    CallGridToPushRoom();
+			    break;
 		}
 
 		if (hitCounter == 4)
@@ -41,8 +41,6 @@ public class FindNearestGridSlot : MonoBehaviour
 		else
 		{
 			HandleMesh(true);
-			if(hitCounter == 0)
-				targetTile = null;
 		}
 		
 	}
@@ -69,7 +67,7 @@ public class FindNearestGridSlot : MonoBehaviour
 		Vector3 offPos;
 		if (targetTile != null)
 		{
-			offPos = (transform.position - targetTile.transform.position).normalized * 0.03f;
+			offPos = (transform.position - targetTile.transform.position + transform.up).normalized * 0.03f;
 		}
 		else
 		{
@@ -95,6 +93,7 @@ public class FindNearestGridSlot : MonoBehaviour
 		{
 			if (targetTile.edgePiece && (targetTile.canMoveVertical || targetTile.canMoveHorizontal))
 			{
+                Debug.Log("f");
 				VR_Grid.instance.InsertNewRoomPushing(targetTile, GetComponent<VR_Tile>());
 				targetTile = null;
 			}

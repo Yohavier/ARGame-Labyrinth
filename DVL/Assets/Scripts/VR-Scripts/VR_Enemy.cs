@@ -204,7 +204,7 @@ public class VR_Enemy : MonoBehaviour
 						{
 							StopCoroutine(walkCoroutine);
 						}
-						walkCoroutine = MoveToTarget(path, 1);
+						walkCoroutine = MoveToTarget(path, 3);
 						StartCoroutine(walkCoroutine);
 					}
 				}			

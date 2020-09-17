@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class VR_Door : MonoBehaviour
 {
-    public Animation anim;
-
-    public AnimationClip open;
-    public AnimationClip close;
-    private bool isOpen;
+    VR_Tile parentTile;
+    private void Start()
+    {
+        parentTile = transform.parent.GetComponent<VR_Tile>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Controller"))
         {
-            if (isOpen)
-                anim.clip = close;
-            else
-                anim.clip = open;
-
-            isOpen = !isOpen;
-            anim.Play();
+            Debug.Log("ff");
+            parentTile.ToggleDoors();
         }
     }
 }
